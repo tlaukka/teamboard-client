@@ -1,0 +1,47 @@
+<form role="form">
+	<div class="modal-header">
+		<h3>Edit ticket</h3>
+		<h4 ng-if="userOptions.owner.email">
+			Created by: <img tb-gravatar email="userOptions.owner.email"> {{userOptions.owner.email}}
+		</h4>
+	</div>
+	<div class="modal-body">
+		<label>Color</label>
+		<div class="form-group">
+			<div class="btn-group btn-group-justified radiogroup" ng-init="newData.color = userOptions.color">
+				<label class="btn btn-lg radioselect turquoise" ng-model="newData.color" btn-radio="'#72bdbb'">&nbsp;</label>
+				<label class="btn btn-lg radioselect purple" ng-model="newData.color" btn-radio="'#724a7f'">&nbsp;</label>
+				<label class="btn btn-lg radioselect red" ng-model="newData.color" btn-radio="'#eb584a'">&nbsp;</label>
+				<label class="btn btn-lg radioselect yellow" ng-model="newData.color" btn-radio="'#dcc75b'">&nbsp;</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="headingInput">Heading</label>
+			<input type="text"
+				class="form-control text"
+				id="headingInput"
+				placeholder="Enter ticket heading"
+				ng-init="newData.heading = userOptions.heading"
+				ng-model="newData.heading"
+				tb-auto-focus>
+		</div>
+		<div class="form-group">
+			<label for="contentInput">Content</label>
+			<div text-angular id="contentInput"
+				ng-init="newData.content = userOptions.content"
+				ng-model="newData.content">
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="btn-group btn-group-justified">
+			<label class="btn btn-lg" ng-click="userOptions.cancel()">Cancel</label>
+			<label class="btn btn-lg btn-primary" ng-click="userOptions.apply(newData)">Apply</label>
+		</div>
+	</div>
+
+	<!-- <div class="modal-footer">
+		<button type="button" class="btn" ng-click="userOptions.cancel()">Cancel</button>
+		<button type="submit" class="btn btn-primary" ng-click="userOptions.apply(newData)">Apply</button>
+	</div> -->
+</form>

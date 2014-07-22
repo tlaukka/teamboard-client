@@ -1,0 +1,44 @@
+.modal {
+	z-index: 100001 !important;
+}
+
+.modal-backdrop {
+	z-index: 100000 !important;
+}
+
+// .modal .visibility button.active {
+// 	background: $turquoise;
+// 	color: white;
+// }
+
+.modal-header {
+	h4 {
+		margin-top: 2rem;
+		color: rgb(170, 170, 170);
+	}
+
+	.gravatar {
+		max-height: 3rem;
+		margin-left: 1rem;
+		margin-right: 0.5rem;
+		border-radius: 50%;
+	}
+}
+
+.modal-content {
+	border-radius: 0;
+}
+
+.modal-body {
+	textarea {
+		resize: vertical;
+	}
+}
+
+.boardname {
+	color: rgb(170, 170, 170);
+}
+
+.form-control.text {
+	border-radius: 0;
+}

@@ -1,0 +1,33 @@
+<div id="workspace">
+	<!-- <div class="container-fluid"> -->
+		<!-- <div class="row"> -->
+			<!-- List all available boards. -->
+			<div ng-repeat="board in boards" class="board-preview" tb-board-list>
+				<div class="col-lg-3 col-sm-4 col-xs-12">
+					<div class="text-center">
+						<h5 class="boardlist-caption" ng-click="editBoard(board)">
+							<span ng-if="board.isPublic" class="visibility">Public</span>
+							<span ng-if="!board.isPublic" class="visibility">Private</span>
+							{{ board.name | characters: 23: true }}
+						</h5>
+					</div>
+					<div class="thumbnail-container">
+						<button class="btn btn-removeboard" ng-click="promptBoardRemove(board)">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+						<a ui-sref="main.board({ id: board.id })">
+							<img ng-if="board.screenshotUrl.length != 0"
+								src="{{board.screenshotUrl}}"
+								alt="..."
+								class="thumbnail board img-responsive">
+							<img ng-if="board.screenshotUrl.length == 0"
+								src="http://placehold.it/320x180/ffffff&text=Empty Board"
+								alt="..."
+								class="thumbnail board img-responsive">
+						</a>
+					</div>
+				</div>
+			</div>
+		<!--</div>--> <!-- /row -->
+	<!--</div>--> <!-- /container-fluid -->
+</div> <!-- /workspace -->

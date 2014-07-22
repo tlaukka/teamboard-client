@@ -1,0 +1,37 @@
+<form role="form">
+	<div class="modal-header">
+		<h3>Create a new ticket</h3>
+	</div>
+	<div class="modal-body">
+		<div class="form-group">
+			<label>Color</label>
+			<div class="btn-group btn-group-justified radiogroup" ng-init="newTicket.color = '#72bdbb'">
+				<label class="btn btn-lg radioselect turquoise" ng-model="newTicket.color" btn-radio="'#72bdbb'">&nbsp;</label>
+				<label class="btn btn-lg radioselect purple" ng-model="newTicket.color" btn-radio="'#724a7f'">&nbsp;</label>
+				<label class="btn btn-lg radioselect red" ng-model="newTicket.color" btn-radio="'#eb584a'">&nbsp;</label>
+				<label class="btn btn-lg radioselect yellow" ng-model="newTicket.color" btn-radio="'#dcc75b'">&nbsp;</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="headingInput">Heading</label>
+			<input type="text"
+				class="form-control text"
+				id="headingInput"
+				placeholder="Enter ticket heading"
+				ng-model="newTicket.heading"
+				tb-auto-focus>
+		</div>
+		<div class="form-group">
+			<label for="contentInput">Content</label>
+			<div text-angular id="contentInput"
+				ng-model="newTicket.content">
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="btn-group btn-group-justified">
+			<label class="btn btn-lg" ng-click="userOptions.cancel()">Cancel</label>
+			<label class="btn btn-lg btn-primary" ng-click="userOptions.apply(newTicket)">Apply</label>
+		</div>
+	</div>
+</form>

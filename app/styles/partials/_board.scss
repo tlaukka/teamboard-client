@@ -1,0 +1,105 @@
+#board-background {
+	position: absolute;
+	width: $board-width + 2 * $board-margin;
+	height: $board-height + 2 * $board-margin;
+}
+
+#board {
+	position: absolute;
+	left: $board-margin;
+	top: $board-margin;
+	width: $board-width;
+	height: $board-height;
+	background-color: #ffffff;
+	overflow: hidden;
+}
+
+.ticket {
+	position: absolute;
+	width: 200px;
+	background: rgb(255, 255, 255);
+	border: 1px solid rgb(180, 180, 180);
+
+	.color {
+		height: 10px;
+		width: 100%;
+	}
+
+	.heading {
+		padding: 5px 10px 5px 10px;
+		font-size: 1.5rem;
+	}
+
+	.content {
+		padding: 5px 10px 5px 10px;
+		min-height: 58px;
+		height: 100%;
+		font-size: 1.2rem;
+		color: rgb(170, 170, 170);
+
+		&.collapsed {
+			max-height: 58px;
+			overflow: hidden;
+		}
+	}
+
+	.btnbar {
+		height: 3rem;
+		width: 100%;
+
+		.gravatar {
+			float: left;
+			display: inline-block;
+			max-height: 100%;
+			margin-left: 1.5rem;
+			border-radius: 50%;
+			padding: 0.2rem;
+		}
+
+		button {
+			float: right;
+			padding: 0.2rem;
+			background: none;
+			border: none;
+			font-size: 2rem;
+			color: rgb(170, 170, 170);
+			margin-right: 1.5rem;
+			margin-bottom: 0.3rem;
+
+			&:first-child {
+				margin-right: 1rem;
+			}
+		}
+	}
+}
+
+.ticket-proxy {
+	position: absolute;
+	display: none;
+	width: 200px;
+	height: 136px;
+	border: 1px solid rgb(220, 220, 220);
+
+	&.visible {
+		display: block;
+	}
+}
+
+.dragging {
+	box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.2);
+	transition: box-shadow 0.2s ease;
+}
+
+
+.overflow-hidden {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/*
+.overflow-hidden:hover {
+	overflow: visible;
+	white-space: normal;
+}
+*/

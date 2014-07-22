@@ -1,0 +1,49 @@
+.btn-toolbar {
+	display: none;
+
+	.btn-default {
+		min-width: 48px;
+		background-color: rgb(255, 255, 255);
+
+		&.active {
+			box-shadow: none;
+			background-color: rgb(200, 200, 200);
+		}
+
+		&:active {
+			box-shadow: none;
+		}
+	}
+}
+
+.ta-scroll-window {
+	.ta-bind {
+		min-height: 12em;
+		max-height: 12em;
+		height: 12em;
+		outline: none;
+	}
+}
+
+.ta-editor {
+	&.form-control {
+		cursor: pointer;
+		min-height: 12em;
+		max-height: auto;
+		height: auto;
+		border-radius: 0;
+		margin-top: 2px;
+	}
+}
+
+.focussed {
+	.ta-editor {
+		&.form-control {
+			cursor: text;
+		}
+	}
+
+	&.btn-toolbar {
+		display: block;
+	}
+}

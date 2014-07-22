@@ -1,0 +1,162 @@
+/*
+ * Main Sass file for Teamboard
+ */
+
+// Override default font path in fontawesome
+$fa-font-path: "./fonts";
+
+@import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap";
+@import "fontawesome/scss/font-awesome";
+@import "web-fonts";
+
+@include web-fonts("Lobster");
+
+/*
+ * Global variables
+ */
+
+$bg-dark: rgb(34, 26, 38);
+$bg-medium: rgb(240, 240, 240);
+$bg-light: rgb(255, 255, 255);
+$fg-dark: rgb(30, 30, 30);
+$fg-light: rgb(255, 255, 255);
+$purple: rgb(114, 74, 127);
+$purple-dark: rgb(90, 56, 102);
+$purple-darker: rgb(25, 12, 33);
+$red: rgb(235, 88, 74);
+$yellow: rgb(220, 199, 91);
+$turquoise: rgb(114, 189, 187);
+$blue-dark: rgb(92, 152, 180);
+$blue-darker: rgb(79, 129, 154);
+$font-lobster: "Lobster", "Helvetica", "Arial", sans-serif;
+
+$topbar-height: 64px;
+$sidebar-width: 240px;
+$board-width: 1280px;
+$board-height: 720px;
+$board-margin: 8px;
+
+@import "partials/buttons";
+@import "partials/texteditor";
+@import "partials/auth";
+@import "partials/modal";
+@import "partials/sidebar";
+@import "partials/topbar";
+@import "partials/workspace";
+@import "partials/board";
+
+html, body, .container-fluid, .row {
+	height: 100%;
+}
+
+html, body {
+	width: 100%;
+}
+
+html {
+	// overflow: hidden;
+}
+
+body {
+	background: $bg-medium;
+	overflow: hidden;
+}
+
+#app {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#sidebar-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	z-index: 10001;
+}
+
+#topbar-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: 10000;
+}
+
+#content-container {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#content-scrollarea {
+	position: absolute;
+	left: $sidebar-width;
+	top: $topbar-height;
+	width: calc(100% - #{$sidebar-width});
+	height: calc(100% - #{$topbar-height});
+}
+
+/*
+ * Scrollbars
+ */
+
+.iScrollIndicator {
+	border: none !important;
+	border-radius: 0 !important;
+}
+
+/*
+ * Animations
+ */
+
+$boardpreview-fade-duration: 0.6s;
+
+.board-preview.ng-enter {
+	-webkit-animation: $boardpreview-fade-duration fadeIn;
+	-moz-animation: $boardpreview-fade-duration fadeIn;
+	-ms-animation: $boardpreview-fade-duration fadeIn;
+	animation: $boardpreview-fade-duration fadeIn;
+}
+
+.board-preview.ng-leave {
+	-webkit-animation: $boardpreview-fade-duration fadeOut;
+	-moz-animation: $boardpreview-fade-duration fadeOut;
+	-ms-animation: $boardpreview-fade-duration fadeOut;
+	animation: $boardpreview-fade-duration fadeOut;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@-moz-keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@-webkit-keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@-moz-keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@-webkit-keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}

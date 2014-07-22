@@ -1,0 +1,25 @@
+<div class="topbar">
+	<div class="sidebar-margin"></div>
+	<h2>Board: {{ currentBoard.name | characters: 38: true }}</h2>
+	<h3>Owner:
+		<img tb-gravatar email="currentBoard.owner.email"> {{ currentBoard.owner.email | characters: 38: true }}
+	</h3>
+	<button class="btn add" ng-click="onCreateTicketClicked()">
+		<span class="glyphicon glyphicon-plus"></span> Add Ticket
+	</button>
+	<button type="button"
+		class="btn snap"
+		ng-model="snapEnabled"
+		ng-click="onEnableSnapClicked()"
+		btn-checkbox>
+		<span class="glyphicon glyphicon-magnet"></span> Snap to grid
+	</button>
+
+	<!-- <button type="button"
+		class="btn zoom"
+		ng-model="zoomOut"
+		ng-click="onZoomOutClicked()"
+		btn-checkbox>
+		<span class="glyphicon glyphicon-zoom-out"></span> Zoom out
+	</button> -->
+</div>

@@ -1,0 +1,33 @@
+<div class="sidebar">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="logo" ui-sref="main.workspace"><img src="/images/teamboard_logo.svg"> Teamboard</div>
+		</div>
+	</div>
+
+	<div ng-if="currentUser.email" class="row profile">
+		<div class="col-md-12">
+			<img tb-gravatar email="currentUser.email" class="center-block">
+			<div class="email text-center">{{ currentUser.email }}</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<nav role="navigation" class="navigation">
+				<ul>
+					<a ui-sref="main.workspace">
+						<li>
+							<span class="glyphicon glyphicon-th"></span><span>Workspace</span>
+						</li>
+					</a>
+					<a href="#" ng-click="logout()">
+						<li>
+							<span class="glyphicon glyphicon-log-out"></span><span>Log Out</span>
+						</li>
+					</a>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>

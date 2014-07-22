@@ -1,0 +1,12 @@
+*.orig
+*.tmp
+*.sass-cache
+*.coverrun
+*.DS_Store
+*.swp
+*.log
+
+node_modules/
+bower_components/
+
+app/styles/**/*.css

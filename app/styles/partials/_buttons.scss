@@ -1,0 +1,40 @@
+.btn {
+	border-radius: 0;
+	background-color: rgb(170, 170, 170);
+}
+
+.btn.btn-primary {
+	background: $turquoise;
+	border-color: darken($turquoise, 5%);
+}
+
+.btn.btn-primary:hover {
+	background: darken($turquoise, 10%);
+}
+
+.btn.radioselect {
+	border-top: 8px solid rgb(255, 255, 255);
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	color: rgb(255, 255, 255);
+
+	&.active { border-top: none; box-shadow: none; }
+	&:active { border-top: none; box-shadow: none; }
+
+	// Ticket color selection
+	&.turquoise { background: $turquoise; }
+	&.purple { background: $purple; }
+	&.red { background: $red; }
+	&.yellow { background: $yellow; }
+
+	// Board visibility selection
+	&.private { background: rgb(120, 120, 120); }
+	&.public { background: $turquoise; }
+}
+
+.radiogroup {
+	// Should be the same height as the radioselect buttons,
+	// prevents layout jittering when changing selection.
+	height: 52px;
+}

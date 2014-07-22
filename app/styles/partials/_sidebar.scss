@@ -1,0 +1,76 @@
+.sidebar {
+	width: $sidebar-width;
+	min-height: 100%;
+	padding: 2rem 0 0 0;
+	background: $bg-dark;
+	color: $fg-light;
+
+	.logo {
+		font-family: $font-lobster;
+		cursor: pointer;
+		font-size: 3rem;
+		text-align: center;
+		margin: 0 0 5rem 0;
+
+		img {
+			width: 2.5rem;
+			margin-right: 0.5rem;
+		}
+	}
+
+	.profile {
+		// text-align: center;
+		margin-bottom: 2rem;
+
+		.gravatar {
+			border: 0.4rem $purple-darker solid;
+			border-radius: 50%;
+			margin-bottom: 1rem;
+		}
+	}
+
+	.email {
+		max-width: 90%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		margin-left: 1rem;
+	}
+
+	nav {
+		a {
+			color: $fg-light;
+		}
+
+		ul {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+
+			list-style-type: none;
+
+			li {
+				width: 100%;
+				padding: 1.5rem 0 1.5rem 0;
+
+				.glyphicon {
+					vertical-align: middle;
+					font-size: 3rem;
+					margin: 0 2rem 0 3rem;
+				}
+			}
+
+			a {
+				&:hover {
+					background: $turquoise;
+					text-decoration: none;
+				}
+			}
+
+			li:hover {
+				background: $turquoise;
+				text-decoration: none;
+			}
+		}
+	}
+}

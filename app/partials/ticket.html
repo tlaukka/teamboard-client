@@ -1,0 +1,23 @@
+<div ng-click="collapse()">
+	<div ng-style="{ 'background': ticket.color }" class="color"></div>
+	<div class="heading">
+		{{ticket.heading | characters: 38: true}}
+	</div>
+
+	<div ng-if="isCollapsed" class="content collapsed">
+		<div ta-bind ng-model="ticket.content"></div>
+	</div>
+	<div ng-if="!isCollapsed" class="content">
+		<div ta-bind ng-model="ticket.content"></div>
+	</div>
+	<div class="btnbar">
+		<img ng-if="ticket.owner.email" alt="{{ticket.owner.email}}" tb-gravatar email="ticket.owner.email">
+
+		<button ng-click="removeTicket($event); $event.stopPropagation()" class="btn-removeticket">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+		<button ng-click="editTicket(ticket); $event.stopPropagation()" class="btn-editticket">
+			<span class="glyphicon glyphicon-edit"></span>
+		</button>
+	</div>
+</div>

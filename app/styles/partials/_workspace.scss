@@ -1,0 +1,37 @@
+#workspace {
+	position: absolute;
+	width: 100%;
+	// height: calc(100% - 0px);
+	// width: 1000px;
+	// height: 1000px;
+}
+
+.boardlist-caption {
+	// @extend .overflow-hidden;
+	cursor: pointer;
+
+	.visibility {
+		color: rgb(170, 170, 170);
+	}
+}
+
+.thumbnail.board {
+	border-radius: 0;
+	border: 1px solid rgb(180, 180, 180);
+}
+
+#add-board-caption {
+	cursor: default;
+}
+
+.btn.btn-removeboard {
+	position: absolute;
+	cursor: pointer;
+	bottom: 20px;
+	color: rgb(170, 170, 170);
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.board-preview {
+
+}
