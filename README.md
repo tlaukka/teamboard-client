@@ -4,11 +4,17 @@ Teamboard is the next level of Internet.
 
 ## Dependencies
 
-The client depends on both the [teamboard-io](https://github.com/N4SJAMK/teamboard-io), 
-and [teamboard-api](https://github.com/N4SJAMK/teamboard-api) being installed and running. 
-Please refer to their respective guides for installation.
+The client depends on both the [teamboard-io](https://github.com/N4SJAMK/teamboard-io),
+and [teamboard-api](https://github.com/N4SJAMK/teamboard-api) being installed
+and running. Please refer to their respective guides for installation.
 
 ## Installation
+
+```
+npm install N4SJAMK/teamboard-client
+```
+
+### Setup
 
 You need to have a few variables set before building the distribution.
 
