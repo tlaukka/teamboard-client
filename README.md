@@ -4,8 +4,8 @@ Teamboard is the next level of Internet.
 
 ## Dependencies
 
-The client depends on both the [teamboard-io](/N4SJAMK/teamboard-io), and
-[teamboard-api](/N4SJAMK/teamboard-api) being installed and running. Please
+The client depends on both the [teamboard-io](https://github.com/N4SJAMK/teamboard-io), and
+[teamboard-api](N4SJAMK/teamboard-api) being installed and running. Please
 refer to their respective guides for installation.
 
 ## Installation
