@@ -18913,8 +18913,9 @@ button.close {
   .topbar button.snap.active span {
     color: #72bdbb; }
 
-.workspace {
-  padding: 2rem; }
+#workspace {
+  position: absolute;
+  width: 100%; }
 
 .boardlist-caption {
   cursor: pointer; }
@@ -18935,10 +18936,19 @@ button.close {
   color: #aaaaaa;
   background-color: transparent; }
 
+#board-background {
+  position: absolute;
+  width: 1296px;
+  height: 736px; }
+
 #board {
+  position: absolute;
+  left: 8px;
+  top: 8px;
   width: 1280px;
   height: 720px;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  overflow: hidden; }
 
 .ticket {
   position: absolute;
@@ -19019,7 +19029,7 @@ body {
 #app {
   width: 100%;
   height: 100%;
-  overflow: auto; }
+  overflow: hidden; }
 
 #sidebar-container {
   position: fixed;
@@ -19036,10 +19046,23 @@ body {
   z-index: 10000; }
 
 #content-container {
-  position: relative;
-  margin-left: 240px;
-  margin-top: 64px;
-  padding: 8px; }
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+#content-scrollarea {
+  position: absolute;
+  left: 240px;
+  top: 64px;
+  width: calc(100% - 240px);
+  height: calc(100% - 64px); }
+
+/*
+ * Scrollbars
+ */
+.iScrollIndicator {
+  border: none !important;
+  border-radius: 0 !important; }
 
 /*
  * Animations

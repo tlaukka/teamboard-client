@@ -3,18 +3,15 @@
 
 module.exports = function(scrollArea, $timeout) {
 	return {
+		restrict: 'AE',
+
 		link: function(scope, element) {
 
-			if (scope.$last) {
-				// angular.element(window).bind('load', function() {
-				// scrollArea.scroll.refresh();
-				// console.debug('refresh');
-			}
-
-			// $timeout(function() {
-			// 	scrollArea.scroll.refresh();
-			// 	console.debug('refresh');
-			// }, 0);
+			// if (scope.$last) {
+			// 	$timeout(function() {
+			// 		scrollArea.refresh();
+			// 	}, 300);
+			// }
 		}
 	};
 }

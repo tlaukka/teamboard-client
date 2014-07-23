@@ -6,5 +6,11 @@ module.exports = function() {
 		scroll: null
 	};
 
+	scroller.refresh = function() {
+		if (this.scroll != null) {
+			this.scroll.refresh();
+		}
+	}
+
 	return scroller;
 }

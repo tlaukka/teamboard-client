@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($scope, modalService, Board, boards) {
+module.exports = function($scope, modalService, Board, boards, scrollArea) {
 
 	// 'boards' is a resolved parameter
 	$scope.boards = boards;
