@@ -10,7 +10,6 @@ module.exports = function(scrollArea, $timeout) {
 		},
 
 		link: function(scope, element) {
-			console.log('boards: ' + scope.boards.length);
 
 			scope.updateHeight = function() {
 

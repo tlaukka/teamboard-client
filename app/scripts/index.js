@@ -36,7 +36,6 @@ angular.module('tb', [
 	.directive('tbAutoFocus',   require('./directives/autofocus'))
 	.directive('tbTicketProxy', require('./directives/ticketproxy'))
 	.directive('tbScrollArea',  require('./directives/scrollarea'))
-	.directive('tbBoardList',   require('./directives/boardlist'))
 	.directive('tbWorkspace',   require('./directives/workspace'))
 
 	.factory('Board',         require('./services/board'))

@@ -10,7 +10,7 @@ module.exports = function($timeout, $document, scrollArea) {
 		scope: {},
 
 		link: function(scope, element) {
-console.debug('scrollarea link');
+
 			scrollArea.scroll = new IScroll(element[0], {
 				scrollX: true,
 				scrollY: true,
