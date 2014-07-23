@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('tb.uservoice', [])
-	.directive('uservoiceTrigger', function() {
+module.exports = function() {
 		var count = 0;
 
 		return {
@@ -61,10 +60,9 @@ angular.module('tb.uservoice', [])
 					if (scope.identify) {
 						UserVoice.push(['identify', scope.identify]);
 					}
-				};
+				}
 
 				scope.$watch('identify', setIdentify);
 			}
-		};
-	})
-;
+		}
+	}
