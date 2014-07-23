@@ -42,24 +42,35 @@
 		}
 	}
 
-	button {
-		float: right;
-		padding: 2rem 2rem 2rem 2rem;
+	.btn-add {
+		position: relative;
 		display: inline-block;
-
-		.glyphicon {
-			margin-right: 0.1rem;
-		}
-	}
-
-	button.add {
-		color: $fg-light;
-		background: $turquoise;
+		color: $text-color-light;
+		background-color: $btn-primary-bg;
+		top: -4px;
+		left: 160px;
+		width: 200px;
+		height: 46px;
+		-webkit-border-radius: 5px 5px 5px 5px;
+		border-radius: 5px 5px 5px 5px;
+		-webkit-box-shadow: 3px 3px 0 0 #589190;
+		box-shadow: 3px 3px 0 0 #589190;
 	}
 
 	button.snap.active {
 		span {
 			color: $turquoise;
+		}
+	}
+
+	.iconbar {
+		position: relative;
+		display: inline-block;
+		left: 240px;
+		font-size: 24px;
+
+		.btn-icon {
+
 		}
 	}
 }
