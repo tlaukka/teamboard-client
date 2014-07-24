@@ -5,12 +5,24 @@ module.exports = function($scope, modalService, Board, boards, scrollArea) {
 
 	// 'boards' is a resolved parameter
 	$scope.boards = boards;
+	$scope.selectedBoards = [];
 
 	console.log('workspace: resolved boards', boards);
 
 	$scope.$on('workspace:create-board', function() {
 		$scope.promptBoardCreate();
 	});
+
+	$scope.toggleBoardSelection = function(index) {
+		var selectedIndex = $scope.selectedBoards.indexOf(index);
+
+		if (selectedIndex == -1) {
+			$scope.selectedBoards.push(index);
+		}
+		else {
+			$scope.selectedBoards.splice(selectedIndex, 1);
+		}
+	}
 
 	$scope.createBoard = function(data) {
 		new Board(data).save().then(

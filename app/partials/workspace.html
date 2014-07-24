@@ -1,26 +1,12 @@
 <div tb-workspace boards="boards" id="workspace">
 	<div class="board-preview-container">
-		<div ng-repeat="board in boards" class="board-preview" tb-board-list>
-			<div class="thumbnail-container">
-				<button class="btn btn-edit" ng-click="promptBoardRemove(board)">
-					<i class="fa fa-check-circle"></i>
-				</button>
-				<a ui-sref="main.board({ id: board.id })">
-					<img ng-if="board.screenshotUrl.length != 0"
-						src="{{board.screenshotUrl}}"
-						alt="..."
-						class="thumbnail board center-block">
-					<img ng-if="board.screenshotUrl.length == 0"
-						src="http://placehold.it/320x180/ffffff&text=Empty Board"
-						alt="..."
-						class="thumbnail board center-block">
-				</a>
-			</div>
-			<div class="heading" ng-click="editBoard(board)">
-				{{ board.name | characters: 23: true }}
-			</div>
-			<div ng-if="board.isPublic" class="label label-public">Public</div>
-			<div ng-if="!board.isPublic" class="label label-private">Private</div>
+		<div tb-board-preview
+			ng-repeat="board in boards"
+			index="{{$index}}"
+			board-data="board"
+			board-remove="promptBoardRemove(board)"
+			board-edit="editBoard(board)"
+			board-toggle="toggleBoardSelection(index)">
 		</div>
 	</div>
 </div>
