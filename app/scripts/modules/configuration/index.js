@@ -31,9 +31,9 @@ var config = {
 
 		// restful api url and port
 		api: {
-			_url:   'http://' + (process.env.HOSTNAME || 'localhost'),
+			_url:     'http://' + (process.env.HOSTNAME || 'localhost'),
 			_port:    9002,
-			_version: 1
+			_version: 'api/v1'
 		},
 
 		// static content provider url and port
