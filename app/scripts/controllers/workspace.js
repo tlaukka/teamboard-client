@@ -9,7 +9,7 @@ module.exports = function($scope, modalService, Board, boards, scrollArea) {
 
 	console.log('workspace: resolved boards', boards);
 
-	$scope.$on('workspace:create-board', function() {
+	$scope.$on('action:create', function() {
 		$scope.promptBoardCreate();
 	});
 

@@ -1,11 +1,11 @@
 <div class="topbar">
 	<div class="sidebar-margin"></div>
 	<h2>Workspace</h2>
-	<button class="btn btn-add" ng-click="onCreateBoardClicked()">
+	<button class="btn btn-add" ng-click="onCreateClicked()">
 		<i class="fa fa-plus"></i> Add Board
 	</button>
 	<div class="btn-group iconbar">
-		<div class="btn btn-icon"><div class="fa fa-trash-o fa-fw"></div></div>
-		<div class="btn btn-icon"><div class="fa fa-edit fa-fw"></div></div>
+		<div class="btn btn-icon" ng-click="onRemoveClicked()"><div class="fa fa-trash-o fa-fw"></div></div>
+		<div class="btn btn-icon" ng-click="onEditClicked()"><div class="fa fa-edit fa-fw"></div></div>
 	</div>
 </div>

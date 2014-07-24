@@ -12,5 +12,11 @@ module.exports = function() {
 		}
 	}
 
+	scroller.scrollTo = function(x, y) {
+		if (this.scroll != null) {
+			this.scroll.scrollTo(x, y);
+		}
+	}
+
 	return scroller;
 }

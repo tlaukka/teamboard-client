@@ -1,10 +1,12 @@
 <div class="board-preview">
 	<div class="thumbnail-container">
+		<div class="spinner" ng-show="isLoading"><i class="fa fa-circle-o-notch fa-spin"></i></div>
 		<!-- <button class="btn btn-edit" ng-click="promptBoardRemove(board)"> -->
 		<button class="btn btn-edit" ng-click="selectBoard()">
 			<i class="fa fa-check-circle"></i>
 		</button>
-		<a ui-sref="main.board({ id: board.id })">
+		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked()">
+		<!-- <a ng-click="onBoardClicked()"> -->
 			<img ng-if="board.screenshotUrl.length != 0"
 				src="{{board.screenshotUrl}}"
 				alt="..."

@@ -21,6 +21,10 @@
 
 	&.selected {
 		background-color: $boardpreview-selected-bg;
+
+		.btn-edit {
+			color: $icon-on;
+		}
 	}
 
 	.heading {
@@ -35,6 +39,7 @@
 	}
 
 	.thumbnail.board {
+		box-sizing: border-box;
 		border-radius: 0;
 		border: 1px solid #b2b2b2;
 		margin-bottom: 12px;
@@ -66,5 +71,16 @@
 
 	.label-public {
 		background-color: $label-public-bg;
+	}
+
+	.spinner {
+		position: absolute;
+		font-size: $spinner-size;
+		line-height: $spinner-size;
+		width: $spinner-size;
+		height: $spinner-size;
+		left: ($boardpreview-width / 2) - ($boardpreview-margin-left / 2) - ($spinner-size / 2);
+		top: 36px;
+		color: $icon-off;
 	}
 }
