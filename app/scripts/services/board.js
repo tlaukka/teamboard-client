@@ -58,7 +58,7 @@ module.exports = function($http, Config, Ticket) {
 		this.info          = data.info;
 		this.isPublic      = data.isPublic;
 		this.screenshot    = data.screenshot;
-		this.screenshotUrl = data.screenshot ?
+		this.screenshotUrl = (data.screenshot && data.screenshot.path) ?
 			Config.static.url() + '/' + data.screenshot.path : '';
 
 		this.guests  = data.guests  || [ ];
