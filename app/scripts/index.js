@@ -19,7 +19,8 @@ angular.module('tb', [
 		'ngSanitize',
 		'textAngular',
 		require('./modules/configuration').name,
-		require('./modules/authentication').name
+		require('./modules/authentication').name,
+		require('./modules/uservoice').name
 	])
 
 	.run(function($state, Config) {
