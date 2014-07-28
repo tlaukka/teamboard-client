@@ -23,9 +23,9 @@ variables manually. If set to `development`, the client will try to connect
 to services running on localhost. When set to `production`, you must declare
 the other environmental variables with valid values.
 
-- `API_HOST` and `API_PORT` correspond to the `teamboard-api` host and port
-- `IO_HOST` and `IO_PORT` correspond to the `teamboard-io` host and port
-- `STATIC_HOST` and `STATIC_PORT` correspond to where screenshots and stuff
+- `API_URL` and `API_PORT` correspond to the `teamboard-api` host and port
+- `IO_URL` and `IO_PORT` correspond to the `teamboard-io` host and port
+- `STATIC_URL` and `STATIC_PORT` correspond to where screenshots and stuff
   are hosted. Currently the static contet is being hosted by `teamboard-api`.
 - `HOSTNAME` can be set if you want to test on IPad or something similar. This
   will mean that the `gulp` default task will run the server with the given

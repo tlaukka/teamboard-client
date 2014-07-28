@@ -2,9 +2,7 @@
   "name": "teamboard",
   "version": "0.0.1",
   "dependencies": {
-    "socket.io-client": "^1.0.6"
-  },
-  "devDependencies": {
+    "socket.io-client": "^1.0.6",
     "browserify": "~3.32.1",
     "browserify-shim": "^3.4.1",
     "envify": "^2.0.0",

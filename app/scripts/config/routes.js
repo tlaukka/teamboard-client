@@ -80,6 +80,9 @@ module.exports = function(
 										console.log('err', err);
 									});
 						},
+						currentUser: function(authService) {
+							return authService.getUser();
+						},
 						connectedSocket: function(socketService) {
 							return socketService.connect().then(
 								function(socket) {

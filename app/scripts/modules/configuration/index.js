@@ -25,37 +25,37 @@ var config = {
 
 		// socket.io server host and port
 		io: {
-			host: 'http://' + (process.env.HOSTNAME || 'localhost'),
-			port: 9001,
+			_url: 'http://' + (process.env.HOSTNAME || 'localhost'),
+			_port: 9001,
 		},
 
-		// restful api host and port
+		// restful api url and port
 		api: {
-			host:   'http://' + (process.env.HOSTNAME || 'localhost'),
-			port:    9002,
-			version: 1
+			_url:     'http://' + (process.env.HOSTNAME || 'localhost'),
+			_port:    9002,
+			_version: 'api/v1'
 		},
 
-		// static content provider host and port
+		// static content provider url and port
 		// serves things like board images
 		static: {
-			host: 'http://' + (process.env.HOSTNAME || 'localhost'),
-			port: 9002
+			_url: 'http://' + (process.env.HOSTNAME || 'localhost'),
+			_port: 9002
 		}
 	},
 	production: {
 		io: {
-			host: process.env.IO_HOST,
-			port: process.env.IO_PORT
+			_url:  process.env.IO_URL,
+			_port: process.env.IO_PORT
 		},
 		api: {
-			host:    process.env.API_HOST,
-			port:    process.env.API_PORT,
-			version: 1
+			_url:     process.env.API_URL,
+			_port:    process.env.API_PORT,
+			_version: 'api/v1'
 		},
 		static: {
-			host: process.env.STATIC_HOST,
-			port: process.env.STATIC_PORT
+			_url:  process.env.STATIC_URL,
+			_port: process.env.STATIC_PORT
 		}
 	}
 }
@@ -64,16 +64,15 @@ config = _.extend(config.common,
 	config[process.env.NODE_ENV] || config.development);
 
 config.io.url = function() {
-	return this.host + ':' + this.port;
+	return this._url + ':' + this._port;
 }
 
 config.api.url = function() {
-	return this.host + ':' + this.port +
-		'/api/v' + this.version + '/';
+	return this._url + ':' + this._port + '/' + this._version + '/';
 }
 
 config.static.url = function() {
-	return this.host + ':' + this.port;
+	return this._url + ':' + this._port;
 }
 
 module.exports = angular.module('tb.configuration', [ ])
