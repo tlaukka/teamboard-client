@@ -4,6 +4,8 @@
 module.exports = function($scope, $rootScope) {
 
 	$scope.snapEnabled = false;
+	$scope.removeEnabled = false;
+	$scope.editEnabled = false;
 
 	$scope.onCreateClicked = function() {
 		$rootScope.$broadcast('action:create');
@@ -28,4 +30,12 @@ module.exports = function($scope, $rootScope) {
 	$scope.onEditClicked = function() {
 		$rootScope.$broadcast('action:edit');
 	}
+
+	$scope.$on('ui:enable-remove', function(event, enabled) {
+		$scope.removeEnabled = enabled;
+	});
+
+	$scope.$on('ui:enable-edit', function(event, enabled) {
+		$scope.editEnabled = enabled;
+	});
 }

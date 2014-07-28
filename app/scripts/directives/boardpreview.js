@@ -67,7 +67,7 @@ module.exports = function(scrollArea) {
 					element.addClass('selected');
 				}
 
-				scope.toggleBoardSelection(scope.index);
+				scope.toggleBoardSelection({ index: scope.index });
 			}
 		}
 	};

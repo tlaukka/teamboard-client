@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($scope, modalService, Board, boards, scrollArea) {
+module.exports = function($scope, $rootScope, modalService, Board, boards, scrollArea) {
 
 	// 'boards' is a resolved parameter
 	$scope.boards = boards;
@@ -15,6 +15,37 @@ module.exports = function($scope, modalService, Board, boards, scrollArea) {
 
 	$scope.$on('action:create', function() {
 		$scope.promptBoardCreate();
+	});
+
+	$scope.$on('action:remove', function() {
+		// for (var i = 0; i < $scope.selectedBoards.length; i++) {
+		// 	var boardId = $scope.boards[$scope.selectedBoards[i]].id;
+		// 	console.debug('id: ' + boardId);
+		// 	$scope.removeBoard(boardId);
+		// 	$scope.selectedBoards.length = 0;
+		// }
+
+		$scope.removeBoards($scope.selectedBoards);
+		$scope.selectedBoards.length = 0;
+	});
+
+	// Enable/disable necessary toolbar buttons.
+	$scope.$watch('selectedBoards.length', function() {
+		if ($scope.selectedBoards.length != 0) {
+			$rootScope.$broadcast('ui:enable-remove', true);
+
+			// Enable edit only if a single board is selected.
+			if ($scope.selectedBoards.length == 1) {
+				$rootScope.$broadcast('ui:enable-edit', true);
+			}
+			else {
+				$rootScope.$broadcast('ui:enable-edit', false);
+			}
+		}
+		else {
+			$rootScope.$broadcast('ui:enable-remove', false);
+			$rootScope.$broadcast('ui:enable-edit', false);
+		}
 	});
 
 	$scope.toggleBoardSelection = function(index) {
@@ -54,6 +85,13 @@ module.exports = function($scope, modalService, Board, boards, scrollArea) {
 					// wat do
 					console.log(err);
 				});
+		}
+	}
+
+	$scope.removeBoards = function(indexes) {
+		for (var i = 0; i < indexes.length; i++) {
+			var boardId = $scope.boards[indexes[i]].id;
+			$scope.removeBoard(boardId);
 		}
 	}
 
