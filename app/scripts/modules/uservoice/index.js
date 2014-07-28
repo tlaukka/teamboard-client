@@ -2,5 +2,5 @@
 
 var angular = require('angular');
 
-angular.module('tb.uservoice', [])
+module.exports = angular.module('tb.uservoice', [])
 	.directive('uservoiceTrigger', require('./directives/uservoice'));

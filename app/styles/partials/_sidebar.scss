@@ -73,4 +73,22 @@
 			}
 		}
 	}
+
+	.uservoice {
+		position: fixed;
+		bottom: 2rem;
+
+		a {
+			color: $fg-light;
+		}
+		.glyphicon {
+			vertical-align: middle;
+			font-size:  3rem;
+			margin: 0 2rem 0 10.6rem;
+		}
+		a:hover {
+			cursor: pointer;
+			color: $turquoise;
+		}
+	}
 }
