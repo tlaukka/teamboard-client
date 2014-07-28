@@ -2,7 +2,7 @@
 	<div class="thumbnail-container">
 		<div class="spinner" ng-show="isLoading"><i class="fa fa-circle-o-notch fa-spin"></i></div>
 		<!-- <button class="btn btn-edit" ng-click="promptBoardRemove(board)"> -->
-		<button class="btn btn-edit" ng-click="selectBoard()">
+		<button ng-if="!isLoading" class="btn btn-edit" ng-click="selectBoard()">
 			<i class="fa fa-check-circle"></i>
 		</button>
 		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked()">

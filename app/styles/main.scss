@@ -50,12 +50,19 @@ $sidebar-width: 240px;
 $board-width: 1280px;
 $board-height: 720px;
 $board-margin: 8px;
-$boardpreview-width: 236px;
-$boardpreview-height: 220px;
+// $boardpreview-width: 236px;
+$boardpreview-width: 226px;
+$boardpreview-height: 210px;
 $boardpreview-margin-left: 24px;
 $boardpreview-margin-top: 24px;
+$boardpreview-padding: 12px;
 $spinner-size: 52px;
 
+/* Animations */
+$boardpreview-fade-duration: 0.6s;
+$loadingoverlay-fade-duration: 0.4s;
+
+@import "partials/animations";
 @import "partials/buttons";
 @import "partials/texteditor";
 @import "partials/auth";
@@ -132,52 +139,52 @@ body {
  * Animations
  */
 
-$boardpreview-fade-duration: 0.6s;
 
-.board-preview.ng-enter {
-	-webkit-animation: $boardpreview-fade-duration fadeIn;
-	-moz-animation: $boardpreview-fade-duration fadeIn;
-	-ms-animation: $boardpreview-fade-duration fadeIn;
-	animation: $boardpreview-fade-duration fadeIn;
-}
 
-.board-preview.ng-leave {
-	-webkit-animation: $boardpreview-fade-duration fadeOut;
-	-moz-animation: $boardpreview-fade-duration fadeOut;
-	-ms-animation: $boardpreview-fade-duration fadeOut;
-	animation: $boardpreview-fade-duration fadeOut;
-}
+// .board-preview.ng-enter {
+// 	-webkit-animation: $boardpreview-fade-duration fadeIn;
+// 	-moz-animation: $boardpreview-fade-duration fadeIn;
+// 	-ms-animation: $boardpreview-fade-duration fadeIn;
+// 	animation: $boardpreview-fade-duration fadeIn;
+// }
 
-@keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
+// .board-preview.ng-leave {
+// 	-webkit-animation: $boardpreview-fade-duration fadeOut;
+// 	-moz-animation: $boardpreview-fade-duration fadeOut;
+// 	-ms-animation: $boardpreview-fade-duration fadeOut;
+// 	animation: $boardpreview-fade-duration fadeOut;
+// }
 
-@-moz-keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
+// @keyframes fadeIn {
+// 	from { opacity: 0; }
+// 	to { opacity: 1; }
+// }
 
-@-webkit-keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
+// @-moz-keyframes fadeIn {
+// 	from { opacity: 0; }
+// 	to { opacity: 1; }
+// }
 
-@keyframes fadeOut {
-	from { opacity: 1; }
-	to { opacity: 0; }
-}
+// @-webkit-keyframes fadeIn {
+// 	from { opacity: 0; }
+// 	to { opacity: 1; }
+// }
 
-@-moz-keyframes fadeOut {
-	from { opacity: 1; }
-	to { opacity: 0; }
-}
+// @keyframes fadeOut {
+// 	from { opacity: 1; }
+// 	to { opacity: 0; }
+// }
 
-@-webkit-keyframes fadeOut {
-	from { opacity: 1; }
-	to { opacity: 0; }
-}
+// @-moz-keyframes fadeOut {
+// 	from { opacity: 1; }
+// 	to { opacity: 0; }
+// }
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-	display: none !important;
-}
+// @-webkit-keyframes fadeOut {
+// 	from { opacity: 1; }
+// 	to { opacity: 0; }
+// }
+
+// [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+// 	display: none !important;
+// }

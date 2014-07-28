@@ -1,8 +1,10 @@
-<div tb-workspace boards="boards" id="workspace">
+<div tb-workspace boards="boards" id="workspace" state="state">
+	<div class="loading-overlay"></div>
 	<div class="board-preview-container">
 		<div tb-board-preview
 			ng-repeat="board in boards"
 			index="{{$index}}"
+			workspace-state="state"
 			board-data="board"
 			board-remove="promptBoardRemove(board)"
 			board-edit="editBoard(board)"

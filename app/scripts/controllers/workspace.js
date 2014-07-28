@@ -7,6 +7,10 @@ module.exports = function($scope, modalService, Board, boards, scrollArea) {
 	$scope.boards = boards;
 	$scope.selectedBoards = [];
 
+	$scope.state = {
+		isLoadingBoard: false
+	};
+
 	console.log('workspace: resolved boards', boards);
 
 	$scope.$on('action:create', function() {

@@ -14,6 +14,7 @@ module.exports = function(scrollArea) {
 		scope: {
 			index: '@',
 			board: '=boardData',
+			workspaceState: '=workspaceState',
 			promptBoardRemove: '&boardRemove',
 			editBoard: '&boardEdit',
 			toggleBoardSelection: '&boardToggle'
@@ -25,27 +26,37 @@ module.exports = function(scrollArea) {
 
 			scope.onBoardClicked = function() {
 
-				scrollArea.scrollTo(0, 0);
-
-				var row = Math.floor(scope.index / 3);
-				var col = scope.index % 3;
-
-				var marginX = -((col + 1) * 36 + col * 24);
-				var marginY = -((row + 1) * 36 + row * 24);
-
-				var newX = marginX - (col * 200);
-				var newY = marginY - (row * 184);
-
 				scope.isLoading = true;
+				scope.workspaceState.isLoadingBoard = true;
+
 				var thumbnailContainer = angular.element(element.children()[0]);
 				thumbnailContainer.css('z-index', 1000);
-				TweenLite.to(thumbnailContainer, 0.4, {
-					x: newX,
-					y: newY,
-					scaleX: 5,
-					scaleY: 5,
-					transformOrigin: 'left top'
-				});
+
+				// scope.$emit('action:loading-board');
+
+				// scrollArea.scrollTo(0, 0);
+
+				// var row = Math.floor(scope.index / 3);
+				// var col = scope.index % 3;
+
+				// var marginX = -((col + 1) * 36 + col * 24);
+				// var marginY = -((row + 1) * 36 + row * 24);
+
+				// var newX = marginX - col * 200 - 5;
+				// var newY = marginY - row * 184;
+
+				// var thumbnailContainer = angular.element(element.children()[0]);
+				// thumbnailContainer.css('z-index', 1000);
+				// thumbnailContainer.css('border', 'none');
+				// thumbnailContainer.css('box-shadow', 'none');
+
+				// TweenLite.to(thumbnailContainer, 0.4, {
+				// 	left: newX,
+				// 	top: newY,
+				// 	scaleX: 5,
+				// 	scaleY: 5,
+				// 	transformOrigin: 'left top'
+				// });
 			}
 
 			scope.selectBoard = function() {

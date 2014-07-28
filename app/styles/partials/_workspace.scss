@@ -1,7 +1,25 @@
 #workspace {
 	position: absolute;
 	background-color: $workspace-bg;
-	width: 3 * ($boardpreview-width + $boardpreview-margin-left) + $boardpreview-margin-left;
+	width: 100%;
+	// width: 3 * ($boardpreview-width + $boardpreview-margin-left) + $boardpreview-margin-left;
+}
+
+.loading-overlay {
+	position: absolute;
+	display: none;
+	z-index: 500;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+
+	&.visible {
+		display: block;
+		-webkit-animation: $loadingoverlay-fade-duration fadeIn;
+		-moz-animation: $loadingoverlay-fade-duration fadeIn;
+		-ms-animation: $loadingoverlay-fade-duration fadeIn;
+		animation: $loadingoverlay-fade-duration fadeIn;
+	}
 }
 
 .board-preview-container {
@@ -15,7 +33,7 @@
 	display: inline-block;
 	margin-left: $boardpreview-margin-left;
 	margin-top: $boardpreview-margin-top;
-	padding: 12px;
+	padding: $boardpreview-padding;
 	width: $boardpreview-width;
 	height: $boardpreview-height;
 
@@ -36,16 +54,21 @@
 
 	.thumbnail-container {
 		position: relative;
-	}
-
-	.thumbnail.board {
 		box-sizing: border-box;
-		border-radius: 0;
+		width: 202px;
+		// height: 120px;
 		border: 1px solid #b2b2b2;
 		margin-bottom: 12px;
 		-webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
 		-moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
 		box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+	}
+
+	.thumbnail.board {
+		border-radius: 0;
+		border: none;
+		padding: 0;
+		margin: 0;
 	}
 
 	.btn.btn-removeboard {
@@ -80,7 +103,21 @@
 		width: $spinner-size;
 		height: $spinner-size;
 		left: ($boardpreview-width / 2) - ($boardpreview-margin-left / 2) - ($spinner-size / 2);
-		top: 36px;
+		top: 32px;
 		color: $icon-off;
+	}
+
+	.ng-enter {
+		-webkit-animation: $boardpreview-fade-duration fadeIn;
+		-moz-animation: $boardpreview-fade-duration fadeIn;
+		-ms-animation: $boardpreview-fade-duration fadeIn;
+		animation: $boardpreview-fade-duration fadeIn;
+	}
+
+	.ng-leave {
+		-webkit-animation: $boardpreview-fade-duration fadeOut;
+		-moz-animation: $boardpreview-fade-duration fadeOut;
+		-ms-animation: $boardpreview-fade-duration fadeOut;
+		animation: $boardpreview-fade-duration fadeOut;
 	}
 }

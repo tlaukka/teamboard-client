@@ -6,7 +6,8 @@ module.exports = function(scrollArea, $timeout) {
 		restrict: 'AE',
 
 		scope: {
-			boards: '='
+			boards: '=',
+			state: '='
 		},
 
 		link: function(scope, element) {
@@ -19,7 +20,7 @@ module.exports = function(scrollArea, $timeout) {
 					boardRowCount++;
 				}
 
-				var height = (boardRowCount * 260) + 'px';
+				var height = (boardRowCount * 250) + 'px';
 				element.css('height', height);
 			}
 
@@ -27,6 +28,17 @@ module.exports = function(scrollArea, $timeout) {
 				scope.updateHeight();
 				scrollArea.refresh();
 			});
+
+			scope.$watch('state.isLoadingBoard', function() {
+				if (scope.state.isLoadingBoard) {
+					var loadingOverlay = angular.element(element.children()[0]);
+					loadingOverlay.addClass('visible');
+				}
+			});
+
+			// scope.$on('action:loading-board', function() {
+			// 	console.log('loading...');
+			// });
 		}
 	};
 }
