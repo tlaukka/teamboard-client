@@ -32,8 +32,6 @@ module.exports = function(scrollArea) {
 				var thumbnailContainer = angular.element(element.children()[0]);
 				thumbnailContainer.css('z-index', 1000);
 
-				// scope.$emit('action:loading-board');
-
 				// scrollArea.scrollTo(0, 0);
 
 				// var row = Math.floor(scope.index / 3);

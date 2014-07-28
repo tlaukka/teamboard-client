@@ -18,15 +18,13 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 	});
 
 	$scope.$on('action:remove', function() {
-		// for (var i = 0; i < $scope.selectedBoards.length; i++) {
-		// 	var boardId = $scope.boards[$scope.selectedBoards[i]].id;
-		// 	console.debug('id: ' + boardId);
-		// 	$scope.removeBoard(boardId);
-		// 	$scope.selectedBoards.length = 0;
-		// }
-
 		$scope.removeBoards($scope.selectedBoards);
 		$scope.selectedBoards.length = 0;
+	});
+
+	$scope.$on('action:edit', function() {
+		var board = $scope.boards[$scope.selectedBoards[0]];
+		$scope.editBoard(board);
 	});
 
 	// Enable/disable necessary toolbar buttons.
