@@ -87,6 +87,15 @@
 		color: $icon-off;
 	}
 
+	.spinner {
+		position: absolute;
+		top: 10px;
+		right: 14px;
+		font-size: 16px;
+		background-color: rgba(0, 0, 0, 0);
+		color: $icon-off;
+	}
+
 	.label-private {
 		background-color: $label-private-bg;
 	}
@@ -95,16 +104,16 @@
 		background-color: $label-public-bg;
 	}
 
-	.spinner {
-		position: absolute;
-		font-size: $spinner-size;
-		line-height: $spinner-size;
-		width: $spinner-size;
-		height: $spinner-size;
-		left: ($boardpreview-width / 2) - ($boardpreview-margin-left / 2) - ($spinner-size / 2);
-		top: 32px;
-		color: $icon-off;
-	}
+	// .spinner {
+	// 	position: absolute;
+	// 	font-size: $spinner-size;
+	// 	line-height: $spinner-size;
+	// 	width: $spinner-size;
+	// 	height: $spinner-size;
+	// 	left: ($boardpreview-width / 2) - ($boardpreview-margin-left / 2) - ($spinner-size / 2);
+	// 	top: 32px;
+	// 	color: $icon-off;
+	// }
 
 	.ng-enter {
 		-webkit-animation: $boardpreview-fade-duration fadeIn;
