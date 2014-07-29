@@ -1,21 +1,30 @@
 <div class="topbar">
-	<div class="sidebar-margin"></div>
-	<h2>Workspace</h2>
-	<button class="btn btn-add" ng-click="onCreateClicked()">
-		<i class="fa fa-plus"></i> Add Board
-	</button>
-	<div class="btn-group iconbar">
-		<div class="btn btn-icon"
-			ng-class="{ enabled: removeEnabled }"
-			ng-disabled="!removeEnabled"
-			ng-click="onRemoveClicked()">
-			<i class="fa fa-trash-o fa-fw"></i>
-		</div>
-		<div class="btn btn-icon"
-			ng-class="{ enabled: editEnabled }"
-			ng-disabled="!editEnabled"
-			ng-click="onEditClicked()">
-			<i class="fa fa-edit fa-fw"></i>
+	<div class="container-fluid content-wrapper">
+		<div class="row">
+			<div class="col-sm-4">
+				<h2>Workspace</h2>
+			</div>
+			<div class="col-sm-4">
+				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
+					<i class="fa fa-plus"></i> Create Board
+				</button>
+			</div>
+			<div class="col-sm-4">
+				<div class="btn-group iconbar">
+					<div class="btn btn-icon"
+						ng-class="{ enabled: removeEnabled }"
+						ng-disabled="!removeEnabled"
+						ng-click="onRemoveClicked()">
+						<i class="fa fa-trash-o fa-fw"></i>
+					</div>
+					<div class="btn btn-icon"
+						ng-class="{ enabled: editEnabled }"
+						ng-disabled="!editEnabled"
+						ng-click="onEditClicked()">
+						<i class="fa fa-edit fa-fw"></i>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

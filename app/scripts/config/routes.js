@@ -23,7 +23,7 @@ module.exports = function(
 
 				'topbar': {
 					template:   require('../../partials/topbar-workspace.html'),
-					controller: require('../controllers/topbar')
+					controller: require('../controllers/topbar-workspace')
 				},
 
 				'content': {
@@ -53,6 +53,22 @@ module.exports = function(
 
 			url: '/board/:id',
 
+			resolve: {
+				resolvedBoard: function(
+						$http, $stateParams, Config, Board) {
+					return $http.get(Config.api.url() + 'boards/' +
+							$stateParams.id + '')
+						.then(
+							function(response) {
+								return new Board(response.data);
+							},
+							function(err) {
+								// TODO Handle it?
+								console.log('err', err);
+							});
+				}
+			},
+
 			views: {
 				'sidebar': {
 					template:   require('../../partials/sidebar.html'),
@@ -61,25 +77,12 @@ module.exports = function(
 
 				'topbar': {
 					template:   require('../../partials/topbar-board.html'),
-					controller: require('../controllers/topbar')
+					controller: require('../controllers/topbar-board')
 				},
 
 				'content': {
 
 					resolve: {
-						resolvedBoard: function(
-								$http, $stateParams, Config, Board) {
-							return $http.get(Config.api.url() + 'boards/' +
-									$stateParams.id + '')
-								.then(
-									function(response) {
-										return new Board(response.data);
-									},
-									function(err) {
-										// TODO Handle it?
-										console.log('err', err);
-									});
-						},
 						currentUser: function(authService) {
 							return authService.getUser();
 						},

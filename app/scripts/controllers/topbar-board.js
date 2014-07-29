@@ -1,7 +1,9 @@
 'use strict';
 
 
-module.exports = function($scope, $rootScope) {
+module.exports = function($scope, $rootScope, resolvedBoard) {
+
+	$scope.board = resolvedBoard;
 
 	$scope.snapEnabled = false;
 	$scope.removeEnabled = false;
@@ -10,10 +12,6 @@ module.exports = function($scope, $rootScope) {
 	$scope.onCreateClicked = function() {
 		$rootScope.$broadcast('action:create');
 	}
-
-	// $scope.onCreateTicketClicked = function() {
-	// 	$rootScope.$broadcast('action:create-ticket');
-	// }
 
 	$scope.onEnableSnapClicked = function() {
 		$rootScope.$broadcast('action:enable-snap');

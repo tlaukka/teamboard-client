@@ -1,38 +1,27 @@
 .topbar {
 	position: fixed;
 	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 	left: 0;
 	top: 0;
 	min-width: 100%;
-	min-height: $topbar-height;
+	height: $topbar-height;
 	background: $topbar-bg;
 	border-bottom: 1px solid $topbar-border-bottom;
 
-	// @media (max-width: $screen-md-min) {
-	// 	padding: 0;
-	// 	width: 75%;
-	// }
-
-	// @media (max-width: $screen-sm-min) {
-	// 	width: 100%;
-	// }
-
-	.sidebar-margin {
-		display: inline-block;
-		width: 240px;
+	.content-wrapper {
+		margin-left: $sidebar-width;
+		height: $topbar-height;
 	}
 
 	h2 {
-		display: inline-block;
-		margin-left: 2rem;
 		font-size: 2rem;
 		color: $text-dark;
 	}
 
 	h3 {
-		display: inline-block;
 		font-size: 1.5rem;
-		margin-left: 2rem;
 		color: $text-dark;
 
 		.gravatar {
@@ -43,13 +32,10 @@
 	}
 
 	.btn-add {
-		position: relative;
-		display: inline-block;
 		outline: none;
 		color: $text-light;
 		background-color: $btn-primary-bg;
-		top: -6px;
-		left: 160px;
+		margin-top: 6px;
 		width: 200px;
 		height: 46px;
 		-webkit-border-radius: 5px 5px 5px 5px;
@@ -69,26 +55,25 @@
 		}
 	}
 
-	button.snap.active {
-		span {
-			color: $turquoise;
-		}
-	}
-
 	.iconbar {
-		position: relative;
-		display: inline-block;
-		left: 240px;
 		color: $icon-off;
+		margin-top: 12px;
 
 		.btn-icon {
 			font-size: 28px;
 			line-height: 28px;
 			background-color: rgba(0, 0, 0, 0);
-			height: 42px;
+			box-shadow: none;
 
 			&.enabled {
 				color: $icon-on;
+			}
+		}
+
+		.btn-checkbox {
+			&.active {
+				box-shadow: none;
+				color: #000000;
 			}
 		}
 	}

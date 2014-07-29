@@ -1,25 +1,36 @@
 <div class="topbar">
-	<div class="sidebar-margin"></div>
-	<h2>Board: {{ currentBoard.name | characters: 38: true }}</h2>
-	<h3>Owner:
-		<img tb-gravatar email="currentBoard.owner.email"> {{ currentBoard.owner.email | characters: 38: true }}
-	</h3>
-	<button class="btn add" ng-click="onCreateClicked()">
-		<span class="glyphicon glyphicon-plus"></span> Add Ticket
-	</button>
-	<button type="button"
-		class="btn snap"
-		ng-model="snapEnabled"
-		ng-click="onEnableSnapClicked()"
-		btn-checkbox>
-		<span class="glyphicon glyphicon-magnet"></span> Snap to grid
-	</button>
-
-	<!-- <button type="button"
-		class="btn zoom"
-		ng-model="zoomOut"
-		ng-click="onZoomOutClicked()"
-		btn-checkbox>
-		<span class="glyphicon glyphicon-zoom-out"></span> Zoom out
-	</button> -->
+	<div class="container-fluid content-wrapper">
+		<div class="row">
+			<div class="col-sm-4">
+				<h2>{{ board.name | characters: 38: true }}</h2>
+			</div>
+			<div class="col-sm-4">
+				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
+					<i class="fa fa-plus"></i> Create Ticket
+				</button>
+			</div>
+			<div class="col-sm-4">
+				<div class="btn-group iconbar">
+					<div btn-checkbox
+						class="btn btn-checkbox btn-icon enabled"
+						ng-model="snapEnabled"
+						ng-click="onEnableSnapClicked()">
+						<i class="fa fa-magnet fa-fw"></i>
+					</div>
+					<div class="btn btn-icon"
+						ng-class="{ enabled: removeEnabled }"
+						ng-disabled="!removeEnabled"
+						ng-click="onRemoveClicked()">
+						<i class="fa fa-trash-o fa-fw"></i>
+					</div>
+					<div class="btn btn-icon"
+						ng-class="{ enabled: editEnabled }"
+						ng-disabled="!editEnabled"
+						ng-click="onEditClicked()">
+						<i class="fa fa-edit fa-fw"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
