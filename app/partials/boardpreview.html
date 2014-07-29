@@ -1,0 +1,20 @@
+<div class="board-preview">
+	<div class="thumbnail-container">
+		<div class="spinner" ng-show="isLoading"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+		<!-- <button class="btn btn-edit" ng-click="promptBoardRemove(board)"> -->
+		<button ng-if="!isLoading" class="btn btn-edit" ng-click="selectBoard()">
+			<i class="fa fa-check-circle"></i>
+		</button>
+		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked()">
+		<!-- <a ng-click="onBoardClicked()"> -->
+			<img src="{{board.screenshot}}"
+				alt="..."
+				class="thumbnail board center-block">
+		</a>
+	</div>
+	<div class="heading" ng-click="editBoard(board)">
+		{{ board.name | characters: 23: true }}
+	</div>
+	<div ng-if="board.isPublic" class="label label-public">Public</div>
+	<div ng-if="!board.isPublic" class="label label-private">Private</div>
+</div>

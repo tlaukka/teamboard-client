@@ -1,37 +1,131 @@
 #workspace {
 	position: absolute;
-	width: 100%;
-	// height: calc(100% - 0px);
-	// width: 1000px;
-	// height: 1000px;
+	background-color: $workspace-bg;
+	width: 3 * ($boardpreview-width + $boardpreview-margin-left) + $boardpreview-margin-left;
 }
 
-.boardlist-caption {
-	// @extend .overflow-hidden;
-	cursor: pointer;
+.loading-overlay {
+	position: fixed;
+	display: none;
+	z-index: 500;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.6);
 
-	.visibility {
-		color: rgb(170, 170, 170);
+	&.visible {
+		display: block;
+		-webkit-animation: $loadingoverlay-fade-duration fadeIn;
+		-moz-animation: $loadingoverlay-fade-duration fadeIn;
+		-ms-animation: $loadingoverlay-fade-duration fadeIn;
+		animation: $loadingoverlay-fade-duration fadeIn;
 	}
 }
 
-.thumbnail.board {
-	border-radius: 0;
-	border: 1px solid rgb(180, 180, 180);
-}
-
-#add-board-caption {
-	cursor: default;
-}
-
-.btn.btn-removeboard {
-	position: absolute;
-	cursor: pointer;
-	bottom: 20px;
-	color: rgb(170, 170, 170);
-	background-color: rgba(0, 0, 0, 0);
+.board-preview-container {
+	width: 3 * ($boardpreview-width + $boardpreview-margin-left);
 }
 
 .board-preview {
+	background-color: $boardpreview-bg;
+	color: $text-dark;
+	box-sizing: border-box;
+	display: inline-block;
+	margin-left: $boardpreview-margin-left;
+	margin-top: $boardpreview-margin-top;
+	padding: $boardpreview-padding;
+	width: $boardpreview-width;
+	height: $boardpreview-height;
 
+	&.selected {
+		background-color: $boardpreview-selected-bg;
+
+		.btn-edit {
+			color: $icon-on;
+		}
+	}
+
+	.heading {
+		cursor: pointer;
+		font-size: 18px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+
+	.thumbnail-container {
+		position: relative;
+		box-sizing: border-box;
+		width: 202px;
+		// height: 120px;
+		border: 1px solid #b2b2b2;
+		margin-bottom: 12px;
+		-webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+		box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+	}
+
+	.thumbnail.board {
+		border-radius: 0;
+		border: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.btn.btn-removeboard {
+		position: absolute;
+		cursor: pointer;
+		bottom: 20px;
+		color: rgb(170, 170, 170);
+		background-color: rgba(0, 0, 0, 0);
+	}
+
+	.btn-edit {
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		font-size: 18px;
+		background-color: rgba(0, 0, 0, 0);
+		color: $icon-off;
+	}
+
+	.spinner {
+		position: absolute;
+		top: 10px;
+		right: 14px;
+		font-size: 16px;
+		background-color: rgba(0, 0, 0, 0);
+		color: $icon-off;
+	}
+
+	.label-private {
+		background-color: $label-private-bg;
+	}
+
+	.label-public {
+		background-color: $label-public-bg;
+	}
+
+	// .spinner {
+	// 	position: absolute;
+	// 	font-size: $spinner-size;
+	// 	line-height: $spinner-size;
+	// 	width: $spinner-size;
+	// 	height: $spinner-size;
+	// 	left: ($boardpreview-width / 2) - ($boardpreview-margin-left / 2) - ($spinner-size / 2);
+	// 	top: 32px;
+	// 	color: $icon-off;
+	// }
+
+	.ng-enter {
+		-webkit-animation: $boardpreview-fade-duration fadeIn;
+		-moz-animation: $boardpreview-fade-duration fadeIn;
+		-ms-animation: $boardpreview-fade-duration fadeIn;
+		animation: $boardpreview-fade-duration fadeIn;
+	}
+
+	.ng-leave {
+		-webkit-animation: $boardpreview-fade-duration fadeOut;
+		-moz-animation: $boardpreview-fade-duration fadeOut;
+		-ms-animation: $boardpreview-fade-duration fadeOut;
+		animation: $boardpreview-fade-duration fadeOut;
+	}
 }

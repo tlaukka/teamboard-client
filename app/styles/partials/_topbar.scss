@@ -1,10 +1,12 @@
 .topbar {
 	position: fixed;
+	box-sizing: border-box;
 	left: 0;
 	top: 0;
 	min-width: 100%;
 	min-height: $topbar-height;
-	background: darken($bg-medium, 10%);
+	background: $topbar-bg;
+	border-bottom: 1px solid $topbar-border-bottom;
 
 	// @media (max-width: $screen-md-min) {
 	// 	padding: 0;
@@ -24,14 +26,14 @@
 		display: inline-block;
 		margin-left: 2rem;
 		font-size: 2rem;
-		color: darken($bg-medium, 80%);
+		color: $text-dark;
 	}
 
 	h3 {
 		display: inline-block;
-		color: darken($bg-medium, 50%);
 		font-size: 1.5rem;
 		margin-left: 2rem;
+		color: $text-dark;
 
 		.gravatar {
 			max-height: 2rem;
@@ -40,24 +42,54 @@
 		}
 	}
 
-	button {
-		float: right;
-		padding: 2rem 2rem 2rem 2rem;
+	.btn-add {
+		position: relative;
 		display: inline-block;
+		outline: none;
+		color: $text-light;
+		background-color: $btn-primary-bg;
+		top: -6px;
+		left: 160px;
+		width: 200px;
+		height: 46px;
+		-webkit-border-radius: 5px 5px 5px 5px;
+		border-radius: 5px 5px 5px 5px;
+		-webkit-box-shadow: 3px 3px 0 0 #589190;
+		box-shadow: 3px 3px 0 0 #589190;
 
-		.glyphicon {
-			margin-right: 0.1rem;
+		&:active {
+			outline: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			-moz-transform: translateX(3px) translateY(3px);
+			-webkit-transform: translateX(3px) translateY(3px);
+			-o-transform: translateX(3px) translateY(3px);
+			-ms-transform: translateX(3px) translateY(3px);
+			transform: translateX(3px) translateY(3px);
 		}
-	}
-
-	button.add {
-		color: $fg-light;
-		background: $turquoise;
 	}
 
 	button.snap.active {
 		span {
 			color: $turquoise;
+		}
+	}
+
+	.iconbar {
+		position: relative;
+		display: inline-block;
+		left: 240px;
+		color: $icon-off;
+
+		.btn-icon {
+			font-size: 28px;
+			line-height: 28px;
+			background-color: rgba(0, 0, 0, 0);
+			height: 42px;
+
+			&.enabled {
+				color: $icon-on;
+			}
 		}
 	}
 }

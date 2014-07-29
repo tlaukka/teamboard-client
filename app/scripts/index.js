@@ -19,7 +19,8 @@ angular.module('tb', [
 		'ngSanitize',
 		'textAngular',
 		require('./modules/configuration').name,
-		require('./modules/authentication').name
+		require('./modules/authentication').name,
+		require('./modules/uservoice').name
 	])
 
 	.run(function($state, Config) {
@@ -29,14 +30,15 @@ angular.module('tb', [
 	.config(require('./config/routes'))
 	.config(require('./config/decorators'))
 
-	.directive('tbBoard',       require('./directives/board'))
-	.directive('tbTicket',      require('./directives/ticket'))
-	.directive('ngClick',       require('./directives/click'))
-	.directive('tbGravatar',    require('./directives/gravatar'))
-	.directive('tbAutoFocus',   require('./directives/autofocus'))
-	.directive('tbTicketProxy', require('./directives/ticketproxy'))
-	.directive('tbScrollArea',  require('./directives/scrollarea'))
-	.directive('tbWorkspace',   require('./directives/workspace'))
+	.directive('tbBoard',        require('./directives/board'))
+	.directive('tbTicket',       require('./directives/ticket'))
+	.directive('ngClick',        require('./directives/click'))
+	.directive('tbGravatar',     require('./directives/gravatar'))
+	.directive('tbAutoFocus',    require('./directives/autofocus'))
+	.directive('tbTicketProxy',  require('./directives/ticketproxy'))
+	.directive('tbScrollArea',   require('./directives/scrollarea'))
+	.directive('tbWorkspace',    require('./directives/workspace'))
+	.directive('tbBoardPreview', require('./directives/boardpreview'))
 
 	.factory('Board',         require('./services/board'))
 	.factory('Ticket',        require('./services/ticket'))

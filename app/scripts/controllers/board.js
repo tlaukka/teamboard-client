@@ -81,17 +81,17 @@ module.exports = function($scope, Ticket, modalService, socketService,
 	}
 
 	// triggered from TopBarController
-	$scope.$on('board:create-ticket', function(event, data) {
+	$scope.$on('action:create', function(event, data) {
 		$scope.promptTicketCreate();
 	});
 
 	// triggered from TopBarController
-	$scope.$on('board:enable-snap', function(event, data) {
+	$scope.$on('action:enable-snap', function(event, data) {
 		$scope.snapOptions.enabled = !$scope.snapOptions.enabled;
 	});
 
 	// triggered from TicketDirective
-	$scope.$on('ticket:remove', function(event, data) {
+	$scope.$on('action:remove', function(event, data) {
 
 		var filter = function(ticket) { return ticket.id === data.id }
 		var ticket = _.find($scope.board.tickets, filter);

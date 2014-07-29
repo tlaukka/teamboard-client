@@ -113,7 +113,7 @@ gulp.task('build', ['uglify', 'sass', 'copy']);
 
 // build the application, start a livereload server and set watchers
 gulp.task('default', ['serve'], function() {
-	gulp.watch('./app/**/*.html',        ['copy-html']);
+	gulp.watch('./app/**/*.html',        ['copy-html', 'browserify']);
 	gulp.watch('./app/scripts/**/*.js',  ['jshint', 'browserify']);
 	gulp.watch('./app/styles/**/*.scss', ['sass']);
 });
