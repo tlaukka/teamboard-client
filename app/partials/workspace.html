@@ -16,12 +16,7 @@
 							<span class="glyphicon glyphicon-remove"></span>
 						</button>
 						<a ui-sref="main.board({ id: board.id })">
-							<img ng-if="board.screenshotUrl.length != 0"
-								src="{{board.screenshotUrl}}"
-								alt="..."
-								class="thumbnail board img-responsive">
-							<img ng-if="board.screenshotUrl.length == 0"
-								src="http://placehold.it/320x180/ffffff&text=Empty Board"
+							<img ng-src="{{board.screenshot}}"
 								alt="..."
 								class="thumbnail board img-responsive">
 						</a>
