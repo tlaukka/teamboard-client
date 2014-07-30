@@ -3,7 +3,7 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, Ticket, modalService, socketService,
+module.exports = function($scope, $rootScope, Ticket, modalService, socketService,
 		resolvedBoard, currentUser) {
 
 	// board resolved in the ui-router
@@ -73,11 +73,14 @@ module.exports = function($scope, Ticket, modalService, socketService,
 		return $scope.apply();
 	});
 
+	$scope.selectedTickets = [];
+	$scope.selectedTicketIds = [];
+
 	// TODO Move these to app configuration?
 	$scope.snapOptions = {
 		enabled:    false,
-		gridWidth:  215,
-		gridHeight: 146
+		gridWidth:  242,
+		gridHeight: 136
 	}
 
 	// triggered from TopBarController
@@ -90,24 +93,99 @@ module.exports = function($scope, Ticket, modalService, socketService,
 		$scope.snapOptions.enabled = !$scope.snapOptions.enabled;
 	});
 
-	// triggered from TicketDirective
+	// triggered from TopBarController
+	$scope.$on('action:edit-board', function(event, data) {
+		$scope.promptBoardEdit($scope.board);
+	});
+
+	// triggered from TopBarController
 	$scope.$on('action:remove', function(event, data) {
+		$scope.removeTickets($scope.selectedTickets);
+		$scope.selectedTickets.length = 0;
+		$scope.selectedTicketIds.length = 0;
+	});
 
-		var filter = function(ticket) { return ticket.id === data.id }
-		var ticket = _.find($scope.board.tickets, filter);
+	// triggered from TopBarController
+	$scope.$on('action:edit', function(event, data) {
+		var ticket = $scope.board.tickets[$scope.selectedTickets[0]];
+		$scope.promptTicketEdit(ticket);
+	});
 
-		if(ticket) {
-			ticket.remove().then(
-				function() {
-					$scope.board.tickets = _.reject(
-						$scope.board.tickets, filter);
-				},
-				function(err) {
-					// wat do
-					console.log(err);
-				});
+	// triggered from TicketDirective
+	// $scope.$on('action:remove', function(event, data) {
+
+	// 	var filter = function(ticket) { return ticket.id === data.id }
+	// 	var ticket = _.find($scope.board.tickets, filter);
+
+	// 	if(ticket) {
+	// 		ticket.remove().then(
+	// 			function() {
+	// 				$scope.board.tickets = _.reject(
+	// 					$scope.board.tickets, filter);
+	// 			},
+	// 			function(err) {
+	// 				// wat do
+	// 				console.log(err);
+	// 			});
+	// 	}
+	// });
+
+	// Enable/disable necessary toolbar buttons.
+	$scope.$watch('selectedTickets.length', function() {
+		// if ($scope.selectedTicketIds.length != 0) {
+		// 	$rootScope.$broadcast('ui:enable-remove', true);
+
+		// 	// Enable edit only if a single ticket is selected.
+		// 	if ($scope.selectedTicketIds.length == 1) {
+		// 		$rootScope.$broadcast('ui:enable-edit', true);
+		// 	}
+		// 	else {
+		// 		$rootScope.$broadcast('ui:enable-edit', false);
+		// 	}
+		// }
+		// else {
+		// 	$rootScope.$broadcast('ui:enable-remove', false);
+		// 	$rootScope.$broadcast('ui:enable-edit', false);
+		// }
+
+		if ($scope.selectedTickets.length != 0) {
+			$rootScope.$broadcast('ui:enable-remove', true);
+
+			// Enable edit only if a single ticket is selected.
+			if ($scope.selectedTickets.length == 1) {
+				$rootScope.$broadcast('ui:enable-edit', true);
+			}
+			else {
+				$rootScope.$broadcast('ui:enable-edit', false);
+			}
+		}
+		else {
+			$rootScope.$broadcast('ui:enable-remove', false);
+			$rootScope.$broadcast('ui:enable-edit', false);
 		}
 	});
+
+	$scope.toggleTicketSelection = function(index) {
+		var selectedIndex = $scope.selectedTickets.indexOf(index);
+
+		if (selectedIndex == -1) {
+			$scope.selectedTickets.push(index);
+		}
+		else {
+			$scope.selectedTickets.splice(selectedIndex, 1);
+		}
+	}
+
+	// $scope.toggleTicketSelection = function(id) {
+	// 	var selectedIndex = $scope.selectedTickets.indexOf(index);
+
+	// 	if (selectedIndex == -1) {
+	// 		$scope.selectedTickets.push(index);
+	// 	}
+	// 	else {
+	// 		$scope.selectedTickets.splice(selectedIndex, 1);
+	// 	}
+	// }
 
 	$scope.createTicket = function(ticketData) {
 		// TODO Allow a predefined position
@@ -122,6 +200,48 @@ module.exports = function($scope, Ticket, modalService, socketService,
 				// TODO Handle it
 				console.log(err);
 			});
+	}
+
+	// $scope.removeTicket = function(ticket) {
+	// 	var filter = function(ticket) { return ticket.id === data.id }
+	// 	var ticket = _.find($scope.board.tickets, filter);
+
+	// 	if(ticket) {
+	// 		ticket.remove().then(
+	// 			function() {
+	// 				$scope.board.tickets = _.reject(
+	// 					$scope.board.tickets, filter);
+	// 			},
+	// 			function(err) {
+	// 				// wat do
+	// 				console.log(err);
+	// 			});
+	// 	}
+	// }
+
+	$scope.removeTicket = function(id) {
+		console.debug('remove: ' + id);
+		var filter = function(ticket) { return ticket.id === id }
+		var ticket = _.find($scope.board.tickets, filter);
+
+		if(ticket) {
+			ticket.remove().then(
+				function() {
+					$scope.board.tickets = _.reject(
+						$scope.board.tickets, filter);
+				},
+				function(err) {
+					// wat do
+					console.log(err);
+				});
+		}
+	}
+
+	$scope.removeTickets = function(indexes) {
+		for (var i = 0; i < indexes.length; i++) {
+			var ticketId = $scope.board.tickets[indexes[i]].id;
+			$scope.removeTicket(ticketId);
+		}
 	}
 
 	$scope.editTicket = function(ticket, attrs) {
@@ -149,7 +269,7 @@ module.exports = function($scope, Ticket, modalService, socketService,
 		});
 	}
 
-	$scope.promptEditTicket = function(ticket) {
+	$scope.promptTicketEdit = function(ticket) {
 		var modalOptions = {
 			template: require('../../partials/modal-ticketedit.html')
 		}
@@ -163,6 +283,35 @@ module.exports = function($scope, Ticket, modalService, socketService,
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
 			$scope.editTicket(ticket, result);
+		});
+	}
+
+	$scope.editBoard = function(board, attrs) {
+		board.name     = attrs.heading;
+		board.isPublic = attrs.isPublic;
+
+		return board.save().then(
+			function(board) {
+				console.log('edited', board);
+			},
+			function(err) {
+				// wat do
+				console.log(err);
+			});
+	}
+
+	$scope.promptBoardEdit = function(board) {
+		var modalOptions = {
+			template: require('../../partials/modal-boardedit.html')
+		}
+
+		var userOptions = {
+			heading:  board.name,
+			isPublic: board.isPublic
+		}
+
+		modalService.show(modalOptions, userOptions).then(function(result) {
+			$scope.editBoard(board, result);
 		});
 	}
 }

@@ -78,13 +78,21 @@
 		background-color: rgba(0, 0, 0, 0);
 	}
 
-	.btn-edit {
+	.btn-select {
 		position: absolute;
 		top: 2px;
 		right: 2px;
 		font-size: 18px;
+		box-shadow: none;
 		background-color: rgba(0, 0, 0, 0);
 		color: $icon-off;
+
+		&.btn-checkbox {
+			&.active {
+				box-shadow: none;
+				color: $turquoise;
+			}
+		}
 	}
 
 	.spinner {
@@ -94,14 +102,6 @@
 		font-size: 16px;
 		background-color: rgba(0, 0, 0, 0);
 		color: $icon-off;
-	}
-
-	.label-private {
-		background-color: $label-private-bg;
-	}
-
-	.label-public {
-		background-color: $label-public-bg;
 	}
 
 	// .spinner {

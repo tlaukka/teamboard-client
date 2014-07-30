@@ -10,15 +10,29 @@
 	top: $board-margin;
 	width: $board-width;
 	height: $board-height;
-	background-color: #ffffff;
+	background-color: $board-bg;
 	overflow: hidden;
 }
 
 .ticket {
 	position: absolute;
-	width: 200px;
-	background: rgb(255, 255, 255);
-	border: 1px solid rgb(180, 180, 180);
+	box-sizing: border-box;
+	width: $ticket-width; // Margin 16
+	height: $ticket-height; // Margin 8
+	max-width: $ticket-width;
+	max-height: $ticket-height;
+	background-color: $white;
+	border: 1px solid $lightgray-dark;
+
+	.selection-overlay {
+		position: absolute;
+		left: -1px;
+		top: -1px;
+		width: $ticket-width;
+		height: $ticket-height;
+		border: 3px solid $turquoise;
+		background-color: $transparent;
+	}
 
 	.color {
 		height: 10px;
@@ -26,8 +40,9 @@
 	}
 
 	.heading {
-		padding: 5px 10px 5px 10px;
-		font-size: 1.5rem;
+		font-size: 12pt;
+		padding: 14px;
+		color: $gray-medium;
 	}
 
 	.content {
@@ -40,6 +55,24 @@
 		&.collapsed {
 			max-height: 58px;
 			overflow: hidden;
+		}
+	}
+
+	.btn-select {
+		position: relative;
+		float: right;
+		top: 10px;
+		right: 0;
+		font-size: 18px;
+		box-shadow: none;
+		background-color: $transparent;
+		color: $lightgray-dark;
+
+		&.btn-checkbox {
+			&.active {
+				box-shadow: none;
+				color: $turquoise;
+			}
 		}
 	}
 
@@ -76,9 +109,10 @@
 .ticket-proxy {
 	position: absolute;
 	display: none;
-	width: 200px;
-	height: 136px;
-	border: 1px solid rgb(220, 220, 220);
+	width: $ticket-width;
+	height: $ticket-height;
+	background-color: $lightgray;
+	// border: 1px solid $lightgray;
 
 	&.visible {
 		display: block;
@@ -86,7 +120,7 @@
 }
 
 .dragging {
-	box-shadow: 2px 2px 2px rgba(30, 30, 30, 0.2);
+	box-shadow: 2px 2px 2px $black-transparent;
 	transition: box-shadow 0.2s ease;
 }
 

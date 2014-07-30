@@ -29,6 +29,10 @@ module.exports = function($scope, $rootScope, resolvedBoard) {
 		$rootScope.$broadcast('action:edit');
 	}
 
+	$scope.onHeadingClicked = function() {
+		$rootScope.$broadcast('action:edit-board');
+	}
+
 	$scope.$on('ui:enable-remove', function(event, enabled) {
 		$scope.removeEnabled = enabled;
 	});

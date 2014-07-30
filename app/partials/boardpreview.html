@@ -1,12 +1,14 @@
 <div class="board-preview">
 	<div class="thumbnail-container">
 		<div class="spinner" ng-show="isLoading"><i class="fa fa-circle-o-notch fa-spin"></i></div>
-		<!-- <button class="btn btn-edit" ng-click="promptBoardRemove(board)"> -->
-		<button ng-if="!isLoading" class="btn btn-edit" ng-click="selectBoard()">
+		<div btn-checkbox
+			ng-if="!isLoading"
+			class="btn btn-select btn-checkbox"
+			ng-model="isSelected"
+			ng-click="selectBoard()">
 			<i class="fa fa-check-circle"></i>
-		</button>
+		</div>
 		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked()">
-		<!-- <a ng-click="onBoardClicked()"> -->
 			<img ng-if="board.screenshotUrl.length != 0"
 				src="{{board.screenshotUrl}}"
 				alt="..."
@@ -17,7 +19,8 @@
 				class="thumbnail board center-block">
 		</a>
 	</div>
-	<div class="heading" ng-click="editBoard(board)">
+	<!-- <div class="heading" ng-click="editBoard(board)"> -->
+	<div class="heading" ng-click="promptBoardEdit(board)">
 		{{ board.name | characters: 23: true }}
 	</div>
 	<div ng-if="board.isPublic" class="label label-public">Public</div>

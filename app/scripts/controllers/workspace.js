@@ -93,7 +93,56 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 		}
 	}
 
-	$scope.editBoard = function(board) {
+	$scope.editBoard = function(board, attrs) {
+		board.name     = attrs.heading;
+		board.isPublic = attrs.isPublic;
+
+		return board.save().then(
+			function(board) {
+				console.log('edited', board);
+			},
+			function(err) {
+				// wat do
+				console.log(err);
+			});
+
+
+		// var modalOptions = {
+		// 	template: require('../../partials/modal-boardedit.html')
+		// }
+
+		// var userOptions = {
+		// 	heading:  board.name,
+		// 	isPublic: board.isPublic
+		// }
+
+		// modalService.show(modalOptions, userOptions).then(function(result) {
+
+		// 	board.name     = result.heading;
+		// 	board.isPublic = result.isPublic;
+
+		// 	board.save().then(
+		// 		function(board) {
+		// 			console.log('edited', board);
+		// 		},
+		// 		function(err) {
+		// 			// wat do
+		// 			console.log(err);
+		// 		});
+		// });
+	}
+
+	$scope.promptBoardCreate = function() {
+		var modalOptions = {
+			template: require('../../partials/modal-boardcreate.html')
+		}
+
+		modalService.show(modalOptions, null).then(function(result) {
+			$scope.createBoard(result);
+		});
+	}
+
+	$scope.promptBoardEdit = function(board) {
 		var modalOptions = {
 			template: require('../../partials/modal-boardedit.html')
 		}
@@ -104,28 +153,7 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 		}
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
-
-			board.name     = result.heading;
-			board.isPublic = result.isPublic;
-
-			board.save().then(
-				function(board) {
-					console.log('edited', board);
-				},
-				function(err) {
-					// wat do
-					console.log(err);
-				});
-		});
-	}
-
-	$scope.promptBoardCreate = function() {
-		var modalOptions = {
-			template: require('../../partials/modal-boardcreate.html')
-		}
-
-		modalService.show(modalOptions, null).then(function(result) {
-			$scope.createBoard(result);
+			$scope.editBoard(board, result);
 		});
 	}
 

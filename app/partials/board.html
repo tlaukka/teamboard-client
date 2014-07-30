@@ -1,12 +1,14 @@
 <div id="board-background">
 	<div tb-board id="board" zoom-options="zoomOptions">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
-		<div tb-ticket
-			class="ticket"
+		<tb-ticket
 			ng-repeat="ticket in board.tickets"
-			ticket-data="ticket"
+			index="{{$index}}"
 			snap-options="snapOptions"
-			ticket-edit="promptEditTicket">
-		</div>
+			ticket-data="ticket"
+			ticket-remove="promptTicketRemove(ticket)"
+			ticket-edit="promptTicketEdit(ticket)"
+			ticket-toggle="toggleTicketSelection(index)">
+		</tb-ticket>
 	</div>
 </div>

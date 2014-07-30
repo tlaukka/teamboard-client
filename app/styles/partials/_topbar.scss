@@ -7,8 +7,8 @@
 	top: 0;
 	min-width: 100%;
 	height: $topbar-height;
-	background: $topbar-bg;
-	border-bottom: 1px solid $topbar-border-bottom;
+	background: $lightgray;
+	border-bottom: 1px solid $lightgray-dark;
 
 	.content-wrapper {
 		margin-left: $sidebar-width;
@@ -17,12 +17,14 @@
 
 	h2 {
 		font-size: 2rem;
-		color: $text-dark;
+		color: $gray-medium;
 	}
 
 	h3 {
-		font-size: 1.5rem;
-		color: $text-dark;
+		font-size: 14pt;
+		color: $gray-medium;
+		margin-top: 8px;
+		margin-bottom: 6px;
 
 		.gravatar {
 			max-height: 2rem;
@@ -33,48 +35,65 @@
 
 	.btn-add {
 		outline: none;
-		color: $text-light;
-		background-color: $btn-primary-bg;
+		color: $white;
+		background-color: $turquoise;
 		margin-top: 6px;
 		width: 200px;
 		height: 46px;
 		-webkit-border-radius: 5px 5px 5px 5px;
 		border-radius: 5px 5px 5px 5px;
-		-webkit-box-shadow: 3px 3px 0 0 #589190;
-		box-shadow: 3px 3px 0 0 #589190;
+		-webkit-box-shadow: 2px 2px 0 0 $turquoise-dark;
+		box-shadow: 2px 2px 0 0 $turquoise-dark;
 
 		&:active {
 			outline: none;
 			-webkit-box-shadow: none;
 			box-shadow: none;
-			-moz-transform: translateX(3px) translateY(3px);
-			-webkit-transform: translateX(3px) translateY(3px);
-			-o-transform: translateX(3px) translateY(3px);
-			-ms-transform: translateX(3px) translateY(3px);
-			transform: translateX(3px) translateY(3px);
+			-moz-transform: translate(2px, 2px);
+			-webkit-transform: translate(2px, 2px);
+			-o-transform: translate(2px, 2px);
+			-ms-transform: translate(2px, 2px);
+			transform: translateX(2px, 2px);
 		}
 	}
 
 	.iconbar {
-		color: $icon-off;
 		margin-top: 12px;
 
 		.btn-icon {
-			font-size: 28px;
-			line-height: 28px;
-			background-color: rgba(0, 0, 0, 0);
+			display: none;
+			font-size: $topbar-icon-size;
+			line-height: $topbar-icon-size;
+			background-color: $transparent;
 			box-shadow: none;
 
 			&.enabled {
-				color: $icon-on;
+				display: block;
+				color: $lightgray-dark;
+			}
+
+			&.ng-click-active {
+				color: $turquoise;
 			}
 		}
 
 		.btn-checkbox {
 			&.active {
 				box-shadow: none;
-				color: #000000;
+				color: $turquoise;
 			}
 		}
 	}
+}
+
+.label-private {
+	background-color: $gray;
+}
+
+.label-public {
+	background-color: $gray-medium;
+}
+
+.cursor-pointer {
+	cursor: pointer;
 }

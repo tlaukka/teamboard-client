@@ -8,6 +8,7 @@ module.exports = function() {
 
 	return {
 		replace: true,
+		restrict: 'AE',
 		scope: {
 			// zoom: '=zoomOptions'
 		},

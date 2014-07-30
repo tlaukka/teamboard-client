@@ -7,7 +7,7 @@ module.exports = function(scrollArea) {
 	var CSSPlugin = require('CSSPlugin');
 
 	return {
-		restrict: 'AE',
+		restrict: 'E',
 		template: require('../../partials/boardpreview.html'),
 		replace: true,
 
@@ -16,7 +16,7 @@ module.exports = function(scrollArea) {
 			board: '=boardData',
 			workspaceState: '=workspaceState',
 			promptBoardRemove: '&boardRemove',
-			editBoard: '&boardEdit',
+			promptBoardEdit: '&boardEdit',
 			toggleBoardSelection: '&boardToggle'
 		},
 

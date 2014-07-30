@@ -9,18 +9,23 @@ module.exports = function(ticketProxy) {
 
 	return {
 		template: require('../../partials/ticket.html'),
+		restrict: 'E',
+		replace: true,
 
 		scope: {
+			index: '@',
+			snap: '=snapOptions',
 			ticket: '=ticketData',
-			editTicket: '=ticketEdit',
-			snap: '=snapOptions'
+			promptTicketRemove: '&ticketRemove',
+			editTicket: '&ticketEdit',
+			toggleTicketSelection: '&ticketToggle'
 		},
 
 		link: function(scope, element) {
 			var ticket = scope.ticket;
 			var snap = scope.snap;
 
-			scope.isCollapsed = true;
+			scope.isSelected = false;
 
 			// TODO: Need to handle zIndex
 			TweenLite.to(element, 0, {
@@ -100,6 +105,17 @@ module.exports = function(ticketProxy) {
 
 				scope.$emit('ticket:remove', { id: ticket.id });
 				//ticket.remove();
+			}
+
+			scope.selectTicket = function() {
+				if (element.hasClass('selected')) {
+					element.removeClass('selected');
+				}
+				else {
+					element.addClass('selected');
+				}
+
+				scope.toggleTicketSelection({ index: scope.index });
 			}
 		}
 	}
