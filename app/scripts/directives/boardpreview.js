@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function(scrollArea) {
+module.exports = function(scrollArea, authService) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
@@ -23,6 +23,11 @@ module.exports = function(scrollArea) {
 		link: function(scope, element) {
 
 			scope.isLoading = false;
+
+			scope.screenshotUrl = scope.board.screenshot + '?' +
+				'access_token=' + authService.getToken() + '&' +
+				// it just works
+				'refresh=' + new Date().getTime() + '';
 
 			scope.onBoardClicked = function() {
 
