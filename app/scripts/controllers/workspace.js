@@ -74,7 +74,6 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 		var board  = _.find($scope.boards, filter);
 
 		if(board) {
-			console.log(board);
 			board.remove().then(
 				function() {
 					$scope.boards = _.reject($scope.boards, filter);
@@ -164,7 +163,7 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 
 		var userOptions = {
 			boardName:      board.name,
-			screenshotPath: board.screenshotUrl
+			screenshotPath: board.screenshot
 		}
 
 		modalService.show(modalOptions, userOptions).then(function() {

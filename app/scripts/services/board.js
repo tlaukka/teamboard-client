@@ -54,12 +54,12 @@ module.exports = function($http, Config, Ticket) {
 		this.id    = data.id;
 		this.owner = data.owner;
 
-		this.name          = data.name;
-		this.info          = data.info;
-		this.isPublic      = data.isPublic;
-		this.screenshot    = data.screenshot;
-		this.screenshotUrl = (data.screenshot && data.screenshot.path) ?
-			Config.static.url() + '/' + data.screenshot.path : '';
+		this.name     = data.name;
+		this.info     = data.info;
+		this.isPublic = data.isPublic;
+
+		this.screenshot = Config.api.url() + 'boards/' + this.id +
+			'/screenshot';
 
 		this.guests  = data.guests  || [ ];
 		this.members = data.members || [ ];

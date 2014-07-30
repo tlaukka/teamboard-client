@@ -9,17 +9,10 @@
 			<i class="fa fa-check-circle"></i>
 		</div>
 		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked()">
-			<img ng-if="board.screenshotUrl.length != 0"
-				src="{{board.screenshotUrl}}"
-				alt="..."
-				class="thumbnail board center-block">
-			<img ng-if="board.screenshotUrl.length == 0"
-				src="http://placehold.it/200x120/ffffff&text=Empty Board"
-				alt="..."
+			<img ng-src="{{screenshotUrl}}"
 				class="thumbnail board center-block">
 		</a>
 	</div>
-	<!-- <div class="heading" ng-click="editBoard(board)"> -->
 	<div class="heading" ng-click="promptBoardEdit(board)">
 		{{ board.name | characters: 23: true }}
 	</div>
