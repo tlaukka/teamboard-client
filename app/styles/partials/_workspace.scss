@@ -72,22 +72,14 @@ img.board {
 	.thumbnail.board {
 		border-radius: 0;
 		border: none;
-		padding: 0;
+		padding: 2px;
 		margin: 0;
-	}
-
-	.btn.btn-removeboard {
-		position: absolute;
-		cursor: pointer;
-		bottom: 20px;
-		color: rgb(170, 170, 170);
-		background-color: rgba(0, 0, 0, 0);
 	}
 
 	.btn-select {
 		position: absolute;
-		top: 2px;
-		right: 2px;
+		top: 0;
+		right: 0;
 		font-size: 18px;
 		box-shadow: none;
 		background-color: rgba(0, 0, 0, 0);
