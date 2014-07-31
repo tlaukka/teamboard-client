@@ -3,8 +3,8 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, $rootScope, Ticket, modalService, socketService,
-		resolvedBoard, currentUser) {
+module.exports = function($scope, $rootScope,
+		Ticket, modalService, socketService, resolvedBoard, currentUser) {
 
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
@@ -20,12 +20,14 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 	socketService.on('ticket:create', function(ev) {
 		console.log('socket - ticket:create', ev);
 
-		var ticketDoesExist = _getTicket(ev.ticket.id);
+		if(currentUser.id === ev.user.id) {
+			return console.log('ticket:create made by this client');
+		}
 
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if(!ticketDoesExist) {
-			return $scope.board.tickets.push(new Ticket(ev.ticket));
+			return $scope.board.tickets.push(new Ticket(ev.tickets[0]));
 		}
 
 		return $scope.$apply();
@@ -43,12 +45,12 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 			return console.log('ticket:update made by this client');
 		}
 
-		var existingTicket = _getTicket(ev.ticket.id);
+		var existingTicket = _getTicket(ev.tickets[0].id);
 
 		// for some reason the ticket does not yet exist in our client
 		// so we need to add it to our clients collection
 		if(!existingTicket) {
-			return $scope.board.tickets.push(new Ticket(ev.ticket));
+			return $scope.board.tickets.push(new Ticket(ev.tickets[0]));
 		}
 
 		// the ticket already exists in our clients collection, so
@@ -63,14 +65,12 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 
 	// remove a ticket from our clients collection if it exists
 	socketService.on('ticket:remove', function(ev) {
-		console.log('socket - ticket:remove', ev.ticket);
-
+		console.log('socket - ticket:remove', ev.tickets);
 		$scope.board.tickets = _.reject($scope.board.tickets,
 			function(ticket) {
-				return ticket.id === ev.ticket.id;
+				return _.contains(_.pluck(ev.tickets, 'id'), ticket.id);
 			});
-
-		return $scope.apply();
+		return $scope.$apply();
 	});
 
 	$scope.selectedTickets = [];
@@ -238,10 +238,23 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 	}
 
 	$scope.removeTickets = function(indexes) {
-		for (var i = 0; i < indexes.length; i++) {
-			var ticketId = $scope.board.tickets[indexes[i]].id;
-			$scope.removeTicket(ticketId);
+		var ids = [ ]
+
+		for(var i = 0; i < indexes.length; i++) {
+			ids.push($scope.board.tickets[indexes[i]].id);
 		}
+
+		Ticket.remove($scope.board.id, ids).then(
+			function() {
+				$scope.board.tickets = _.reject($scope.board.tickets,
+					function(ticket) {
+						return _.contains(ids, ticket.id);
+					});
+			},
+			function(err) {
+				// wat do
+				console.log(err);
+			});
 	}
 
 	$scope.editTicket = function(ticket, attrs) {
