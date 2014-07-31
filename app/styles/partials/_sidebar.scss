@@ -1,20 +1,20 @@
 .sidebar {
 	width: $sidebar-width;
 	min-height: 100%;
-	padding: 2rem 0 0 0;
-	background: $bg-dark;
-	color: $fg-light;
+	background-color: $gray-medium;
+	color: $white;
 
 	.logo {
-		font-family: $font-lobster;
+		// font-family: $font-lobster;
+		font-family: "Comic Sans MS";
 		cursor: pointer;
-		font-size: 3rem;
-		text-align: center;
-		margin: 0 0 5rem 0;
+		font-size: 28px;
+		padding-left: $sidebar-margin-left;
+		padding-top: 12px;
+		padding-bottom: 12px;
 
 		img {
-			width: 2.5rem;
-			margin-right: 0.5rem;
+			width: 28px;
 		}
 	}
 
@@ -37,58 +37,63 @@
 		margin-left: 1rem;
 	}
 
-	nav {
+	.uservoice {
+		position: absolute;
+		text-align: center;
+		bottom: 14px;
+		left: $sidebar-width / 2 - 20px;
+
 		a {
-			color: $fg-light;
+			cursor: pointer;
+			color: $white;
 		}
 
-		ul {
+		a:hover {
+			color: $turquoise;
+		}
+
+		i {
+			font-size: 32px;
+		}
+	}
+}
+
+.sidebar nav {
+	a {
+		color: $fg-light;
+	}
+
+	ul {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+
+		li {
+			font-size: 18px;
 			width: 100%;
-			margin: 0;
-			padding: 0;
+			padding-left: $sidebar-margin-left;
+			padding-top: 12px;
+			padding-bottom: 12px;
 
-			list-style-type: none;
-
-			li {
-				width: 100%;
-				padding: 1.5rem 0 1.5rem 0;
-
-				.glyphicon {
-					vertical-align: middle;
-					font-size: 3rem;
-					margin: 0 2rem 0 3rem;
-				}
+			i {
+				margin-right: 16px;
+				font-size: 20px;
+				// font-size: 3rem;
+				// margin: 0 2rem 0 3rem;
 			}
+		}
 
-			a {
-				&:hover {
-					background: $turquoise;
-					text-decoration: none;
-				}
-			}
-
-			li:hover {
+		a {
+			&:hover {
 				background: $turquoise;
 				text-decoration: none;
 			}
 		}
-	}
 
-	.uservoice {
-		position: fixed;
-		bottom: 2rem;
-
-		a {
-			color: $fg-light;
-		}
-		.glyphicon {
-			vertical-align: middle;
-			font-size:  3rem;
-			margin: 0 2rem 0 10.6rem;
-		}
-		a:hover {
-			cursor: pointer;
-			color: $turquoise;
+		li:hover {
+			background: $turquoise;
+			text-decoration: none;
 		}
 	}
 }

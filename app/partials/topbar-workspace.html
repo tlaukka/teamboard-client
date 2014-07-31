@@ -1,15 +1,15 @@
 <div class="topbar">
 	<div class="container-fluid content-wrapper">
 		<div class="row">
-			<div class="col-sm-4">
-				<h2>Workspace</h2>
+			<div class="col-sm-4 content-block">
+				<h2>Boards <span class="badge">{{ boards.length }}</span></h2>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4 content-block">
 				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
 					<i class="fa fa-plus"></i> Create Board
 				</button>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4 content-block">
 				<div class="btn-group iconbar">
 					<div class="btn btn-icon"
 						ng-class="{ enabled: removeEnabled }"

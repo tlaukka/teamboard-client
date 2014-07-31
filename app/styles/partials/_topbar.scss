@@ -15,13 +15,17 @@
 		height: $topbar-height;
 	}
 
+	.content-block {
+		height: 100%;
+	}
+
 	h2 {
 		font-size: 2rem;
 		color: $gray-medium;
 	}
 
 	h3 {
-		font-size: 14pt;
+		font-size: 18px;
 		color: $gray-medium;
 		margin-top: 8px;
 		margin-bottom: 6px;
@@ -35,6 +39,7 @@
 
 	.btn-add {
 		outline: none;
+		vertical-align: center;
 		color: $white;
 		background-color: $turquoise;
 		margin-top: 6px;

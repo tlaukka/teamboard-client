@@ -38,3 +38,40 @@
 	// prevents layout jittering when changing selection.
 	height: 52px;
 }
+
+.btn-auth {
+	outline: none;
+	color: $white;
+	background-color: $turquoise;
+	height: 64px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	// -webkit-box-shadow: 2px 2px 0 0 $turquoise-dark;
+	// box-shadow: 2px 2px 0 0 $turquoise-dark;
+
+	&:active {
+		outline: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		-moz-transform: translate(2px, 2px);
+		-webkit-transform: translate(2px, 2px);
+		-o-transform: translate(2px, 2px);
+		-ms-transform: translate(2px, 2px);
+		transform: translateX(2px, 2px);
+	}
+
+	&.flat {
+
+	}
+
+	&.flat:active {
+		outline: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		// -moz-transform: translate(2px, 2px);
+		// -webkit-transform: translate(2px, 2px);
+		// -o-transform: translate(2px, 2px);
+		// -ms-transform: translate(2px, 2px);
+		// transform: translateX(2px, 2px);
+	}
+}
