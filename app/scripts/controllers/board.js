@@ -24,13 +24,14 @@ module.exports = function($scope, $rootScope,
 			return console.log('ticket:create made by this client');
 		}
 
+		var ticketDoesExist = (_getTicket(ev.tickets[0].id) != undefined)
+
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if(!ticketDoesExist) {
-			return $scope.board.tickets.push(new Ticket(ev.tickets[0]));
+			$scope.board.tickets.push(new Ticket(ev.tickets[0]));
+			return $scope.$apply();
 		}
-
-		return $scope.$apply();
 	});
 
 	// update a ticket in our collection, create it if necessary
@@ -55,10 +56,10 @@ module.exports = function($scope, $rootScope,
 
 		// the ticket already exists in our clients collection, so
 		// we can just update the attributes of it
-		existingTicket.color    = ev.ticket.color;
-		existingTicket.heading  = ev.ticket.heading;
-		existingTicket.content  = ev.ticket.content;
-		existingTicket.position = ev.ticket.position;
+		existingTicket.color    = ev.tickets[0].color;
+		existingTicket.heading  = ev.tickets[0].heading;
+		existingTicket.content  = ev.tickets[0].content;
+		existingTicket.position = ev.tickets[0].position;
 
 		return $scope.$apply();
 	});
