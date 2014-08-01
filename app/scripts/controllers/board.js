@@ -66,7 +66,7 @@ module.exports = function($scope, $rootScope,
 
 	// remove a ticket from our clients collection if it exists
 	socketService.on('ticket:remove', function(ev) {
-		console.log('socket - ticket:remove', ev.tickets);
+		console.log('socket - ticket:remove', ev);
 		$scope.board.tickets = _.reject($scope.board.tickets,
 			function(ticket) {
 				return _.contains(_.pluck(ev.tickets, 'id'), ticket.id);
