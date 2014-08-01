@@ -1,7 +1,9 @@
 'use strict';
 
 
-module.exports = function($scope, $rootScope) {
+module.exports = function($scope, $rootScope, boards) {
+
+	$scope.boards = boards;
 
 	$scope.removeEnabled = false;
 	$scope.editEnabled = false;

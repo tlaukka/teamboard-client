@@ -14,6 +14,22 @@ module.exports = function(
 
 			url: '/workspace',
 
+			resolve: {
+
+				// transform boards from http request into Board models
+				// so they can have some more functionality
+				boards: function($http, Config, Board) {
+					var _ = require('underscore');
+					return $http.get(Config.api.url() + 'boards')
+						.then(function(response) {
+							var boards = response.data;
+							return _.map(boards, function(board) {
+								return new Board(board);
+							});
+						});
+				}
+			},
+
 			views: {
 
 				'sidebar': {
@@ -27,23 +43,6 @@ module.exports = function(
 				},
 
 				'content': {
-
-					resolve: {
-
-						// transform boards from http request into Board models
-						// so they can have some more functionality
-						boards: function($http, Config, Board) {
-							var _ = require('underscore');
-							return $http.get(Config.api.url() + 'boards')
-								.then(function(response) {
-									var boards = response.data;
-									return _.map(boards, function(board) {
-										return new Board(board);
-									});
-								});
-						}
-					},
-
 					template:   require('../../partials/workspace.html'),
 					controller: require('../controllers/workspace')
 				}

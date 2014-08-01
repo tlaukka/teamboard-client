@@ -5,12 +5,12 @@
 		</div>
 	</div>
 
-	<div ng-if="currentUser.email" class="row profile">
+	<!-- <div ng-if="currentUser.email" class="row profile">
 		<div class="col-md-12">
 			<img tb-gravatar email="currentUser.email" class="center-block">
 			<div class="email text-center">{{ currentUser.email }}</div>
 		</div>
-	</div>
+	</div> -->
 
 	<div class="row">
 		<div class="col-md-12">
@@ -18,32 +18,27 @@
 				<ul>
 					<a ui-sref="main.workspace">
 						<li>
-							<span class="glyphicon glyphicon-th"></span><span>Workspace</span>
+							<i class="fa fa-th fa-fw"></i><span>Boards</span>
 						</li>
 					</a>
-					<a href="#" ng-click="logout()">
+					<a href="#" ng-click="logout()" class="">
 						<li>
-							<span class="glyphicon glyphicon-log-out"></span><span>Log Out</span>
+							<i class="fa fa-sign-out fa-fw"></i><span>Log Out</span>
 						</li>
 					</a>
 				</ul>
 			</nav>
 		</div>
 	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			<div class="uservoice">
-				<a uservoice-trigger
-					mode="contact"
-					position="top"
-					accent-color="#724A7F"
-					widget-height="300px"
-					widget-width="220px"
-					smarvote-enabled="false">
-						<span class="glyphicon glyphicon-question-sign"></span>
-				</a>
-			</div>
-		</div>
+	<div class="uservoice">
+		<a uservoice-trigger
+			mode="contact"
+			position="top"
+			accent-color="#724A7F"
+			widget-height="300px"
+			widget-width="220px"
+			smarvote-enabled="false">
+			<i class="fa fa-question-circle fa-fw"></i>
+		</a>
 	</div>
 </div>

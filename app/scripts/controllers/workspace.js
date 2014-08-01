@@ -24,7 +24,7 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 
 	$scope.$on('action:edit', function() {
 		var board = $scope.boards[$scope.selectedBoards[0]];
-		$scope.editBoard(board);
+		$scope.promptBoardEdit(board);
 	});
 
 	// Enable/disable necessary toolbar buttons.
@@ -104,31 +104,6 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 				// wat do
 				console.log(err);
 			});
-
-
-		// var modalOptions = {
-		// 	template: require('../../partials/modal-boardedit.html')
-		// }
-
-		// var userOptions = {
-		// 	heading:  board.name,
-		// 	isPublic: board.isPublic
-		// }
-
-		// modalService.show(modalOptions, userOptions).then(function(result) {
-
-		// 	board.name     = result.heading;
-		// 	board.isPublic = result.isPublic;
-
-		// 	board.save().then(
-		// 		function(board) {
-		// 			console.log('edited', board);
-		// 		},
-		// 		function(err) {
-		// 			// wat do
-		// 			console.log(err);
-		// 		});
-		// });
 	}
 
 	$scope.promptBoardCreate = function() {
