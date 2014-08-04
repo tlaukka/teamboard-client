@@ -108,7 +108,8 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 
 	$scope.promptBoardCreate = function() {
 		var modalOptions = {
-			template: require('../../partials/modal-boardcreate.html')
+			template: require('../../partials/modal-boardcreate.html'),
+			size: 'sm'
 		}
 
 		modalService.show(modalOptions, null).then(function(result) {

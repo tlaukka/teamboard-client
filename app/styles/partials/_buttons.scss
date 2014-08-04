@@ -1,15 +1,25 @@
-.btn {
-	border-radius: 0;
-	background-color: rgb(170, 170, 170);
+// .btn {
+// 	border-radius: 0;
+// 	background-color: rgb(170, 170, 170);
+// }
+
+.btn.btn-default {
+	background-color: $lightgray-dark;
+	color: $white;
+}
+
+.btn.btn-default {
+	border-color: darken($lightgray-dark, 10%);
 }
 
 .btn.btn-primary {
-	background: $turquoise;
+	background-color: $turquoise;
 	border-color: darken($turquoise, 5%);
+	color: $white;
 }
 
 .btn.btn-primary:hover {
-	background: darken($turquoise, 10%);
+	background-color: darken($turquoise, 10%);
 }
 
 .btn.radioselect {

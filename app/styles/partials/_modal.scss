@@ -6,15 +6,14 @@
 	z-index: 100000 !important;
 }
 
-// .modal .visibility button.active {
-// 	background: $turquoise;
-// 	color: white;
-// }
-
 .modal-header {
-	h4 {
-		margin-top: 2rem;
-		color: rgb(170, 170, 170);
+	text-align: center;
+	border-bottom: 1px solid $lightgray-dark;
+	font-size: 22px;
+	font-weight: bold;
+
+	.heading {
+		color: $gray-medium;
 	}
 
 	.gravatar {
@@ -35,10 +34,55 @@
 	}
 }
 
+.modal-footer {
+	border-top: none;
+}
+
 .boardname {
 	color: rgb(170, 170, 170);
 }
 
 .form-control.text {
-	border-radius: 0;
+	border-radius: 3px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	border: 1px solid $lightgray-dark;
+	background-color: $lightgray;
+	color: $gray-medium;
+}
+
+.btn-group-visibility {
+	margin-top: 18px;
+	// margin-bottom: 8px;
+}
+
+.btn-visibility {
+	border-radius: 3px;
+	border: 1px solid $lightgray-dark;
+	background-color: $lightgray;
+	color: $gray-medium;
+
+	&.active {
+		background-color: darken($lightgray, 10%);
+	}
+}
+
+// .row.modal-controls {
+// 	margin-left: 0;
+// 	margin-right: 0;
+// }
+
+// .row.modal-controls [class*='col-']:not(:first-child),
+// .row.modal-controls [class*='col-']:not(:last-child) {
+// 	padding-right: 8px;
+// 	padding-left: 8px;
+// }
+
+// .col:not(:first-child,:last-child) {
+// 	padding-right: 4px;
+// 	padding-left: 4px;
+// }
+
+.btn-modal-control {
+	width: 100%;
 }
