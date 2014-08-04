@@ -18,5 +18,17 @@ module.exports = function() {
 		}
 	}
 
+	scroller.enable = function() {
+		if (this.scroll != null) {
+			this.scroll.enable();
+		}
+	}
+
+	scroller.disable = function() {
+		if (this.scroll != null) {
+			this.scroll.disable();
+		}
+	}
+
 	return scroller;
 }

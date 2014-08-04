@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function(ticketProxy) {
+module.exports = function(ticketProxy, scrollArea) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
@@ -39,6 +39,7 @@ module.exports = function(ticketProxy) {
 				edgeResistance: 0.65,
 
 				onDragStart: function() {
+					scrollArea.disable();
 					element.addClass('dragging');
 
 					if (snap.enabled) {
@@ -60,6 +61,7 @@ module.exports = function(ticketProxy) {
 
 				onDragEnd: function() {
 					ticketProxy.isVisible = false;
+					scrollArea.enable();
 					element.removeClass('dragging');
 					element.addClass('drag-end');
 					var x = 0;

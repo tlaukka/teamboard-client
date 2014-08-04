@@ -18,7 +18,7 @@ module.exports = function($timeout, $document, scrollArea) {
 				mouseWheel: true,
 				scrollbars: true,
 				interactiveScrollbars: true,
-				disableMouse: true
+				disableMouse: false
 			});
 
 			// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
