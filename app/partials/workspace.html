@@ -3,12 +3,11 @@
 	<div class="board-preview-container">
 		<tb-board-preview
 			ng-repeat="board in boards"
-			index="{{$index}}"
 			workspace-state="state"
 			board-data="board"
 			board-remove="promptBoardRemove(board)"
 			board-edit="promptBoardEdit(board)"
-			board-toggle="toggleBoardSelection(index)">
+			board-toggle="toggleBoardSelection(id)">
 		</tb-board-preview>
 	</div>
 </div>
