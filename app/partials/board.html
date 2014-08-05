@@ -3,12 +3,11 @@
 		<div tb-ticket-proxy class="ticket-proxy"></div>
 		<tb-ticket
 			ng-repeat="ticket in board.tickets"
-			index="{{$index}}"
 			snap-options="snapOptions"
 			ticket-data="ticket"
 			ticket-remove="promptTicketRemove(ticket)"
 			ticket-edit="promptTicketEdit(ticket)"
-			ticket-toggle="toggleTicketSelection(index)">
+			ticket-toggle="toggleTicketSelection(id)">
 		</tb-ticket>
 	</div>
 </div>

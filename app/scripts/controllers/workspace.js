@@ -1,11 +1,13 @@
 'use strict';
 
 
+var _ = require('underscore');
+
 module.exports = function($scope, $rootScope, modalService, Board, boards, scrollArea) {
 
 	// 'boards' is a resolved parameter
 	$scope.boards = boards;
-	$scope.selectedBoards = [];
+	$scope.selectedBoardIds = [];
 
 	$scope.state = {
 		isLoadingBoard: false
@@ -18,22 +20,27 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 	});
 
 	$scope.$on('action:remove', function() {
-		$scope.removeBoards($scope.selectedBoards);
-		$scope.selectedBoards.length = 0;
+		$scope.removeBoards($scope.selectedBoardIds);
+		$scope.selectedBoardIds.length = 0;
 	});
 
 	$scope.$on('action:edit', function() {
-		var board = $scope.boards[$scope.selectedBoards[0]];
+		// var board = $scope.boards[$scope.selectedBoardIds[0]];
+
+		var board = _.find($scope.board.tickets, function(board) {
+			return board.id == $scope.selectedBoardIds[0];
+		});
+
 		$scope.promptBoardEdit(board);
 	});
 
 	// Enable/disable necessary toolbar buttons.
-	$scope.$watch('selectedBoards.length', function() {
-		if ($scope.selectedBoards.length != 0) {
+	$scope.$watch('selectedBoardIds.length', function() {
+		if ($scope.selectedBoardIds.length != 0) {
 			$rootScope.$broadcast('ui:enable-remove', true);
 
 			// Enable edit only if a single board is selected.
-			if ($scope.selectedBoards.length == 1) {
+			if ($scope.selectedBoardIds.length == 1) {
 				$rootScope.$broadcast('ui:enable-edit', true);
 			}
 			else {
@@ -46,14 +53,14 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 		}
 	});
 
-	$scope.toggleBoardSelection = function(index) {
-		var selectedIndex = $scope.selectedBoards.indexOf(index);
+	$scope.toggleBoardSelection = function(id) {
+		var selectedIndex = $scope.selectedBoardIds.indexOf(id);
 
 		if (selectedIndex == -1) {
-			$scope.selectedBoards.push(index);
+			$scope.selectedBoardIds.push(id);
 		}
 		else {
-			$scope.selectedBoards.splice(selectedIndex, 1);
+			$scope.selectedBoardIds.splice(selectedIndex, 1);
 		}
 	}
 
@@ -69,7 +76,6 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 	}
 
 	$scope.removeBoard = function(id) {
-		var _      = require('underscore');
 		var filter = function(board) { return board.id === id }
 		var board  = _.find($scope.boards, filter);
 
@@ -85,11 +91,18 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 		}
 	}
 
-	$scope.removeBoards = function(indexes) {
-		for (var i = 0; i < indexes.length; i++) {
-			var boardId = $scope.boards[indexes[i]].id;
-			$scope.removeBoard(boardId);
-		}
+	$scope.removeBoards = function(ids) {
+		Board.remove($scope.board.id, ids).then(
+			function() {
+				$scope.boards = _.reject($scope.boards,
+					function(board) {
+						return _.contains(ids, board.id);
+					});
+			},
+			function(err) {
+				// wat do
+				console.log(err);
+			});
 	}
 
 	$scope.editBoard = function(board, attrs) {

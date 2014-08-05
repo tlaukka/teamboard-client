@@ -3,8 +3,7 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, $rootScope,
-		Ticket, modalService, socketService, resolvedBoard, currentUser) {
+module.exports = function($scope, $rootScope, Ticket, modalService, socketService, resolvedBoard, currentUser) {
 
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
@@ -101,59 +100,28 @@ module.exports = function($scope, $rootScope,
 
 	// triggered from TopBarController
 	$scope.$on('action:remove', function(event, data) {
-		$scope.removeTickets($scope.selectedTickets);
-		$scope.selectedTickets.length = 0;
+		$scope.removeTickets($scope.selectedTicketIds);
 		$scope.selectedTicketIds.length = 0;
 	});
 
 	// triggered from TopBarController
 	$scope.$on('action:edit', function(event, data) {
-		var ticket = $scope.board.tickets[$scope.selectedTickets[0]];
+		// var ticket = $scope.board.tickets[$scope.selectedTicketIds[0]];
+
+		var ticket = _.find($scope.board.tickets, function(ticket) {
+			return ticket.id == $scope.selectedTicketIds[0];
+		});
+
 		$scope.promptTicketEdit(ticket);
 	});
 
-	// triggered from TicketDirective
-	// $scope.$on('action:remove', function(event, data) {
-
-	// 	var filter = function(ticket) { return ticket.id === data.id }
-	// 	var ticket = _.find($scope.board.tickets, filter);
-
-	// 	if(ticket) {
-	// 		ticket.remove().then(
-	// 			function() {
-	// 				$scope.board.tickets = _.reject(
-	// 					$scope.board.tickets, filter);
-	// 			},
-	// 			function(err) {
-	// 				// wat do
-	// 				console.log(err);
-	// 			});
-	// 	}
-	// });
-
 	// Enable/disable necessary toolbar buttons.
-	$scope.$watch('selectedTickets.length', function() {
-		// if ($scope.selectedTicketIds.length != 0) {
-		// 	$rootScope.$broadcast('ui:enable-remove', true);
-
-		// 	// Enable edit only if a single ticket is selected.
-		// 	if ($scope.selectedTicketIds.length == 1) {
-		// 		$rootScope.$broadcast('ui:enable-edit', true);
-		// 	}
-		// 	else {
-		// 		$rootScope.$broadcast('ui:enable-edit', false);
-		// 	}
-		// }
-		// else {
-		// 	$rootScope.$broadcast('ui:enable-remove', false);
-		// 	$rootScope.$broadcast('ui:enable-edit', false);
-		// }
-
-		if ($scope.selectedTickets.length != 0) {
+	$scope.$watch('selectedTicketIds.length', function() {
+		if ($scope.selectedTicketIds.length != 0) {
 			$rootScope.$broadcast('ui:enable-remove', true);
 
 			// Enable edit only if a single ticket is selected.
-			if ($scope.selectedTickets.length == 1) {
+			if ($scope.selectedTicketIds.length == 1) {
 				$rootScope.$broadcast('ui:enable-edit', true);
 			}
 			else {
@@ -166,27 +134,16 @@ module.exports = function($scope, $rootScope,
 		}
 	});
 
-	$scope.toggleTicketSelection = function(index) {
-		var selectedIndex = $scope.selectedTickets.indexOf(index);
+	$scope.toggleTicketSelection = function(id) {
+		var selectedIndex = $scope.selectedTicketIds.indexOf(id);
 
 		if (selectedIndex == -1) {
-			$scope.selectedTickets.push(index);
+			$scope.selectedTicketIds.push(id);
 		}
 		else {
-			$scope.selectedTickets.splice(selectedIndex, 1);
+			$scope.selectedTicketIds.splice(selectedIndex, 1);
 		}
 	}
-
-	// $scope.toggleTicketSelection = function(id) {
-	// 	var selectedIndex = $scope.selectedTickets.indexOf(index);
-
-	// 	if (selectedIndex == -1) {
-	// 		$scope.selectedTickets.push(index);
-	// 	}
-	// 	else {
-	// 		$scope.selectedTickets.splice(selectedIndex, 1);
-	// 	}
-	// }
 
 	$scope.createTicket = function(ticketData) {
 		// TODO Allow a predefined position
@@ -203,25 +160,7 @@ module.exports = function($scope, $rootScope,
 			});
 	}
 
-	// $scope.removeTicket = function(ticket) {
-	// 	var filter = function(ticket) { return ticket.id === data.id }
-	// 	var ticket = _.find($scope.board.tickets, filter);
-
-	// 	if(ticket) {
-	// 		ticket.remove().then(
-	// 			function() {
-	// 				$scope.board.tickets = _.reject(
-	// 					$scope.board.tickets, filter);
-	// 			},
-	// 			function(err) {
-	// 				// wat do
-	// 				console.log(err);
-	// 			});
-	// 	}
-	// }
-
 	$scope.removeTicket = function(id) {
-		console.debug('remove: ' + id);
 		var filter = function(ticket) { return ticket.id === id }
 		var ticket = _.find($scope.board.tickets, filter);
 
@@ -238,13 +177,7 @@ module.exports = function($scope, $rootScope,
 		}
 	}
 
-	$scope.removeTickets = function(indexes) {
-		var ids = [ ]
-
-		for(var i = 0; i < indexes.length; i++) {
-			ids.push($scope.board.tickets[indexes[i]].id);
-		}
-
+	$scope.removeTickets = function(ids) {
 		Ticket.remove($scope.board.id, ids).then(
 			function() {
 				$scope.board.tickets = _.reject($scope.board.tickets,
