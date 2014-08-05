@@ -100,8 +100,9 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 
 	// triggered from TopBarController
 	$scope.$on('action:remove', function(event, data) {
-		$scope.removeTickets($scope.selectedTicketIds);
-		$scope.selectedTicketIds.length = 0;
+		$scope.removeTickets($scope.selectedTicketIds, function() {
+			$scope.selectedTicketIds.length = 0;
+		});
 	});
 
 	// triggered from TopBarController
@@ -177,13 +178,15 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 		}
 	}
 
-	$scope.removeTickets = function(ids) {
+	$scope.removeTickets = function(ids, callback) {
 		Ticket.remove($scope.board.id, ids).then(
 			function() {
 				$scope.board.tickets = _.reject($scope.board.tickets,
 					function(ticket) {
 						return _.contains(ids, ticket.id);
 					});
+
+				callback();
 			},
 			function(err) {
 				// wat do

@@ -1,6 +1,8 @@
 <div id="{{board.id}}" class="board-preview">
 	<div class="thumbnail-container">
-		<div class="spinner" ng-show="isLoading"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+		<div class="spinner" ng-show="isLoading">
+			<i class="fa fa-circle-o-notch fa-spin"></i>
+		</div>
 		<div btn-checkbox
 			ng-if="!isLoading"
 			class="btn btn-select btn-checkbox"
@@ -9,12 +11,11 @@
 			<i class="fa fa-check-circle"></i>
 		</div>
 		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked()">
-			<img ng-src="{{screenshotUrl}}"
-				class="thumbnail board center-block">
+			<img ng-src="{{screenshotUrl}}" class="board center-block">
 		</a>
 	</div>
 	<div class="heading" ng-click="promptBoardEdit(board)">
-		{{ board.name | characters: 23: true }}
+		{{ board.name | characters: 20: true }}
 	</div>
 	<div ng-if="board.isPublic" class="label label-public">Public</div>
 	<div ng-if="!board.isPublic" class="label label-private">Private</div>

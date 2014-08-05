@@ -66,6 +66,10 @@ module.exports = function($http, Config, Ticket) {
 		this.tickets = _makeTickets(data.tickets, this.id);
 	}
 
+	Board.remove = function(ids) {
+		return $http.delete(Config.api.url() + 'boards?boards=' + ids.join(','));
+	}
+
 	Board.prototype.save = function() {
 		return this.id ? this.update() : this.create(_obj(this));
 	}

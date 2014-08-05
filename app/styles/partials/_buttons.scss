@@ -14,12 +14,12 @@
 
 .btn.btn-primary {
 	background-color: $turquoise;
-	border-color: darken($turquoise, 5%);
+	border-color: $turquoise-dark;
 	color: $white;
 }
 
 .btn.btn-primary:hover {
-	background-color: darken($turquoise, 10%);
+	background-color: $turquoise-dark;
 }
 
 .btn.radioselect {

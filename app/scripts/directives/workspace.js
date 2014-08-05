@@ -19,7 +19,7 @@ module.exports = function(scrollArea, $timeout, $window) {
 					boardRowCount++;
 				}
 
-				var height = (boardRowCount * 250) + 'px';
+				var height = (boardRowCount * 224 + 48) + 'px';
 				element.css('height', height);
 			}
 

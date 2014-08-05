@@ -20,14 +20,13 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 	});
 
 	$scope.$on('action:remove', function() {
-		$scope.removeBoards($scope.selectedBoardIds);
-		$scope.selectedBoardIds.length = 0;
+		$scope.removeBoards($scope.selectedBoardIds, function() {
+			$scope.selectedBoardIds.length = 0;
+		});
 	});
 
 	$scope.$on('action:edit', function() {
-		// var board = $scope.boards[$scope.selectedBoardIds[0]];
-
-		var board = _.find($scope.board.tickets, function(board) {
+		var board = _.find($scope.boards, function(board) {
 			return board.id == $scope.selectedBoardIds[0];
 		});
 
@@ -91,13 +90,15 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 		}
 	}
 
-	$scope.removeBoards = function(ids) {
-		Board.remove($scope.board.id, ids).then(
+	$scope.removeBoards = function(ids, callback) {
+		Board.remove(ids).then(
 			function() {
 				$scope.boards = _.reject($scope.boards,
 					function(board) {
-						return _.contains(ids, board.id);
+						return _.contains(ids, board.id);;
 					});
+
+				callback();
 			},
 			function(err) {
 				// wat do

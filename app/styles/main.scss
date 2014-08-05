@@ -45,7 +45,8 @@ $lightgray-dark: #b2b2b2;
 $turquoise: #72bdbb;
 $turquoise-dark: #619b98;
 $transparent: rgba(0, 0, 0, 0);
-$black-transparent: rgba(0, 0, 0, 0.2);
+$black-transparent-20: rgba(0, 0, 0, 0.2);
+$black-transparent-60: rgba(0, 0, 0, 0.6);
 
 /* Element colors */
 $topbar-bg: #ededed;
@@ -71,8 +72,8 @@ $sidebar-margin-left: 24px;
 $board-width: 1920px;
 $board-height: 1080px;
 $board-margin: 8px;
-$boardpreview-width: 226px;
-$boardpreview-height: 210px;
+$boardpreview-width: 230px;
+$boardpreview-height: 200px;
 $boardpreview-margin-left: 24px;
 $boardpreview-margin-top: 24px;
 $boardpreview-padding: 12px;
@@ -144,7 +145,7 @@ body {
 	background-color: $white;
 	left: $sidebar-width;
 	top: $topbar-height;
-	width: calc(100% - #{$sidebar-width});
+	width: calc(100% - #{$sidebar-width} + 1px);
 	height: calc(100% - #{$topbar-height});
 }
 

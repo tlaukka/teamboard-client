@@ -12,7 +12,6 @@ module.exports = function(scrollArea, authService) {
 		replace: true,
 
 		scope: {
-			index: '@',
 			board: '=boardData',
 			workspaceState: '=workspaceState',
 			promptBoardRemove: '&boardRemove',
@@ -70,7 +69,7 @@ module.exports = function(scrollArea, authService) {
 					element.addClass('selected');
 				}
 
-				scope.toggleBoardSelection({ index: scope.index });
+				scope.toggleBoardSelection({ id: scope.board.id });
 			}
 		}
 	};
