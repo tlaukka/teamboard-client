@@ -6,6 +6,18 @@
 	z-index: 100000 !important;
 }
 
+.modal-size-sm .modal-dialog {
+	width: 35%;
+}
+
+.modal-size-md .modal-dialog {
+	width: 50%;
+}
+
+.modal-size-lg .modal-dialog {
+	width: 70%;
+}
+
 .modal-header {
 	text-align: center;
 	border-bottom: 1px solid $lightgray-dark;
@@ -52,8 +64,7 @@
 }
 
 .btn-group-visibility {
-	margin-top: 18px;
-	// margin-bottom: 8px;
+	margin-top: 8px;
 }
 
 .btn-visibility {
@@ -65,6 +76,10 @@
 	&.active {
 		background-color: darken($lightgray, 10%);
 	}
+}
+
+.col-modal-control {
+	width: 52%;
 }
 
 // .row.modal-controls {

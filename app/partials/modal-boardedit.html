@@ -1,33 +1,38 @@
 <form role="form">
 	<div class="modal-header">
-		<h3>Edit board</h3>
+		<div class="heading">Edit board</div>
 	</div>
 	<div class="modal-body">
-		<label>Visibility</label>
-		<div class="form-group">
-			<div class="btn-group btn-group-justified radiogroup" ng-init="newData.isPublic = userOptions.isPublic">
-				<label class="btn btn-lg radioselect private" ng-model="newData.isPublic" btn-radio="false">Private</label>
-				<label class="btn btn-lg radioselect public" ng-model="newData.isPublic" btn-radio="true">Public</label>
+		<div class="row">
+			<div class="col-md-12">
+				<input type="text"
+					class="form-control text"
+					id="headingInput"
+					placeholder="Board name"
+					ng-init="newData.heading = userOptions.heading"
+					ng-model="newData.heading"
+					tb-auto-focus>
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="headingInput">Heading</label>
-			<input type="text"
-				class="form-control text"
-				id="headingInput"
-				placeholder="Enter board heading"
-				ng-init="newData.heading = userOptions.heading"
-				ng-model="newData.heading"
-				tb-auto-focus>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<div class="btn-group btn-group-justified btn-group-visibility" ng-init="newData.isPublic = userOptions.isPublic">
+						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="false">Private</label>
+						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="true">Public</label>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="modal-footer">
-
-		<div class="btn-group btn-group-justified">
-			<label class="btn btn-lg" ng-click="userOptions.cancel()">Cancel</label>
-			<label class="btn btn-lg btn-primary" ng-click="userOptions.apply(newData)">Apply</label>
+		<div class="row modal-controls">
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-default btn-modal-control" ng-click="userOptions.cancel()">Cancel</button>
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-primary btn-modal-control" ng-click="userOptions.apply(newData)">Apply</button>
+			</div>
 		</div>
-		<!-- <button type="button" class="btn" ng-click="userOptions.cancel()">Cancel</button> -->
-		<!-- <button type="submit" class="btn btn-primary" ng-click="userOptions.apply(newData)">Apply</button> -->
 	</div>
 </form>

@@ -109,7 +109,7 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 	$scope.promptBoardCreate = function() {
 		var modalOptions = {
 			template: require('../../partials/modal-boardcreate.html'),
-			size: 'sm'
+			windowClass: 'modal-size-sm'
 		}
 
 		modalService.show(modalOptions, null).then(function(result) {
@@ -119,7 +119,8 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 
 	$scope.promptBoardEdit = function(board) {
 		var modalOptions = {
-			template: require('../../partials/modal-boardedit.html')
+			template: require('../../partials/modal-boardedit.html'),
+			windowClass: 'modal-size-sm'
 		}
 
 		var userOptions = {

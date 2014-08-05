@@ -3,34 +3,33 @@
 		<div class="heading">Create a new board</div>
 	</div>
 	<div class="modal-body">
-		<!-- <label>Visibility</label>
-		<div class="form-group">
-			<div class="btn-group btn-group-justified radiogroup" ng-init="newBoard.isPublic = false">
-				<label class="btn btn-lg radioselect private" ng-model="newBoard.isPublic" btn-radio="false">Private</label>
-				<label class="btn btn-lg radioselect public" ng-model="newBoard.isPublic" btn-radio="true">Public</label>
+		<div class="row">
+			<div class="col-md-12">
+				<input type="text"
+					class="form-control text"
+					id="headingInput"
+					placeholder="Board name"
+					ng-model="newBoard.name"
+					tb-auto-focus>
 			</div>
-		</div> -->
-
-			<input type="text"
-				class="form-control text"
-				id="headingInput"
-				placeholder="Board name"
-				ng-model="newBoard.name"
-				tb-auto-focus>
-
-		<div class="form-group">
-			<div class="btn-group btn-group-justified btn-group-visibility" ng-init="newBoard.isPublic = false">
-				<label class="btn btn-md btn-visibility" ng-model="newBoard.isPublic" btn-radio="false">Private</label>
-				<label class="btn btn-md btn-visibility" ng-model="newBoard.isPublic" btn-radio="true">Public</label>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<div class="btn-group btn-group-justified btn-group-visibility" ng-init="newBoard.isPublic = false">
+						<label class="btn btn-md btn-visibility" ng-model="newBoard.isPublic" btn-radio="false">Private</label>
+						<label class="btn btn-md btn-visibility" ng-model="newBoard.isPublic" btn-radio="true">Public</label>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<div class="row modal-controls">
-			<div class="col col-md-6">
+			<div class="col-md-6">
 				<button class="btn btn-lg btn-default btn-modal-control" ng-click="userOptions.cancel()">Cancel</button>
 			</div>
-			<div class="col col-md-6">
+			<div class="col-md-6">
 				<button class="btn btn-lg btn-primary btn-modal-control" ng-click="userOptions.apply(newBoard)">Create</button>
 			</div>
 		</div>
