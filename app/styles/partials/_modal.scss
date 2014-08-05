@@ -50,18 +50,56 @@
 	border-top: none;
 }
 
-.boardname {
-	color: rgb(170, 170, 170);
+.form-control {
+	&.text {
+		border-radius: 3px;
+		// margin-top: 8px;
+		margin-bottom: 8px;
+		border: 1px solid $lightgray-dark;
+		background-color: $lightgray;
+		color: $gray-medium;
+	}
+
+	&.ticket-heading {
+		border: none;
+		// margin-top: 8px;
+		margin-bottom: 8px;
+		background-color: $white;
+		color: $gray-medium;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+
+		&:focus {
+			border-radius: 3px;
+			border: 1px solid $lightgray-dark;
+			background-color: $lightgray;
+		}
+	}
+
+	// &.ticket-heading input[type="text"] {
+	// 	font-size: 24px;
+	// 	font-weight: bold;
+	// 	height: 18px;
+	// 	line-height: 32px;
+	// }
 }
 
-.form-control.text {
-	border-radius: 3px;
-	// margin-top: 8px;
-	margin-bottom: 8px;
-	border: 1px solid $lightgray-dark;
-	background-color: $lightgray;
-	color: $gray-medium;
-}
+// .form-control.ticket-heading input[type="text"] {
+// 		font-size: 24px;
+// 		font-weight: bold;
+// 		height: 42px;
+// 		line-height: 42px;
+// 	}
+
+// .form-control.text {
+// 	border-radius: 3px;
+// 	// margin-top: 8px;
+// 	margin-bottom: 8px;
+// 	border: 1px solid $lightgray-dark;
+// 	background-color: $lightgray;
+// 	color: $gray-medium;
+// }
 
 .btn-group-visibility {
 	margin-top: 8px;

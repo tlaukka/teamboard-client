@@ -3,6 +3,40 @@
 		<h3>Create a new ticket</h3>
 	</div>
 	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-12">
+				<input type="text"
+					class="form-control ticket-heading"
+					id="headingInput"
+					placeholder="Enter ticket heading"
+					ng-model="newTicket.heading"
+					tb-auto-focus>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div text-angular id="contentInput" ng-model="newTicket.content"></div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="row modal-controls">
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-default btn-modal-control" ng-click="userOptions.cancel()">Cancel</button>
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-primary btn-modal-control" ng-click="userOptions.apply(newBoard)">Create</button>
+			</div>
+		</div>
+	</div>
+</form>
+
+
+<!-- <form role="form">
+	<div class="modal-header">
+		<h3>Create a new ticket</h3>
+	</div>
+	<div class="modal-body">
 		<div class="form-group">
 			<label>Color</label>
 			<div class="btn-group btn-group-justified radiogroup" ng-init="newTicket.color = '#72bdbb'">
@@ -34,4 +68,4 @@
 			<label class="btn btn-lg btn-primary" ng-click="userOptions.apply(newTicket)">Apply</label>
 		</div>
 	</div>
-</form>
+</form> -->

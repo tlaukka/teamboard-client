@@ -5,11 +5,12 @@
 
 .btn.btn-default {
 	background-color: $lightgray-dark;
+	border-color: $gray;
 	color: $white;
 }
 
-.btn.btn-default {
-	border-color: darken($lightgray-dark, 10%);
+.btn.btn-default:hover {
+	background-color: $gray;
 }
 
 .btn.btn-primary {
@@ -33,10 +34,10 @@
 	&:active { border-top: none; box-shadow: none; }
 
 	// Ticket color selection
-	&.turquoise { background: $turquoise; }
+	&.turquoise { background: $blue; }
 	&.purple { background: $purple; }
-	&.red { background: $red; }
 	&.yellow { background: $yellow; }
+	&.red { background: $red; }
 
 	// Board visibility selection
 	&.private { background: rgb(120, 120, 120); }
