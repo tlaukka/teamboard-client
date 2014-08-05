@@ -13,7 +13,6 @@ module.exports = function(ticketProxy, scrollArea) {
 		replace: true,
 
 		scope: {
-			index: '@',
 			snap: '=snapOptions',
 			ticket: '=ticketData',
 			promptTicketRemove: '&ticketRemove',
@@ -117,7 +116,7 @@ module.exports = function(ticketProxy, scrollArea) {
 					element.addClass('selected');
 				}
 
-				scope.toggleTicketSelection({ index: scope.index });
+				scope.toggleTicketSelection({ id: scope.ticket.id });
 			}
 		}
 	}
