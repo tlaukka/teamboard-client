@@ -103,17 +103,17 @@
 		color: $lightgray-dark;
 	}
 
-	.ng-enter {
-		-webkit-animation: $boardpreview-fade-duration fadeIn;
-		-moz-animation: $boardpreview-fade-duration fadeIn;
-		-ms-animation: $boardpreview-fade-duration fadeIn;
-		animation: $boardpreview-fade-duration fadeIn;
-	}
+	// .ng-enter {
+	// 	-webkit-animation: $boardpreview-fade-duration fadeIn;
+	// 	-moz-animation: $boardpreview-fade-duration fadeIn;
+	// 	-ms-animation: $boardpreview-fade-duration fadeIn;
+	// 	animation: $boardpreview-fade-duration fadeIn;
+	// }
 
-	.ng-leave {
-		-webkit-animation: $boardpreview-fade-duration fadeOut;
-		-moz-animation: $boardpreview-fade-duration fadeOut;
-		-ms-animation: $boardpreview-fade-duration fadeOut;
-		animation: $boardpreview-fade-duration fadeOut;
-	}
+	// .ng-leave {
+	// 	-webkit-animation: $boardpreview-fade-duration fadeOut;
+	// 	-moz-animation: $boardpreview-fade-duration fadeOut;
+	// 	-ms-animation: $boardpreview-fade-duration fadeOut;
+	// 	animation: $boardpreview-fade-duration fadeOut;
+	// }
 }

@@ -14,7 +14,6 @@ module.exports = function(scrollArea, authService) {
 		scope: {
 			board: '=boardData',
 			workspaceState: '=workspaceState',
-			promptBoardRemove: '&boardRemove',
 			promptBoardEdit: '&boardEdit',
 			toggleBoardSelection: '&boardToggle'
 		},

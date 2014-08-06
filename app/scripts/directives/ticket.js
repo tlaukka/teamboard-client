@@ -15,7 +15,6 @@ module.exports = function(ticketProxy, scrollArea) {
 		scope: {
 			snap: '=snapOptions',
 			ticket: '=ticketData',
-			promptTicketRemove: '&ticketRemove',
 			promptTicketEdit: '&ticketEdit',
 			toggleTicketSelection: '&ticketToggle'
 		},
@@ -91,22 +90,22 @@ module.exports = function(ticketProxy, scrollArea) {
 					{ x: ticket.position.x, y: ticket.position.y });
 			});
 
-			scope.collapse = function() {
-				if (element.hasClass('drag-end')) {
-					element.removeClass('drag-end');
-					return;
-				}
+			// scope.collapse = function() {
+			// 	if (element.hasClass('drag-end')) {
+			// 		element.removeClass('drag-end');
+			// 		return;
+			// 	}
 
-				scope.isCollapsed = !scope.isCollapsed;
-			}
+			// 	scope.isCollapsed = !scope.isCollapsed;
+			// }
 
-			scope.removeTicket = function(event) {
-				// stop from opening modal to edit ticket
-				event.stopPropagation();
+			// scope.removeTicket = function(event) {
+			// 	// stop from opening modal to edit ticket
+			// 	event.stopPropagation();
 
-				scope.$emit('ticket:remove', { id: ticket.id });
-				//ticket.remove();
-			}
+			// 	scope.$emit('ticket:remove', { id: ticket.id });
+			// 	//ticket.remove();
+			// }
 
 			scope.selectTicket = function($event) {
 				$event.stopPropagation()
@@ -122,6 +121,12 @@ module.exports = function(ticketProxy, scrollArea) {
 			}
 
 			scope.editTicket = function($event) {
+				// Prevent click event afger drag
+				if (element.hasClass('drag-end')) {
+					element.removeClass('drag-end');
+					return;
+				}
+
 				$event.stopPropagation();
 				scope.promptTicketEdit({ ticket: scope.ticket });
 			}

@@ -1,8 +1,3 @@
-// .btn {
-// 	border-radius: 0;
-// 	background-color: rgb(170, 170, 170);
-// }
-
 .btn.btn-default {
 	background-color: $lightgray-dark;
 	border-color: $gray;
@@ -21,6 +16,16 @@
 
 .btn.btn-primary:hover {
 	background-color: $turquoise-dark;
+}
+
+.btn.btn-danger {
+	background-color: $red;
+	border-color: $red-dark;
+	color: $white;
+}
+
+.btn.btn-danger:hover {
+	background-color: $red-dark;
 }
 
 .btn.radioselect {

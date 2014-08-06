@@ -20,7 +20,8 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 	});
 
 	$scope.$on('action:remove', function() {
-		$scope.removeBoards($scope.selectedBoardIds, function() {
+		$scope.promptBoardRemove($scope.selectedBoardIds, function() {
+			// Clear board selections if boards were deleted
 			$scope.selectedBoardIds.length = 0;
 		});
 	});
@@ -95,7 +96,7 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 			function() {
 				$scope.boards = _.reject($scope.boards,
 					function(board) {
-						return _.contains(ids, board.id);;
+						return _.contains(ids, board.id);
 					});
 
 				callback();
@@ -147,18 +148,26 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 		});
 	}
 
-	$scope.promptBoardRemove = function(board) {
+	$scope.promptBoardRemove = function(ids, callback) {
 		var modalOptions = {
-			template: require('../../partials/modal-boardremove.html')
+			template: require('../../partials/modal-boardremove.html'),
+			windowClass: 'modal-size-sm'
 		}
 
-		var userOptions = {
-			boardName:      board.name,
-			screenshotPath: board.screenshot
+		var userOptions = {};
+
+		if (ids.length == 1) {
+			var board = _.find($scope.boards, function(board) {
+				return board.id == ids[0];
+			});
+
+			userOptions.boardName = board.name;
 		}
+
+		userOptions.boardCount = ids.length;
 
 		modalService.show(modalOptions, userOptions).then(function() {
-			$scope.removeBoard(board.id);
+			$scope.removeBoards(ids, callback);
 		});
 	}
 }

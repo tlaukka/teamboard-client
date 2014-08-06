@@ -46,11 +46,16 @@
 
 .modal-content {
 	border-radius: 0;
+	color: $gray-medium;
 }
 
 .modal-body {
 	textarea {
 		resize: vertical;
+	}
+
+	.highlight {
+		font-weight: bold;
 	}
 }
 

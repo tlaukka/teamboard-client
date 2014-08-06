@@ -99,7 +99,8 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 
 	// triggered from TopBarController
 	$scope.$on('action:remove', function(event, data) {
-		$scope.removeTickets($scope.selectedTicketIds, function() {
+		$scope.promptTicketRemove($scope.selectedTicketIds, function() {
+			// Clear ticket selections if tickets were deleted
 			$scope.selectedTicketIds.length = 0;
 		});
 	});
@@ -233,6 +234,29 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
 			$scope.editTicket(ticket, result);
+		});
+	}
+
+	$scope.promptTicketRemove = function(ids, callback) {
+		var modalOptions = {
+			template: require('../../partials/modal-ticketremove.html'),
+			windowClass: 'modal-size-sm'
+		}
+
+		var userOptions = {};
+
+		if (ids.length == 1) {
+			var ticket = _.find($scope.board.tickets, function(ticket) {
+				return ticket.id == ids[0];
+			});
+
+			userOptions.ticketName = ticket.heading;
+		}
+
+		userOptions.ticketCount = ids.length;
+
+		modalService.show(modalOptions, userOptions).then(function() {
+			$scope.removeTickets(ids, callback);
 		});
 	}
 
