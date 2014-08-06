@@ -11,7 +11,7 @@
 }
 
 .modal-size-md .modal-dialog {
-	width: 50%;
+	width: 60%;
 }
 
 .modal-size-lg .modal-dialog {
@@ -33,6 +33,14 @@
 		margin-left: 1rem;
 		margin-right: 0.5rem;
 		border-radius: 50%;
+	}
+
+	&.color-select {
+		padding-top: 40px;
+		padding-left: 0;
+		padding-right: 0;
+		padding-bottom: 0;
+		border-bottom: none;
 	}
 }
 
@@ -76,30 +84,7 @@
 			background-color: $lightgray;
 		}
 	}
-
-	// &.ticket-heading input[type="text"] {
-	// 	font-size: 24px;
-	// 	font-weight: bold;
-	// 	height: 18px;
-	// 	line-height: 32px;
-	// }
 }
-
-// .form-control.ticket-heading input[type="text"] {
-// 		font-size: 24px;
-// 		font-weight: bold;
-// 		height: 42px;
-// 		line-height: 42px;
-// 	}
-
-// .form-control.text {
-// 	border-radius: 3px;
-// 	// margin-top: 8px;
-// 	margin-bottom: 8px;
-// 	border: 1px solid $lightgray-dark;
-// 	background-color: $lightgray;
-// 	color: $gray-medium;
-// }
 
 .btn-group-visibility {
 	margin-top: 8px;

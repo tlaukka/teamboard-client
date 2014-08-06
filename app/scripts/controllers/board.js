@@ -73,7 +73,6 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 		return $scope.$apply();
 	});
 
-	$scope.selectedTickets = [];
 	$scope.selectedTicketIds = [];
 
 	// TODO Move these to app configuration?
@@ -211,7 +210,8 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 
 	$scope.promptTicketCreate = function() {
 		var modalOptions = {
-			template: require('../../partials/modal-ticketcreate.html')
+			template: require('../../partials/modal-ticketcreate.html'),
+			windowClass: 'modal-size-md'
 		}
 
 		return modalService.show(modalOptions, null).then(function(result) {

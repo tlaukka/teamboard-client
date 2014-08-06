@@ -1,12 +1,12 @@
-<div id="{{ticket.id}}" class="ticket">
+<div id="{{ticket.id}}" class="ticket" ng-click="editTicket($event)">
 	<div ng-if="isSelected" class="selection-overlay"></div>
 	<div btn-checkbox
 		class="btn btn-select btn-checkbox"
 		ng-model="isSelected"
-		ng-click="selectTicket()">
+		ng-click="selectTicket($event)">
 		<i class="fa fa-check-circle"></i>
 	</div>
-	<div ng-style="{ 'background': ticket.color }" class="color"></div>
+	<div ng-style="{ 'background-color': ticket.color }" class="color"></div>
 	<div class="heading">
 		{{ ticket.heading | characters: 80: true }}
 	</div>

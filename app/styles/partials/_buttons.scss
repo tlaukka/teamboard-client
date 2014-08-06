@@ -24,30 +24,33 @@
 }
 
 .btn.radioselect {
-	border-top: 8px solid rgb(255, 255, 255);
+	padding: 0;
+	border-radius: 0;
+	// border-top: 8px solid $white;
 	border-left: none;
 	border-right: none;
+	border-top: none;
 	border-bottom: none;
-	color: rgb(255, 255, 255);
+	color: $white;
 
 	&.active { border-top: none; box-shadow: none; }
 	&:active { border-top: none; box-shadow: none; }
 
 	// Ticket color selection
-	&.turquoise { background: $blue; }
+	&.blue { background: $blue; }
 	&.purple { background: $purple; }
 	&.yellow { background: $yellow; }
 	&.red { background: $red; }
 
 	// Board visibility selection
-	&.private { background: rgb(120, 120, 120); }
+	&.private { background: $lightgray-dark; }
 	&.public { background: $turquoise; }
 }
 
 .radiogroup {
 	// Should be the same height as the radioselect buttons,
 	// prevents layout jittering when changing selection.
-	height: 52px;
+	height: 40px;
 }
 
 .btn-auth {

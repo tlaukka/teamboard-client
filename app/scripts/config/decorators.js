@@ -29,7 +29,7 @@ module.exports = function($provide) {
 	// Set default tools in text editors
 	$provide.decorator('taOptions', ['$delegate', function(taOptions){
 		taOptions.toolbar = [
-			['h4', 'p'],
+			['h5', 'p'],
 			['bold', 'italics', 'underline'],
 			['ul', 'ol']
 		];
@@ -49,7 +49,7 @@ module.exports = function($provide) {
 	}]);
 
 	$provide.decorator('taTools', ['$delegate', function(taTools) {
-		taTools.h4.buttontext = 'Header';
+		taTools.h5.buttontext = 'Header';
 		taTools.p.buttontext = 'Paragraph';
 
 		return taTools;

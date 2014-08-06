@@ -16,7 +16,7 @@ module.exports = function(ticketProxy, scrollArea) {
 			snap: '=snapOptions',
 			ticket: '=ticketData',
 			promptTicketRemove: '&ticketRemove',
-			editTicket: '&ticketEdit',
+			promptTicketEdit: '&ticketEdit',
 			toggleTicketSelection: '&ticketToggle'
 		},
 
@@ -108,7 +108,9 @@ module.exports = function(ticketProxy, scrollArea) {
 				//ticket.remove();
 			}
 
-			scope.selectTicket = function() {
+			scope.selectTicket = function($event) {
+				$event.stopPropagation()
+
 				if (element.hasClass('selected')) {
 					element.removeClass('selected');
 				}
@@ -117,6 +119,11 @@ module.exports = function(ticketProxy, scrollArea) {
 				}
 
 				scope.toggleTicketSelection({ id: scope.ticket.id });
+			}
+
+			scope.editTicket = function($event) {
+				$event.stopPropagation();
+				scope.promptTicketEdit({ ticket: scope.ticket });
 			}
 		}
 	}
