@@ -69,6 +69,7 @@ $ticket-bg: #ffffff;
 $topbar-height: 64px;
 $topbar-icon-size: 28px;
 $sidebar-width: 232px;
+$sidebar-width-collapsed: 74px;
 $sidebar-margin-left: 24px;
 $board-width: 1920px;
 $board-height: 1080px;
@@ -85,6 +86,7 @@ $ticket-height: 128px;
 /* Animations */
 $boardpreview-fade-duration: 0.6s;
 $loadingoverlay-fade-duration: 0.4s;
+$sidebar-collapse-duration: 0.2s;
 
 @import "partials/animations";
 @import "partials/buttons";

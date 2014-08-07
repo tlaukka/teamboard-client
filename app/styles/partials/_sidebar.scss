@@ -4,29 +4,85 @@
 	min-height: 100%;
 	background-color: $gray-medium;
 	color: $white;
+	-webkit-transition: width $sidebar-collapse-duration linear;
+	-moz-transition: width $sidebar-collapse-duration linear;
+	-ms-transition: width $sidebar-collapse-duration linear;
+	-o-transition: width $sidebar-collapse-duration linear;
+	transition: width $sidebar-collapse-duration linear;
 
 	.logo {
 		// font-family: $font-lobster;
 		font-family: "Comic Sans MS";
+		position: relative;
+		box-sizing: border-box;
 		cursor: pointer;
 		font-size: 28px;
 		padding-left: $sidebar-margin-left;
 		padding-top: 12px;
 		padding-bottom: 12px;
 
+		// Full width 74px (collapsed sidebar)
+		.underline {
+			&:after {
+				content: '';
+				position: absolute;
+				left: 12px;
+				top: $topbar-height;
+				width: 50px;
+				border-bottom: 1px solid $lightgray-dark;
+			}
+		}
+
 		img {
 			width: 28px;
 		}
 	}
 
+	.btn-collapse-space {
+		// height: 66px;
+		height: 73px;
+	}
+
+	.btn-collapse {
+		position: absolute;
+		cursor: pointer;
+		z-index: 1;
+		font-size: 26px;
+		right: 0px;
+		top: 76px;
+		padding: 2px 6px 2px 6px;
+		-webkit-border-radius: 3px 0 0 3px;
+		border-radius: 3px 0 0 3px;
+		color: $white;
+		background-color: $turquoise;
+
+		&:hover {
+			background-color: $turquoise-dark;
+		}
+	}
+
 	.profile {
-		// text-align: center;
-		margin-bottom: 2rem;
+		margin-top: 24px;
+		margin-bottom: 24px;
 
 		.gravatar {
-			border: 0.4rem $purple-darker solid;
+			border: 1px solid $turquoise;
 			border-radius: 50%;
-			margin-bottom: 1rem;
+			margin-bottom: 12px;
+		}
+
+		.gravatar-lg {
+			border: 1px solid $turquoise;
+			border-radius: 50%;
+			margin-bottom: 12px;
+		}
+
+		.gravatar-sm {
+			border: 1px solid $turquoise;
+			width: 26px;
+			height: 26px;
+			border-radius: 50%;
+			margin-bottom: 12px;
 		}
 	}
 
@@ -35,7 +91,8 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
-		margin-left: 1rem;
+		margin-left: 12px;
+		color: $turquoise;
 	}
 
 	.uservoice {
@@ -43,6 +100,10 @@
 		text-align: center;
 		bottom: 14px;
 		left: $sidebar-width / 2 - 20px;
+
+		&.uservoice-collapsed {
+			left: 16px;
+		}
 
 		a {
 			cursor: pointer;
@@ -80,8 +141,6 @@
 			i {
 				margin-right: 16px;
 				font-size: 20px;
-				// font-size: 3rem;
-				// margin: 0 2rem 0 3rem;
 			}
 		}
 
@@ -97,4 +156,8 @@
 			text-decoration: none;
 		}
 	}
+}
+
+.sidebar-collapsed {
+	width: $sidebar-width-collapsed;
 }
