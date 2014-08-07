@@ -7,9 +7,6 @@ $fa-font-path: "./fonts";
 
 @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap";
 @import "fontawesome/scss/font-awesome";
-@import "web-fonts";
-
-@include web-fonts("Lobster");
 
 /*
  * Global variables
