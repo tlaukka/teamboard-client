@@ -12,8 +12,10 @@ module.exports = function($http, Config, Ticket) {
 	}
 
 	var _init = function(response) {
-		this.id    = response.data.id;
-		this.owner = response.data.owner;
+		this.id         = response.data.id;
+		this.owner      = response.data.owner;
+		this.screenshot = Config.api.url() + 'boards/' + this.id +
+			'/screenshot';
 
 		return response;
 	}
@@ -58,9 +60,8 @@ module.exports = function($http, Config, Ticket) {
 		this.info     = data.info;
 		this.isPublic = data.isPublic;
 
-		this.screenshot = this.id ?
-			Config.api.url() + 'boards/' + this.id + '/screenshot' :
-			'http://m.c.lnkd.licdn.com/mpr/pub/image-RSInvIMMN2K_PNjg2CcBYdxA9zHBs3VTNhQ3wlxsK7ygoTobYhQbEIx7Fc6tzEIFVs/marko-%22narsuman%22-rintam%C3%A4ki.jpg';
+		this.screenshot = Config.api.url() + 'boards/' + this.id +
+			'/screenshot';
 
 		this.guests  = data.guests  || [ ];
 		this.members = data.members || [ ];
