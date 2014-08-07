@@ -12,20 +12,38 @@ module.exports = function(scrollArea, $timeout, $window) {
 
 		link: function(scope, element) {
 
-			scope.updateHeight = function() {
-				var boardRowCount = Math.floor(scope.boards.length / 3); // Full rows
-				if ((scope.boards.length - boardRowCount * 3) != 0) {
+			scope.updateWorkspace = function() {
+				var scroller = angular.element(document.getElementById('content-scrollarea'));
+				// (workspaceWidth / (boardPreviewWidth + margin)) * (boardPreviewWidth + margin)
+				var width = Math.floor(scroller[0].clientWidth / 254) * 254;
+
+				// workspaceWidth / (boardPreviewWidth + margin)
+				var boardsPerRow = Math.floor(width / 254);
+				boardsPerRow = Math.min(Math.max(boardsPerRow, 1), 8);
+
+				var boardRowCount = Math.floor(scope.boards.length / boardsPerRow); // Full rows
+				if ((scope.boards.length - boardRowCount * boardsPerRow) != 0) {
 					// Partial row
 					boardRowCount++;
 				}
 
+				// (boardRowCount * boardPreviewHeight + margin) + 2 * margin
 				var height = (boardRowCount * 224 + 48) + 'px';
 				element.css('height', height);
 			}
 
-			scope.$watch('boards.length', function() {
-				scope.updateHeight();
+			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
+				scope.updateWorkspace();
 				scrollArea.refresh();
+			});
+
+			scope.$watch('boards.length', function() {
+				scope.updateWorkspace();
+				scrollArea.refresh();
+			});
+
+			angular.element($window).bind('resize', function() {
+				scope.updateWorkspace();
 			});
 
 			scope.$watch('state.isLoadingBoard', function() {

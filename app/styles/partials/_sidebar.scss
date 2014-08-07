@@ -4,11 +4,6 @@
 	min-height: 100%;
 	background-color: $gray-medium;
 	color: $white;
-	-webkit-transition: width $sidebar-collapse-duration linear;
-	-moz-transition: width $sidebar-collapse-duration linear;
-	-ms-transition: width $sidebar-collapse-duration linear;
-	-o-transition: width $sidebar-collapse-duration linear;
-	transition: width $sidebar-collapse-duration linear;
 
 	.logo {
 		// font-family: $font-lobster;
@@ -39,7 +34,6 @@
 	}
 
 	.btn-collapse-space {
-		// height: 66px;
 		height: 73px;
 	}
 

@@ -150,6 +150,11 @@ body {
 	top: $topbar-height;
 	width: calc(100% - #{$sidebar-width} + 1px);
 	height: calc(100% - #{$topbar-height});
+
+	&.scrollarea-expanded {
+		left: $sidebar-width-collapsed;
+		width: calc(100% - #{$sidebar-width-collapsed} + 1px);
+	}
 }
 
 /*
