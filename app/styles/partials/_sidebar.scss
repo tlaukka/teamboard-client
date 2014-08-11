@@ -126,11 +126,13 @@
 		list-style-type: none;
 
 		li {
+			box-sizing: border-box;
 			font-size: 18px;
 			width: 100%;
-			padding-left: $sidebar-margin-left;
+			padding-left: $sidebar-margin-left - 8px;
 			padding-top: 12px;
 			padding-bottom: 12px;
+			border-left: 8px solid $gray-medium;
 
 			i {
 				margin-right: 16px;
@@ -138,16 +140,16 @@
 			}
 		}
 
-		a {
-			&:hover {
-				background: $turquoise;
-				text-decoration: none;
-			}
-		}
-
 		li:hover {
+			border-left: 8px solid $turquoise-dark;
 			background: $turquoise;
 			text-decoration: none;
+		}
+
+		a {
+			&:hover {
+				text-decoration: none;
+			}
 		}
 	}
 }

@@ -15,10 +15,10 @@ module.exports = function(scrollArea, $timeout, $window) {
 			scope.updateWorkspace = function() {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
 				// (workspaceWidth / (boardPreviewWidth + margin)) * (boardPreviewWidth + margin)
-				var width = Math.floor(scroller[0].clientWidth / 254) * 254;
+				// var width = Math.floor(scroller[0].clientWidth / 254) * 254;
 
 				// workspaceWidth / (boardPreviewWidth + margin)
-				var boardsPerRow = Math.floor(width / 254);
+				var boardsPerRow = Math.floor(scroller[0].clientWidth / 254);
 				boardsPerRow = Math.min(Math.max(boardsPerRow, 1), 8);
 
 				var boardRowCount = Math.floor(scope.boards.length / boardsPerRow); // Full rows

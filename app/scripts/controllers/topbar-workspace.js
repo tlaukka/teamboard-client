@@ -4,6 +4,7 @@
 module.exports = function($scope, $rootScope, boards) {
 
 	$scope.boards = boards;
+	$scope.isSidebarCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
 
 	$scope.removeEnabled = false;
 	$scope.editEnabled = false;
@@ -26,5 +27,9 @@ module.exports = function($scope, $rootScope, boards) {
 
 	$scope.$on('ui:enable-edit', function(event, enabled) {
 		$scope.editEnabled = enabled;
+	});
+
+	$scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
+		$scope.isSidebarCollapsed = isCollapsed;
 	});
 }
