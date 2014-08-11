@@ -11,8 +11,15 @@
 	border-bottom: 1px solid $lightgray-dark;
 
 	.content-wrapper {
-		margin-left: $sidebar-width;
 		height: $topbar-height;
+
+		&.sidebar-margin {
+			margin-left: $sidebar-width;
+		}
+
+		&.sidebar-margin-collapsed {
+			margin-left: $sidebar-width-collapsed;
+		}
 	}
 
 	.content-block {
@@ -37,13 +44,17 @@
 		}
 	}
 
+	.workspace-heading {
+		margin-left: 9px
+	}
+
 	.btn-add {
 		outline: none;
 		vertical-align: center;
 		color: $white;
 		background-color: $turquoise;
 		margin-top: 6px;
-		width: 200px;
+		width: 80%;
 		height: 46px;
 		-webkit-border-radius: 5px 5px 5px 5px;
 		border-radius: 5px 5px 5px 5px;
@@ -59,6 +70,10 @@
 			-o-transform: translate(2px, 2px);
 			-ms-transform: translate(2px, 2px);
 			transform: translateX(2px, 2px);
+		}
+
+		&:hover {
+			background-color: $turquoise-dark;
 		}
 	}
 
@@ -92,10 +107,12 @@
 }
 
 .label-private {
+	font-size: 10px;
 	background-color: $gray;
 }
 
 .label-public {
+	font-size: 10px;
 	background-color: $gray-medium;
 }
 

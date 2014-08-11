@@ -1,4 +1,5 @@
 .sidebar {
+	font-family: $font-lato;
 	box-sizing: border-box;
 	width: $sidebar-width;
 	min-height: 100%;
@@ -7,25 +8,80 @@
 
 	.logo {
 		font-family: $font-lobster;
+		position: relative;
+		box-sizing: border-box;
 		cursor: pointer;
-		font-size: 28px;
+		font-size: 30px;
 		padding-left: $sidebar-margin-left;
 		padding-top: 12px;
 		padding-bottom: 12px;
+
+		.logo-text {
+			margin-left: 12px;
+			top: 45px;
+		}
+
+		// Full width 74px (collapsed sidebar)
+		.underline {
+			&:after {
+				content: '';
+				position: absolute;
+				left: 12px;
+				top: $topbar-height;
+				width: 50px;
+				border-bottom: 1px solid $lightgray-dark;
+			}
+		}
 
 		img {
 			width: 28px;
 		}
 	}
 
+	.btn-collapse-space {
+		height: 73px;
+	}
+
+	.btn-collapse {
+		position: absolute;
+		cursor: pointer;
+		z-index: 1;
+		font-size: 26px;
+		right: 0px;
+		top: 76px;
+		padding: 2px 6px 2px 6px;
+		-webkit-border-radius: 3px 0 0 3px;
+		border-radius: 3px 0 0 3px;
+		color: $white;
+		background-color: $turquoise;
+
+		&:hover {
+			background-color: $turquoise-dark;
+		}
+	}
+
 	.profile {
-		// text-align: center;
-		margin-bottom: 2rem;
+		margin-top: 24px;
+		margin-bottom: 24px;
 
 		.gravatar {
-			border: 0.4rem $purple-darker solid;
+			border: 1px solid $turquoise;
 			border-radius: 50%;
-			margin-bottom: 1rem;
+			margin-bottom: 12px;
+		}
+
+		.gravatar-lg {
+			border: 1px solid $turquoise;
+			border-radius: 50%;
+			margin-bottom: 12px;
+		}
+
+		.gravatar-sm {
+			border: 1px solid $turquoise;
+			width: 26px;
+			height: 26px;
+			border-radius: 50%;
+			margin-bottom: 12px;
 		}
 	}
 
@@ -34,7 +90,8 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
-		margin-left: 1rem;
+		margin-left: 12px;
+		color: $turquoise;
 	}
 
 	.uservoice {
@@ -42,6 +99,10 @@
 		text-align: center;
 		bottom: 14px;
 		left: $sidebar-width / 2 - 20px;
+
+		&.uservoice-collapsed {
+			left: 16px;
+		}
 
 		a {
 			cursor: pointer;
@@ -70,30 +131,34 @@
 		list-style-type: none;
 
 		li {
+			box-sizing: border-box;
 			font-size: 18px;
 			width: 100%;
-			padding-left: $sidebar-margin-left;
+			padding-left: $sidebar-margin-left - 8px;
 			padding-top: 12px;
 			padding-bottom: 12px;
+			border-left: 8px solid $gray-medium;
 
 			i {
 				margin-right: 16px;
 				font-size: 20px;
-				// font-size: 3rem;
-				// margin: 0 2rem 0 3rem;
-			}
-		}
-
-		a {
-			&:hover {
-				background: $turquoise;
-				text-decoration: none;
 			}
 		}
 
 		li:hover {
+			border-left: 8px solid $turquoise-dark;
 			background: $turquoise;
 			text-decoration: none;
 		}
+
+		a {
+			&:hover {
+				text-decoration: none;
+			}
+		}
 	}
+}
+
+.sidebar-collapsed {
+	width: $sidebar-width-collapsed;
 }

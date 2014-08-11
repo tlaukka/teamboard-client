@@ -276,7 +276,8 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 
 	$scope.promptBoardEdit = function(board) {
 		var modalOptions = {
-			template: require('../../partials/modal-boardedit.html')
+			template: require('../../partials/modal-boardedit.html'),
+			windowClass: 'modal-size-sm'
 		}
 
 		var userOptions = {

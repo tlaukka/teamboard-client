@@ -6,6 +6,7 @@ var angular = require('angular');
 // required third party modules
 require('angular-ui-router');
 require('angular-bootstrap');
+require('angular-animate');
 require('angular-truncate');
 require('angular-sanitize');
 require('angular-text');
@@ -15,6 +16,7 @@ require('angular-text');
 angular.module('tb', [
 		'ui.router',
 		'ui.bootstrap',
+		'ngAnimate',
 		'truncate',
 		'ngSanitize',
 		'textAngular',

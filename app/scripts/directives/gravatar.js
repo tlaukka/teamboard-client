@@ -12,9 +12,10 @@ module.exports = function() {
 	var crypto = require('crypto');
 
 	return {
-		template: '<img ng-src="{{ url }}" class="gravatar">',
+		template: '<img ng-src="{{ url }}" width="{{size}}" height="{{size}}" class="gravatar">',
 		scope: {
-			email: '=email'
+			email: '=email',
+			size: '@'
 		},
 		link: function(scope) {
 			scope.$watch('email', function(val) {

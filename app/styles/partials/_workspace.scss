@@ -1,7 +1,8 @@
 #workspace {
 	position: absolute;
 	background-color: $workspace-bg;
-	width: 3 * ($boardpreview-width + $boardpreview-margin-left) + $boardpreview-margin-left;
+	width: 100%;
+	// width: 3 * ($boardpreview-width + $boardpreview-margin-left) + $boardpreview-margin-left;
 }
 
 .loading-overlay {

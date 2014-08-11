@@ -1,18 +1,15 @@
 <div class="topbar">
-	<div class="container-fluid content-wrapper">
+	<div class="container-fluid content-wrapper"
+		ng-class="isSidebarCollapsed ? 'sidebar-margin-collapsed' : 'sidebar-margin'">
 		<div class="row">
-			<div class="col-sm-4 cursor-pointer" ng-click="onHeadingClicked()">
-				<h3>{{ board.name | characters: 38: true }}</h3>
-				<div ng-if="board.isPublic" class="label label-public">Public</div>
-				<div ng-if="!board.isPublic" class="label label-private">Private</div>
+			<div class="col-sm-5 content-block cursor-pointer" ng-click="onHeadingClicked()">
+				<h2 class="workspace-heading">{{ board.name | characters: 20: true }}
+					<span ng-if="board.isPublic" class="label label-public">Public</span>
+					<span ng-if="!board.isPublic" class="label label-private">Private</span>
+				</h2>
 			</div>
-			<div class="col-sm-4">
-				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
-					<i class="fa fa-plus"></i> Create Ticket
-				</button>
-			</div>
-			<div class="col-sm-4">
-				<div class="btn-group iconbar">
+			<div class="col-sm-4 content-block">
+				<div class="btn-group iconbar pull-right">
 					<div btn-checkbox
 						class="btn btn-icon btn-checkbox enabled"
 						ng-model="snapEnabled"
@@ -32,6 +29,11 @@
 						<i class="fa fa-edit fa-fw"></i>
 					</div>
 				</div>
+			</div>
+			<div class="col-sm-3 content-block">
+				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
+					<i class="fa fa-plus"></i> Create Ticket
+				</button>
 			</div>
 		</div>
 	</div>

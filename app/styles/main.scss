@@ -26,6 +26,7 @@ $turquoise: rgb(114, 189, 187);
 $blue-dark: rgb(92, 152, 180);
 $blue-darker: rgb(79, 129, 154);
 $font-lobster: "Lobster", "Helvetica", "Arial", sans-serif;
+$font-lato: "Lato", "Helvetica", "Arial", sans-serif;
 
 /* Colors */
 $purple: #724a7f;
@@ -66,6 +67,7 @@ $ticket-bg: #ffffff;
 $topbar-height: 64px;
 $topbar-icon-size: 28px;
 $sidebar-width: 232px;
+$sidebar-width-collapsed: 74px;
 $sidebar-margin-left: 24px;
 $board-width: 1920px;
 $board-height: 1080px;
@@ -82,6 +84,7 @@ $ticket-height: 128px;
 /* Animations */
 $boardpreview-fade-duration: 0.6s;
 $loadingoverlay-fade-duration: 0.4s;
+$sidebar-collapse-duration: 0.2s;
 
 @import "partials/animations";
 @import "partials/buttons";
@@ -106,6 +109,7 @@ html {
 }
 
 body {
+	font-family: $font-lato;
 	background: $lightgray;
 	overflow: hidden;
 }
@@ -145,6 +149,11 @@ body {
 	top: $topbar-height;
 	width: calc(100% - #{$sidebar-width} + 1px);
 	height: calc(100% - #{$topbar-height});
+
+	&.scrollarea-expanded {
+		left: $sidebar-width-collapsed;
+		width: calc(100% - #{$sidebar-width-collapsed} + 1px);
+	}
 }
 
 /*

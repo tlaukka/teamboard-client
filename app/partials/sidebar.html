@@ -1,17 +1,21 @@
-<div class="sidebar">
+<!-- Full size sidebar -->
+<div ng-show="!isCollapsed" class="sidebar">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="logo" ui-sref="main.workspace"><img src="/images/teamboard_logo.svg"> Teamboard</div>
+			<div class="logo" ui-sref="main.workspace">
+				<img src="/images/teamboard_logo.svg"><span class="logo-text">Teamboard</span>
+			</div>
 		</div>
 	</div>
-
-	<!-- <div ng-if="currentUser.email" class="row profile">
+	<div class="btn-collapse" ng-click="toggleCollapse()">
+		<i class="fa fa-chevron-left"></i>
+	</div>
+	<div ng-if="currentUser.email" class="row profile">
 		<div class="col-md-12">
-			<img tb-gravatar email="currentUser.email" class="center-block">
-			<div class="email text-center">{{ currentUser.email }}</div>
+			<img tb-gravatar size="80" email="currentUser.email" class="center-block">
+			<div class="email text-center">{{currentUser.email}}</div>
 		</div>
-	</div> -->
-
+	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<nav role="navigation" class="navigation">
@@ -31,6 +35,56 @@
 		</div>
 	</div>
 	<div class="uservoice">
+		<a uservoice-trigger
+			mode="contact"
+			position="top"
+			accent-color="#724A7F"
+			widget-height="300px"
+			widget-width="220px"
+			smarvote-enabled="false">
+			<i class="fa fa-question-circle fa-fw"></i>
+		</a>
+	</div>
+</div>
+
+<!-- Collapsed sidebar -->
+<div ng-show="isCollapsed" class="sidebar sidebar-collapsed">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="logo" ui-sref="main.workspace">
+				<div class="underline"></div>
+				<img src="/images/teamboard_logo.svg">
+			</div>
+		</div>
+	</div>
+	<div class="btn-collapse" ng-click="toggleCollapse()">
+		<i class="fa fa-chevron-right"></i>
+	</div>
+	<div class="btn-collapse-space"></div>
+	<div class="row profile">
+		<div class="col-md-12">
+			<img tb-gravatar size="26" email="currentUser.email" class="center-block">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<nav role="navigation" class="navigation">
+				<ul>
+					<a ui-sref="main.workspace">
+						<li>
+							<i class="fa fa-th fa-fw"></i>
+						</li>
+					</a>
+					<a href="#" ng-click="logout()" class="">
+						<li>
+							<i class="fa fa-sign-out fa-fw"></i>
+						</li>
+					</a>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div class="uservoice uservoice-collapsed">
 		<a uservoice-trigger
 			mode="contact"
 			position="top"

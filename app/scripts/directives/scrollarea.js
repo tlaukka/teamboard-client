@@ -21,6 +21,17 @@ module.exports = function($timeout, $document, scrollArea) {
 				disableMouse: false
 			});
 
+			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
+				if (isCollapsed) {
+					element.addClass('scrollarea-expanded');
+				}
+				else {
+					element.removeClass('scrollarea-expanded');
+				}
+
+				scrollArea.refresh();
+			});
+
 			// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 		}
 	};
