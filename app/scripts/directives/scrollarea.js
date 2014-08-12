@@ -32,7 +32,10 @@ module.exports = function($timeout, $document, scrollArea) {
 				scrollArea.refresh();
 			});
 
-			// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+			// Prevent the whole window from scrolling
+			document.addEventListener('touchmove', function (event) {
+				event.preventDefault();
+			}, false);
 		}
 	};
 }

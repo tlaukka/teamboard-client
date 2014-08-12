@@ -17,6 +17,10 @@ module.exports = function(scrollArea, $timeout, $window) {
 				// (workspaceWidth / (boardPreviewWidth + margin)) * (boardPreviewWidth + margin)
 				// var width = Math.floor(scroller[0].clientWidth / 254) * 254;
 
+				// console.log(scroller);
+				// console.log('clientWidth: ' + scroller[0].offsetWidth + ', ' + scroller[0].offsetHeight);
+
+
 				// workspaceWidth / (boardPreviewWidth + margin)
 				var boardsPerRow = Math.floor(scroller[0].clientWidth / 254);
 				boardsPerRow = Math.min(Math.max(boardsPerRow, 1), 8);
@@ -29,6 +33,7 @@ module.exports = function(scrollArea, $timeout, $window) {
 
 				// (boardRowCount * boardPreviewHeight + margin) + 2 * margin
 				var height = (boardRowCount * 224 + 48) + 'px';
+				// console.log('height: ' + height);
 				element.css('height', height);
 			}
 

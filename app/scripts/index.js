@@ -31,6 +31,10 @@ angular.module('tb', [
 
 	.config(require('./config/routes'))
 	.config(require('./config/decorators'))
+	.config(function(buttonConfig) {
+		// Fix radio button toggle event in mobile devices
+		buttonConfig.toggleEvent = 'touchstart click';
+	})
 
 	.directive('tbBoard',        require('./directives/board'))
 	.directive('tbTicket',       require('./directives/ticket'))
