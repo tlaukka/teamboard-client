@@ -4,14 +4,16 @@
 		<div ng-if="userOptions.boardCount > 1" class="heading">Delete boards</div>
 	</div>
 	<div class="modal-body">
-		<div ng-if="userOptions.boardCount == 1">
-			<p class="text-center">Are you sure you want to delete board</p>
-			<p class="text-center highlight">{{userOptions.boardName}}</p>
-		</div>
-		<div ng-if="userOptions.boardCount > 1">
-			<p class="text-center">
-				Are you sure you want to delete <span class="highlight">{{userOptions.boardCount}}</span> boards
-			</p>
+		<div class="modal-block">
+			<div ng-if="userOptions.boardCount == 1">
+				<p class="text-center">Are you sure you want to delete board</p>
+				<p class="text-center highlight">{{userOptions.boardName}}</p>
+			</div>
+			<div ng-if="userOptions.boardCount > 1">
+				<p class="text-center">
+					Are you sure you want to delete <span class="highlight">{{userOptions.boardCount}}</span> boards
+				</p>
+			</div>
 		</div>
 	</div>
 	<div class="modal-footer">

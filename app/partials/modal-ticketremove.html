@@ -4,14 +4,16 @@
 		<div ng-if="userOptions.ticketCount > 1" class="heading">Delete tickets</div>
 	</div>
 	<div class="modal-body">
-		<div ng-if="userOptions.ticketCount == 1">
-			<p class="text-center">Are you sure you want to delete ticket</p>
-			<p class="text-center highlight">{{userOptions.ticketName}}</p>
-		</div>
-		<div ng-if="userOptions.ticketCount > 1">
-			<p class="text-center">
-				Are you sure you want to delete <span class="highlight">{{userOptions.ticketCount}}</span> tickets
-			</p>
+		<div class="modal-block">
+			<div ng-if="userOptions.ticketCount == 1">
+				<p class="text-center">Are you sure you want to delete ticket</p>
+				<p class="text-center highlight">{{userOptions.ticketName}}</p>
+			</div>
+			<div ng-if="userOptions.ticketCount > 1">
+				<p class="text-center">
+					Are you sure you want to delete <span class="highlight">{{userOptions.ticketCount}}</span> tickets
+				</p>
+			</div>
 		</div>
 	</div>
 	<div class="modal-footer">

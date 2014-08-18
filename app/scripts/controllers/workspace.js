@@ -121,13 +121,24 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 			});
 	}
 
+	function inviteUser(userName) {
+		console.debug('added: ' + userName);
+	}
+
 	$scope.promptBoardCreate = function() {
 		var modalOptions = {
 			template: require('../../partials/modal-boardcreate.html'),
-			windowClass: 'modal-size-sm'
-		}
+			windowClass: 'modal-size-md'
+		};
 
-		modalService.show(modalOptions, null).then(function(result) {
+		var users = ['asd1', 'asd2', 'qwe3', 'qwe4', 'zxc5', 'zxc6', 'ghj7'];
+
+		var userOptions = {
+			users: users,
+			inviteUser: inviteUser
+		};
+
+		modalService.show(modalOptions, userOptions).then(function(result) {
 			$scope.createBoard(result);
 		});
 	}
@@ -135,13 +146,13 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 	$scope.promptBoardEdit = function(board) {
 		var modalOptions = {
 			template: require('../../partials/modal-boardedit.html'),
-			windowClass: 'modal-size-sm'
-		}
+			windowClass: 'modal-size-md'
+		};
 
 		var userOptions = {
 			heading:  board.name,
 			isPublic: board.isPublic
-		}
+		};
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
 			$scope.editBoard(board, result);
@@ -152,7 +163,7 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 		var modalOptions = {
 			template: require('../../partials/modal-boardremove.html'),
 			windowClass: 'modal-size-sm'
-		}
+		};
 
 		var userOptions = {};
 

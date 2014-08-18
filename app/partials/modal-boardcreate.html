@@ -1,37 +1,102 @@
-<form role="form">
-	<div class="modal-header">
-		<div class="heading">Create a new board</div>
+<div class="modal-header">
+	<span class="btn btn-modal-close pull-right" ng-click="userOptions.cancel()"><i class="fa fa-times"></i></span>
+	<div class="modal-heading-block">
+		<div>Create a new board</div>
 	</div>
-	<div class="modal-body">
-		<div class="row">
-			<div class="col-md-12">
-				<input type="text"
-					class="form-control text"
-					id="headingInput"
-					placeholder="Board name"
-					ng-model="newBoard.name"
-					tb-auto-focus>
+</div>
+<div class="modal-content-divider"></div>
+<div class="modal-body">
+	<div class="modal-content-block padding-lg">
+		<form role="form" name="boardInfo" class="form-horizontal">
+			<div class="form-group">
+				<label for="headingInput" class="control-label col-xs-2">Name</label>
+				<div class="col-xs-10">
+					<input type="text"
+						id="headingInput"
+						name="headingInput"
+						class="form-control text"
+						placeholder="Board name"
+						ng-model="newBoard.name"
+						tb-auto-focus
+						required>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="form-group">
-					<div class="btn-group btn-group-justified btn-group-visibility" ng-init="newBoard.isPublic = false">
+			<div class="form-group last">
+				<label for="visibilityInput" class="control-label col-md-2">Visibility</label>
+				<div class="col-xs-10">
+					<div id="visibilityInput" class="btn-group btn-group-justified btn-group-visibility" ng-init="newBoard.isPublic = false">
 						<label class="btn btn-md btn-visibility" ng-model="newBoard.isPublic" btn-radio="false">Private</label>
 						<label class="btn btn-md btn-visibility" ng-model="newBoard.isPublic" btn-radio="true">Public</label>
 					</div>
 				</div>
 			</div>
+		</form>
+	</div>
+	<div class="modal-content-divider"></div>
+	<div class="modal-heading-block" ng-click="isCollapsed = !isCollapsed">
+		<div>People on this board
+			<i ng-if="!isCollapsed" class="fa fa-caret-down fa-fw modal-content-caret"></i>
+			<i ng-if="isCollapsed" class="fa fa-caret-right fa-fw modal-content-caret"></i>
 		</div>
 	</div>
-	<div class="modal-footer">
-		<div class="row modal-controls">
+	<div class="modal-content-block padding-md centered" ng-show="!isCollapsed">
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+		<div class="tmp-img"></div>
+	</div>
+	<div class="modal-content-divider"></div>
+	<div class="modal-heading-block">
+		<div>Invite people</div>
+	</div>
+	<div class="modal-content-block padding-md">
+		<form role="form" name="userInvite" class="form-horizontal">
+			<div class="form-group">
+				<label for="userInput" class="control-label col-xs-3">Invite poeple</label>
+				<div class="col-xs-6">
+					<!-- <input type="text" id="peopleInput" class="form-control text" ng-model="userName"> -->
+					<input type="text"
+						id="userInput"
+						name="userInput"
+						class="form-control text"
+						typeahead="user for user in userOptions.users | filter:$viewValue | limitTo:8"
+						ng-model="userName"
+						required>
+				</div>
+				<div class="col-xs-3">
+					<button class="btn btn-primary btn-fw"
+						ng-disabled="userInvite.$invalid"
+						ng-click="userOptions.inviteUser(userName)">
+						Invite
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="modal-content-divider"></div>
+<div class="modal-footer">
+	<div class="modal-content-block padding-md">
+		<div class="row">
 			<div class="col-md-6">
-				<button class="btn btn-lg btn-default btn-modal-control" ng-click="userOptions.cancel()">Cancel</button>
+				<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">Cancel</button>
 			</div>
 			<div class="col-md-6">
-				<button class="btn btn-lg btn-primary btn-modal-control" ng-click="userOptions.apply(newBoard)">Create</button>
+				<button class="btn btn-lg btn-primary btn-fw"
+					ng-disabled="boardInfo.$invalid"
+					ng-click="userOptions.apply(newBoard)">
+					Create
+				</button>
 			</div>
 		</div>
 	</div>
-</form>
+</div>

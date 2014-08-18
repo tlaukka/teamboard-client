@@ -18,15 +18,16 @@
 	width: 70%;
 }
 
-.modal-header {
-	text-align: center;
-	border-bottom: 1px solid $lightgray-dark;
-	font-size: 22px;
-	font-weight: bold;
+.modal-content {
+	border-radius: 0;
+	color: $gray-medium;
+}
 
-	.heading {
-		color: $gray-medium;
-	}
+.modal-header {
+	// text-align: center;
+	padding: 0;
+	border: none;
+	// border-bottom: 1px solid $lightgray-dark;
 
 	.gravatar {
 		max-height: 3rem;
@@ -44,12 +45,10 @@
 	}
 }
 
-.modal-content {
-	border-radius: 0;
-	color: $gray-medium;
-}
-
 .modal-body {
+	padding: 0;
+	// margin: 18px;
+
 	textarea {
 		resize: vertical;
 	}
@@ -60,14 +59,46 @@
 }
 
 .modal-footer {
-	border-top: none;
+	padding: 0;
+	border: none;
+}
+
+.modal-heading-block {
+	text-align: center;
+	padding: 16px;
+	font-size: 22px;
+	font-weight: bold;
+	color: $gray-medium;
+}
+
+.modal-content-block {
+	padding: 0;
+	// padding: 32px;
+
+	&.padding-md {
+		padding: 16px;
+	}
+
+	&.padding-lg {
+		padding: 32px;
+	}
+
+	&.centered {
+		text-align: center;
+	}
+}
+
+.modal-content-caret {
+	color: $lightgray-dark;
+}
+
+.modal-content-divider {
+	border-bottom: 1px solid $lightgray-dark;
 }
 
 .form-control {
 	&.text {
 		border-radius: 3px;
-		// margin-top: 8px;
-		margin-bottom: 8px;
 		border: 1px solid $lightgray-dark;
 		background-color: $lightgray;
 		color: $gray-medium;
@@ -75,8 +106,6 @@
 
 	&.ticket-heading {
 		border: none;
-		// margin-top: 8px;
-		margin-bottom: 8px;
 		background-color: $white;
 		color: $gray-medium;
 		-webkit-box-shadow: none;
@@ -91,8 +120,8 @@
 	}
 }
 
-.btn-group-visibility {
-	margin-top: 8px;
+.form-group.last {
+	margin-bottom: 0;
 }
 
 .btn-visibility {
@@ -106,6 +135,44 @@
 	}
 }
 
+.btn-modal-close {
+	position: absolute;
+	font-size: 28px;
+	top: 2px;
+	right: 8px;
+
+	&:active {
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+}
+
 .btn-modal-control {
 	width: 100%;
+}
+
+.dropdown-menu {
+	width: 100%;
+	color: $gray-medium;
+	background-color: $lightgray;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+	color: $gray-medium;
+	background-color: $lightgray-dark;
+}
+
+.gravatar-container {
+	text-align: center;
+}
+
+.tmp-img {
+	display: inline-block;
+	margin: 10px;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background-color: $red;
 }

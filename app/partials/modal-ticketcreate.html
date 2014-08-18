@@ -8,19 +8,21 @@
 		</div>
 	</div>
 	<div class="modal-body">
-		<div class="row">
-			<div class="col-md-12">
-				<input type="text"
-					class="form-control input-lg ticket-heading"
-					id="headingInput"
-					placeholder="Ticket heading..."
-					ng-model="newTicket.heading"
-					tb-auto-focus>
+		<div class="modal-block">
+			<div class="row">
+				<div class="col-md-12">
+					<input type="text"
+						class="form-control input-lg ticket-heading"
+						id="headingInput"
+						placeholder="Ticket heading..."
+						ng-model="newTicket.heading"
+						tb-auto-focus>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div text-angular id="contentInput" ng-model="newTicket.content" placeholder="Ticket description..."></div>
+			<div class="row">
+				<div class="col-md-12">
+					<div text-angular id="contentInput" ng-model="newTicket.content" placeholder="Ticket description..."></div>
+				</div>
 			</div>
 		</div>
 	</div>
