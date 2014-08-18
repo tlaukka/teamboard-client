@@ -3,9 +3,10 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, $rootScope, modalService, Board, boards, scrollArea) {
+module.exports = function($scope, $rootScope, modalService, Board, boards, currentUser, scrollArea) {
 
 	// 'boards' is a resolved parameter
+	$scope.user = currentUser;
 	$scope.boards = boards;
 	$scope.selectedBoardIds = [];
 
@@ -121,8 +122,10 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 			});
 	}
 
-	function inviteUser(userName) {
+	function inviteUser(userName, members) {
 		console.debug('added: ' + userName);
+		console.log(members);
+		users.push(userName);
 	}
 
 	$scope.promptBoardCreate = function() {
@@ -131,10 +134,8 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 			windowClass: 'modal-size-md'
 		};
 
-		var users = ['asd1', 'asd2', 'qwe3', 'qwe4', 'zxc5', 'zxc6', 'ghj7'];
-
 		var userOptions = {
-			users: users,
+			members: [$scope.user],
 			inviteUser: inviteUser
 		};
 
@@ -149,9 +150,13 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, scrol
 			windowClass: 'modal-size-md'
 		};
 
+		// var users = ['asd1', 'asd2', 'qwe3', 'qwe4', 'zxc5', 'zxc6', 'ghj7'];
+
 		var userOptions = {
-			heading:  board.name,
-			isPublic: board.isPublic
+			heading: board.name,
+			isPublic: board.isPublic,
+			members: [board.owner].concat(board.members),
+			inviteUser: inviteUser
 		};
 
 		modalService.show(modalOptions, userOptions).then(function(result) {

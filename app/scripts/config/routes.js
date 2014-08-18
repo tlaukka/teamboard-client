@@ -16,6 +16,10 @@ module.exports = function(
 
 			resolve: {
 
+				currentUser: function(authService) {
+					return authService.getUser();
+				},
+
 				// transform boards from http request into Board models
 				// so they can have some more functionality
 				boards: function($http, Config, Board) {

@@ -40,6 +40,14 @@
 		</div>
 	</div>
 	<div class="modal-content-block padding-md centered" ng-show="!isCollapsed">
+		<img ng-repeat="member in userOptions.members"
+			tb-gravatar
+			size="48"
+			email="member.email"
+			class="center-block">
+		<!-- <img tb-gravatar size="48" email="user.email"> -->
+		<!-- <div ng-repeat="user in userOptions.users" class="tmp-img"></div> -->
+		<!-- <div class="tmp-img"></div>
 		<div class="tmp-img"></div>
 		<div class="tmp-img"></div>
 		<div class="tmp-img"></div>
@@ -51,8 +59,7 @@
 		<div class="tmp-img"></div>
 		<div class="tmp-img"></div>
 		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
+		<div class="tmp-img"></div> -->
 	</div>
 	<div class="modal-content-divider"></div>
 	<div class="modal-heading-block">
@@ -63,7 +70,6 @@
 			<div class="form-group">
 				<label for="userInput" class="control-label col-xs-3">Invite poeple</label>
 				<div class="col-xs-6">
-					<!-- <input type="text" id="peopleInput" class="form-control text" ng-model="userName"> -->
 					<input type="text"
 						id="userInput"
 						name="userInput"
@@ -75,7 +81,7 @@
 				<div class="col-xs-3">
 					<button class="btn btn-primary btn-fw"
 						ng-disabled="userInvite.$invalid"
-						ng-click="userOptions.inviteUser(userName)">
+						ng-click="userOptions.inviteUser(userName, userOptions.members)">
 						Invite
 					</button>
 				</div>

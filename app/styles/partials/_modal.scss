@@ -86,6 +86,11 @@
 	&.centered {
 		text-align: center;
 	}
+
+	.gravatar {
+		border-radius: 50%;
+		border: 1px solid $turquoise;
+	}
 }
 
 .modal-content-caret {
