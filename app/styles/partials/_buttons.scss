@@ -60,37 +60,92 @@
 
 .btn-auth {
 	outline: none;
+	font-size: 18px;
 	color: $white;
-	background-color: $turquoise;
 	height: 64px;
+	margin-top: 24px;
+	margin-bottom: 24px;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
-	// -webkit-box-shadow: 2px 2px 0 0 $turquoise-dark;
-	// box-shadow: 2px 2px 0 0 $turquoise-dark;
 
 	&:active {
 		outline: none;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-		-moz-transform: translate(2px, 2px);
-		-webkit-transform: translate(2px, 2px);
-		-o-transform: translate(2px, 2px);
-		-ms-transform: translate(2px, 2px);
-		transform: translateX(2px, 2px);
+		color: white;
 	}
 
-	&.flat {
+	&.active {
+		outline: none;
+		color: white;
+	}
 
+	&.btn-3d {
+		border: none;
+	}
+
+	&.btn-flat {
+		border: 2px solid $white;
 	}
 
 	&.flat:active {
-		outline: none;
-		-webkit-box-shadow: none;
+		-webkit-box-shado: none;
 		box-shadow: none;
-		// -moz-transform: translate(2px, 2px);
-		// -webkit-transform: translate(2px, 2px);
-		// -o-transform: translate(2px, 2px);
-		// -ms-transform: translate(2px, 2px);
-		// transform: translateX(2px, 2px);
+	}
+
+	&.btn-register {
+		background-color: $purple;
+		-webkit-box-shadow: 2px 2px 0 0 $purple-dark;
+		box-shadow: 2px 2px 0 0 $purple-dark;
+
+		&:hover {
+			// background-color: $purple-dark;
+		}
+
+		&:active {
+			outline: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			-moz-transform: translate(2px, 2px);
+			-webkit-transform: translate(2px, 2px);
+			-o-transform: translate(2px, 2px);
+			-ms-transform: translate(2px, 2px);
+			transform: translateX(2px, 2px);
+		}
+	}
+
+	&.btn-login {
+		background-color: $turquoise;
+		-webkit-box-shadow: 2px 2px 0 0 $turquoise-dark;
+		box-shadow: 2px 2px 0 0 $turquoise-dark;
+
+		&:hover {
+			background-color: $turquoise-dark;
+		}
+
+		&:active {
+			outline: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			-moz-transform: translate(2px, 2px);
+			-webkit-transform: translate(2px, 2px);
+			-o-transform: translate(2px, 2px);
+			-ms-transform: translate(2px, 2px);
+			transform: translateX(2px, 2px);
+		}
+	}
+
+	&.btn-registerlink {
+		background-color: $gray-dark;
+
+		&:hover {
+			background-color: $purple;
+		}
+	}
+
+	&.btn-loginlink {
+		background-color: $gray-dark;
+
+		&:hover {
+			background-color: $turquoise;
+		}
 	}
 }

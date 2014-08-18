@@ -1,4 +1,76 @@
 <div class="registerwrapper">
+	<div class="container register">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1><img src="/images/teamboard_logo.svg"> Teamboard</h1>
+			</div>
+		</div>
+		<form class="form" name="form" ng-submit="register(form)" novalidate>
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>Register</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<p class="help-block error" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+							 Please enter your email and password.
+						</p>
+						<p class="help-block">{{ errors.other }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<input type="email"
+						name="email"
+						class="form-control"
+						ng-model="user.email"
+						placeholder="Email address"
+						autofocus
+						required>
+
+					<input type="password"
+						name="password"
+						class="form-control"
+						ng-model="user.password"
+						placeholder="Password"
+						required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="submit" class="form-control btn-auth btn-3d btn-register">Register</button>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="divider"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>Already registered?</p>
+				<a ui-sref="login">
+					<button class="form-control btn-auth btn-flat btn-loginlink">Sign in</button>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="registerwrapper">
 	<div class="register">
 		<div class="row">
 			<div class="col-sm-12">
@@ -46,3 +118,4 @@
 		</div>
 	</div>
 </div>
+ -->

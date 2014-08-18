@@ -1,20 +1,28 @@
 <div class="loginwrapper">
-	<div class="login">
+	<div class="container login">
 		<div class="row">
 			<div class="col-sm-12">
 				<h1><img src="/images/teamboard_logo.svg"> Teamboard</h1>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<h2>Login</h2>
+		<form class="form login-form" name="form" ng-submit="login(form)" novalidate>
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>Login</h2>
+				</div>
 			</div>
-			<div class="col-sm-12">
-				<form class="form login-form"
-					name="form"
-					ng-submit="login(form)"
-					novalidate>
-
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<p class="help-block error" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+							Please enter your email and password.
+						</p>
+						<p class="help-block">{{ errors.other }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
 					<input type="email"
 						name="email"
 						class="form-control"
@@ -29,22 +37,25 @@
 						ng-model="user.password"
 						placeholder="Password"
 						required>
-
-					<div class="form-group has-error">
-						<p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
-							Please enter your email and password.
-						</p>
-						<p class="help-block">{{ errors.other }}</p>
-					</div>
-
-					<button type="submit" class="btn btn-block btn-primary">Sign in</button>
-				</form>
+				</div>
 			</div>
-		</div>
-
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="submit" class="form-control btn-auth btn-3d btn-login">Sign in</button>
+				</div>
+			</div>
+		</form>
 		<div class="row">
 			<div class="col-sm-12">
-				Not registered? <a ui-sref="register">Create an account.</a>
+				<div class="divider"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>Not registered?</p>
+				<a ui-sref="register">
+					<button class="form-control btn-auth btn-flat btn-registerlink">Register</button>
+				</a>
 			</div>
 		</div>
 	</div>
