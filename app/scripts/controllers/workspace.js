@@ -122,10 +122,14 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, curre
 			});
 	}
 
-	function inviteUser(userName, members) {
-		console.debug('added: ' + userName);
+	function addUser(user, members) {
+		console.debug(user);
 		console.log(members);
-		users.push(userName);
+	}
+
+	function removeUser(user, members) {
+		console.debug(user);
+		console.log(members);
 	}
 
 	$scope.promptBoardCreate = function() {
@@ -136,7 +140,8 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, curre
 
 		var userOptions = {
 			members: [$scope.user],
-			inviteUser: inviteUser
+			addUser: addUser,
+			removeUser: removeUser
 		};
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
@@ -150,13 +155,19 @@ module.exports = function($scope, $rootScope, modalService, Board, boards, curre
 			windowClass: 'modal-size-md'
 		};
 
-		// var users = ['asd1', 'asd2', 'qwe3', 'qwe4', 'zxc5', 'zxc6', 'ghj7'];
+		var members = [{
+			email: 'qwe@qwe.qwe'
+		}, {
+			email: 'zxc@zxc.zxc'
+		}];
 
 		var userOptions = {
 			heading: board.name,
 			isPublic: board.isPublic,
-			members: [board.owner].concat(board.members),
-			inviteUser: inviteUser
+			// members: [board.owner].concat(board.members),
+			members: [board.owner].concat(members),
+			addUser: addUser,
+			removeUser: removeUser
 		};
 
 		modalService.show(modalOptions, userOptions).then(function(result) {

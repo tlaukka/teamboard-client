@@ -34,18 +34,33 @@
 		</form>
 	</div>
 	<div class="modal-content-divider"></div>
-	<div class="modal-heading-block" ng-click="isCollapsed = !isCollapsed">
+	<div class="modal-heading-block"
+		ng-init="userOptions.showDetails = false; userOptions.selectedUser = null"
+		ng-click="isCollapsed = !isCollapsed; userOptions.showDetails = false">
 		<div>People on this board
 			<i ng-if="!isCollapsed" class="fa fa-caret-down fa-fw modal-content-caret"></i>
 			<i ng-if="isCollapsed" class="fa fa-caret-right fa-fw modal-content-caret"></i>
 		</div>
 	</div>
-	<div class="modal-content-block padding-md centered" ng-show="!isCollapsed">
-		<!-- <div ng-repeat="member in userOptions.members" class="tmp-img"></div> -->
-		<img ng-repeat="member in userOptions.members"
-			tb-gravatar
-			size="48"
-			email="member.email">
+	<div class="modal-content-block padding-md centered"
+		ng-show="!isCollapsed && !userOptions.showDetails">
+		<div ng-repeat="member in userOptions.members"
+			class="member-block"
+			ng-click="userOptions.showDetails = true; userOptions.selectedUser = member">
+			<div tb-gravatar size="48" email="member.email"></div>
+		</div>
+	</div>
+	<div ng-if="userOptions.showDetails" class="modal-content-block padding-md centered">
+		<div class="member-block" ng-click="userOptions.showDetails = false; userOptions.selectedUser = null">
+			<div tb-gravatar size="80" email="userOptions.selectedUser.email"></div>
+		</div>
+		<p class="selected-email">{{userOptions.selectedUser.email}}</p>
+		<button class="btn btn-primary"
+			ng-click="userOptions.removeUser(userOptions.selectedUser, userOptions.members);
+				userOptions.showDetails = false;
+				userOptions.selectedUser = null">
+			Remove
+		</button>
 	</div>
 	<div class="modal-content-divider"></div>
 	<div class="modal-heading-block">
@@ -67,7 +82,7 @@
 				<div class="col-xs-3">
 					<button class="btn btn-primary btn-fw"
 						ng-disabled="userInvite.$invalid"
-						ng-click="userOptions.inviteUser(userName, userOptions.members)">
+						ng-click="userOptions.addUser(userName, userOptions.members)">
 						Invite
 					</button>
 				</div>

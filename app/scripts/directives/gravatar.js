@@ -13,10 +13,13 @@ module.exports = function() {
 
 	return {
 		template: '<img ng-src="{{ url }}" width="{{size}}" height="{{size}}" class="gravatar">',
+		replace: true,
+
 		scope: {
 			email: '=email',
 			size: '@'
 		},
+
 		link: function(scope) {
 			scope.$watch('email', function(val) {
 				if(val !== undefined && val !== null && val !== '') {
@@ -30,7 +33,6 @@ module.exports = function() {
 						scope.hash + '?d=monsterid';
 				}
 			});
-		},
-		replace: true
+		}
 	}
 }

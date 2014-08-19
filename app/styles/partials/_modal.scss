@@ -152,10 +152,6 @@
 	}
 }
 
-.btn-modal-control {
-	width: 100%;
-}
-
 .dropdown-menu {
 	width: 100%;
 	color: $gray-medium;
@@ -169,8 +165,14 @@
 	background-color: $lightgray-dark;
 }
 
-.gravatar-container {
-	text-align: center;
+.member-block {
+	display: inline-block;
+	cursor: pointer;
+	margin: 8px;
+}
+
+.selected-email {
+	color: $turquoise;
 }
 
 .tmp-img {
