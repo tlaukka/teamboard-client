@@ -45,21 +45,7 @@
 		<img ng-repeat="member in userOptions.members"
 			tb-gravatar
 			size="48"
-			email="member.email"
-			class="center-block">
-		<!-- <div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div> -->
+			email="member.email">
 	</div>
 	<div class="modal-content-divider"></div>
 	<div class="modal-heading-block">
@@ -70,7 +56,6 @@
 			<div class="form-group">
 				<label for="userInput" class="control-label col-xs-3">Invite poeple</label>
 				<div class="col-xs-6">
-					<!-- <input type="text" id="peopleInput" class="form-control text" ng-model="userName"> -->
 					<input type="text"
 						id="userInput"
 						name="userInput"
@@ -101,50 +86,9 @@
 				<button class="btn btn-lg btn-primary btn-fw"
 					ng-disabled="boardInfo.$invalid"
 					ng-click="userOptions.apply(newData)">
-					Create
+					Save changes
 				</button>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-<!-- <form role="form">
-	<div class="modal-header">
-		<div class="heading">Edit board</div>
-	</div>
-	<div class="modal-body">
-		<div class="row">
-			<div class="col-md-12">
-				<input type="text"
-					class="form-control text"
-					id="headingInput"
-					placeholder="Board name"
-					ng-init="newData.heading = userOptions.heading"
-					ng-model="newData.heading"
-					tb-auto-focus>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="form-group">
-					<div class="btn-group btn-group-justified btn-group-visibility" ng-init="newData.isPublic = userOptions.isPublic">
-						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="false">Private</label>
-						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="true">Public</label>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<div class="row modal-controls">
-			<div class="col-md-6">
-				<button class="btn btn-lg btn-default btn-modal-control" ng-click="userOptions.cancel()">Cancel</button>
-			</div>
-			<div class="col-md-6">
-				<button class="btn btn-lg btn-primary btn-modal-control" ng-click="userOptions.apply(newData)">Apply</button>
-			</div>
-		</div>
-	</div>
-</form>
- -->

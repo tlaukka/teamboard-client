@@ -1,10 +1,13 @@
 <form role="form">
 	<div class="modal-header">
-		<div ng-if="userOptions.boardCount == 1" class="heading">Delete board</div>
-		<div ng-if="userOptions.boardCount > 1" class="heading">Delete boards</div>
+		<div class="modal-heading-block">
+			<div ng-if="userOptions.boardCount == 1">Delete board</div>
+			<div ng-if="userOptions.boardCount > 1">Delete boards</div>
+		</div>
 	</div>
+	<div class="modal-content-divider"></div>
 	<div class="modal-body">
-		<div class="modal-block">
+		<div class="modal-content-block padding-md">
 			<div ng-if="userOptions.boardCount == 1">
 				<p class="text-center">Are you sure you want to delete board</p>
 				<p class="text-center highlight">{{userOptions.boardName}}</p>
@@ -17,12 +20,14 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<div class="row modal-controls">
-			<div class="col-md-6">
-				<button class="btn btn-lg btn-default btn-modal-control" ng-click="userOptions.cancel()">Cancel</button>
-			</div>
-			<div class="col-md-6">
-				<button class="btn btn-lg btn-danger btn-modal-control" ng-click="userOptions.apply()">Delete</button>
+		<div class="modal-content-block padding-md">
+			<div class="row">
+				<div class="col-md-6">
+					<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">Cancel</button>
+				</div>
+				<div class="col-md-6">
+					<button class="btn btn-lg btn-danger btn-fw" ng-click="userOptions.apply()">Delete</button>
+				</div>
 			</div>
 		</div>
 	</div>

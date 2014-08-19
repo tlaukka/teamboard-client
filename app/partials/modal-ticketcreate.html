@@ -8,31 +8,33 @@
 		</div>
 	</div>
 	<div class="modal-body">
-		<div class="modal-block">
+		<div class="modal-content-block padding-md">
 			<div class="row">
 				<div class="col-md-12">
 					<input type="text"
 						class="form-control input-lg ticket-heading"
 						id="headingInput"
-						placeholder="Ticket heading..."
+						placeholder="Add a heading..."
 						ng-model="newTicket.heading"
 						tb-auto-focus>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div text-angular id="contentInput" ng-model="newTicket.content" placeholder="Ticket description..."></div>
+					<div text-angular id="contentInput" ng-model="newTicket.content" placeholder="Add a description..."></div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<div class="row modal-controls">
-			<div class="col-md-6">
-				<button class="btn btn-lg btn-default btn-modal-control" ng-click="userOptions.cancel()">Cancel</button>
-			</div>
-			<div class="col-md-6">
-				<button class="btn btn-lg btn-primary btn-modal-control" ng-click="userOptions.apply(newTicket)">Create</button>
+		<div class="modal-content-block padding-md">
+			<div class="row">
+				<div class="col-md-6">
+					<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">Cancel</button>
+				</div>
+				<div class="col-md-6">
+					<button class="btn btn-lg btn-primary btn-fw" ng-click="userOptions.apply(newTicket)">Create</button>
+				</div>
 			</div>
 		</div>
 	</div>
