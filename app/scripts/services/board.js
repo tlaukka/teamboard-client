@@ -92,8 +92,13 @@ module.exports = function($http, Config, Ticket) {
 	}
 
 	Board.prototype.addMember = function(uid) {
-		return $http.post(Config.api.url() + 'boards/' + this.id +
-			'/users', { id: uid });
+		return $http.post(Config.api.url() + 'boards/' + this.id + '/users', { id: uid })
+			.then(_update.bind(this));
+	}
+
+	Board.prototype.removeMember = function(uid) {
+		return $http.delete(Config.api.url() + 'boards/' + this.id + '/users' + uid)
+			.then(_update.bind(this));
 	}
 
 	return Board;

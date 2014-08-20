@@ -29,7 +29,7 @@ module.exports = function($provide) {
 	// Set default tools in text editors
 	$provide.decorator('taOptions', ['$delegate', function(taOptions){
 		taOptions.toolbar = [
-			['h5', 'p'],
+			// ['h5', 'p'],
 			['bold', 'italics', 'underline'],
 			['ul', 'ol']
 		];
