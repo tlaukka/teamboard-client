@@ -7,6 +7,7 @@ var gulp = require('gulp');
 gulp.task('copy-img', function() {
 	return gulp.src([
 			'./app/images/**/*.png',
+			'./app/images/**/*.jpg',
 			'./app/images/**/*.svg',
 			'./app/images/**/*.ico',
 		])

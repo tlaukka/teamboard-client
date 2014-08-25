@@ -1,0 +1,35 @@
+<div class="modal-header">
+	<span class="btn btn-modal-close pull-right" ng-click="userOptions.cancel()"><i class="fa fa-times"></i></span>
+	<div class="modal-heading-block">
+		<div>Workflow templates</div>
+	</div>
+</div>
+<div class="modal-content-divider"></div>
+<div class="modal-body">
+	<div class="modal-content-block padding-lg" ng-init="result.selectedBgUrl = ''; selectedIndex = -1">
+		<h4>Select workflow template:</h4>
+		<div ng-repeat="bg in userOptions.backgrounds"
+			class="bg-preview"
+			ng-class="$index == selectedIndex ? 'selected' : 'not-selected'"
+			ng-click="result.selectedBgUrl = bg.url; selectedIndex = $index">
+			<img ng-src="{{bg.url}}" class="bg-thumpnail center-block">
+			<div class="bg-heading">{{ bg.name | characters: 20: true }}</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="modal-content-block padding-md">
+		<div class="row">
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">Cancel</button>
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-primary btn-fw"
+					ng-disabled="bgInfo.$invalid"
+					ng-click="userOptions.apply(result)">
+					Add
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

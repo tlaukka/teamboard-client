@@ -81,15 +81,18 @@
 		margin-top: 12px;
 
 		.btn-icon {
-			display: none;
 			font-size: $topbar-icon-size;
 			line-height: $topbar-icon-size;
 			background-color: $transparent;
+			color: $lightgray-dark;
 			box-shadow: none;
 
 			&.enabled {
 				display: block;
-				color: $lightgray-dark;
+			}
+
+			&.disabled {
+				display: none;
 			}
 
 			&.ng-click-active {

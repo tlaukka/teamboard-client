@@ -14,6 +14,10 @@ module.exports = function($scope, $rootScope, resolvedBoard) {
 		$rootScope.$broadcast('action:create');
 	}
 
+	$scope.onAddBackgroundClicked = function() {
+		$rootScope.$broadcast('action:add-background');
+	}
+
 	$scope.onEnableSnapClicked = function() {
 		$rootScope.$broadcast('action:enable-snap');
 	}

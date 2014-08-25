@@ -30,7 +30,7 @@ module.exports = function() {
 
 			var def = ['contact', 'automatic', '#448dd6', '300px', '300px', true];
 
-			for(var i=0; i<set.length; i++) {
+			for (var i = 0; i < set.length; i++) {
 				if (!set[i]) {
 					set[i] = def[i];
 				}
@@ -58,6 +58,8 @@ module.exports = function() {
 				UserVoice.push(['addTrigger', '#' + elem.attr('id'), {
 					mode: set[0]
 				}]);
+
+				UserVoice.push(['autoprompt', { mode: 'smartvote', trigger_position: 'bottom-right' }]);
 			}
 
 			var setIdentify = function() {

@@ -15,7 +15,7 @@
 }
 
 .modal-size-lg .modal-dialog {
-	width: 70%;
+	width: 75%;
 }
 
 .modal-content {
@@ -188,11 +188,34 @@
 	color: $turquoise;
 }
 
-.tmp-img {
+.bg-preview {
 	display: inline-block;
-	margin: 10px;
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	background-color: $red;
+	margin-right: 10px;
+	margin-top: 10px;
+	padding: 10px;
+	background-color: $lightgray;
+
+	&.selected {
+		background-color: $turquoise;
+	}
+
+	&.not-selected {
+		background-color: $lightgray;
+	}
+
+	.bg-thumpnail {
+		width: 200px;
+		height: 113px;
+		border: 1px solid $lightgray-dark;
+		-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
+		-moz-box-shadow: 1px 1px 1px 1px $black-transparent-20;
+		box-shadow: 1px 1px 1px 1px $black-transparent-20;
+	}
+
+	.bg-heading {
+		text-align: center;
+		font-size: 20px;
+		margin-top: 12px;
+		margin-bottom: 4px;
+	}
 }

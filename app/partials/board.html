@@ -1,5 +1,5 @@
 <div id="board-background">
-	<div tb-board id="board" zoom-options="zoomOptions" ng-click="removeTicketSelections($event)">
+	<div tb-board id="board" background-add="promptBackgroundAdd" ng-click="removeTicketSelections($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
 		<tb-ticket
 			ng-repeat="ticket in board.tickets"

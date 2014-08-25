@@ -12,6 +12,7 @@
 	height: $board-height;
 	background-color: $board-bg;
 	overflow: hidden;
+	// background-image: url("../images/narsu.jpg");
 }
 
 .ticket {
@@ -111,7 +112,7 @@
 	display: none;
 	width: $ticket-width;
 	height: $ticket-height;
-	background-color: $lightgray;
+	background-color: $black-transparent-20;
 
 	&.visible {
 		display: block;

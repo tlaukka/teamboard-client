@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function() {
+module.exports = function(modalService) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
@@ -10,10 +10,38 @@ module.exports = function() {
 		replace: true,
 		restrict: 'AE',
 		scope: {
+			prompBackgroundAdd: '&backgroundAdd'
 			// zoom: '=zoomOptions'
 		},
 
 		link: function(scope, element) {
+
+			scope.promptBackgroundAdd = function() {
+				var modalOptions = {
+					template: require('../../partials/modal-backgroundadd.html'),
+					windowClass: 'modal-size-lg'
+				}
+
+				var backgrounds = [];
+				backgrounds.push({ url: 'images/workflow_template_scrum.png', name: 'Scrum' });
+				backgrounds.push({ url: 'images/bg01.jpg', name: 'Test Bg 01' });
+				backgrounds.push({ url: 'images/bg02.jpg', name: 'Test Bg 02' });
+				backgrounds.push({ url: 'images/narsu.jpg', name: 'NarsuMan 02' });
+
+				var userOptions = {
+					backgrounds: backgrounds
+				};
+
+				modalService.show(modalOptions, userOptions).then(function(result) {
+					element.css('background-image', 'url(../' + result.selectedBgUrl + ')');
+				});
+			}
+
+			// triggered from TopBarController
+			scope.$on('action:add-background', function(event, data) {
+				scope.promptBackgroundAdd();
+			});
+
 
 			// var zoom = scope.zoom;
 			// var transformOrigin = 'center top';
