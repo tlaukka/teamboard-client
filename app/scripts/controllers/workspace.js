@@ -65,6 +65,12 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 		}
 	}
 
+	$scope.removeBoardSelections = function($event) {
+		$event.stopPropagation();
+		$rootScope.$broadcast('action:select-boards', false);
+		$scope.selectedBoardIds.length = 0;
+	}
+
 	$scope.createBoard = function(data) {
 		new Board(data).save().then(
 			function(board) {
@@ -129,7 +135,7 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 		};
 
 		var userOptions = {
-			members: [$scope.user]
+			owner: $scope.user
 		};
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
@@ -137,148 +143,14 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 		});
 	}
 
-	// function getUsers() {
-	// 	return $http.get(Config.api.url() + 'users')
-	// 		.then(function(res) {
-
-	// 			var users = [];
-
-	// 			angular.forEach(res.data, function(user) {
-	// 				users.push(user);
-	// 			});
-
-	// 			return users;
-	// 		});
-	// }
-
 	$scope.promptBoardEdit = function(board) {
-
-		var controller = function($scope, $modalInstance) {
-
-			$scope.board = board;
-			$scope.members = [board.owner].concat(board.members);
-			$scope.isMemberViewCollapsed = false;
-			$scope.isMemberDetailsVisible = false;
-			$scope.selectedMember = null;
-console.log(board);
-// console.log($scope.members);
-			$scope.users = [];
-			$http.get(Config.api.url() + 'users')
-				.then(function(res) {
-
-					var users = [];
-
-					res.data.forEach(function(user) {
-						users.push(user);
-					});
-
-					$scope.users = users;
-				});
-
-
-			$scope.toggleMemberView = function() {
-				$scope.isMemberViewCollapsed = !$scope.isMemberViewCollapsed;
-
-				if ($scope.isMemberViewCollapsed) {
-					$scope.hideMemberDetails();
-				}
-			}
-
-			$scope.showMemberDetails = function(member) {
-				$scope.selectedMember = member;
-				$scope.isMemberDetailsVisible = true;
-			}
-
-			$scope.hideMemberDetails = function() {
-				$scope.selectedMember = null;
-				$scope.isMemberDetailsVisible = false;
-			}
-
-			$scope.removeSelectedMember = function() {
-				var member = _.find($scope.members, function(user) {
-					return user.email === $scope.selectedMember.email;
-				});
-
-				// var memberIndex = $scope.members.indexOf(member);
-				// $scope.members.splice(memberIndex, 1);
-				$scope.board.removeMember(member.id)
-					.then(function() {
-						console.log(member);
-						var memberIndex = $scope.members.indexOf(member);
-						$scope.members.splice(memberIndex, 1);
-						$scope.hideMemberDetails();
-					});
-			}
-
-			$scope.addMember = function(memberName) {
-				var member = _.find($scope.users, function(user) {
-					return user.email === memberName;
-				});
-
-				// $scope.members.push(member);
-				$scope.board.addMember(member.id)
-					.then(function() {
-						console.log(member);
-						$scope.board.members.push(member);
-						$scope.members.push(member);
-					});
-			}
-
-			$scope.getUsers = function(val) {
-				return $http.get(Config.api.url() + 'users', {
-					params: {
-						email: val
-					}
-				})
-				.then(function(res) {
-
-					var users = [];
-					// var emails = [];
-
-					angular.forEach(res.data, function(user) {
-						users.push(user);
-						// emails.push(user.email);
-					});
-
-					// return emails;
-					return users;
-				});
-			}
-
-			// Apply action
-			$scope.apply = function(result) {
-				$modalInstance.close(result);
-			}
-
-			// Cancel action
-			$scope.cancel = function() {
-				$modalInstance.dismiss('cancel');
-			}
-		}
+		Board.selectedBoard = board;
 
 		var modalOptions = {
 			template: require('../../partials/modal-boardedit.html'),
 			windowClass: 'modal-size-md',
-			controller: controller
+			controller: require('./modal-boardedit')
 		};
-
-		// var members = [{
-		// 	email: 'qwe@qwe.qwe'
-		// }, {
-		// 	email: 'zxc@zxc.zxc'
-		// }];
-
-		// var users = getUsers();
-
-		// var userOptions = {
-		// 	heading: board.name,
-		// 	isPublic: board.isPublic,
-		// 	members: [board.owner].concat(board.members),
-		// 	// members: [board.owner].concat(members),
-		// 	users: getUsers(),
-		// 	addUser: addUser,
-		// 	removeUser: removeUser
-		// };
 
 		var userOptions = {};
 

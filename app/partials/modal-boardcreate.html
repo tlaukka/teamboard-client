@@ -6,6 +6,7 @@
 </div>
 <div class="modal-content-divider"></div>
 <div class="modal-body">
+	<!-- Board info -->
 	<div class="modal-content-block padding-lg">
 		<form role="form" name="boardInfo" class="form-horizontal">
 			<div class="form-group">
@@ -33,60 +34,26 @@
 		</form>
 	</div>
 	<div class="modal-content-divider"></div>
-	<div class="modal-heading-block" ng-click="isCollapsed = !isCollapsed">
+	<div class="modal-heading-block"
+		ng-click="isMemberViewCollapsed = !isMemberViewCollapsed; userOptions.isOwnerDetailsVisible = false">
 		<div>People on this board
-			<i ng-if="!isCollapsed" class="fa fa-caret-down fa-fw modal-content-caret"></i>
-			<i ng-if="isCollapsed" class="fa fa-caret-right fa-fw modal-content-caret"></i>
+			<i ng-if="!isMemberViewCollapsed" class="fa fa-caret-down fa-fw modal-content-caret"></i>
+			<i ng-if="isMemberViewCollapsed" class="fa fa-caret-right fa-fw modal-content-caret"></i>
 		</div>
 	</div>
-	<div class="modal-content-block padding-md centered" ng-show="!isCollapsed">
-		<img ng-repeat="member in userOptions.members"
-			tb-gravatar
-			size="48"
-			email="member.email"
-			class="center-block">
-		<!-- <img tb-gravatar size="48" email="user.email"> -->
-		<!-- <div ng-repeat="user in userOptions.users" class="tmp-img"></div> -->
-		<!-- <div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div>
-		<div class="tmp-img"></div> -->
+	<!-- Member view -->
+	<div class="modal-content-block padding-md centered"
+		ng-show="!isMemberViewCollapsed && !userOptions.isOwnerDetailsVisible">
+		<div class="member-block" ng-click="userOptions.isOwnerDetailsVisible = true">
+			<i class="fa fa-star owner-mark"></i>
+			<div tb-gravatar size="48" email="userOptions.owner.email"></div>
+		</div>
 	</div>
-	<div class="modal-content-divider"></div>
-	<div class="modal-heading-block">
-		<div>Invite people</div>
-	</div>
-	<div class="modal-content-block padding-md">
-		<form role="form" name="userInvite" class="form-horizontal">
-			<div class="form-group">
-				<label for="userInput" class="control-label col-xs-3">Invite poeple</label>
-				<div class="col-xs-6">
-					<input type="text"
-						id="userInput"
-						name="userInput"
-						class="form-control text"
-						typeahead="user for user in userOptions.users | filter:$viewValue | limitTo:8"
-						ng-model="userName"
-						required>
-				</div>
-				<div class="col-xs-3">
-					<button class="btn btn-primary btn-fw"
-						ng-disabled="userInvite.$invalid"
-						ng-click="userOptions.addUser(userName, userOptions.members)">
-						Invite
-					</button>
-				</div>
-			</div>
-		</form>
+	<div ng-if="userOptions.isOwnerDetailsVisible" class="modal-content-block padding-md centered">
+		<div class="member-block" ng-click="userOptions.isOwnerDetailsVisible = false">
+			<div tb-gravatar size="80" email="userOptions.owner.email"></div>
+		</div>
+		<p class="selected-email">{{userOptions.owner.email}}</p>
 	</div>
 </div>
 <div class="modal-content-divider"></div>

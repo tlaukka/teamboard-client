@@ -3,7 +3,7 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, $rootScope, Ticket, modalService, socketService, resolvedBoard, currentUser) {
+module.exports = function($scope, $rootScope, Board, Ticket, modalService, socketService, resolvedBoard, currentUser) {
 
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
@@ -146,6 +146,12 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 		}
 	}
 
+	$scope.removeTicketSelections = function($event) {
+		$event.stopPropagation();
+		$rootScope.$broadcast('action:select-tickets', false);
+		$scope.selectedTicketIds.length = 0;
+	}
+
 	$scope.createTicket = function(ticketData) {
 		// TODO Allow a predefined position
 		ticketData.board    = $scope.board.id;
@@ -261,7 +267,7 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 	}
 
 	$scope.editBoard = function(board, attrs) {
-		board.name     = attrs.heading;
+		board.name     = attrs.name;
 		board.isPublic = attrs.isPublic;
 
 		return board.save().then(
@@ -275,15 +281,15 @@ module.exports = function($scope, $rootScope, Ticket, modalService, socketServic
 	}
 
 	$scope.promptBoardEdit = function(board) {
+		Board.selectedBoard = board;
+
 		var modalOptions = {
 			template: require('../../partials/modal-boardedit.html'),
-			windowClass: 'modal-size-sm'
+			windowClass: 'modal-size-md',
+			controller: require('./modal-boardedit')
 		}
 
-		var userOptions = {
-			heading:  board.name,
-			isPublic: board.isPublic
-		}
+		var userOptions = {};
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
 			$scope.editBoard(board, result);

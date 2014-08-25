@@ -39,10 +39,6 @@
 
 	&.selected {
 		background-color: $turquoise;
-
-		.btn-edit {
-			color: $turquoise;
-		}
 	}
 
 	.heading {
@@ -68,7 +64,7 @@
 
 	img.board {
 		box-sizing: border-box;
-		width:  200px;
+		width: 200px;
 		height: 113px;
 		background-color: $white;
 	}

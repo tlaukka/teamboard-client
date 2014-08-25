@@ -21,13 +21,31 @@ module.exports = function(scrollArea, authService) {
 		link: function(scope, element) {
 
 			scope.isLoading = false;
+			scope.isSelected = false;
 
 			scope.screenshotUrl = scope.board.screenshot + '?' +
 				'access_token=' + authService.getToken() + '&' +
 				// it just works
 				'refresh=' + new Date().getTime() + '';
 
-			scope.onBoardClicked = function() {
+
+			scope.$on('action:select-boards', function(event, select) {
+				if (select) {
+					if (!scope.isSelected) {
+						scope.isSelected = true;
+						scope.toggleSelection();
+					}
+				}
+				else {
+					if (scope.isSelected) {
+						scope.isSelected = false;
+						scope.toggleSelection();
+					}
+				}
+			});
+
+			scope.onBoardClicked = function($event) {
+				$event.stopPropagation();
 
 				scope.isLoading = true;
 				scope.workspaceState.isLoadingBoard = true;
@@ -60,7 +78,12 @@ module.exports = function(scrollArea, authService) {
 				// });
 			}
 
-			scope.selectBoard = function() {
+			scope.onSelectClicked = function($event) {
+				$event.stopPropagation();
+				scope.toggleSelection();
+			}
+
+			scope.toggleSelection = function() {
 				if (element.hasClass('selected')) {
 					element.removeClass('selected');
 				}
@@ -68,6 +91,7 @@ module.exports = function(scrollArea, authService) {
 					element.addClass('selected');
 				}
 
+				// scope.isSelected = !scope.isSelected;
 				scope.toggleBoardSelection({ id: scope.board.id });
 			}
 		}

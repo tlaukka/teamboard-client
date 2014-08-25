@@ -167,8 +167,21 @@
 
 .member-block {
 	display: inline-block;
+	position: relative;
 	cursor: pointer;
 	margin: 8px;
+
+	.owner-mark {
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: $purple;
+	}
+}
+
+.help-block.error {
+	text-align: center;
+	color: $red;
 }
 
 .selected-email {

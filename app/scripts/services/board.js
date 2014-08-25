@@ -3,6 +3,8 @@
 
 module.exports = function($http, Config, Ticket) {
 
+	var selectedBoard = null;
+
 	var _obj = function(board) {
 		return {
 			name:       board.name,
@@ -97,7 +99,7 @@ module.exports = function($http, Config, Ticket) {
 	}
 
 	Board.prototype.removeMember = function(uid) {
-		return $http.delete(Config.api.url() + 'boards/' + this.id + '/users' + uid)
+		return $http.delete(Config.api.url() + 'boards/' + this.id + '/users/' + uid)
 			.then(_update.bind(this));
 	}
 

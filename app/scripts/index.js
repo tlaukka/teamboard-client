@@ -51,9 +51,9 @@ angular.module('tb', [
 	.service('modalService',  require('./services/modal'))
 	.factory('socketService', require('./services/socket'))
 	.factory('ticketProxy',   require('./services/ticketproxy'))
-	.factory('scrollArea',    require('./services/scrollarea'));
+	.factory('scrollArea',    require('./services/scrollarea'))
 
-
+	.filter('reverse', require('./filters/reverse'));
 
 
 	// TODO add non-modularized functionality...

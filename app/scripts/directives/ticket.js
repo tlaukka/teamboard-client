@@ -90,6 +90,21 @@ module.exports = function(ticketProxy, scrollArea) {
 					{ x: ticket.position.x, y: ticket.position.y });
 			});
 
+			scope.$on('action:select-tickets', function(event, select) {
+				if (select) {
+					if (!scope.isSelected) {
+						scope.isSelected = true;
+						scope.toggleSelection();
+					}
+				}
+				else {
+					if (scope.isSelected) {
+						scope.isSelected = false;
+						scope.toggleSelection();
+					}
+				}
+			});
+
 			// scope.collapse = function() {
 			// 	if (element.hasClass('drag-end')) {
 			// 		element.removeClass('drag-end');
@@ -107,9 +122,12 @@ module.exports = function(ticketProxy, scrollArea) {
 			// 	//ticket.remove();
 			// }
 
-			scope.selectTicket = function($event) {
-				$event.stopPropagation()
+			scope.onSelectClicked = function($event) {
+				$event.stopPropagation();
+				scope.toggleSelection();
+			}
 
+			scope.toggleSelection = function() {
 				if (element.hasClass('selected')) {
 					element.removeClass('selected');
 				}
@@ -117,17 +135,19 @@ module.exports = function(ticketProxy, scrollArea) {
 					element.addClass('selected');
 				}
 
+				// scope.isSelected = !scope.isSelected;
 				scope.toggleTicketSelection({ id: scope.ticket.id });
 			}
 
 			scope.editTicket = function($event) {
+				$event.stopPropagation();
+
 				// Prevent click event afger drag
 				if (element.hasClass('drag-end')) {
 					element.removeClass('drag-end');
 					return;
 				}
 
-				$event.stopPropagation();
 				scope.promptTicketEdit({ ticket: scope.ticket });
 			}
 		}

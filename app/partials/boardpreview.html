@@ -6,11 +6,11 @@
 		<div btn-checkbox
 			ng-if="!isLoading"
 			class="btn btn-select btn-checkbox"
-			ng-model="isSelected"
-			ng-click="selectBoard()">
+			ng-model="$parent.isSelected"
+			ng-click="onSelectClicked($event)">
 			<i class="fa fa-check-circle"></i>
 		</div>
-		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked()">
+		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked($event)">
 			<img ng-src="{{screenshotUrl}}" class="board center-block">
 		</a>
 	</div>
