@@ -1,0 +1,5 @@
+<div class="bg-preview" ng-click="onBackgroundClicked($event)">
+	<img ng-if="imageUrl != 'none'" src="{{imageUrl}}" class="bg-thumbnail center-block">
+	<div ng-if="imageUrl == 'none'" class="bg-thumbnail"></div>
+	<div class="bg-heading">{{name | characters: 20: true}}</div>
+</div>

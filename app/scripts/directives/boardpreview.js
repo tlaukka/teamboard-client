@@ -91,7 +91,6 @@ module.exports = function(scrollArea, authService) {
 					element.addClass('selected');
 				}
 
-				// scope.isSelected = !scope.isSelected;
 				scope.toggleBoardSelection({ id: scope.board.id });
 			}
 		}

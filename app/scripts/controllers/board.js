@@ -107,8 +107,6 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 
 	// triggered from TopBarController
 	$scope.$on('action:edit', function(event, data) {
-		// var ticket = $scope.board.tickets[$scope.selectedTicketIds[0]];
-
 		var ticket = _.find($scope.board.tickets, function(ticket) {
 			return ticket.id == $scope.selectedTicketIds[0];
 		});

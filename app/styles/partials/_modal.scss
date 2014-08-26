@@ -195,18 +195,19 @@
 	padding: 10px;
 	background-color: $lightgray;
 
+	&.active {
+		background-color: $turquoise;
+	}
+
 	&.selected {
 		background-color: $turquoise;
 	}
 
-	&.not-selected {
-		background-color: $lightgray;
-	}
-
-	.bg-thumpnail {
+	.bg-thumbnail {
 		width: 200px;
 		height: 113px;
 		border: 1px solid $lightgray-dark;
+		background-color: $white;
 		-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 		-moz-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 		box-shadow: 1px 1px 1px 1px $black-transparent-20;
@@ -217,5 +218,9 @@
 		font-size: 20px;
 		margin-top: 12px;
 		margin-bottom: 4px;
+	}
+
+	.bg-empty {
+		background-color: $white;
 	}
 }

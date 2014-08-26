@@ -45,6 +45,7 @@ angular.module('tb', [
 	.directive('tbScrollArea',   require('./directives/scrollarea'))
 	.directive('tbWorkspace',    require('./directives/workspace'))
 	.directive('tbBoardPreview', require('./directives/boardpreview'))
+	.directive('tbBgPreview',    require('./directives/bgpreview'))
 
 	.factory('Board',         require('./services/board'))
 	.factory('Ticket',        require('./services/ticket'))

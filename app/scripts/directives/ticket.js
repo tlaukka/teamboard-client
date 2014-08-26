@@ -105,23 +105,6 @@ module.exports = function(ticketProxy, scrollArea) {
 				}
 			});
 
-			// scope.collapse = function() {
-			// 	if (element.hasClass('drag-end')) {
-			// 		element.removeClass('drag-end');
-			// 		return;
-			// 	}
-
-			// 	scope.isCollapsed = !scope.isCollapsed;
-			// }
-
-			// scope.removeTicket = function(event) {
-			// 	// stop from opening modal to edit ticket
-			// 	event.stopPropagation();
-
-			// 	scope.$emit('ticket:remove', { id: ticket.id });
-			// 	//ticket.remove();
-			// }
-
 			scope.onSelectClicked = function($event) {
 				$event.stopPropagation();
 				scope.toggleSelection();
@@ -135,7 +118,6 @@ module.exports = function(ticketProxy, scrollArea) {
 					element.addClass('selected');
 				}
 
-				// scope.isSelected = !scope.isSelected;
 				scope.toggleTicketSelection({ id: scope.ticket.id });
 			}
 

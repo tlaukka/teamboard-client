@@ -16,8 +16,9 @@ module.exports = function(modalService) {
 
 		link: function(scope, element) {
 
-			var bg = localStorage.getItem('tb-board-bg');
-			element.css('background-image', 'url(../' + bg + ')');
+			// Set current background image
+			var currentBg = localStorage.getItem('tb-board-bg');
+			element.css('background-image', 'url(../' + currentBg + ')');
 
 			scope.promptBackgroundAdd = function() {
 				var modalOptions = {
@@ -26,18 +27,20 @@ module.exports = function(modalService) {
 				}
 
 				var backgrounds = [];
-				backgrounds.push({ url: 'images/workflow_template_scrum.png', name: 'Scrum' });
-				backgrounds.push({ url: 'images/bg01.jpg', name: 'Test Bg 01' });
-				backgrounds.push({ url: 'images/bg02.jpg', name: 'Test Bg 02' });
-				backgrounds.push({ url: 'images/bg03.jpeg', name: 'Test Bg 03' });
+				backgrounds.push({ name: 'Blank', url: 'none' });
+				backgrounds.push({ name: 'Scrum', url: 'images/workflow_template_scrum.png' });
+				backgrounds.push({ name: 'Test Bg 01', url: 'images/bg01.jpg' });
+				backgrounds.push({ name: 'Test Bg 02', url: 'images/bg02.jpg' });
+				backgrounds.push({ name: 'Test Bg 03', url: 'images/bg03.jpeg' });
 
 				var userOptions = {
-					backgrounds: backgrounds
+					backgrounds: backgrounds,
+					currentBg: currentBg
 				};
 
 				modalService.show(modalOptions, userOptions).then(function(result) {
-					localStorage.setItem('tb-board-bg', result.selectedBgUrl);
-					element.css('background-image', 'url(../' + result.selectedBgUrl + ')');
+					localStorage.setItem('tb-board-bg', result.selectedBg);
+					element.css('background-image', 'url(../' + result.selectedBg + ')');
 				});
 			}
 

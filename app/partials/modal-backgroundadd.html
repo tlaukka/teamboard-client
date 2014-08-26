@@ -5,15 +5,16 @@
 	</div>
 </div>
 <div class="modal-content-divider"></div>
-<div class="modal-body" ng-init="userOptions.selectedIndex = -1" ng-click="userOptions.selectedIndex = -1">
-	<div class="modal-content-block padding-lg" ng-init="result.selectedBgUrl = ''">
+<div class="modal-body">
+	<div class="modal-content-block padding-lg" ng-init="result.selectedBg = userOptions.currentBg">
 		<h4>Select workflow template:</h4>
 		<div ng-repeat="bg in userOptions.backgrounds"
 			class="bg-preview"
-			ng-class="$index == userOptions.selectedIndex ? 'selected' : 'not-selected'"
-			ng-click="result.selectedBgUrl = bg.url; userOptions.selectedIndex = $index; $event.stopPropagation()">
-			<img ng-src="{{bg.url}}" class="bg-thumpnail center-block">
-			<div class="bg-heading">{{ bg.name | characters: 20: true }}</div>
+			ng-model="result.selectedBg"
+			btn-radio="bg.url">
+			<img ng-if="bg.url !== 'none'" src="{{bg.url}}" class="bg-thumbnail">
+			<div ng-if="bg.url === 'none'" class="bg-thumbnail"></div>
+			<div class="bg-heading">{{bg.name | characters: 20: true}}</div>
 		</div>
 	</div>
 </div>
