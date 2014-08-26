@@ -16,6 +16,9 @@ module.exports = function(modalService) {
 
 		link: function(scope, element) {
 
+			var bg = localStorage.getItem('tb-board-bg');
+			element.css('background-image', 'url(../' + bg + ')');
+
 			scope.promptBackgroundAdd = function() {
 				var modalOptions = {
 					template: require('../../partials/modal-backgroundadd.html'),
@@ -26,13 +29,14 @@ module.exports = function(modalService) {
 				backgrounds.push({ url: 'images/workflow_template_scrum.png', name: 'Scrum' });
 				backgrounds.push({ url: 'images/bg01.jpg', name: 'Test Bg 01' });
 				backgrounds.push({ url: 'images/bg02.jpg', name: 'Test Bg 02' });
-				backgrounds.push({ url: 'images/narsu.jpg', name: 'NarsuMan 02' });
+				backgrounds.push({ url: 'images/bg03.jpeg', name: 'Test Bg 03' });
 
 				var userOptions = {
 					backgrounds: backgrounds
 				};
 
 				modalService.show(modalOptions, userOptions).then(function(result) {
+					localStorage.setItem('tb-board-bg', result.selectedBgUrl);
 					element.css('background-image', 'url(../' + result.selectedBgUrl + ')');
 				});
 			}

@@ -8,13 +8,13 @@
 			<div class="col-sm-4 content-block">
 				<div class="btn-group iconbar pull-right">
 					<div class="btn btn-icon"
-						ng-class="{ enabled: removeEnabled }"
+						ng-class="{ enabled: removeEnabled, disabled: !removeEnabled }"
 						ng-disabled="!removeEnabled"
 						ng-click="onRemoveClicked()">
 						<i class="fa fa-trash-o fa-fw"></i>
 					</div>
 					<div class="btn btn-icon"
-						ng-class="{ enabled: editEnabled }"
+						ng-class="{ enabled: editEnabled, disabled: !editEnabled }"
 						ng-disabled="!editEnabled"
 						ng-click="onEditClicked()">
 						<i class="fa fa-edit fa-fw"></i>
