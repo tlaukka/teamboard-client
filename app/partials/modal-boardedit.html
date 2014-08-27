@@ -1,7 +1,7 @@
 <div class="modal-header">
 	<span class="btn btn-modal-close pull-right" ng-click="cancel()"><i class="fa fa-times"></i></span>
 	<div class="modal-heading-block">
-		<div>Edit board</div>
+		<div>{{ 'MODAL_HEADER_BOARDEDIT' | translate }}</div>
 	</div>
 </div>
 <div class="modal-content-divider"></div>
@@ -10,13 +10,13 @@
 	<div class="modal-content-block padding-lg">
 		<form role="form" name="boardInfo" class="form-horizontal">
 			<div class="form-group">
-				<label for="headingInput" class="control-label col-xs-2">Name</label>
+				<label for="headingInput" class="control-label col-xs-2">{{ 'MODAL_LABEL_NAME' | translate }}</label>
 				<div class="col-xs-10">
 					<input type="text"
 						id="headingInput"
 						name="headingInput"
 						class="form-control text"
-						placeholder="Board name"
+						placeholder="{{ 'MODAL_LABEL_BOARDNAME' | translate }}"
 						ng-init="newData.name = board.name"
 						ng-model="newData.name"
 						tb-auto-focus
@@ -24,11 +24,11 @@
 				</div>
 			</div>
 			<div class="form-group last">
-				<label for="visibilityInput" class="control-label col-md-2">Visibility</label>
+				<label for="visibilityInput" class="control-label col-md-2">{{ 'MODAL_LABEL_VISIBILITY' | translate }}</label>
 				<div class="col-xs-10">
 					<div id="visibilityInput" class="btn-group btn-group-justified btn-group-visibility" ng-init="newData.isPublic = board.isPublic">
-						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="false">Private</label>
-						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="true">Public</label>
+						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="false">{{ 'MODAL_LABEL_PRIVATE' | translate }}</label>
+						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="true">{{ 'MODAL_LABEL_PUBLIC' | translate }}</label>
 					</div>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 	</div>
 	<div class="modal-content-divider"></div>
 	<div class="modal-heading-block" ng-click="toggleMemberView()">
-		<div>People on this board
+		<div>{{ 'MODAL_HEADER_PEOPLEVIEW' | translate }}
 			<i ng-if="!isMemberViewCollapsed" class="fa fa-caret-down fa-fw modal-content-caret"></i>
 			<i ng-if="isMemberViewCollapsed" class="fa fa-caret-right fa-fw modal-content-caret"></i>
 		</div>
@@ -53,18 +53,18 @@
 			<div tb-gravatar size="80" email="selectedMember.email"></div>
 		</div>
 		<p class="selected-email">{{selectedMember.email}}</p>
-		<button class="btn btn-primary" ng-click="removeSelectedMember()">Remove</button>
+		<button class="btn btn-primary" ng-click="removeSelectedMember()">{{ 'MODAL_LABEL_REMOVE' | translate }}</button>
 	</div>
 	<div class="modal-content-divider"></div>
 	<div class="modal-heading-block">
-		<div>Invite people</div>
+		<div>{{ 'MODAL_HEADER_PEOPLEADD' | translate }}</div>
 	</div>
 	<!-- Add member view -->
 	<div class="modal-content-block padding-md">
 		<form role="form" name="userInvite" class="form-horizontal">
 			<p ng-if="result.hasError" class="help-block error">{{result.message}}</p>
 			<div class="form-group">
-				<label for="userInput" class="control-label col-xs-3">Invite poeple</label>
+				<label for="userInput" class="control-label col-xs-3">{{ 'MODAL_LABEL_PEOPLEADD' | translate }}</label>
 				<div class="col-xs-6">
 					<input type="text"
 						id="userInput"
@@ -78,7 +78,7 @@
 					<button class="btn btn-primary btn-fw"
 						ng-disabled="userInvite.$invalid"
 						ng-click="result = addMember(memberName); memberName = ''">
-						Invite
+						{{ 'MODAL_LABEL_INVITE' | translate }}
 					</button>
 				</div>
 			</div>
@@ -90,13 +90,13 @@
 	<div class="modal-content-block padding-md">
 		<div class="row">
 			<div class="col-md-6">
-				<button class="btn btn-lg btn-default btn-fw" ng-click="cancel()">Cancel</button>
+				<button class="btn btn-lg btn-default btn-fw" ng-click="cancel()">{{ 'MODAL_LABEL_CANCEL' | translate }}</button>
 			</div>
 			<div class="col-md-6">
 				<button class="btn btn-lg btn-primary btn-fw"
 					ng-disabled="boardInfo.$invalid"
 					ng-click="apply(newData)">
-					Save changes
+					{{ 'MODAL_LABEL_SAVECHANGES' | translate }}
 				</button>
 			</div>
 		</div>

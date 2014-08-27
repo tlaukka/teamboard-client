@@ -6,6 +6,7 @@ var angular = require('angular');
 // required third party modules
 require('angular-ui-router');
 require('angular-bootstrap');
+require('angular-translate');
 require('angular-animate');
 require('angular-truncate');
 require('angular-sanitize');
@@ -20,6 +21,7 @@ angular.module('tb', [
 		'truncate',
 		'ngSanitize',
 		'textAngular',
+		'pascalprecht.translate',
 		require('./modules/configuration').name,
 		require('./modules/authentication').name,
 		require('./modules/uservoice').name
@@ -31,6 +33,7 @@ angular.module('tb', [
 
 	.config(require('./config/routes'))
 	.config(require('./config/decorators'))
+	.config(require('./config/translations'))
 	.config(function(buttonConfig) {
 		// Fix radio button toggle event in mobile devices
 		buttonConfig.toggleEvent = 'touchstart click';

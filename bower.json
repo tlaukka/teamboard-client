@@ -14,7 +14,8 @@
     "bootstrap-sass-official": "~3.1.1",
     "underscore": "~1.6.0",
     "angular-sanitize": "~1.2.20",
-    "iscroll": "~5.1.2"
+    "iscroll": "~5.1.2",
+    "angular-translate": "~2.2.0"
   },
   "overrides": {
     "gsap": {

@@ -8,14 +8,14 @@
 		<form class="form" name="form" ng-submit="register(form)" novalidate>
 			<div class="row">
 				<div class="col-sm-12">
-					<h2>Register</h2>
+					<h2>{{ 'AUTH_LABEL_REGISTER' | translate }}</h2>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-group">
 						<p class="help-block error" ng-show="form.email.$error.required && form.password.$error.required && submitted">
-							 Please enter your email and password.
+							{{ 'AUTH_MESSAGE_EMPTYFIELDS' | translate }}
 						</p>
 						<p class="help-block">{{ errors.other }}</p>
 					</div>
@@ -27,7 +27,7 @@
 						name="email"
 						class="form-control"
 						ng-model="user.email"
-						placeholder="Email address"
+						placeholder="{{ 'AUTH_LABEL_EMAIL' | translate }}"
 						autofocus
 						required>
 
@@ -35,13 +35,13 @@
 						name="password"
 						class="form-control"
 						ng-model="user.password"
-						placeholder="Password"
+						placeholder="{{ 'AUTH_LABEL_PASSWORD' | translate }}"
 						required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<button type="submit" class="form-control btn-auth btn-3d btn-register">Register</button>
+					<button type="submit" class="form-control btn-auth btn-3d btn-register">{{ 'AUTH_LABEL_REGISTER' | translate }}</button>
 				</div>
 			</div>
 		</form>
@@ -52,9 +52,9 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<p>Already registered?</p>
+				<p>{{ 'AUTH_MESSAGE_ALREADYREGISTERED' | translate }}</p>
 				<a ui-sref="login">
-					<button class="form-control btn-auth btn-flat btn-loginlink">Sign in</button>
+					<button class="form-control btn-auth btn-flat btn-loginlink">{{ 'AUTH_LABEL_SIGNIN' | translate }}</button>
 				</a>
 			</div>
 		</div>

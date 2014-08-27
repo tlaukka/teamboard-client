@@ -3,7 +3,7 @@
 		ng-class="isSidebarCollapsed ? 'sidebar-margin-collapsed' : 'sidebar-margin'">
 		<div class="row">
 			<div class="col-sm-5 content-block">
-				<h2 class="workspace-heading">Boards <span class="badge">{{ boards.length }}</span></h2>
+				<h2 class="workspace-heading">{{ 'TOPBAR_LABEL_BOARDS' | translate }} <span class="badge">{{ boards.length }}</span></h2>
 			</div>
 			<div class="col-sm-4 content-block">
 				<div class="btn-group iconbar pull-right">
@@ -23,7 +23,7 @@
 			</div>
 			<div class="col-sm-3 content-block">
 				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
-					<i class="fa fa-plus"></i> Create Board
+					<i class="fa fa-plus"></i> {{ 'TOPBAR_LABEL_CREATEBOARD' | translate }}
 				</button>
 			</div>
 		</div>

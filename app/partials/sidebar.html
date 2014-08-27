@@ -13,7 +13,7 @@
 	<div ng-if="currentUser.email" class="row profile">
 		<div class="col-md-12">
 			<img tb-gravatar size="80" email="currentUser.email" class="center-block">
-			<div class="email text-center">{{currentUser.email}}</div>
+			<div class="email text-center">{{ currentUser.email }}</div>
 		</div>
 	</div>
 	<div class="row">
@@ -22,12 +22,12 @@
 				<ul>
 					<a ui-sref="main.workspace">
 						<li>
-							<i class="fa fa-th fa-fw"></i><span>Boards</span>
+							<i class="fa fa-th fa-fw"></i><span>{{ 'SIDEBAR_LABEL_BOARDS' | translate }}</span>
 						</li>
 					</a>
 					<a href="#" ng-click="logout()" class="">
 						<li>
-							<i class="fa fa-sign-out fa-fw"></i><span>Log Out</span>
+							<i class="fa fa-sign-out fa-fw"></i><span>{{ 'SIDEBAR_LABEL_LOGOUT' | translate }}</span>
 						</li>
 					</a>
 				</ul>
