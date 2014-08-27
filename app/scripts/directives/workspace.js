@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function(scrollArea, $timeout, $window) {
+module.exports = function(scrollArea, $timeout, $window, $document) {
 	return {
 		restrict: 'AE',
 
@@ -12,14 +12,15 @@ module.exports = function(scrollArea, $timeout, $window) {
 
 		link: function(scope, element) {
 
+			// Fix scroll area height on iPad
+			if(navigator.userAgent.match(/iPad/i)) {
+				var scroller = angular.element(document.getElementById('content-scrollarea'));
+				// Height: 768 - safariTopbarHeight(96) - topbarHeight(64) = 608
+				scroller.css('height', '608px');
+			}
+
 			scope.updateWorkspace = function() {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
-				// (workspaceWidth / (boardPreviewWidth + margin)) * (boardPreviewWidth + margin)
-				// var width = Math.floor(scroller[0].clientWidth / 254) * 254;
-
-				// console.log(scroller);
-				// console.log('clientWidth: ' + scroller[0].offsetWidth + ', ' + scroller[0].offsetHeight);
-
 
 				// workspaceWidth / (boardPreviewWidth + margin)
 				var boardsPerRow = Math.floor(scroller[0].clientWidth / 254);
@@ -33,7 +34,6 @@ module.exports = function(scrollArea, $timeout, $window) {
 
 				// (boardRowCount * boardPreviewHeight + margin) + 2 * margin
 				var height = (boardRowCount * 224 + 48) + 'px';
-				// console.log('height: ' + height);
 				element.css('height', height);
 			}
 
@@ -47,10 +47,6 @@ module.exports = function(scrollArea, $timeout, $window) {
 				scrollArea.refresh();
 			});
 
-			angular.element($window).bind('resize', function() {
-				scope.updateWorkspace();
-			});
-
 			scope.$watch('state.isLoadingBoard', function() {
 				// Show overlay when loading board.
 				if (scope.state.isLoadingBoard) {
@@ -62,6 +58,10 @@ module.exports = function(scrollArea, $timeout, $window) {
 					loadingOverlay.css('height', height);
 					loadingOverlay.addClass('visible');
 				}
+			});
+
+			angular.element($window).bind('resize', function() {
+				scope.updateWorkspace();
 			});
 		}
 	};

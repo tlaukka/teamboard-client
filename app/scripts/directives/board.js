@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function(modalService) {
+module.exports = function($window, modalService, scrollArea) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
@@ -15,6 +15,13 @@ module.exports = function(modalService) {
 		},
 
 		link: function(scope, element) {
+
+			// Fix scroll area height on iPad
+			if(navigator.userAgent.match(/iPad/i)) {
+				var scroller = angular.element(document.getElementById('content-scrollarea'));
+				// Height: 768 - safariTopbarHeight(96) - topbarHeight(64) = 608
+				scroller.css('height', '608px');
+			}
 
 			// Set current background image
 			var currentBg = localStorage.getItem('tb-board-bg');
@@ -48,7 +55,6 @@ module.exports = function(modalService) {
 			scope.$on('action:add-background', function(event, data) {
 				scope.promptBackgroundAdd();
 			});
-
 
 			// var zoom = scope.zoom;
 			// var transformOrigin = 'center top';

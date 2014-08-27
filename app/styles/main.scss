@@ -106,10 +106,6 @@ html, body {
 	width: 100%;
 }
 
-html {
-	// overflow: hidden;
-}
-
 body {
 	font-family: $font-lato;
 	background: $lightgray;
@@ -155,6 +151,27 @@ body {
 	&.scrollarea-expanded {
 		left: $sidebar-width-collapsed;
 		width: calc(100% - #{$sidebar-width-collapsed} + 1px);
+	}
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+	#content-scrollarea {
+		height: 768px - 96px - $topbar-height;
+		background-color: red;
+	}
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 2) {
+	#content-scrollarea {
+		height: 768px - 96px - $topbar-height;
+		background-color: red;
 	}
 }
 
