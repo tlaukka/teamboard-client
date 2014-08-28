@@ -32,6 +32,8 @@ module.exports = function($translateProvider) {
 		'MODAL_HEADER_REMOVEBOARDS': 'Delete boards',
 		'MODAL_HEADER_REMOVETICKET': 'Delete ticket',
 		'MODAL_HEADER_REMOVETICKETS': 'Delete tickets',
+		'MODAL_HEADER_TEMPLATES': 'Workflow templates',
+		'MODAL_HEADER_TEMPLATESELECT': 'Select workflow template:',
 		'MODAL_MESSAGE_BOARDREMOVE': 'Are you sure you want to delete board',
 		'MODAL_MESSAGE_BOARDSREMOVE': 'Are you sure you want to delete',
 		'MODAL_MESSAGE_BOARDS': 'boards',
@@ -50,7 +52,8 @@ module.exports = function($translateProvider) {
 		'MODAL_LABEL_DELETE': 'Delete',
 		'MODAL_LABEL_HEADINGADD': 'Add a heading...',
 		'MODAL_LABEL_DESCRIPTIONADD': 'Add a description...',
-		'MODAL_LABEL_APPLY': 'Apply'
+		'MODAL_LABEL_APPLY': 'Apply',
+		'MODAL_LABEL_ADD': 'Add'
 	});
 
 	$translateProvider.translations('fi', {
@@ -82,6 +85,8 @@ module.exports = function($translateProvider) {
 		'MODAL_HEADER_REMOVEBOARDS': 'Poista lankut',
 		'MODAL_HEADER_REMOVETICKET': 'Poista lappu',
 		'MODAL_HEADER_REMOVETICKETS': 'Poista laput',
+		'MODAL_HEADER_TEMPLATES': 'Työpohjat',
+		'MODAL_HEADER_TEMPLATESELECT': 'Valitse työpohja:',
 		'MODAL_MESSAGE_BOARDREMOVE': 'Oletko varma, että haluat poistaa lankun',
 		'MODAL_MESSAGE_BOARDSREMOVE': 'Oletko varma, että haluat poistaa',
 		'MODAL_MESSAGE_BOARDS': 'lankkua',
@@ -100,7 +105,8 @@ module.exports = function($translateProvider) {
 		'MODAL_LABEL_DELETE': 'Poista',
 		'MODAL_LABEL_HEADINGADD': 'Lisää otsikko...',
 		'MODAL_LABEL_DESCRIPTIONADD': 'Lisää kuvaus...',
-		'MODAL_LABEL_APPLY': 'Hyväsky'
+		'MODAL_LABEL_APPLY': 'Hyväsky',
+		'MODAL_LABEL_ADD': 'Lisää'
 	});
 
 	$translateProvider.translations('ru', {
@@ -132,6 +138,8 @@ module.exports = function($translateProvider) {
 		'MODAL_HEADER_REMOVEBOARDS': 'Удалить доски',
 		'MODAL_HEADER_REMOVETICKET': 'Удалить билет',
 		'MODAL_HEADER_REMOVETICKETS': 'Удалить билеты',
+		'MODAL_HEADER_TEMPLATES': 'Шаблоны рабочих процессов',
+		'MODAL_HEADER_TEMPLATESELECT': 'Выберите шаблон рабочего процесса:',
 		'MODAL_MESSAGE_BOARDREMOVE': 'Вы уверены, что хотите удалить доска',
 		'MODAL_MESSAGE_BOARDSREMOVE': 'Вы уверены, что хотите удалить',
 		'MODAL_MESSAGE_BOARDS': 'доски',
@@ -150,7 +158,8 @@ module.exports = function($translateProvider) {
 		'MODAL_LABEL_DELETE': 'Удалить',
 		'MODAL_LABEL_HEADINGADD': 'Добавить заголовок ...',
 		'MODAL_LABEL_DESCRIPTIONADD': 'Добавление описания ...',
-		'MODAL_LABEL_APPLY': 'Применить'
+		'MODAL_LABEL_APPLY': 'Применить',
+		'MODAL_LABEL_ADD': 'Добавить'
 	});
 
 	$translateProvider.preferredLanguage('en');

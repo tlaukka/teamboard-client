@@ -15,7 +15,7 @@ module.exports = function($scope, $rootScope, $state, $timeout, $translate, auth
 
 	$scope.isLanguagesCollapsed = true;
 
-	// Available lanlguages
+	// Available languages
 	$scope.languages = [];
 	$scope.languages.push({ key: 'en', image: 'images/flags/gb.png' });
 	$scope.languages.push({ key: 'fi', image: 'images/flags/fi.png' });

@@ -1,13 +1,13 @@
 <div class="modal-header">
 	<span class="btn btn-modal-close pull-right" ng-click="userOptions.cancel()"><i class="fa fa-times"></i></span>
 	<div class="modal-heading-block">
-		<div>Workflow templates</div>
+		<div>{{ 'MODAL_HEADER_TEMPLATES' | translate }}</div>
 	</div>
 </div>
 <div class="modal-content-divider"></div>
 <div class="modal-body">
 	<div class="modal-content-block padding-lg" ng-init="result.selectedBg = userOptions.currentBg">
-		<h4>Select workflow template:</h4>
+		<h4>{{ 'MODAL_HEADER_TEMPLATESELECT' | translate }}</h4>
 		<div ng-repeat="bg in userOptions.backgrounds"
 			class="bg-preview"
 			ng-model="result.selectedBg"
@@ -22,13 +22,13 @@
 	<div class="modal-content-block padding-md">
 		<div class="row">
 			<div class="col-md-6">
-				<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">Cancel</button>
+				<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">{{ 'MODAL_LABEL_CANCEL' | translate }}</button>
 			</div>
 			<div class="col-md-6">
 				<button class="btn btn-lg btn-primary btn-fw"
 					ng-disabled="bgInfo.$invalid"
 					ng-click="userOptions.apply(result)">
-					Add
+					{{ 'MODAL_LABEL_ADD' | translate }}
 				</button>
 			</div>
 		</div>
