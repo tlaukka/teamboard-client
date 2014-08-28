@@ -30,5 +30,18 @@ module.exports = function() {
 		}
 	}
 
+	scroller.destroy = function() {
+		if (this.scroll != null) {
+			this.scroll.destroy();
+			this.scroll = null;
+		}
+	}
+
+	scroller.addIndicator = function(indicator) {
+		if (this.scroll != null) {
+			this.scroll.indicators.push(indicator);
+		}
+	}
+
 	return scroller;
 }

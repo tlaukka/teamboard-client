@@ -1,8 +1,7 @@
 <div id="board-background">
 	<div tb-board id="board" background-add="promptBackgroundAdd" ng-click="removeTicketSelections($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
-		<tb-ticket
-			ng-repeat="ticket in board.tickets"
+		<tb-ticket ng-repeat="ticket in board.tickets"
 			snap-options="snapOptions"
 			ticket-data="ticket"
 			ticket-edit="promptTicketEdit(ticket)"
@@ -10,3 +9,4 @@
 		</tb-ticket>
 	</div>
 </div>
+<tb-minimap tickets="board.tickets"></tb-minimap>

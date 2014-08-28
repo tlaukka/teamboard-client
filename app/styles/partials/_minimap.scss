@@ -1,0 +1,25 @@
+#minimap {
+	position: fixed;
+	z-index: 11000;
+	right: 8px;
+	top: $topbar-height + 8px;
+	width: $board-width * $minimap-scale;
+	height: $board-height * $minimap-scale;
+	border: 1px solid $lightgray-dark;
+	background-color: $white;
+
+	#minimap-indicator {
+		position: absolute;
+		z-index: 1;
+		// width: 100px;
+		// height: 100px;
+		border: 1px solid $turquoise;
+		background-color: rgba(20, 20, 255, 0.2);
+	}
+
+	.minimap-ticket {
+		position: absolute;
+		width: $ticket-width * $minimap-scale;
+		height: $ticket-height * $minimap-scale;
+	}
+}
