@@ -14,7 +14,7 @@
 					<input type="text"
 						class="form-control input-lg ticket-heading"
 						id="headingInput"
-						placeholder="Add a heading..."
+						placeholder="{{ 'MODAL_LABEL_HEADINGADD' | translate }}"
 						ng-init="newData.heading = userOptions.heading"
 						ng-model="newData.heading"
 						tb-auto-focus>
@@ -26,7 +26,7 @@
 						id="contentInput"
 						ng-init="newData.content = userOptions.content"
 						ng-model="newData.content"
-						placeholder-text="Add a description...">
+						placeholder-text="{{ 'MODAL_LABEL_DESCRIPTIONADD' | translate }}">
 					</div>
 				</div>
 			</div>
@@ -36,10 +36,10 @@
 		<div class="modal-content-block padding-md">
 			<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">Cancel</button>
+					<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">{{ 'MODAL_LABEL_CANCEL' | translate }}</button>
 				</div>
 				<div class="col-md-6">
-					<button class="btn btn-lg btn-primary btn-fw" ng-click="userOptions.apply(newData)">Apply</button>
+					<button class="btn btn-lg btn-primary btn-fw" ng-click="userOptions.apply(newData)">{{ 'MODAL_LABEL_APPLY' | translate }}</button>
 				</div>
 			</div>
 		</div>

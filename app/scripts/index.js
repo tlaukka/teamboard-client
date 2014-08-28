@@ -27,7 +27,14 @@ angular.module('tb', [
 		require('./modules/uservoice').name
 	])
 
-	.run(function($state, Config) {
+	.run(function($state, $translate, Config) {
+		// Set currently slected language
+		var language = localStorage.getItem('tb-language');
+		if (language) {
+			console.log('set language: ' + language);
+			$translate.use(language);
+		}
+
 		$state.go(Config.states.main);
 	})
 

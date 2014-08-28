@@ -4,8 +4,8 @@
 		<div class="row">
 			<div class="col-sm-5 content-block cursor-pointer" ng-click="onHeadingClicked()">
 				<h2 class="workspace-heading">{{ board.name | characters: 20: true }}
-					<span ng-if="board.isPublic" class="label label-public">Public</span>
-					<span ng-if="!board.isPublic" class="label label-private">Private</span>
+					<span ng-if="!board.isPublic" class="label label-private">{{ 'LABEL_PRIVATE' | translate }}</span>
+					<span ng-if="board.isPublic" class="label label-public">{{ 'LABEL_PUBLIC' | translate }}</span>
 				</h2>
 			</div>
 			<div class="col-sm-4 content-block">
@@ -36,7 +36,7 @@
 			</div>
 			<div class="col-sm-3 content-block">
 				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
-					<i class="fa fa-plus"></i> Create Ticket
+					<i class="fa fa-plus"></i> {{ 'TOPBAR_LABEL_CREATETICKET' | translate }}
 				</button>
 			</div>
 		</div>

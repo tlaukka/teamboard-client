@@ -34,6 +34,16 @@
 			</nav>
 		</div>
 	</div>
+	<div class="row language-select">
+		<div class="btn language-icon" ng-click="isLanguagesCollapsed = !isLanguagesCollapsed">
+			<div><i class="fa fa-language fa-fw"></i></div>
+		</div>
+		<div ng-show="!isLanguagesCollapsed" class="flag-container">
+			<div div ng-repeat="language in languages" class="flag">
+				<img ng-src="{{language.image}}" ng-click="setLanguage(language.key)">
+			</div>
+		</div>
+	</div>
 	<div class="uservoice">
 		<a uservoice-trigger
 			mode="contact"
@@ -82,6 +92,16 @@
 					</a>
 				</ul>
 			</nav>
+		</div>
+	</div>
+	<div class="row language-select">
+		<div class="btn language-icon" ng-click="isLanguagesCollapsed = !isLanguagesCollapsed">
+			<div><i class="fa fa-language fa-fw"></i></div>
+		</div>
+		<div ng-show="!isLanguagesCollapsed" class="flag-container collapsed">
+			<div div ng-repeat="language in languages" class="flag">
+				<img ng-src="{{language.image}}" ng-click="setLanguage(language.key)">
+			</div>
 		</div>
 	</div>
 	<div class="uservoice uservoice-collapsed">

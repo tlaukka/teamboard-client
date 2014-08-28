@@ -1,20 +1,20 @@
 <form role="form">
 	<div class="modal-header">
 		<div class="modal-heading-block">
-			<div ng-if="userOptions.ticketCount == 1">Delete ticket</div>
-			<div ng-if="userOptions.ticketCount > 1">Delete tickets</div>
+			<div ng-if="userOptions.ticketCount == 1">{{ 'MODAL_HEADER_REMOVETICKET' | translate }}</div>
+			<div ng-if="userOptions.ticketCount > 1">{{ 'MODAL_HEADER_REMOVETICKETS' | translate }}</div>
 		</div>
 	</div>
 	<div class="modal-content-divider"></div>
 	<div class="modal-body">
 		<div class="modal-content-block padding-md">
 			<div ng-if="userOptions.ticketCount == 1">
-				<p class="text-center">Are you sure you want to delete ticket</p>
+				<p class="text-center">{{ 'MODAL_MESSAGE_TICKETREMOVE' | translate }}</p>
 				<p class="text-center highlight">{{userOptions.ticketName}}</p>
 			</div>
 			<div ng-if="userOptions.ticketCount > 1">
 				<p class="text-center">
-					Are you sure you want to delete <span class="highlight">{{userOptions.ticketCount}}</span> tickets
+					{{ 'MODAL_MESSAGE_TICKETSREMOVE' | translate }} <span class="highlight">{{userOptions.ticketCount}}</span> {{ 'MODAL_MESSAGE_TICKETS' | translate }}
 				</p>
 			</div>
 		</div>
@@ -23,10 +23,10 @@
 		<div class="modal-content-block padding-md">
 			<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">Cancel</button>
+					<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">{{ 'MODAL_LABEL_CANCEL' | translate }}</button>
 				</div>
 				<div class="col-md-6">
-					<button class="btn btn-lg btn-danger btn-fw" ng-click="userOptions.apply()">Delete</button>
+					<button class="btn btn-lg btn-danger btn-fw" ng-click="userOptions.apply()">{{ 'MODAL_LABEL_DELETE' | translate }}</button>
 				</div>
 			</div>
 		</div>

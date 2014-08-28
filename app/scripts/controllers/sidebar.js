@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($scope, $rootScope, $state, $timeout, authService) {
+module.exports = function($scope, $rootScope, $state, $timeout, $translate, authService) {
 
 	// Set the initial state
 	$scope.isCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
@@ -13,6 +13,14 @@ module.exports = function($scope, $rootScope, $state, $timeout, authService) {
 		$scope.currentUser = user;
 	});
 
+	$scope.isLanguagesCollapsed = true;
+
+	// Available lanlguages
+	$scope.languages = [];
+	$scope.languages.push({ key: 'en', image: 'images/flags/gb.png' });
+	$scope.languages.push({ key: 'fi', image: 'images/flags/fi.png' });
+	$scope.languages.push({ key: 'ru', image: 'images/flags/ru.png' });
+
 	$scope.logout = function() {
 		authService.logout().then(function() {
 			$state.go('login');
@@ -23,5 +31,10 @@ module.exports = function($scope, $rootScope, $state, $timeout, authService) {
 		$scope.isCollapsed = !$scope.isCollapsed;
 		localStorage.setItem('tb-sidebar-collapsed', $scope.isCollapsed.toString());
 		$rootScope.$broadcast('action:sidebar-collapse', $scope.isCollapsed);
+	}
+
+	$scope.setLanguage = function(key) {
+		$translate.use(key);
+		localStorage.setItem('tb-language', key);
 	}
 }
