@@ -82,6 +82,8 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 		gridHeight: 136
 	}
 
+	$scope.isMinimapVisible = (localStorage.getItem('tb-minimap-visible') === 'true');
+
 	// triggered from TopBarController
 	$scope.$on('action:create', function(event, data) {
 		$scope.promptTicketCreate();
@@ -132,6 +134,11 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 			$rootScope.$broadcast('ui:enable-edit', false);
 		}
 	});
+
+	$scope.toggleMinimap = function() {
+		$scope.isMinimapVisible = !$scope.isMinimapVisible;
+		localStorage.setItem('tb-minimap-visible', $scope.isMinimapVisible);
+	}
 
 	$scope.toggleTicketSelection = function(id) {
 		var selectedIndex = $scope.selectedTicketIds.indexOf(id);

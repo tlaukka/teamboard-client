@@ -19,6 +19,20 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				scroller.css('height', '608px');
 			}
 
+			$timeout(function() {
+				scrollArea.destroy();
+
+				scrollArea.scroll = new IScroll('#content-scrollarea', {
+					scrollX: true,
+					scrollY: true,
+					freeScroll: true,
+					mouseWheel: true,
+					scrollbars: true,
+					interactiveScrollbars: true,
+					disableMouse: false
+				});
+			}, 0);
+
 			scope.updateWorkspace = function() {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
 

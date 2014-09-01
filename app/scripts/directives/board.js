@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($window, modalService, scrollArea) {
+module.exports = function($window, $timeout, modalService, scrollArea) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
@@ -23,9 +23,42 @@ module.exports = function($window, modalService, scrollArea) {
 				scroller.css('height', '608px');
 			}
 
+			$timeout(function() {
+				scrollArea.destroy();
+
+				scrollArea.scroll = new IScroll('#content-scrollarea', {
+					scrollX: true,
+					scrollY: true,
+					freeScroll: true,
+					mouseWheel: true,
+					scrollbars: true,
+					interactiveScrollbars: true,
+					disableMouse: false,
+
+					indicators: {
+						el: '#minimap',
+						interactive: true,
+						resize: false,
+						shrink: false
+					}
+				});
+
+				scope.updateMinimapIndicator();
+			}, 0);
+
 			// Set current background image
 			var currentBg = localStorage.getItem('tb-board-bg');
 			element.css('background-image', 'url(../' + currentBg + ')');
+
+			scope.updateMinimapIndicator = function() {
+				var indicator = angular.element(document.getElementById('minimap-indicator'));
+				var indicatorWidth = ($window.innerWidth - 232) * 0.1;
+				var indicatorHeight = ($window.innerHeight - 74) * 0.1;
+				indicator.css('width', indicatorWidth + 'px');
+				indicator.css('height', indicatorHeight + 'px');
+
+				scrollArea.refresh();
+			}
 
 			scope.promptBackgroundAdd = function() {
 				var modalOptions = {
@@ -54,6 +87,10 @@ module.exports = function($window, modalService, scrollArea) {
 			// triggered from TopBarController
 			scope.$on('action:add-background', function(event, data) {
 				scope.promptBackgroundAdd();
+			});
+
+			angular.element($window).bind('resize', function() {
+				scope.updateMinimapIndicator();
 			});
 
 			// var zoom = scope.zoom;

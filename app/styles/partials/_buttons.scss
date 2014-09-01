@@ -32,6 +32,19 @@
 	width: 100%;
 }
 
+.btn-show-minimap {
+	position: fixed;
+	z-index: 11001;
+	right: 8px;
+	top: $topbar-height + 8px;
+
+	&:active {
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+}
+
 .btn.radioselect {
 	padding: 0;
 	border-radius: 0;

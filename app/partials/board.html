@@ -9,4 +9,7 @@
 		</tb-ticket>
 	</div>
 </div>
-<tb-minimap tickets="board.tickets"></tb-minimap>
+<div class="btn btn-show-minimap" ng-click="toggleMinimap()">
+	<i class="fa fa-arrows-alt fa-fw"></i>
+</div>
+<tb-minimap ng-show="isMinimapVisible" tickets="board.tickets"></tb-minimap>
