@@ -8,7 +8,7 @@ module.exports = function() {
 		replace: true,
 
 		scope: {
-			tickets: "="
+			tickets: '='
 		},
 
 		link: function(scope, element) {

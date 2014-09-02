@@ -1,47 +1,48 @@
 'use strict';
 
 
-module.exports = function() {
-	var scroller = {
-		scroll: null
+module.exports = function($timeout) {
+	var scrollArea = {
+		scroller: null
 	};
 
-	scroller.refresh = function() {
-		if (this.scroll != null) {
-			this.scroll.refresh();
+	scrollArea.set = function(scroller) {
+		this.scroller = scroller;
+	}
+
+	scrollArea.destroy = function() {
+		if (this.scroller != null) {
+			this.scroller.destroy();
+			this.scroller = null;
 		}
 	}
 
-	scroller.scrollTo = function(x, y) {
-		if (this.scroll != null) {
-			this.scroll.scrollTo(x, y);
+	scrollArea.refresh = function(delay) {
+		if (this.scroller != null) {
+			var scroller = this.scroller;
+			$timeout(function() {
+				scroller.refresh();
+			}, delay);
 		}
 	}
 
-	scroller.enable = function() {
-		if (this.scroll != null) {
-			this.scroll.enable();
+	scrollArea.scrollTo = function(x, y) {
+		if (this.scroller != null) {
+			this.scroller.scrollTo(x, y);
 		}
 	}
 
-	scroller.disable = function() {
-		if (this.scroll != null) {
-			this.scroll.disable();
+	scrollArea.enable = function() {
+		if (this.scroller != null) {
+			this.scroller.enable();
 		}
 	}
 
-	scroller.destroy = function() {
-		if (this.scroll != null) {
-			this.scroll.destroy();
-			this.scroll = null;
+	scrollArea.disable = function() {
+		if (this.scroller != null) {
+			this.scroller.disable();
 		}
 	}
 
-	scroller.addIndicator = function(indicator) {
-		if (this.scroll != null) {
-			this.scroll.indicators.push(indicator);
-		}
-	}
-
-	return scroller;
+	return scrollArea;
 }

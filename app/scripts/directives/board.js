@@ -5,6 +5,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
+	var IScroll = require('IScroll');
 
 	return {
 		replace: true,
@@ -17,47 +18,51 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 		link: function(scope, element) {
 
 			// Fix scroll area height on iPad
-			if(navigator.userAgent.match(/iPad/i)) {
+			if (navigator.userAgent.match(/iPad/i)) {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
 				// Height: 768 - safariTopbarHeight(96) - topbarHeight(64) = 608
 				scroller.css('height', '608px');
 			}
 
+			scrollArea.destroy();
+			scrollArea.set(new IScroll('#content-scrollarea', {
+				scrollX: true,
+				scrollY: true,
+				freeScroll: true,
+				mouseWheel: true,
+				scrollbars: true,
+				interactiveScrollbars: true,
+				disableMouse: false,
+
+				indicators: {
+					el: '#minimap',
+					interactive: true,
+					resize: false,
+					shrink: false
+				}
+			}));
+
 			$timeout(function() {
-				scrollArea.destroy();
-
-				scrollArea.scroll = new IScroll('#content-scrollarea', {
-					scrollX: true,
-					scrollY: true,
-					freeScroll: true,
-					mouseWheel: true,
-					scrollbars: true,
-					interactiveScrollbars: true,
-					disableMouse: false,
-
-					indicators: {
-						el: '#minimap',
-						interactive: true,
-						resize: false,
-						shrink: false
-					}
-				});
-
 				scope.updateMinimapIndicator();
 			}, 0);
+
+			scrollArea.refresh(0);
 
 			// Set current background image
 			var currentBg = localStorage.getItem('tb-board-bg');
 			element.css('background-image', 'url(../' + currentBg + ')');
 
 			scope.updateMinimapIndicator = function() {
+				var isSidebarCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
+				var scale = 0.1;
+
+				var indicatorWidth = isSidebarCollapsed ? ($window.innerWidth - 74) : ($window.innerWidth - 232);
+				indicatorWidth *= scale;
+				var indicatorHeight = ($window.innerHeight - 64) * scale;
+
 				var indicator = angular.element(document.getElementById('minimap-indicator'));
-				var indicatorWidth = ($window.innerWidth - 232) * 0.1;
-				var indicatorHeight = ($window.innerHeight - 74) * 0.1;
 				indicator.css('width', indicatorWidth + 'px');
 				indicator.css('height', indicatorHeight + 'px');
-
-				scrollArea.refresh();
 			}
 
 			scope.promptBackgroundAdd = function() {
@@ -87,6 +92,10 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 			// triggered from TopBarController
 			scope.$on('action:add-background', function(event, data) {
 				scope.promptBackgroundAdd();
+			});
+
+			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
+				scope.updateMinimapIndicator();
 			});
 
 			angular.element($window).bind('resize', function() {

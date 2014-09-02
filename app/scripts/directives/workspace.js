@@ -2,6 +2,9 @@
 
 
 module.exports = function(scrollArea, $timeout, $window, $document) {
+
+	var IScroll = require('IScroll');
+
 	return {
 		restrict: 'AE',
 
@@ -19,19 +22,16 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				scroller.css('height', '608px');
 			}
 
-			$timeout(function() {
-				scrollArea.destroy();
-
-				scrollArea.scroll = new IScroll('#content-scrollarea', {
-					scrollX: true,
-					scrollY: true,
-					freeScroll: true,
-					mouseWheel: true,
-					scrollbars: true,
-					interactiveScrollbars: true,
-					disableMouse: false
-				});
-			}, 0);
+			scrollArea.destroy();
+			scrollArea.set(new IScroll('#content-scrollarea', {
+				scrollX: true,
+				scrollY: true,
+				freeScroll: true,
+				mouseWheel: true,
+				scrollbars: true,
+				interactiveScrollbars: true,
+				disableMouse: false
+			}));
 
 			scope.updateWorkspace = function() {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
@@ -53,12 +53,11 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 
 			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
 				scope.updateWorkspace();
-				scrollArea.refresh();
 			});
 
 			scope.$watch('boards.length', function() {
 				scope.updateWorkspace();
-				scrollArea.refresh();
+				scrollArea.refresh(0);
 			});
 
 			scope.$watch('state.isLoadingBoard', function() {

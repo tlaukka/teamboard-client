@@ -2,9 +2,6 @@
 
 
 module.exports = function($timeout, $document, scrollArea) {
-
-	var IScroll = require('IScroll');
-
 	return {
 		restrict: 'A',
 		scope: {},
@@ -19,7 +16,7 @@ module.exports = function($timeout, $document, scrollArea) {
 					element.removeClass('scrollarea-expanded');
 				}
 
-				scrollArea.refresh();
+				scrollArea.refresh(0);
 			});
 
 			// Prevent the whole window from scrolling

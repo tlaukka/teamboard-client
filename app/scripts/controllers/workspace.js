@@ -14,8 +14,6 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 		isLoadingBoard: false
 	};
 
-	console.log('workspace: resolved boards', boards);
-
 	$scope.$on('action:create', function() {
 		$scope.promptBoardCreate();
 	});

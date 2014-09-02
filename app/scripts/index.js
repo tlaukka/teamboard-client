@@ -31,7 +31,6 @@ angular.module('tb', [
 		// Set currently slected language
 		var language = localStorage.getItem('tb-language');
 		if (language) {
-			console.log('set language: ' + language);
 			$translate.use(language);
 		}
 

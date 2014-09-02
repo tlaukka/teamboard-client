@@ -158,26 +158,26 @@ body {
 	}
 }
 
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : landscape) {
-	#content-scrollarea {
-		height: 768px - 96px - $topbar-height;
-		background-color: red;
-	}
-}
+// @media only screen
+// and (min-device-width : 768px)
+// and (max-device-width : 1024px)
+// and (orientation : landscape) {
+// 	#content-scrollarea {
+// 		height: 768px - 96px - $topbar-height;
+// 		background-color: red;
+// 	}
+// }
 
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : landscape)
-and (-webkit-min-device-pixel-ratio: 2) {
-	#content-scrollarea {
-		height: 768px - 96px - $topbar-height;
-		background-color: red;
-	}
-}
+// @media only screen
+// and (min-device-width : 768px)
+// and (max-device-width : 1024px)
+// and (orientation : landscape)
+// and (-webkit-min-device-pixel-ratio: 2) {
+// 	#content-scrollarea {
+// 		height: 768px - 96px - $topbar-height;
+// 		background-color: red;
+// 	}
+// }
 
 /*
  * Scrollbars
