@@ -11,7 +11,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 		replace: true,
 		restrict: 'AE',
 		scope: {
-			prompBackgroundAdd: '&backgroundAdd'
+			board: '='
 			// zoom: '=zoomOptions'
 		},
 
@@ -20,7 +20,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 			// Fix scroll area height on iPad
 			if (navigator.userAgent.match(/iPad/i)) {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
-				// Height: 768 - safariTopbarHeight(96) - topbarHeight(64) = 608
+				// Height: 768 - safariAddressbarHeight(96) - topbarHeight(64) = 608
 				scroller.css('height', '608px');
 			}
 
@@ -44,13 +44,12 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 			$timeout(function() {
 				scope.updateMinimapIndicator();
+
+				// Set current background image
+				scope.setBackground(scope.board.background);
 			}, 0);
 
 			scrollArea.refresh(0);
-
-			// Set current background image
-			var currentBg = localStorage.getItem('tb-board-bg');
-			element.css('background-image', 'url(../' + currentBg + ')');
 
 			scope.updateMinimapIndicator = function() {
 				var isSidebarCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
@@ -74,19 +73,29 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 				var backgrounds = [];
 				backgrounds.push({ name: 'Blank', url: 'none' });
 				backgrounds.push({ name: 'Scrum', url: 'images/workflow_template_scrum.png' });
-				backgrounds.push({ name: 'Test Bg 01', url: 'images/bg01.jpg' });
-				backgrounds.push({ name: 'Test Bg 02', url: 'images/bg02.jpg' });
-				backgrounds.push({ name: 'Test Bg 03', url: 'images/bg03.jpeg' });
+				backgrounds.push({ name: 'Business model', url: 'images/business_model_canvas_teamboard.png' });
+				backgrounds.push({ name: 'SWOT', url: 'images/swot_teamboard.png' });
 
 				var userOptions = {
 					backgrounds: backgrounds,
-					currentBg: currentBg
+					currentBg: scope.board.background
 				};
 
 				modalService.show(modalOptions, userOptions).then(function(result) {
-					localStorage.setItem('tb-board-bg', result.selectedBg);
-					element.css('background-image', 'url(../' + result.selectedBg + ')');
+					scope.updateBackground(result.selectedBg);
 				});
+			}
+
+			scope.updateBackground = function(bg) {
+				scope.board.background = bg;
+				scope.board.update()
+					.then(function() {
+						scope.setBackground(bg);
+					});
+			}
+
+			scope.setBackground = function(bg) {
+				element.css('background-image', 'url(../' + bg + ')');
 			}
 
 			// triggered from TopBarController

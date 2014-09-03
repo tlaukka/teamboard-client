@@ -9,7 +9,9 @@ module.exports = function($http, Config, Ticket) {
 		return {
 			name:       board.name,
 			info:       board.info,
-			isPublic:   board.isPublic
+			isPublic:   board.isPublic,
+			size:       board.size,
+			background: board.background
 		}
 	}
 
@@ -23,9 +25,11 @@ module.exports = function($http, Config, Ticket) {
 	}
 
 	var _update = function(response) {
-		this.name       = response.data.name     || this.name;
-		this.info       = response.data.info     || this.info;
-		this.isPublic   = response.data.isPublic || this.isPublic;
+		this.name       = response.data.name       || this.name;
+		this.info       = response.data.info       || this.info;
+		this.isPublic   = response.data.isPublic   || this.isPublic;
+		this.size       = response.data.size       || this.size;
+		this.background = response.data.background || this.background;
 
 		this.guests  = response.data.guests  || this.guests;
 		this.members = response.data.members || this.members;
@@ -58,9 +62,11 @@ module.exports = function($http, Config, Ticket) {
 		this.id    = data.id;
 		this.owner = data.owner;
 
-		this.name     = data.name;
-		this.info     = data.info;
-		this.isPublic = data.isPublic;
+		this.name       = data.name;
+		this.info       = data.info;
+		this.isPublic   = data.isPublic;
+		this.size       = data.size;
+		this.background = data.background;
 
 		this.screenshot = Config.api.url() + 'boards/' + this.id +
 			'/screenshot';

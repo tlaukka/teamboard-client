@@ -51,6 +51,16 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				element.css('height', height);
 			}
 
+			scope.showLoadingOverlay = function() {
+				var width = $window.outerWidth + 'px';
+				var height = $window.outerHeight + 'px';
+				var loadingOverlay = angular.element(element.children()[0]);
+
+				loadingOverlay.css('width', width);
+				loadingOverlay.css('height', height);
+				loadingOverlay.addClass('visible');
+			}
+
 			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
 				scope.updateWorkspace();
 			});
@@ -63,13 +73,7 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 			scope.$watch('state.isLoadingBoard', function() {
 				// Show overlay when loading board.
 				if (scope.state.isLoadingBoard) {
-					var width = $window.outerWidth + 'px';
-					var height = $window.outerHeight + 'px';
-					var loadingOverlay = angular.element(element.children()[0]);
-
-					loadingOverlay.css('width', width);
-					loadingOverlay.css('height', height);
-					loadingOverlay.addClass('visible');
+					scope.showLoadingOverlay();
 				}
 			});
 
