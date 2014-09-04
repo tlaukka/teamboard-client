@@ -75,6 +75,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 				backgrounds.push({ name: 'Scrum', url: 'images/workflow_template_scrum.png' });
 				backgrounds.push({ name: 'Business model', url: 'images/business_model_canvas_teamboard.png' });
 				backgrounds.push({ name: 'SWOT', url: 'images/swot_teamboard.png' });
+				backgrounds.push({ name: 'Customer journey', url: 'images/customer_journey_map_teamboard.png' });
 
 				var userOptions = {
 					backgrounds: backgrounds,
@@ -96,6 +97,9 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 			scope.setBackground = function(bg) {
 				element.css('background-image', 'url(../' + bg + ')');
+
+				var minimap = angular.element(document.getElementById('minimap'));
+				minimap.css('background-image', 'url(../' + bg + ')');
 			}
 
 			// triggered from TopBarController

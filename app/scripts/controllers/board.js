@@ -19,7 +19,7 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 	socketService.on('ticket:create', function(ev) {
 		console.log('socket - ticket:create', ev);
 
-		if(currentUser.id === ev.user.id) {
+		if (currentUser.id === ev.user.id) {
 			return console.log('ticket:create made by this client');
 		}
 
@@ -27,7 +27,7 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
-		if(!ticketDoesExist) {
+		if (!ticketDoesExist) {
 			$scope.board.tickets.push(new Ticket(ev.tickets[0]));
 			return $scope.$apply();
 		}
@@ -41,7 +41,7 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 		//
 		// TODO use a unique client-id to prevent possible issues
 		//      with same user on multiple devices
-		if(currentUser.id === ev.user.id) {
+		if (currentUser.id === ev.user.id) {
 			return console.log('ticket:update made by this client');
 		}
 
@@ -49,7 +49,7 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 
 		// for some reason the ticket does not yet exist in our client
 		// so we need to add it to our clients collection
-		if(!existingTicket) {
+		if (!existingTicket) {
 			return $scope.board.tickets.push(new Ticket(ev.tickets[0]));
 		}
 
