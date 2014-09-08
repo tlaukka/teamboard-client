@@ -72,10 +72,13 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 				var backgrounds = [];
 				backgrounds.push({ name: 'Blank', url: 'none' });
+				backgrounds.push({ name: 'Kanban', url: 'images/backgrounds/kanban.png' });
 				backgrounds.push({ name: 'Scrum', url: 'images/backgrounds/scrum.png' });
 				backgrounds.push({ name: 'Business model', url: 'images/backgrounds/business_model_canvas.png' });
 				backgrounds.push({ name: 'SWOT', url: 'images/backgrounds/swot.png' });
 				backgrounds.push({ name: 'Customer journey', url: 'images/backgrounds/customer_journey_map.png' });
+				backgrounds.push({ name: 'Keep drop try', url: 'images/backgrounds/keep_drop_try.png' });
+				backgrounds.push({ name: 'Play', url: 'images/backgrounds/play.png' });
 
 				var userOptions = {
 					backgrounds: backgrounds,
