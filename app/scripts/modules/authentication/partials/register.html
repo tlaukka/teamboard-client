@@ -37,6 +37,17 @@
 						ng-model="user.password"
 						placeholder="{{ 'AUTH_LABEL_PASSWORD' | translate }}"
 						required>
+
+					<div class="form-group">
+						<label class="lbl-confirm" for="passwordConfirm">{{ 'AUTH_LABEL_PWCONFIRM' | translate }}</label>
+						<input type="password"
+							id="passwordConfirm"
+							name="passwordConfirm"
+							class="form-control pwconfirm"
+							ng-model="user.passwordConfirm"
+							placeholder="{{ 'AUTH_LABEL_PASSWORD' | translate }}"
+							required>
+					</div>
 				</div>
 			</div>
 			<div class="row">

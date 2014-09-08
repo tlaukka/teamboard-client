@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($scope, $state, Config, authService) {
+module.exports = function($scope, $state, $translate, Config, authService) {
 
 	$scope.user   = { }
 	$scope.errors = { }
@@ -10,14 +10,31 @@ module.exports = function($scope, $state, Config, authService) {
 		$scope.submitted = true;
 
 		if(form.$valid) {
-			authService.register($scope.user)
-				.then(
-					function() {
-						$state.go(Config.states.login);
-					},
-					function(err) {
-						$scope.errors.other = err.data.message;
-					});
+			if ($scope.user.password === $scope.user.passwordConfirm) {
+				authService.register($scope.user)
+					.then(
+						function() {
+							$state.go(Config.states.login);
+						},
+						function(err) {
+							$scope.errors.other = err.data.message;
+						});
+			}
+			else {
+				// Password mismatch
+				$translate('AUTH_MESSAGE_PWCONFIRMERROR').then(function(message) {
+					$scope.errors.other = message;
+					$scope.user.password = '';
+					$scope.user.passwordConfirm = '';
+				});
+			}
+		}
+		else {
+			// Invalid email
+			$translate('AUTH_MESSAGE_EMAILERROR').then(function(message) {
+				$scope.errors.other = message;
+				$scope.user.email = '';
+			});
 		}
 	}
 }

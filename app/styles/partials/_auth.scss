@@ -45,10 +45,18 @@
 
 		input[type="password"] {
 			border-radius: 0 0 5px 5px;
+
+			&.pwconfirm {
+				border-radius: 4px;
+			}
 		}
 
 		.form-control {
 			padding: 10px;
+		}
+
+		.lbl-confirm {
+			margin-top: 12px;
 		}
 	}
 }

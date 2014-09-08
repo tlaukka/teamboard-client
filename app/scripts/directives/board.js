@@ -72,10 +72,10 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 				var backgrounds = [];
 				backgrounds.push({ name: 'Blank', url: 'none' });
-				backgrounds.push({ name: 'Scrum', url: 'images/workflow_template_scrum.png' });
-				backgrounds.push({ name: 'Business model', url: 'images/business_model_canvas_teamboard.png' });
-				backgrounds.push({ name: 'SWOT', url: 'images/swot_teamboard.png' });
-				backgrounds.push({ name: 'Customer journey', url: 'images/customer_journey_map_teamboard.png' });
+				backgrounds.push({ name: 'Scrum', url: 'images/backgrounds/scrum.png' });
+				backgrounds.push({ name: 'Business model', url: 'images/backgrounds/business_model_canvas.png' });
+				backgrounds.push({ name: 'SWOT', url: 'images/backgrounds/swot.png' });
+				backgrounds.push({ name: 'Customer journey', url: 'images/backgrounds/customer_journey_map.png' });
 
 				var userOptions = {
 					backgrounds: backgrounds,
