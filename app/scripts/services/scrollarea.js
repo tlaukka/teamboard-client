@@ -44,5 +44,17 @@ module.exports = function($timeout) {
 		}
 	}
 
+	scrollArea.getScrollerPosition = function() {
+		if (this.scroller != null) {
+			return {
+				x: this.scroller.absStartX,
+				y: this.scroller.absStartY
+			};
+		}
+		else {
+			return null;
+		}
+	}
+
 	return scrollArea;
 }

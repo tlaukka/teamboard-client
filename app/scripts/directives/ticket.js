@@ -26,7 +26,7 @@ module.exports = function(ticketProxy, scrollArea) {
 			scope.isSelected = false;
 
 			// TODO: Need to handle zIndex
-			TweenLite.to(element, 0, {
+			TweenLite.set(element, {
 				x: ticket.position.x,
 				y: ticket.position.y
 			});

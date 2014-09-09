@@ -53,11 +53,9 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 
 			scope.showLoadingOverlay = function() {
 				var width = $window.outerWidth + 'px';
-				var height = $window.outerHeight + 'px';
 				var loadingOverlay = angular.element(element.children()[0]);
 
 				loadingOverlay.css('width', width);
-				loadingOverlay.css('height', height);
 				loadingOverlay.addClass('visible');
 			}
 
