@@ -19,6 +19,10 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 	socketService.on('ticket:create', function(ev) {
 		console.log('socket - ticket:create', ev);
 
+		if (ev.board !== $scope.board.id) {
+			return;
+		}
+
 		if (currentUser.id === ev.user.id) {
 			return console.log('ticket:create made by this client');
 		}
@@ -36,6 +40,10 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 	// update a ticket in our collection, create it if necessary
 	socketService.on('ticket:update', function(ev) {
 		console.log('socket - ticket:update', ev);
+
+		if (ev.board !== $scope.board.id) {
+			return;
+		}
 
 		// fix issues with self-made updates overriding client
 		//
@@ -66,6 +74,10 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 	// remove a ticket from our clients collection if it exists
 	socketService.on('ticket:remove', function(ev) {
 		console.log('socket - ticket:remove', ev);
+		if (ev.board !== $scope.board.id) {
+			return;
+		}
+
 		$scope.board.tickets = _.reject($scope.board.tickets,
 			function(ticket) {
 				return _.contains(_.pluck(ev.tickets, 'id'), ticket.id);
