@@ -10,6 +10,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 	return {
 		replace: true,
 		restrict: 'AE',
+
 		scope: {
 			board: '='
 			// zoom: '=zoomOptions'
@@ -35,7 +36,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 				disableMouse: false,
 
 				indicators: {
-					el: '#minimap',
+					el: '.minimap',
 					interactive: true,
 					resize: false,
 					shrink: false
@@ -43,26 +44,11 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 			}));
 
 			$timeout(function() {
-				scope.updateMinimapIndicator();
-
 				// Set current background image
 				scope.setBackground(scope.board.background);
 			}, 0);
 
 			scrollArea.refresh(0);
-
-			scope.updateMinimapIndicator = function() {
-				var isSidebarCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
-				var scale = 0.1;
-
-				var indicatorWidth = isSidebarCollapsed ? ($window.innerWidth - 74) : ($window.innerWidth - 232);
-				indicatorWidth *= scale;
-				var indicatorHeight = ($window.innerHeight - 64) * scale;
-
-				var indicator = angular.element(document.getElementById('minimap-indicator'));
-				indicator.css('width', indicatorWidth + 'px');
-				indicator.css('height', indicatorHeight + 'px');
-			}
 
 			scope.promptBackgroundAdd = function() {
 				var modalOptions = {
@@ -100,22 +86,11 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 			scope.setBackground = function(bg) {
 				element.css('background-image', 'url(../' + bg + ')');
-
-				var minimap = angular.element(document.getElementById('minimap'));
-				minimap.css('background-image', 'url(../' + bg + ')');
 			}
 
 			// triggered from TopBarController
 			scope.$on('action:add-background', function(event, data) {
 				scope.promptBackgroundAdd();
-			});
-
-			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
-				scope.updateMinimapIndicator();
-			});
-
-			angular.element($window).bind('resize', function() {
-				scope.updateMinimapIndicator();
 			});
 
 			// var zoom = scope.zoom;

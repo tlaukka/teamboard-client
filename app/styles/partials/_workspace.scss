@@ -55,12 +55,19 @@
 		padding: 2px;
 		margin: 0;
 		width: 206px;
-		height: 119px;
+		height: 118px;
 		background-color: $white;
 		border: 1px solid $lightgray-dark;
 		-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 		-moz-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 		box-shadow: 1px 1px 1px 1px $black-transparent-20;
+	}
+
+	.board-map {
+		box-sizing: border-box;
+		width: 200px;
+		height: 113px;
+		background-color: $white;
 	}
 
 	img.board {

@@ -1,7 +1,7 @@
 <div id="board-background">
 	<div tb-board id="board" board="board" ng-click="removeTicketSelections($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
-		<tb-ticket ng-repeat="ticket in board.tickets"
+		<tb-ticket ng-repeat="ticket in tickets"
 			snap-options="snapOptions"
 			ticket-data="ticket"
 			ticket-edit="promptTicketEdit(ticket)"
@@ -12,4 +12,6 @@
 <div class="btn btn-show-minimap" ng-click="toggleMinimap()">
 	<i class="fa fa-arrows-alt fa-fw"></i>
 </div>
-<tb-minimap ng-show="isMinimapVisible" tickets="board.tickets"></tb-minimap>
+<div ng-show="isMinimapVisible" class="minimap-container">
+	<tb-minimap board="board" tickets="tickets" width="225" indicator="true"></tb-minimap>
+</div>

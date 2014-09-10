@@ -1,28 +1,7 @@
-#minimap {
-	position: fixed;
-	z-index: 11000;
-	right: 8px;
-	top: $topbar-height + 8px;
-	width: $board-width * $minimap-scale;
-	height: $board-height * $minimap-scale;
-	border: 1px solid $lightgray-dark;
+.minimap {
 	background-color: $white;
-	background-size: $board-width * $minimap-scale $board-height * $minimap-scale;
-	-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
-	-moz-box-shadow: 1px 1px 1px 1px $black-transparent-20;
-	box-shadow: 1px 1px 1px 1px $black-transparent-20;
 
-	&:after {
-		content: "";
-		position: fixed;
-		right: 9px;
-		top: $topbar-height + 9px;
-		width: $board-width * $minimap-scale - 2px;
-		height: $board-height * $minimap-scale - 2px;
-		background-color: $white-transparent-60;
-	}
-
-	#minimap-indicator {
+	.minimap-indicator {
 		position: absolute;
 		box-sizing: border-box;
 		z-index: 3;

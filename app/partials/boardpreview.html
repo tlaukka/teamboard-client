@@ -11,7 +11,10 @@
 			<i class="fa fa-check-circle"></i>
 		</div>
 		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked($event)">
-			<img ng-src="{{screenshotUrl}}" class="board center-block">
+			<!-- <img ng-src="{{screenshotUrl}}" class="board center-block"> -->
+			<div class="board-map">
+				<tb-minimap board="board" tickets="tickets" width="200" indicator="false"></tb-minimap>
+			</div>
 		</a>
 	</div>
 	<div class="heading" ng-click="promptBoardEdit(board)">

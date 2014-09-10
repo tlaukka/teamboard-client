@@ -14,6 +14,20 @@
 	overflow: hidden;
 }
 
+.minimap-container {
+	position: fixed;
+	z-index: 11000;
+	width: 227px;
+	height: 128px;
+	right: 8px;
+	top: $topbar-height + 8px;
+	border: 1px solid $lightgray-dark;
+	background-color: $white;
+	-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
+	-moz-box-shadow: 1px 1px 1px 1px $black-transparent-20;
+	box-shadow: 1px 1px 1px 1px $black-transparent-20;
+}
+
 .ticket {
 	position: absolute;
 	box-sizing: border-box;

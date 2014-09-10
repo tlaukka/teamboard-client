@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function(scrollArea, authService) {
+module.exports = function($http, Config, Ticket, scrollArea, authService) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
@@ -19,6 +19,22 @@ module.exports = function(scrollArea, authService) {
 		},
 
 		link: function(scope, element) {
+
+			$http.get(Config.api.url() + 'boards/' + scope.board.id + '/tickets')
+				.then(function(response) {
+					var tickets = [];
+					for(var i = 0; i < response.data.length; i++) {
+						var ticketData = response.data[i];
+						ticketData.board = scope.board.id;
+						tickets.push(new Ticket(ticketData));
+					}
+
+					scope.tickets = tickets;
+				},
+				function(err) {
+					// TODO Handle it?
+					console.log('err', err);
+				});
 
 			scope.isLoading = false;
 			scope.isSelected = false;

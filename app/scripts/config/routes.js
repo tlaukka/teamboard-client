@@ -69,6 +69,24 @@ module.exports = function(
 								// TODO Handle it?
 								console.log('err', err);
 							});
+				},
+
+				tickets: function($http, $stateParams, Config, Ticket, resolvedBoard) {
+					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '/tickets')
+						.then(function(response) {
+							var tickets = [];
+							for(var i = 0; i < response.data.length; i++) {
+								var ticketData = response.data[i];
+								ticketData.board = resolvedBoard.id;
+								tickets.push(new Ticket(ticketData));
+							}
+
+							return tickets;
+						},
+						function(err) {
+							// TODO Handle it?
+							console.log('err', err);
+						});
 				}
 			},
 

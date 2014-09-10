@@ -3,14 +3,28 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, $rootScope, Board, Ticket, modalService, socketService, resolvedBoard, currentUser) {
+module.exports = function(
+	$scope,
+	$rootScope,
+	Board,
+	Ticket,
+	modalService,
+	socketService,
+	resolvedBoard,
+	tickets,
+	currentUser
+	) {
 
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
+	$scope.tickets = tickets;
 
 	// shorthand for finding a ticket from the scopes ticket collection
 	var _getTicket = function(id) {
-		return _.find($scope.board.tickets, function(ticket) {
+		// return _.find($scope.board.tickets, function(ticket) {
+		// 	return ticket.id === id;
+		// });
+		return _.find($scope.tickets, function(ticket) {
 			return ticket.id === id;
 		});
 	}
@@ -32,7 +46,8 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if (!ticketDoesExist) {
-			$scope.board.tickets.push(new Ticket(ev.tickets[0]));
+			// $scope.board.tickets.push(new Ticket(ev.tickets[0]));
+			$scope.tickets.push(new Ticket(ev.tickets[0]));
 			return $scope.$apply();
 		}
 	});
@@ -58,7 +73,8 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 		// for some reason the ticket does not yet exist in our client
 		// so we need to add it to our clients collection
 		if (!existingTicket) {
-			return $scope.board.tickets.push(new Ticket(ev.tickets[0]));
+			// return $scope.board.tickets.push(new Ticket(ev.tickets[0]));
+			return $scope.tickets.push(new Ticket(ev.tickets[0]));
 		}
 
 		// the ticket already exists in our clients collection, so
@@ -78,10 +94,16 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 			return;
 		}
 
-		$scope.board.tickets = _.reject($scope.board.tickets,
+		// $scope.board.tickets = _.reject($scope.board.tickets,
+		// 	function(ticket) {
+		// 		return _.contains(_.pluck(ev.tickets, 'id'), ticket.id);
+		// 	});
+
+		$scope.tickets = _.reject($scope.tickets,
 			function(ticket) {
 				return _.contains(_.pluck(ev.tickets, 'id'), ticket.id);
 			});
+
 		return $scope.$apply();
 	});
 
@@ -121,7 +143,10 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 
 	// triggered from TopBarController
 	$scope.$on('action:edit', function(event, data) {
-		var ticket = _.find($scope.board.tickets, function(ticket) {
+		// var ticket = _.find($scope.board.tickets, function(ticket) {
+		// 	return ticket.id == $scope.selectedTicketIds[0];
+		// });
+		var ticket = _.find($scope.tickets, function(ticket) {
 			return ticket.id == $scope.selectedTicketIds[0];
 		});
 
@@ -176,7 +201,8 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 
 		return new Ticket(ticketData).save().then(
 			function(ticket) {
-				$scope.board.tickets.push(ticket);
+				// $scope.board.tickets.push(ticket);
+				$scope.tickets.push(ticket);
 			},
 			function(err) {
 				// TODO Handle it
@@ -186,13 +212,14 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 
 	$scope.removeTicket = function(id) {
 		var filter = function(ticket) { return ticket.id === id }
-		var ticket = _.find($scope.board.tickets, filter);
+		// var ticket = _.find($scope.board.tickets, filter);
+		var ticket = _.find($scope.tickets, filter);
 
 		if(ticket) {
 			ticket.remove().then(
 				function() {
-					$scope.board.tickets = _.reject(
-						$scope.board.tickets, filter);
+					// $scope.board.tickets = _.reject($scope.board.tickets, filter);
+					$scope.tickets = _.reject($scope.tickets, filter);
 				},
 				function(err) {
 					// wat do
@@ -204,7 +231,12 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 	$scope.removeTickets = function(ids, callback) {
 		Ticket.remove($scope.board.id, ids).then(
 			function() {
-				$scope.board.tickets = _.reject($scope.board.tickets,
+				// $scope.board.tickets = _.reject($scope.board.tickets,
+				// 	function(ticket) {
+				// 		return _.contains(ids, ticket.id);
+				// 	});
+
+				$scope.tickets = _.reject($scope.tickets,
 					function(ticket) {
 						return _.contains(ids, ticket.id);
 					});
@@ -269,7 +301,11 @@ module.exports = function($scope, $rootScope, Board, Ticket, modalService, socke
 		var userOptions = {};
 
 		if (ids.length == 1) {
-			var ticket = _.find($scope.board.tickets, function(ticket) {
+			// var ticket = _.find($scope.board.tickets, function(ticket) {
+			// 	return ticket.id == ids[0];
+			// });
+
+			var ticket = _.find($scope.tickets, function(ticket) {
 				return ticket.id == ids[0];
 			});
 
