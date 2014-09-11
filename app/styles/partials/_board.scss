@@ -19,13 +19,21 @@
 	z-index: 11000;
 	width: 227px;
 	height: 128px;
-	right: 8px;
-	top: $topbar-height + 8px;
 	border: 1px solid $lightgray-dark;
 	background-color: $white;
 	-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 	-moz-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 	box-shadow: 1px 1px 1px 1px $black-transparent-20;
+
+	&.minimap-visible {
+		right: 8px;
+		top: $topbar-height + 8px;
+	}
+
+	&.minimap-hidden {
+		right: -500px;
+		top: 0;
+	}
 }
 
 .ticket {

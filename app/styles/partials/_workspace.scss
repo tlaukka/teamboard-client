@@ -45,17 +45,16 @@
 	.heading {
 		cursor: pointer;
 		font-size: 18px;
-		margin-top: 6px;
+		margin-top: 8px;
 		margin-bottom: 6px;
 	}
 
 	.thumbnail-container {
 		position: relative;
 		box-sizing: border-box;
-		padding: 2px;
 		margin: 0;
 		width: 206px;
-		height: 118px;
+		height: 116px;
 		background-color: $white;
 		border: 1px solid $lightgray-dark;
 		-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;

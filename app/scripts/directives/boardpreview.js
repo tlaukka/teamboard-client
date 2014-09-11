@@ -22,14 +22,7 @@ module.exports = function($http, Config, Ticket, scrollArea, authService) {
 
 			$http.get(Config.api.url() + 'boards/' + scope.board.id + '/tickets')
 				.then(function(response) {
-					var tickets = [];
-					for(var i = 0; i < response.data.length; i++) {
-						var ticketData = response.data[i];
-						ticketData.board = scope.board.id;
-						tickets.push(new Ticket(ticketData));
-					}
-
-					scope.tickets = tickets;
+					scope.tickets = response.data;
 				},
 				function(err) {
 					// TODO Handle it?

@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($window) {
+module.exports = function($window, $timeout) {
 	return {
 		template: require('../../partials/minimap.html'),
 		restrict: 'E',

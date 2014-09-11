@@ -19,6 +19,7 @@ module.exports = function($scope, $rootScope, $state, $timeout, $translate, auth
 	$scope.languages = [];
 	$scope.languages.push({ key: 'en', image: 'images/flags/gb.png' });
 	$scope.languages.push({ key: 'fi', image: 'images/flags/fi.png' });
+	$scope.languages.push({ key: 'se', image: 'images/flags/se.png' });
 	$scope.languages.push({ key: 'ru', image: 'images/flags/ru.png' });
 
 	$scope.logout = function() {

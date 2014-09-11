@@ -12,6 +12,6 @@
 <div class="btn btn-show-minimap" ng-click="toggleMinimap()">
 	<i class="fa fa-arrows-alt fa-fw"></i>
 </div>
-<div ng-show="isMinimapVisible" class="minimap-container">
+<div class="minimap-container" ng-class="{'minimap-visible': isMinimapVisible, 'minimap-hidden': !isMinimapVisible}">
 	<tb-minimap board="board" tickets="tickets" width="225" indicator="true"></tb-minimap>
 </div>
