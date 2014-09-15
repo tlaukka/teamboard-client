@@ -24,10 +24,8 @@
 }
 
 .modal-header {
-	// text-align: center;
 	padding: 0;
 	border: none;
-	// border-bottom: 1px solid $lightgray-dark;
 
 	.gravatar {
 		max-height: 3rem;
@@ -47,7 +45,6 @@
 
 .modal-body {
 	padding: 0;
-	// margin: 18px;
 
 	textarea {
 		resize: vertical;
@@ -73,7 +70,6 @@
 
 .modal-content-block {
 	padding: 0;
-	// padding: 32px;
 
 	&.padding-md {
 		padding: 16px;

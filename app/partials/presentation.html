@@ -1,0 +1,9 @@
+<div class="board-presentation">
+	<span class="btn btn-presentation-close pull-right" ng-click=""><i class="fa fa-times"></i></span>
+	<div ng-repeat="ticket in tickets" class="ticket" ng-style="setTicket(ticket)">
+		<div ng-style="{ 'background-color': ticket.color }" class="color"></div>
+		<div class="heading">
+			{{ ticket.heading | characters: 80: true }}
+		</div>
+	</div>
+<div>

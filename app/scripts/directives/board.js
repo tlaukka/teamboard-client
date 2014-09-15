@@ -50,6 +50,44 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 			scrollArea.refresh(0);
 
+			// var maxWidth = $window.innerWidth;
+			// var maxHeight = $window.innerHeight;
+			// var size = scope.getMaxAspectRatio(1920, 1080, maxWidth, maxHeight);
+			// var left = Math.floor((maxWidth - size.width) / 2);
+			// scope.getMaxAspectRatio = function(srcWidth, srcHeight, maxWidth, maxHeight) {
+			// 	var ratio = [maxWidth / srcWidth, maxHeight / srcHeight];
+			// 	ratio = Math.min(ratio[0], ratio[1]);
+
+			// 	return { width: Math.floor(srcWidth * ratio), height: Math.floor(srcHeight * ratio) };
+			// }
+
+			// scope.getBoardPresentationInfo = function() {
+			// 	var maxWidth = $window.innerWidth;
+			// 	var maxHeight = $window.innerHeight;
+			// 	var size = scope.getMaxAspectRatio(1920, 1080, maxWidth, maxHeight);
+
+			// 	return {
+			// 		left: Math.floor((maxWidth - size.width) / 2),
+			// 		width: size.width
+			// 	};
+			// }
+
+			// var presentationInfo = scope.getBoardPresentationInfo();
+			// console.log(presentationInfo);
+			// var boardPresentation = angular.element(document.getElementById('board-presentation'));
+			// $timeout(function() {
+			// 	boardPresentation.css({
+			// 		'left': presentationInfo.left + 'px',
+			// 		'width': presentationInfo.width + 'px'
+			// 	});
+
+			// 	element.css({
+			// 	'width': 900,
+			// 	'height': 300,
+			// 	'background-size': '100%'
+			// });
+			// }, 0);
+
 			scope.promptBackgroundAdd = function() {
 				var modalOptions = {
 					template: require('../../partials/modal-backgroundadd.html'),

@@ -2,6 +2,9 @@
 
 
 module.exports = function($window, $timeout) {
+	var TweenLite = require('TweenLite');
+	var CSSPlugin = require('CSSPlugin');
+
 	return {
 		template: require('../../partials/minimap.html'),
 		restrict: 'E',
@@ -10,7 +13,7 @@ module.exports = function($window, $timeout) {
 		scope: {
 			board: '=',
 			tickets: '=',
-			width: '=',
+			width: '@',
 			indicator: '@'
 		},
 

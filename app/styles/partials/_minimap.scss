@@ -14,5 +14,11 @@
 		z-index: 2;
 		width: $ticket-width * $minimap-scale;
 		height: $ticket-height * $minimap-scale;
+
+		-webkit-transition: all 0.4s ease;
+		-moz-transition: all 0.4s ease;
+		-ms-transition: all 0.4s ease;
+		-o-transition: all 0.4s ease;
+		transition: all 0.4s ease;
 	}
 }
