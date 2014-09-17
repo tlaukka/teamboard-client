@@ -1,8 +1,8 @@
 'use strict';
 
 
-module.exports = function($scope, $state, authService , socketService, currentUser, resolvedBoard, tickets) {
-
+module.exports = function($scope, $state, authService, socketService, currentUser, resolvedBoard, tickets) {
+console.log(currentUser);
 	$scope.board = resolvedBoard;
 	$scope.tickets = tickets;
 
