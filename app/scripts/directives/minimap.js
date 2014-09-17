@@ -32,6 +32,10 @@ module.exports = function($window, $timeout) {
 				'background-size': '100%'
 			});
 
+			$timeout(function() {
+				scope.updateIndicator();
+			}, 0);
+
 			scope.setTicket = function(ticket) {
 				return {
 					'background-color': ticket.color,

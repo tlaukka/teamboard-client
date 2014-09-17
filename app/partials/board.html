@@ -9,10 +9,12 @@
 		</tb-ticket>
 	</div>
 </div>
-<div class="btn btn-show-minimap" ng-click="toggleMinimap()">
+<div class="btn btn-board-icon btn-presentation" ui-sref="main.presentation({ boardId: board.id })">
+	<i class="fa fa-expand fa-fw"></i>
+</div>
+<div class="btn btn-board-icon btn-minimap" ng-click="toggleMinimap()">
 	<i class="fa fa-arrows-alt fa-fw"></i>
 </div>
 <div class="minimap-container" ng-class="{'minimap-visible': isMinimapVisible, 'minimap-hidden': !isMinimapVisible}">
 	<tb-minimap board="board" tickets="tickets" width="225" indicator="true"></tb-minimap>
 </div>
-<tb-presentation board="board" tickets="tickets"></tb-presentation>

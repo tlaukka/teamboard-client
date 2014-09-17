@@ -36,13 +36,21 @@
 	}
 }
 
-.board-presentation {
+.presentation-background {
 	position: fixed;
-	box-sizing: border-box;
-	z-index: 100000;
 	left: 0;
 	top: 0;
-	border: 1px solid $lightgray-dark;
+	width: 100%;
+	height: 100%;
+	background-color: $gray-dark;
+}
+
+.board-presentation {
+	position: fixed;
+	box-sizing: content-box;
+	left: 0;
+	top: 0;
+	border: 4px solid $gray;
 	background-color: $white;
 	transform-origin: 0 0;
 
@@ -56,6 +64,14 @@
 			-webkit-box-shadow: none;
 			box-shadow: none;
 		}
+	}
+
+	.smooth-transition {
+		-webkit-transition: all 0.4s ease;
+		-moz-transition: all 0.4s ease;
+		-ms-transition: all 0.4s ease;
+		-o-transition: all 0.4s ease;
+		transition: all 0.4s ease;
 	}
 }
 

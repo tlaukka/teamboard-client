@@ -103,6 +103,7 @@ module.exports = function(
 
 	$scope.isMinimapVisible = (localStorage.getItem('tb-minimap-visible') === 'true');
 
+
 	// triggered from TopBarController
 	$scope.$on('action:create', function(event, data) {
 		$scope.promptTicketCreate();

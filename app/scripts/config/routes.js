@@ -57,10 +57,8 @@ module.exports = function(
 			url: '/board/:id',
 
 			resolve: {
-				resolvedBoard: function(
-						$http, $stateParams, Config, Board) {
-					return $http.get(Config.api.url() + 'boards/' +
-							$stateParams.id + '')
+				resolvedBoard: function($http, $stateParams, Config, Board) {
+					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
 						.then(
 							function(response) {
 								return new Board(response.data);
@@ -141,6 +139,87 @@ module.exports = function(
 
 					template:   require('../../partials/board.html'),
 					controller: require('../controllers/board')
+				}
+			}
+		})
+		.state('main.presentation', {
+
+			url: '/presentation/:boardId',
+
+			resolve: {
+				resolvedBoard: function($http, $stateParams, Config, Board) {
+					return $http.get(Config.api.url() + 'boards/' + $stateParams.boardId + '')
+						.then(
+							function(response) {
+								return new Board(response.data);
+							},
+							function(err) {
+								// TODO Handle it?
+								console.log('err', err);
+							});
+				},
+
+				tickets: function($http, $stateParams, Config, Ticket, resolvedBoard) {
+					return $http.get(Config.api.url() + 'boards/' + $stateParams.boardId + '/tickets')
+						.then(function(response) {
+							var tickets = [];
+							for(var i = 0; i < response.data.length; i++) {
+								var ticketData = response.data[i];
+								ticketData.board = resolvedBoard.id;
+								tickets.push(new Ticket(ticketData));
+							}
+
+							return tickets;
+						},
+						function(err) {
+							// TODO Handle it?
+							console.log('err', err);
+						});
+				}
+			},
+
+			views: {
+				'presentation': {
+
+					resolve: {
+						currentUser: function(authService) {
+							return authService.getUser();
+						},
+						connectedSocket: function(socketService) {
+							return socketService.connect().then(
+								function(socket) {
+									console.log('got socket:', socket);
+									return socket;
+								},
+								function(err) {
+									// TODO Handle it?
+									console.log('err', err);
+								});
+						},
+						joinRoom: function($q, $stateParams, connectedSocket) {
+							var deferred = $q.defer();
+
+							connectedSocket.emit('board:join', {
+									board: $stateParams.boardId
+								},
+								function(err, res) {
+
+									if(err) {
+
+										// TODO Handle this how?
+										console.log('err', err);
+										return deferred.reject(err);
+									}
+
+									return deferred.resolve(res);
+								});
+
+							return deferred.promise;
+						}
+					},
+
+					template:   require('../../partials/presentation-container.html'),
+					controller: require('../controllers/presentation')
 				}
 			}
 		});

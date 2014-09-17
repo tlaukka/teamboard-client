@@ -113,7 +113,7 @@ html, body {
 
 body {
 	font-family: $font-lato;
-	background: $lightgray;
+	background-color: $white;
 	overflow: hidden;
 }
 
@@ -157,6 +157,14 @@ body {
 		left: $sidebar-width-collapsed;
 		width: calc(100% - #{$sidebar-width-collapsed} + 1px);
 	}
+}
+
+#presentation-container {
+	position: fixed;
+	box-sizing: content-box;
+	z-index: 100000;
+	left: 0;
+	top: 0;
 }
 
 // @media only screen
