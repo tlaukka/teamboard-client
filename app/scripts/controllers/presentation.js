@@ -1,15 +1,16 @@
 'use strict';
 
 
-module.exports = function($scope, $state, authService , socketService, resolvedBoard, tickets) {
+module.exports = function($scope, $state, authService , socketService, currentUser, resolvedBoard, tickets) {
 
 	$scope.board = resolvedBoard;
 	$scope.tickets = tickets;
-	console.log($scope.tickets);
 
-	authService.getUser().then(function(user) {
-		$scope.currentUser = user;
-	});
+	var _getTicket = function(id) {
+		return _.find($scope.tickets, function(ticket) {
+			return ticket.id === id;
+		});
+	}
 
 	// create a new ticket in our clients collection if necessary
 	socketService.on('ticket:create', function(ev) {
