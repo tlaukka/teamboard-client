@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($scope, $rootScope, $state, $timeout, $translate, authService) {
+module.exports = function($scope, $rootScope, $state, $timeout, $translate, authService, socketService) {
 
 	// Set the initial state
 	$scope.isCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
@@ -24,6 +24,7 @@ module.exports = function($scope, $rootScope, $state, $timeout, $translate, auth
 
 	$scope.logout = function() {
 		authService.logout().then(function() {
+			socketService.disconnect();
 			$state.go('login');
 		});
 	}

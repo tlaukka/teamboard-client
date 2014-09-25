@@ -37,6 +37,12 @@ module.exports = function($q, Config, authService) {
 			return deferred.promise;
 		},
 
+		disconnect: function() {
+			if (_socket) {
+				_socket.disconnect();
+			}
+		},
+
 		on: function(ev, cb) {
 			_socket.on(ev, cb);
 		},

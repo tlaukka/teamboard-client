@@ -111,7 +111,7 @@ module.exports = function($translateProvider) {
 		'MODAL_LABEL_DELETE': 'Poista',
 		'MODAL_LABEL_HEADINGADD': 'Lisää otsikko...',
 		'MODAL_LABEL_DESCRIPTIONADD': 'Lisää kuvaus...',
-		'MODAL_LABEL_APPLY': 'Hyväsky',
+		'MODAL_LABEL_APPLY': 'Hyväksy',
 		'MODAL_LABEL_ADD': 'Lisää'
 	});
 
