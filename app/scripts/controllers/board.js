@@ -41,6 +41,7 @@ module.exports = function(
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if (!ticketDoesExist) {
+			ev.tickets[0].board = $scope.board.id;
 			$scope.tickets.push(new Ticket(ev.tickets[0]));
 			return $scope.$apply();
 		}
