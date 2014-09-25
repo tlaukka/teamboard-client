@@ -22,10 +22,11 @@
 	<div class="modal-content-block padding-md">
 		<div class="row">
 			<div class="col-md-6">
-				<button class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">{{ 'MODAL_LABEL_CANCEL' | translate }}</button>
+				<button type="button" class="btn btn-lg btn-default btn-fw" ng-click="userOptions.cancel()">{{ 'MODAL_LABEL_CANCEL' | translate }}</button>
 			</div>
 			<div class="col-md-6">
-				<button class="btn btn-lg btn-primary btn-fw"
+				<button type="submit"
+					class="btn btn-lg btn-primary btn-fw"
 					ng-disabled="bgInfo.$invalid"
 					ng-click="userOptions.apply(result)">
 					{{ 'MODAL_LABEL_ADD' | translate }}
