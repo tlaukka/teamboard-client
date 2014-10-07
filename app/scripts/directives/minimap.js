@@ -48,6 +48,9 @@ module.exports = function($window, $timeout) {
 
 			scope.updateIndicator = function() {
 				var isSidebarCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
+				if ($window.innerWidth < 768) {
+					isSidebarCollapsed = true;
+				}
 
 				var indicatorWidth = isSidebarCollapsed ? ($window.innerWidth - 74) : ($window.innerWidth - 232);
 				indicatorWidth *= scale;

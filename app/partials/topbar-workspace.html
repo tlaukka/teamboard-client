@@ -2,10 +2,10 @@
 	<div class="container-fluid content-wrapper"
 		ng-class="isSidebarCollapsed ? 'sidebar-margin-collapsed' : 'sidebar-margin'">
 		<div class="row">
-			<div class="col-sm-5 content-block">
+			<div class="col-xs-4 col-sm-5 content-block">
 				<h2 class="workspace-heading">{{ 'TOPBAR_LABEL_BOARDS' | translate }} <span class="badge">{{ boards.length }}</span></h2>
 			</div>
-			<div class="col-sm-4 content-block">
+			<div class="col-xs-5 col-sm-4 content-block">
 				<div class="btn-group iconbar pull-right">
 					<div class="btn btn-icon"
 						ng-class="{ enabled: removeEnabled, disabled: !removeEnabled }"
@@ -21,9 +21,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-3 content-block">
+			<div class="col-xs-3 col-sm-3 content-block">
 				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
-					<i class="fa fa-plus"></i> {{ 'TOPBAR_LABEL_CREATEBOARD' | translate }}
+					<i class="fa fa-plus"></i> <span class="hidden-xs">{{ 'TOPBAR_LABEL_CREATEBOARD' | translate }}</span>
 				</button>
 			</div>
 		</div>

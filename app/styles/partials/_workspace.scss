@@ -2,7 +2,6 @@
 	position: absolute;
 	background-color: $workspace-bg;
 	width: 100%;
-	// width: 3 * ($boardpreview-width + $boardpreview-margin-left) + $boardpreview-margin-left;
 }
 
 .loading-overlay {
@@ -83,6 +82,7 @@
 
 	.btn-select {
 		position: absolute;
+		z-index: 4;
 		top: 0;
 		right: 0;
 		font-size: 18px;

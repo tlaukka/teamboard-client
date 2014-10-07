@@ -2,13 +2,13 @@
 	<div class="container-fluid content-wrapper"
 		ng-class="isSidebarCollapsed ? 'sidebar-margin-collapsed' : 'sidebar-margin'">
 		<div class="row">
-			<div class="col-sm-5 content-block cursor-pointer" ng-click="onHeadingClicked()">
+			<div class="hidden-xs col-sm-5 content-block cursor-pointer" ng-click="onHeadingClicked()">
 				<h2 class="workspace-heading">{{ board.name | characters: 20: true }}
 					<span ng-if="!board.isPublic" class="label label-private">{{ 'LABEL_PRIVATE' | translate }}</span>
 					<span ng-if="board.isPublic" class="label label-public">{{ 'LABEL_PUBLIC' | translate }}</span>
 				</h2>
 			</div>
-			<div class="col-sm-4 content-block">
+			<div class="col-xs-9 col-sm-4 content-block">
 				<div class="btn-group iconbar pull-right">
 					<div class="btn btn-icon"
 						ng-click="onAddBackgroundClicked()">
@@ -34,9 +34,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-3 content-block">
+			<div class="col-xs-3 col-sm-3 content-block">
 				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
-					<i class="fa fa-plus"></i> {{ 'TOPBAR_LABEL_CREATETICKET' | translate }}
+					<i class="fa fa-plus"></i> <span class="hidden-xs">{{ 'TOPBAR_LABEL_CREATETICKET' | translate }}</span>
 				</button>
 			</div>
 		</div>

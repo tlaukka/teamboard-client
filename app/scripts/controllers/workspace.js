@@ -5,7 +5,6 @@ var _ = require('underscore');
 
 module.exports = function($scope, $rootScope, $http, modalService, Config, Board, boards, currentUser, scrollArea) {
 
-	// 'boards' is a resolved parameter
 	$scope.user = currentUser;
 	$scope.boards = boards;
 	$scope.selectedBoardIds = [];

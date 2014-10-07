@@ -18,6 +18,17 @@
 	width: 75%;
 }
 
+@media
+screen and (max-width : 767px),
+screen and (max-device-width : 767px) {
+	.modal-size-sm .modal-dialog,
+	.modal-size-md .modal-dialog,
+	.modal-size-lg .modal-dialog {
+		width: 100%;
+		margin: 0;
+	}
+}
+
 .modal-content {
 	border-radius: 0;
 	color: $gray-medium;

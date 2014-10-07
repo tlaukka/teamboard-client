@@ -1,13 +1,21 @@
 'use strict';
 
 
-module.exports = function($scope, $rootScope, $state, $timeout, $translate, authService, socketService) {
+module.exports = function($scope, $rootScope, $state, $timeout, $translate, $window, authService, socketService) {
 
 	// Set the initial state
-	$scope.isCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
-	$timeout(function() {
-		$rootScope.$broadcast('action:sidebar-collapse', $scope.isCollapsed);
-	}, 0);
+	if ($window.innerWidth < 768) {
+		$scope.isCollapsed = true;
+		$timeout(function() {
+			$rootScope.$broadcast('action:sidebar-collapse', true);
+		}, 0);
+	}
+	else {
+		$scope.isCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
+		$timeout(function() {
+			$rootScope.$broadcast('action:sidebar-collapse', $scope.isCollapsed);
+		}, 0);
+	}
 
 	authService.getUser().then(function(user) {
 		$scope.currentUser = user;
