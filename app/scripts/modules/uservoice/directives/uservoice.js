@@ -59,7 +59,8 @@ module.exports = function() {
 					mode: set[0]
 				}]);
 
-				UserVoice.push(['autoprompt', { mode: 'smartvote', trigger_position: 'bottom-right' }]);
+				// UserVoice.push(['autoprompt', { mode: 'smartvote', trigger_position: 'bottom-right' }]);
+				UserVoice.push(['autoprompt', {}]);
 			}
 
 			var setIdentify = function() {
