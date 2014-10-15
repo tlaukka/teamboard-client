@@ -12,20 +12,6 @@ $fa-font-path: "./fonts";
  * Global variables
  */
 
-// $bg-dark: rgb(34, 26, 38);
-// $bg-medium: rgb(240, 240, 240);
-// $bg-light: rgb(255, 255, 255);
-// $fg-dark: rgb(30, 30, 30);
-// $fg-light: rgb(255, 255, 255);
-// $purple: rgb(114, 74, 127);
-// $purple-dark: rgb(90, 56, 102);
-// $purple-darker: rgb(25, 12, 33);
-// $red: rgb(235, 88, 74);
-// $yellow: rgb(220, 199, 91);
-// $turquoise: rgb(114, 189, 187);
-// $blue-dark: rgb(92, 152, 180);
-// $blue-darker: rgb(79, 129, 154);
-
 /* Fonts */
 $font-lobster: "Lobster", "Helvetica", "Arial", sans-serif;
 $font-lato: "Lato", "Helvetica", "Arial", sans-serif;
@@ -103,11 +89,17 @@ $sidebar-collapse-duration: 0.2s;
 @import "partials/board";
 @import "partials/minimap";
 
+html {
+	position: fixed;
+}
+
 html, body, .container-fluid, .row {
 	height: 100%;
 }
 
 html, body {
+	margin: 0;
+	padding: 0;
 	width: 100%;
 }
 
@@ -146,12 +138,16 @@ body {
 }
 
 #content-scrollarea {
-	position: absolute;
+	position: relative;
 	background-color: $white;
 	left: $sidebar-width;
 	top: $topbar-height;
+	// left: 0px;
+	// top: 0px;
 	width: calc(100% - #{$sidebar-width} + 1px);
 	height: calc(100% - #{$topbar-height});
+	// width: 100%;
+	// height: 100%;
 
 	&.scrollarea-expanded {
 		left: $sidebar-width-collapsed;
@@ -166,27 +162,6 @@ body {
 	left: 0;
 	top: 0;
 }
-
-// @media only screen
-// and (min-device-width : 768px)
-// and (max-device-width : 1024px)
-// and (orientation : landscape) {
-// 	#content-scrollarea {
-// 		height: 768px - 96px - $topbar-height;
-// 		background-color: red;
-// 	}
-// }
-
-// @media only screen
-// and (min-device-width : 768px)
-// and (max-device-width : 1024px)
-// and (orientation : landscape)
-// and (-webkit-min-device-pixel-ratio: 2) {
-// 	#content-scrollarea {
-// 		height: 768px - 96px - $topbar-height;
-// 		background-color: red;
-// 	}
-// }
 
 /*
  * Scrollbars
