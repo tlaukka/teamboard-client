@@ -5,7 +5,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 	$stateProvider
 		.state('guestlogin', {
-			url: '/guestlogin/:accessCode',
+			url: '/board/:id/access/:code',
 			template: require('../../partials/guestlogin.html'),
 			controller: require('../controllers/guestlogin')
 		})
@@ -21,7 +21,12 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			resolve: {
 
 				currentUser: function(authService) {
-					return authService.getUser();
+					$http.get(api + 'auth')
+						.then(function(response) {
+							return response.data;
+						});
+
+					// return authService.getUser();
 				},
 
 				// transform boards from http request into Board models
@@ -200,7 +205,11 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 					resolve: {
 						currentUser: function(authService) {
-							return authService.getUser();
+							$http.get(api + 'auth')
+								.then(function(response) {
+									return response.data;
+								});
+							// return authService.getUser();
 						},
 						connectedSocket: function(socketService) {
 							return socketService.connect().then(

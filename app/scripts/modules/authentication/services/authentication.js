@@ -36,8 +36,7 @@ module.exports = function($q, $http, Config) {
 
 			if(!user) {
 				var onUser = function(response) {
-					localStorage.setItem(Config.userKey,
-						JSON.stringify(response.data));
+					localStorage.setItem(Config.userKey, JSON.stringify(response.data));
 					deferred.resolve(response.data);
 				}
 				$http.get(api + 'auth')
