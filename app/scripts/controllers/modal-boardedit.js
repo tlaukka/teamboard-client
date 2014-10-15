@@ -3,13 +3,14 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, $modalInstance, $http, Config, Board) {
+module.exports = function($scope, $modalInstance, $http, $location, Config, Board) {
 
 	$scope.board = Board.selectedBoard;
-	$scope.members = [Board.selectedBoard.owner].concat(Board.selectedBoard.members);
-	$scope.isMemberViewCollapsed = false;
-	$scope.isMemberDetailsVisible = false;
-	$scope.selectedMember = null;
+	// $scope.members = [Board.selectedBoard.owner].concat(Board.selectedBoard.members);
+	// $scope.isMemberViewCollapsed = false;
+	// $scope.isMemberDetailsVisible = false;
+	// $scope.selectedMember = null;
+	$scope.url = '';
 
 	$scope.users = [];
 	$http.get(Config.api.url() + 'users')
@@ -24,98 +25,114 @@ module.exports = function($scope, $modalInstance, $http, Config, Board) {
 			$scope.users = users;
 		});
 
+	$scope.generateUrl = function() {
+		// $http.post(Config.api.url() + 'boards/' + $scope.board.id + '/access')
+		// 	.then(function(res) {
+		// 		console.log(res.data.accessCode);
+		// 		var host = $location.host();
+		// 		var port = $location.port();
+		// 		$scope.url = host + ':' + port + '/guestlogin/' + res.data.accessCode;
+		// 		console.debug($scope.url);
+		// 	});
 
-	$scope.toggleMemberView = function() {
-		$scope.isMemberViewCollapsed = !$scope.isMemberViewCollapsed;
-
-		if ($scope.isMemberViewCollapsed) {
-			$scope.hideMemberDetails();
-		}
+		var host = $location.host();
+		var port = $location.port();
+		$scope.url = host + ':' + port + '/guestlogin/123';
+		console.debug($scope.url);
 	}
 
-	$scope.showMemberDetails = function(member) {
-		$scope.selectedMember = member;
-		$scope.isMemberDetailsVisible = true;
-	}
 
-	$scope.hideMemberDetails = function() {
-		$scope.selectedMember = null;
-		$scope.isMemberDetailsVisible = false;
-	}
+	// $scope.toggleMemberView = function() {
+	// 	$scope.isMemberViewCollapsed = !$scope.isMemberViewCollapsed;
 
-	$scope.removeSelectedMember = function() {
-		var member = _.find($scope.members, function(user) {
-			return user.email === $scope.selectedMember.email;
-		});
+	// 	if ($scope.isMemberViewCollapsed) {
+	// 		$scope.hideMemberDetails();
+	// 	}
+	// }
 
-		$scope.board.removeMember(member.id)
-			.then(function() {
-				var memberIndexA = Board.selectedBoard.members.indexOf(member);
-				var memberIndexB = $scope.members.indexOf(member);
-				Board.selectedBoard.members.splice(memberIndexA, 1);
-				$scope.members.splice(memberIndexB, 1);
-				$scope.hideMemberDetails();
-			});
-	}
+	// $scope.showMemberDetails = function(member) {
+	// 	$scope.selectedMember = member;
+	// 	$scope.isMemberDetailsVisible = true;
+	// }
 
-	$scope.addMember = function(memberName) {
-		var member = _.find($scope.users, function(user) {
-			return user.email === memberName;
-		});
+	// $scope.hideMemberDetails = function() {
+	// 	$scope.selectedMember = null;
+	// 	$scope.isMemberDetailsVisible = false;
+	// }
 
-		var memberExists = _.find($scope.members, function(user) {
-			return user.email === memberName;
-		});
+	// $scope.removeSelectedMember = function() {
+	// 	var member = _.find($scope.members, function(user) {
+	// 		return user.email === $scope.selectedMember.email;
+	// 	});
 
-		if (member) {
-			if (!memberExists) {
-				Board.selectedBoard.addMember(member.id)
-					.then(function() {
-						Board.selectedBoard.members.push(member);
-						$scope.members.push(member);
+	// 	$scope.board.removeMember(member.id)
+	// 		.then(function() {
+	// 			var memberIndexA = Board.selectedBoard.members.indexOf(member);
+	// 			var memberIndexB = $scope.members.indexOf(member);
+	// 			Board.selectedBoard.members.splice(memberIndexA, 1);
+	// 			$scope.members.splice(memberIndexB, 1);
+	// 			$scope.hideMemberDetails();
+	// 		});
+	// }
 
-						// Return false to indicate 'no error'
-						return {
-							hasError: false,
-							message: ''
-						};
-					});
-			}
-			else {
-				return {
-					hasError: true,
-					message: 'Member already exists!'
-				};
-			}
-		}
-		else {
-			return {
-				hasError: true,
-				message: 'User not found!'
-			};
-		}
-	}
+	// $scope.addMember = function(memberName) {
+	// 	var member = _.find($scope.users, function(user) {
+	// 		return user.email === memberName;
+	// 	});
 
-	$scope.getUsers = function(val) {
-		return $http.get(Config.api.url() + 'users', {
-			params: {
-				email: val
-			}
-		})
-		.then(function(res) {
+	// 	var memberExists = _.find($scope.members, function(user) {
+	// 		return user.email === memberName;
+	// 	});
 
-			var users = [];
-			// var emails = [];
+	// 	if (member) {
+	// 		if (!memberExists) {
+	// 			Board.selectedBoard.addMember(member.id)
+	// 				.then(function() {
+	// 					Board.selectedBoard.members.push(member);
+	// 					$scope.members.push(member);
 
-			angular.forEach(res.data, function(user) {
-				users.push(user);
-				// emails.push(user.email);
-			});
+	// 					// Return false to indicate 'no error'
+	// 					return {
+	// 						hasError: false,
+	// 						message: ''
+	// 					};
+	// 				});
+	// 		}
+	// 		else {
+	// 			return {
+	// 				hasError: true,
+	// 				message: 'Member already exists!'
+	// 			};
+	// 		}
+	// 	}
+	// 	else {
+	// 		return {
+	// 			hasError: true,
+	// 			message: 'User not found!'
+	// 		};
+	// 	}
+	// }
 
-			// return emails;
-			return users;
-		});
-	}
+	// $scope.getUsers = function(val) {
+	// 	return $http.get(Config.api.url() + 'users', {
+	// 		params: {
+	// 			email: val
+	// 		}
+	// 	})
+	// 	.then(function(res) {
+
+	// 		var users = [];
+	// 		// var emails = [];
+
+	// 		angular.forEach(res.data, function(user) {
+	// 			users.push(user);
+	// 			// emails.push(user.email);
+	// 		});
+
+	// 		// return emails;
+	// 		return users;
+	// 	});
+	// }
 
 	// Apply action
 	$scope.apply = function(result) {

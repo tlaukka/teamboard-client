@@ -4,6 +4,7 @@
 module.exports = function($q, $http, Config) {
 
 	var api = Config.api.url();
+	var _token = null;
 
 	return {
 
@@ -50,8 +51,16 @@ module.exports = function($q, $http, Config) {
 		},
 
 		getToken: function() {
-			return localStorage.getItem(Config.tokenKey);
+			return _token
 		},
+
+		setToken: function(token) {
+			_token = token;
+		},
+
+		// getToken: function() {
+		// 	return localStorage.getItem(Config.tokenKey);
+		// },
 
 		clear: function() {
 			localStorage.removeItem(Config.userKey);

@@ -1,0 +1,42 @@
+<div class="loginwrapper">
+	<div class="container login">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1><img src="/images/teamboard_logo.svg"> Teamboard</h1>
+			</div>
+		</div>
+		<form class="form login-form" name="form" ng-submit="login(form)" novalidate>
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>{{ 'AUTH_HEADER_LOGIN' | translate }}</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<p class="help-block error" ng-show="form.username.$error.required && submitted">
+							{{ 'AUTH_MESSAGE_EMPTYFIELDS' | translate }}
+						</p>
+						<p class="help-block">{{ errors.other }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<input type="text"
+						name="username"
+						class="form-control"
+						ng-model="user.name"
+						placeholder="{{ 'AUTH_LABEL_USERNAME' | translate }}"
+						autofocus
+						required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="submit" class="form-control btn-auth btn-3d btn-login">{{ 'AUTH_LABEL_SIGNIN' | translate }}</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

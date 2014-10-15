@@ -1,10 +1,14 @@
 'use strict';
 
 
-module.exports = function(
-		$stateProvider, $urlRouterProvider, $locationProvider) {
+module.exports = function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 	$stateProvider
+		.state('guestlogin', {
+			url: '/guestlogin/:accessCode',
+			template: require('../../partials/guestlogin.html'),
+			controller: require('../controllers/guestlogin')
+		})
 		.state('main', {
 			url:      '/main',
 			abstract: true,
@@ -57,6 +61,19 @@ module.exports = function(
 			url: '/board/:id',
 
 			resolve: {
+
+				boards: function($http, $stateParams, Config, Board) {
+					var _ = require('underscore');
+					return $http.get(Config.api.url() + 'boards')
+						.then(function(response) {
+							var result = _.find(response.data, function(board) {
+								return board.id == $stateParams.id;
+							});
+
+							return result;
+						});
+				}
+
 				resolvedBoard: function($http, $stateParams, Config, Board) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
 						.then(

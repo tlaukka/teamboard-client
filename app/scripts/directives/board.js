@@ -18,34 +18,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 		link: function(scope, element) {
 
-			// Fix scroll area height on iPad
-			// if (navigator.userAgent.match(/iPad/i)) {
-			// 	var scroller = angular.element(document.getElementById('content-scrollarea'));
-			// 	// Height: 768 - safariAddressbarHeight(96) - topbarHeight(64) = 608
-			// 	scroller.css('height', '608px');
-			// }
-
 			scrollArea.destroy();
-			// $timeout(function() {
-			// 	scrollArea.set(new IScroll('#content-scrollarea', {
-			// 		scrollX: true,
-			// 		scrollY: true,
-			// 		freeScroll: true,
-			// 		mouseWheel: true,
-			// 		scrollbars: true,
-			// 		interactiveScrollbars: true,
-			// 		disableMouse: false,
-			// 		keyBindings: true,
-
-			// 		indicators: {
-			// 			el: '.minimap',
-			// 			interactive: true,
-			// 			resize: false,
-			// 			shrink: false
-			// 		}
-			// 	}));
-			// }, 0);
-
 			scrollArea.set(new IScroll('#content-scrollarea', {
 				scrollX: true,
 				scrollY: true,

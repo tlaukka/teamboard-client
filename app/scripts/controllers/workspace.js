@@ -113,7 +113,7 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 
 	$scope.editBoard = function(board, attrs) {
 		board.name     = attrs.name;
-		board.isPublic = attrs.isPublic;
+		// board.isPublic = attrs.isPublic;
 
 		return board.save().then(
 			function(board) {
@@ -131,9 +131,10 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 			windowClass: 'modal-size-md'
 		};
 
-		var userOptions = {
-			owner: $scope.user
-		};
+		var userOptions = {};
+		// var userOptions = {
+		// 	owner: $scope.user
+		// };
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
 			$scope.createBoard(result);
