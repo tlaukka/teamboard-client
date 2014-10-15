@@ -3,26 +3,23 @@
 
 module.exports = function($q, $http, Config) {
 
-	var api = Config.api.url();
-	var _token = null;
+	var api   = Config.api.url();
+	var token = localStorage.getItem('access-token');
 
 	return {
 
 		login: function(user) {
 			return $http.post(api + 'auth/login', user)
 				.then(function(response) {
-					var token = response.headers('x-access-token');
-					localStorage.setItem(Config.userKey,
-						JSON.stringify(response.data));
-					localStorage.setItem(Config.tokenKey, token);
+					localStorage.setItem('access-token',
+						response.headers('x-access-token'));
 				});
 		},
 
 		logout: function() {
 			return $http.post(api + 'auth/logout')
 				.then(function() {
-					localStorage.removeItem(Config.userKey);
-					localStorage.removeItem(Config.tokenKey);
+					localStorage.removeItem('access-token');
 				});
 		},
 
@@ -31,39 +28,21 @@ module.exports = function($q, $http, Config) {
 		},
 
 		getUser: function() {
-			var user     = JSON.parse(localStorage.getItem(Config.userKey));
-			var deferred = $q.defer();
-
-			if(!user) {
-				var onUser = function(response) {
-					localStorage.setItem(Config.userKey, JSON.stringify(response.data));
-					deferred.resolve(response.data);
-				}
-				$http.get(api + 'auth')
-					.then(onUser, deferred.reject);
-			}
-			else {
-				deferred.resolve(user);
-			}
-
-			return deferred.promise;
+			return $http.get(api + 'auth').then(function(response) {
+				return response.data;
+			});
 		},
 
 		getToken: function() {
-			return _token
+			return token
 		},
 
 		setToken: function(token) {
-			_token = token;
+			token = token;
 		},
 
-		// getToken: function() {
-		// 	return localStorage.getItem(Config.tokenKey);
-		// },
-
 		clear: function() {
-			localStorage.removeItem(Config.userKey);
-			localStorage.removeItem(Config.tokenKey);
+			localStorage.removeItem('access-token');
 		}
 	}
 }
