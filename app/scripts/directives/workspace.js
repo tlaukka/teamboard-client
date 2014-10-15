@@ -16,11 +16,11 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 		link: function(scope, element) {
 
 			// Fix scroll area height on iPad
-			if(navigator.userAgent.match(/iPad/i)) {
-				var scroller = angular.element(document.getElementById('content-scrollarea'));
-				// Height: 768 - safariTopbarHeight(96) - topbarHeight(64) = 608
-				scroller.css('height', '608px');
-			}
+			// if(navigator.userAgent.match(/iPad/i)) {
+			// 	var scroller = angular.element(document.getElementById('content-scrollarea'));
+			// 	// Height: 768 - safariTopbarHeight(96) - topbarHeight(64) = 608
+			// 	scroller.css('height', '608px');
+			// }
 
 			scrollArea.destroy();
 			scrollArea.set(new IScroll('#content-scrollarea', {
