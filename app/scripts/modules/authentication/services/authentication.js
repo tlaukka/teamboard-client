@@ -12,8 +12,8 @@ module.exports = function($q, $http, Config) {
 			return $http.post(api + 'auth/login', user)
 				.then(function(response) {
 					var token = response.headers('x-access-token');
-					localStorage.setItem(Config.userKey,
-						JSON.stringify(response.data));
+					console.log(token);
+					localStorage.setItem(Config.userKey, JSON.stringify(response.data));
 					localStorage.setItem(Config.tokenKey, token);
 				});
 		},

@@ -20,9 +20,10 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 			resolve: {
 
-				currentUser: function(authService) {
-					$http.get(api + 'auth')
+				currentUser: function(Config, authService) {
+					return $http.get(Config.api.url() + 'auth')
 						.then(function(response) {
+							console.log(response);
 							return response.data;
 						});
 
@@ -77,7 +78,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 							return result;
 						});
-				}
+				},
 
 				resolvedBoard: function($http, $stateParams, Config, Board) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
@@ -205,10 +206,11 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 					resolve: {
 						currentUser: function(authService) {
-							$http.get(api + 'auth')
+							$http.get(Config.api.url() + 'auth')
 								.then(function(response) {
 									return response.data;
 								});
+
 							// return authService.getUser();
 						},
 						connectedSocket: function(socketService) {
