@@ -44,15 +44,6 @@
 					</button>
 				</div>
 			</div>
-			<!-- <div class="form-group last">
-				<label for="visibilityInput" class="control-label col-md-2">{{ 'MODAL_LABEL_VISIBILITY' | translate }}</label>
-				<div class="col-xs-10">
-					<div id="visibilityInput" class="btn-group btn-group-justified btn-group-visibility" ng-init="newData.isPublic = board.isPublic">
-						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="false">{{ 'LABEL_PRIVATE' | translate }}</label>
-						<label class="btn btn-md btn-visibility" ng-model="newData.isPublic" btn-radio="true">{{ 'LABEL_PUBLIC' | translate }}</label>
-					</div>
-				</div>
-			</div> -->
 		</form>
 	</div>
 	<!-- <div class="modal-content-divider"></div>
@@ -76,35 +67,7 @@
 		<p class="selected-email">{{selectedMember.email}}</p>
 		<button class="btn btn-primary" ng-click="removeSelectedMember()">{{ 'MODAL_LABEL_REMOVE' | translate }}</button>
 	</div>
-	<div class="modal-content-divider"></div>
-	<div class="modal-heading-block">
-		<div>{{ 'MODAL_HEADER_PEOPLEADD' | translate }}</div>
-	</div> -->
-	<!-- Add member view -->
-	<!-- <div class="modal-content-block padding-md">
-		<form role="form" name="userInvite" class="form-horizontal">
-			<p ng-if="result.hasError" class="help-block error">{{result.message}}</p>
-			<div class="form-group">
-				<label for="userInput" class="control-label col-xs-3">{{ 'MODAL_LABEL_PEOPLEADD' | translate }}</label>
-				<div class="col-xs-6">
-					<input type="text"
-						id="userInput"
-						name="userInput"
-						class="form-control text"
-						typeahead="user.email for user in users | filter:$viewValue"
-						ng-model="memberName"
-						required>
-				</div>
-				<div class="col-xs-3">
-					<button class="btn btn-primary btn-fw"
-						ng-disabled="userInvite.$invalid"
-						ng-click="result = addMember(memberName); memberName = ''">
-						{{ 'MODAL_LABEL_INVITE' | translate }}
-					</button>
-				</div>
-			</div>
-		</form>
-	</div> -->
+-->
 </div>
 <div class="modal-content-divider"></div>
 <div class="modal-footer">

@@ -131,26 +131,6 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 							return deferred.promise;
 						}
-
-						// joinRoom: function($q, $stateParams, connectedSocket) {
-						// 	var deferred = $q.defer();
-
-						// 	connectedSocket.emit('board:join', {
-						// 			board: $stateParams.id
-						// 		},
-						// 		function(err, res) {
-
-						// 			if(err) {
-						// 				// TODO Handle this how?
-						// 				console.log('err', err);
-						// 				return deferred.reject(err);
-						// 			}
-
-						// 			return deferred.resolve(res);
-						// 		});
-
-						// 	return deferred.promise;
-						// }
 					},
 
 					template:   require('../../partials/board.html'),
@@ -160,7 +140,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 		})
 
 		.state('main.presentation', {
-			url: '/presentation/:boardId',
+			url: '/presentation/:id',
 
 			resolve: {
 				resolvedBoard: function($http, $stateParams, Config, Board) {
@@ -198,41 +178,62 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 				'presentation': {
 					resolve: {
 						currentUser: function(authService) {
-							authService.getUser();
+							return authService.getUser();
 						},
 
-						connectedSocket: function(socketService) {
-							return socketService.connect().then(
-								function(socket) {
-									console.log('got socket:', socket);
-									return socket;
-								},
-								function(err) {
-									// TODO Handle it?
-									console.log('err', err);
-								});
-						},
+						connectedSocket: function($q, $stateParams, Config, authService) {
+							var io = require('socket.io-client');
 
-						joinRoom: function($q, $stateParams, connectedSocket) {
+							var socket = io(Config.io.url(), {
+								'query':     'access-token=' + authService.getToken() + '',
+								'multiplex': false
+							});
+
 							var deferred = $q.defer();
 
-							connectedSocket.emit('board:join', {
-									board: $stateParams.boardId
-								},
-								function(err, res) {
-
-									if(err) {
-
-										// TODO Handle this how?
-										console.log('err', err);
-										return deferred.reject(err);
-									}
-
-									return deferred.resolve(res);
+							socket.on('connect', function() {
+								socket.emit('board:join', { 'board': $stateParams.id }, function(err) {
+									return err ? deferred.reject(err) : deferred.resolve(socket);
 								});
+							});
+
+							socket.on('error', deferred.reject);
 
 							return deferred.promise;
 						}
+
+						// connectedSocket: function(socketService) {
+						// 	return socketService.connect().then(
+						// 		function(socket) {
+						// 			console.log('got socket:', socket);
+						// 			return socket;
+						// 		},
+						// 		function(err) {
+						// 			// TODO Handle it?
+						// 			console.log('err', err);
+						// 		});
+						// },
+
+						// joinRoom: function($q, $stateParams, connectedSocket) {
+						// 	var deferred = $q.defer();
+
+						// 	connectedSocket.emit('board:join', {
+						// 			board: $stateParams.boardId
+						// 		},
+						// 		function(err, res) {
+
+						// 			if(err) {
+
+						// 				// TODO Handle this how?
+						// 				console.log('err', err);
+						// 				return deferred.reject(err);
+						// 			}
+
+						// 			return deferred.resolve(res);
+						// 		});
+
+						// 	return deferred.promise;
+						// }
 					},
 
 					template:   require('../../partials/presentation-container.html'),

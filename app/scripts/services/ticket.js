@@ -40,11 +40,6 @@ module.exports = function($http, Config) {
 		this.position = data.position;
 	}
 
-	Ticket.remove = function(board, ids) {
-		return $http.delete(Config.api.url() + 'boards/' + board +
-			'/tickets?tickets=' + ids.join(',') + '');
-	}
-
 	Ticket.prototype.save = function() {
 		return this.id ? this.update() : this.create();
 	}
