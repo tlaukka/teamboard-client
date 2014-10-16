@@ -106,41 +106,51 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 				'content': {
 					resolve: {
+
 						currentUser: function(authService) {
 							return authService.getUser();
 						},
 
-						connectedSocket: function(socketService) {
-							return socketService.connect().then(
-								function(socket) {
-									console.log('got socket:', socket);
-									return socket;
-								},
-								function(err) {
-									// TODO Handle it?
-									console.log('err', err);
-								});
-						},
+						connectedSocket: function($q, $stateParams, Config, authService) {
+							var io = require('socket.io-client');
 
-						joinRoom: function($q, $stateParams, connectedSocket) {
+							var socket = io(Config.io.url(), {
+								'query':     'access-token=' + authService.getToken() + '',
+								'multiplex': false
+							});
+
 							var deferred = $q.defer();
 
-							connectedSocket.emit('board:join', {
-									board: $stateParams.id
-								},
-								function(err, res) {
-
-									if(err) {
-										// TODO Handle this how?
-										console.log('err', err);
-										return deferred.reject(err);
-									}
-
-									return deferred.resolve(res);
+							socket.on('connect', function() {
+								socket.emit('board:join', { 'board': $stateParams.id }, function(err) {
+									return err ? deferred.reject(err) : deferred.resolve(socket);
 								});
+							});
+
+							socket.on('error', deferred.reject);
 
 							return deferred.promise;
 						}
+
+						// joinRoom: function($q, $stateParams, connectedSocket) {
+						// 	var deferred = $q.defer();
+
+						// 	connectedSocket.emit('board:join', {
+						// 			board: $stateParams.id
+						// 		},
+						// 		function(err, res) {
+
+						// 			if(err) {
+						// 				// TODO Handle this how?
+						// 				console.log('err', err);
+						// 				return deferred.reject(err);
+						// 			}
+
+						// 			return deferred.resolve(res);
+						// 		});
+
+						// 	return deferred.promise;
+						// }
 					},
 
 					template:   require('../../partials/board.html'),
