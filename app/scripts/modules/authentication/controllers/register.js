@@ -11,14 +11,13 @@ module.exports = function($scope, $state, $translate, Config, authService) {
 
 		if(form.$valid) {
 			if ($scope.user.password === $scope.user.passwordConfirm) {
-				authService.register($scope.user)
-					.then(
-						function() {
-							$state.go(Config.states.login);
-						},
-						function(err) {
-							$scope.errors.other = err.data.message;
-						});
+				authService.register($scope.user).then(
+					function() {
+						$state.go(Config.states.login);
+					},
+					function(err) {
+						$scope.errors.other = err.data.message;
+					});
 			}
 			else {
 				// Password mismatch
