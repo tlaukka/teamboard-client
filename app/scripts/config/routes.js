@@ -144,7 +144,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 			resolve: {
 				resolvedBoard: function($http, $stateParams, Config, Board) {
-					return $http.get(Config.api.url() + 'boards/' + $stateParams.boardId + '')
+					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
 						.then(
 							function(response) {
 								return new Board(response.data);
@@ -156,7 +156,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 				},
 
 				tickets: function($http, $stateParams, Config, Ticket, resolvedBoard) {
-					return $http.get(Config.api.url() + 'boards/' + $stateParams.boardId + '/tickets')
+					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '/tickets')
 						.then(function(response) {
 							var tickets = [];
 							for(var i = 0; i < response.data.length; i++) {
