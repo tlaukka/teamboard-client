@@ -6,10 +6,11 @@ var _ = require('underscore');
 module.exports = function(
 	$scope,
 	$rootScope,
+	$q,
 	Board,
 	Ticket,
 	modalService,
-	socketService,
+	connectedSocket,
 	resolvedBoard,
 	tickets,
 	currentUser
@@ -27,7 +28,7 @@ module.exports = function(
 	}
 
 	// create a new ticket in our clients collection if necessary
-	socketService.on('ticket:create', function(ev) {
+	connectedSocket.on('ticket:create', function(ev) {
 		if (ev.board !== $scope.board.id) {
 			return;
 		}
@@ -36,23 +37,23 @@ module.exports = function(
 			return console.log('ticket:create made by this client');
 		}
 
-		var ticketDoesExist = (_getTicket(ev.tickets[0].id) != undefined)
+		var ticketDoesExist = (_getTicket(ev.ticket.id) != undefined)
 
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if (!ticketDoesExist) {
-			ev.tickets[0].board = $scope.board.id;
-			$scope.tickets.push(new Ticket(ev.tickets[0]));
+			ev.ticket.board = $scope.board.id;
+			$scope.tickets.push(new Ticket(ev.ticket));
 			return $scope.$apply();
 		}
 	});
 
 	// update a ticket in our collection, create it if necessary
-	socketService.on('ticket:update', function(ev) {
+	connectedSocket.on('ticket:update', function(ev) {
 		if (ev.board !== $scope.board.id) {
 			return;
 		}
-console.log('ticket update');
+
 		// fix issues with self-made updates overriding client
 		//
 		// TODO use a unique client-id to prevent possible issues
@@ -61,33 +62,33 @@ console.log('ticket update');
 			return console.log('ticket:update made by this client');
 		}
 
-		var existingTicket = _getTicket(ev.tickets[0].id);
+		var existingTicket = _getTicket(ev.ticket.id);
 
 		// for some reason the ticket does not yet exist in our client
 		// so we need to add it to our clients collection
 		if (!existingTicket) {
-			return $scope.tickets.push(new Ticket(ev.tickets[0]));
+			return $scope.tickets.push(new Ticket(ev.ticket));
 		}
 
 		// the ticket already exists in our clients collection, so
 		// we can just update the attributes of it
-		existingTicket.color    = ev.tickets[0].color;
-		existingTicket.heading  = ev.tickets[0].heading;
-		existingTicket.content  = ev.tickets[0].content;
-		existingTicket.position = ev.tickets[0].position;
+		existingTicket.color    = ev.ticket.color;
+		existingTicket.heading  = ev.ticket.heading;
+		existingTicket.content  = ev.ticket.content;
+		existingTicket.position = ev.ticket.position;
 
 		return $scope.$apply();
 	});
 
 	// remove a ticket from our clients collection if it exists
-	socketService.on('ticket:remove', function(ev) {
+	connectedSocket.on('ticket:remove', function(ev) {
 		if (ev.board !== $scope.board.id) {
 			return;
 		}
 
 		$scope.tickets = _.reject($scope.tickets,
 			function(ticket) {
-				return _.contains(_.pluck(ev.tickets, 'id'), ticket.id);
+				return ev.ticket.id == ticket.id;
 			});
 
 		return $scope.$apply();
@@ -196,20 +197,19 @@ console.log('ticket update');
 		var filter = function(ticket) { return ticket.id === id }
 		var ticket = _.find($scope.tickets, filter);
 
-		if(ticket) {
-			ticket.remove().then(
-				function() {
-					$scope.tickets = _.reject($scope.tickets, filter);
-				},
-				function(err) {
-					// wat do
-					console.log(err);
-				});
+		if (ticket) {
+			return ticket.remove();
 		}
 	}
 
 	$scope.removeTickets = function(ids, callback) {
-		Ticket.remove($scope.board.id, ids).then(
+		var promises = [];
+
+		for (var i = 0; i < ids.length; i++) {
+			 promises.push($scope.removeTicket(ids[i]));
+		}
+
+		$q.all(promises).then(
 			function() {
 				$scope.tickets = _.reject($scope.tickets,
 					function(ticket) {
@@ -219,7 +219,7 @@ console.log('ticket update');
 				callback();
 			},
 			function(err) {
-				// wat do
+				// Wat do
 				console.log(err);
 			});
 	}

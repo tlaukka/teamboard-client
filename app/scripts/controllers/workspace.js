@@ -3,9 +3,17 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, $rootScope, $http, modalService, Config, Board, boards, currentUser, scrollArea) {
+module.exports = function(
+	$scope,
+	$rootScope,
+	$http,
+	$q,
+	modalService,
+	Config,
+	Board,
+	boards
+	) {
 
-	$scope.user = currentUser;
 	$scope.boards = boards;
 	$scope.selectedBoardIds = [];
 
@@ -74,7 +82,7 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 				$scope.boards.push(board);
 			},
 			function(err) {
-				// wat do
+				// Wat do
 				console.log(err);
 			});
 	}
@@ -84,19 +92,18 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 		var board  = _.find($scope.boards, filter);
 
 		if(board) {
-			board.remove().then(
-				function() {
-					$scope.boards = _.reject($scope.boards, filter);
-				},
-				function(err) {
-					// wat do
-					console.log(err);
-				});
+			return board.remove();
 		}
 	}
 
 	$scope.removeBoards = function(ids, callback) {
-		Board.remove(ids).then(
+		var promises = [];
+
+		for (var i = 0; i < ids.length; i++) {
+			 promises.push($scope.removeBoard(ids[i]));
+		}
+
+		$q.all(promises).then(
 			function() {
 				$scope.boards = _.reject($scope.boards,
 					function(board) {
@@ -112,8 +119,7 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 	}
 
 	$scope.editBoard = function(board, attrs) {
-		board.name     = attrs.name;
-		// board.isPublic = attrs.isPublic;
+		board.name = attrs.name;
 
 		return board.save().then(
 			function(board) {
@@ -132,9 +138,6 @@ module.exports = function($scope, $rootScope, $http, modalService, Config, Board
 		};
 
 		var userOptions = {};
-		// var userOptions = {
-		// 	owner: $scope.user
-		// };
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
 			$scope.createBoard(result);

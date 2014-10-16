@@ -43,10 +43,6 @@ module.exports = function($http, Config, Ticket) {
 		this.accessCode = data.accessCode;
 	}
 
-	Board.remove = function(ids) {
-		return $http.delete(Config.api.url() + 'boards?boards=' + ids.join(','));
-	}
-
 	Board.prototype.save = function() {
 		return this.id ? this.update() : this.create(_obj(this));
 	}
@@ -65,16 +61,6 @@ module.exports = function($http, Config, Ticket) {
 	Board.prototype.remove = function() {
 		return $http.delete(Config.api.url() + 'boards/' + this.id);
 	}
-
-	// Board.prototype.addMember = function(uid) {
-	// 	return $http.post(Config.api.url() + 'boards/' + this.id + '/users', { id: uid })
-	// 		.then(_update.bind(this));
-	// }
-
-	// Board.prototype.removeMember = function(uid) {
-	// 	return $http.delete(Config.api.url() + 'boards/' + this.id + '/users/' + uid)
-	// 		.then(_update.bind(this));
-	// }
 
 	Board.prototype.grantGuestAccess = function() {
 		return $http.post(Config.api.url() + 'boards/' + this.id + '/access')
