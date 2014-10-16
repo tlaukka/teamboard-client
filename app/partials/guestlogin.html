@@ -15,7 +15,7 @@
 				<div class="col-sm-12">
 					<div class="form-group">
 						<p class="help-block error" ng-show="form.username.$error.required && submitted">
-							{{ 'AUTH_MESSAGE_EMPTYFIELDS' | translate }}
+							{{ 'AUTH_MESSAGE_EMPTYUSERNAME' | translate }}
 						</p>
 						<p class="help-block">{{ errors.other }}</p>
 					</div>
@@ -26,7 +26,7 @@
 					<input type="text"
 						name="username"
 						class="form-control"
-						ng-model="user.name"
+						ng-model="username"
 						placeholder="{{ 'AUTH_LABEL_USERNAME' | translate }}"
 						autofocus
 						required>
@@ -34,7 +34,9 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<button type="submit" class="form-control btn-auth btn-3d btn-login">{{ 'AUTH_LABEL_SIGNIN' | translate }}</button>
+					<button type="submit" class="form-control btn-auth btn-3d btn-login">
+						{{ 'AUTH_LABEL_SIGNIN' | translate }}
+					</button>
 				</div>
 			</div>
 		</form>

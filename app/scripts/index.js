@@ -33,8 +33,6 @@ angular.module('tb', [
 		if (language) {
 			$translate.use(language);
 		}
-
-		$state.go(Config.states.main);
 	})
 
 	.config(require('./config/routes'))

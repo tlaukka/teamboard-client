@@ -14,7 +14,8 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-group">
-						<p class="help-block error" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+						<p class="help-block error"
+							ng-show="form.email.$error.required && form.password.$error.required && submitted">
 							{{ 'AUTH_MESSAGE_EMPTYFIELDS' | translate }}
 						</p>
 						<p class="help-block">{{ errors.other }}</p>
@@ -41,7 +42,9 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<button type="submit" class="form-control btn-auth btn-3d btn-login">{{ 'AUTH_LABEL_SIGNIN' | translate }}</button>
+					<button type="submit" class="form-control btn-auth btn-3d btn-login">
+						{{ 'AUTH_LABEL_SIGNIN' | translate }}
+					</button>
 				</div>
 			</div>
 		</form>
@@ -54,7 +57,9 @@
 			<div class="col-sm-12">
 				<p>{{ 'AUTH_MESSAGE_NOTREGISTERED' | translate }}</p>
 				<a ui-sref="register">
-					<button class="form-control btn-auth btn-flat btn-registerlink">{{ 'AUTH_LABEL_REGISTER' | translate }}</button>
+					<button class="form-control btn-auth btn-flat btn-registerlink">
+						{{ 'AUTH_LABEL_REGISTER' | translate }}
+					</button>
 				</a>
 			</div>
 		</div>

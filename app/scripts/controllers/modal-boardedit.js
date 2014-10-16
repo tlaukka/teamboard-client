@@ -11,34 +11,35 @@ module.exports = function($scope, $modalInstance, $http, $location, Config, Boar
 	// $scope.isMemberDetailsVisible = false;
 	// $scope.selectedMember = null;
 	$scope.url = '';
+	// $scope.isUrlActive = false;
 
-	$scope.users = [];
-	$http.get(Config.api.url() + 'users')
-		.then(function(res) {
-
-			var users = [];
-
-			res.data.forEach(function(user) {
-				users.push(user);
-			});
-
-			$scope.users = users;
-		});
+	if ($scope.board.accessCode != undefined) {
+		var host = $location.host();
+		var port = $location.port();
+		$scope.url = host + ':' + port + '/board/' + $scope.board.id + '/access/' + $scope.board.accessCode;
+		// $scope.isUrlActive = true;
+	}
 
 	$scope.generateUrl = function() {
 		// $http.post(Config.api.url() + 'boards/' + $scope.board.id + '/access')
-		// 	.then(function(res) {
-		// 		console.log(res.data.accessCode);
-		// 		var host = $location.host();
-		// 		var port = $location.port();
-		// 		$scope.url = host + ':' + port + '/guestlogin/' + res.data.accessCode;
-		// 		console.debug($scope.url);
-		// 	});
+		$scope.board.grantGuestAccess().then(function() {
+			var host = $location.host();
+			var port = $location.port();
+			$scope.url = host + ':' + port + '/board/' + $scope.board.id + '/access/' + $scope.board.accessCode;
+		});
 
-		var host = $location.host();
-		var port = $location.port();
-		$scope.url = host + ':' + port + '/guestlogin/123';
-		console.debug($scope.url);
+		// $scope.isUrlActive = true;
+	}
+
+	$scope.clearUrl = function() {
+		// $http.delete(Config.api.url() + 'boards/' + $scope.board.id + '/access')
+		$scope.board.revokeGuestAccess().then(function() {
+			$scope.board.accessCode = undefined;
+			$scope.url = '';
+			// $scope.isUrlActive = false;
+			// console.log($scope.board.accessCode);
+			console.log('clear: ' + $scope.board.accessCode);
+		});
 	}
 
 

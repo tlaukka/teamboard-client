@@ -3,8 +3,8 @@
 
 module.exports = function($scope, $state, Config, authService) {
 
-	$scope.user   = { }
-	$scope.errors = { }
+	$scope.user = {};
+	$scope.errors = {};
 
 	$scope.login = function(form) {
 		$scope.submitted = true;

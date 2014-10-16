@@ -23,7 +23,6 @@ module.exports = function($q, $injector, Config) {
 
 		responseError: function(res) {
 			if(res.status == 401) {
-				$injector.get('authService').clear();
 				$injector.get('$state').go(Config.states.login);
 			}
 

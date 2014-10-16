@@ -9,34 +9,30 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			template: require('../../partials/guestlogin.html'),
 			controller: require('../controllers/guestlogin')
 		})
+
 		.state('main', {
 			url:      '/main',
 			abstract: true,
 			template: require('../../partials/main.html')
 		})
-		.state('main.workspace', {
 
+		.state('main.workspace', {
 			url: '/workspace',
 
 			resolve: {
-
-				currentUser: function(Config, authService) {
-					return $http.get(Config.api.url() + 'auth')
-						.then(function(response) {
-							console.log(response);
-							return response.data;
-						});
-
-					// return authService.getUser();
+				currentUser: function(authService) {
+					authService.getUser();
 				},
 
 				// transform boards from http request into Board models
 				// so they can have some more functionality
 				boards: function($http, Config, Board) {
 					var _ = require('underscore');
+
 					return $http.get(Config.api.url() + 'boards')
 						.then(function(response) {
 							var boards = response.data;
+
 							return _.map(boards, function(board) {
 								return new Board(board);
 							});
@@ -45,7 +41,6 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			},
 
 			views: {
-
 				'sidebar': {
 					template:   require('../../partials/sidebar.html'),
 					controller: require('../controllers/sidebar')
@@ -62,24 +57,11 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 				}
 			}
 		})
-		.state('main.board', {
 
+		.state('main.board', {
 			url: '/board/:id',
 
 			resolve: {
-
-				boards: function($http, $stateParams, Config, Board) {
-					var _ = require('underscore');
-					return $http.get(Config.api.url() + 'boards')
-						.then(function(response) {
-							var result = _.find(response.data, function(board) {
-								return board.id == $stateParams.id;
-							});
-
-							return result;
-						});
-				},
-
 				resolvedBoard: function($http, $stateParams, Config, Board) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
 						.then(
@@ -123,11 +105,11 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 				},
 
 				'content': {
-
 					resolve: {
 						currentUser: function(authService) {
 							return authService.getUser();
 						},
+
 						connectedSocket: function(socketService) {
 							return socketService.connect().then(
 								function(socket) {
@@ -139,6 +121,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 									console.log('err', err);
 								});
 						},
+
 						joinRoom: function($q, $stateParams, connectedSocket) {
 							var deferred = $q.defer();
 
@@ -165,8 +148,8 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 				}
 			}
 		})
-		.state('main.presentation', {
 
+		.state('main.presentation', {
 			url: '/presentation/:boardId',
 
 			resolve: {
@@ -203,16 +186,11 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 			views: {
 				'presentation': {
-
 					resolve: {
 						currentUser: function(authService) {
-							$http.get(Config.api.url() + 'auth')
-								.then(function(response) {
-									return response.data;
-								});
-
-							// return authService.getUser();
+							authService.getUser();
 						},
+
 						connectedSocket: function(socketService) {
 							return socketService.connect().then(
 								function(socket) {
@@ -224,6 +202,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 									console.log('err', err);
 								});
 						},
+
 						joinRoom: function($q, $stateParams, connectedSocket) {
 							var deferred = $q.defer();
 
@@ -253,6 +232,5 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 		});
 
 	$urlRouterProvider.otherwise('/main/workspace');
-
 	$locationProvider.html5Mode(true);
 }

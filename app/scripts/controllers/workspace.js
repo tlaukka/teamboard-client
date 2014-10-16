@@ -3,10 +3,9 @@
 
 var _ = require('underscore');
 
-// module.exports = function($scope, $rootScope, $http, modalService, Config, Board, boards, currentUser, scrollArea) {
-module.exports = function($scope, $rootScope, $http, modalService, Config, Board, boards, scrollArea) {
+module.exports = function($scope, $rootScope, $http, modalService, Config, Board, boards, currentUser, scrollArea) {
 
-	// $scope.user = currentUser;
+	$scope.user = currentUser;
 	$scope.boards = boards;
 	$scope.selectedBoardIds = [];
 

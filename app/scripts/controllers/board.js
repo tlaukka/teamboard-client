@@ -52,7 +52,7 @@ module.exports = function(
 		if (ev.board !== $scope.board.id) {
 			return;
 		}
-
+console.log('ticket update');
 		// fix issues with self-made updates overriding client
 		//
 		// TODO use a unique client-id to prevent possible issues

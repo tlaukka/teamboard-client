@@ -36,8 +36,11 @@
 						required>
 				</div>
 				<div class="col-xs-3">
-					<button class="btn btn-primary btn-fw" ng-click="generateUrl()">
+					<button ng-if="!board.accessCode" class="btn btn-primary btn-fw" ng-click="generateUrl()">
 						{{ 'MODAL_LABEL_GENERATE' | translate }}
+					</button>
+					<button ng-if="board.accessCode" class="btn btn-primary btn-fw" ng-click="clearUrl()">
+						{{ 'MODAL_LABEL_CLEAR' | translate }}
 					</button>
 				</div>
 			</div>
