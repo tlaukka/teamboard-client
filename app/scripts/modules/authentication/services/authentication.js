@@ -3,13 +3,13 @@
 
 module.exports = function($q, $http, Config) {
 
-	var api   = Config.api.url();
-	var token = localStorage.getItem('access-token');
+	var _api   = Config.api.url();
+	var _token = localStorage.getItem('access-token');
 
 	return {
 
 		login: function(user) {
-			return $http.post(api + 'auth/login', user)
+			return $http.post(_api + 'auth/login', user)
 				.then(function(response) {
 					localStorage.setItem('access-token',
 						response.headers('x-access-token'));
@@ -17,28 +17,28 @@ module.exports = function($q, $http, Config) {
 		},
 
 		logout: function() {
-			return $http.post(api + 'auth/logout')
+			return $http.post(_api + 'auth/logout')
 				.then(function() {
 					localStorage.removeItem('access-token');
 				});
 		},
 
 		register: function(user) {
-			return $http.post(api + 'auth/register', user);
+			return $http.post(_api + 'auth/register', user);
 		},
 
 		getUser: function() {
-			return $http.get(api + 'auth').then(function(response) {
+			return $http.get(_api + 'auth').then(function(response) {
 				return response.data;
 			});
 		},
 
 		getToken: function() {
-			return token
+			return _token;
 		},
 
 		setToken: function(token) {
-			token = token;
+			localStorage.setItem('access-token', _token = token);
 		},
 
 		clear: function() {
