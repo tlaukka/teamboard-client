@@ -3,8 +3,7 @@
 
 module.exports = function($q, $http, Config) {
 
-	var _api   = Config.api.url();
-	var _token = localStorage.getItem('access-token');
+	var _api = Config.api.url();
 
 	return {
 
@@ -34,11 +33,11 @@ module.exports = function($q, $http, Config) {
 		},
 
 		getToken: function() {
-			return _token;
+			return localStorage.getItem('access-token');
 		},
 
 		setToken: function(token) {
-			localStorage.setItem('access-token', _token = token);
+			localStorage.setItem('access-token', token);
 		},
 
 		clear: function() {
