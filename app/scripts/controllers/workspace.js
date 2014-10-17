@@ -11,8 +11,32 @@ module.exports = function(
 	modalService,
 	Config,
 	Board,
-	boards
+	boards,
+	$speechRecognition
 	) {
+
+	var tasks = {
+		'createBoard': {
+			regex: /^create .+/gi,
+			lang: 'en-US',
+			call: function(e) {
+				$scope.createBoard({
+					'name': e.split(' ').slice(1).join(' ')
+				});
+			}
+		}
+	}
+
+	$speechRecognition.onerror(function(e) {
+		console.error('Voice controls disabled.', e);
+	});
+
+	$speechRecognition.onstart(function() {
+		console.debug('Voice controls enabled!');
+		$speechRecognition.listenUtterance(tasks['createBoard']);
+	});
+
+	$speechRecognition.listen();
 
 	$scope.boards = boards;
 	$scope.selectedBoardIds = [];

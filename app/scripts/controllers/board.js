@@ -13,8 +13,55 @@ module.exports = function(
 	connectedSocket,
 	resolvedBoard,
 	tickets,
-	currentUser
+	currentUser,
+	$speechRecognition
 	) {
+
+
+	var lastVoicedTicket = null;
+
+	var tasks = {
+		'createTicket': {
+			regex: /^create .+/gi,
+			lang: 'en-US',
+			call: function(e) {
+				$scope.createTicket({
+					'heading': e.split(' ').slice(1).join(' ')
+				}).then(function(ticket) {
+					lastVoicedTicket = ticket;
+				});
+			}
+		},
+		'updateTicket': {
+			regex: /^write .+/gi,
+			lang: 'en-US',
+			call: function(e) {
+				if(lastVoicedTicket) {
+					$scope.editTicket(lastVoicedTicket, {
+						'color':   lastVoicedTicket.color,
+						'heading': lastVoicedTicket.heading,
+						'content': e.split(' ').slice(1).join(' ')
+					});
+				}
+				else {
+					console.debug('no ticket was selected');
+				}
+			}
+		}
+	}
+
+	$speechRecognition.onerror(function(e) {
+		console.error('Voice controls disabled.', e);
+	});
+
+	$speechRecognition.onstart(function() {
+		console.debug('Voice controls enabled!');
+		$speechRecognition.listenUtterance(tasks['createTicket']);
+		$speechRecognition.listenUtterance(tasks['updateTicket']);
+	});
+
+	$speechRecognition.listen();
+
 
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
@@ -186,6 +233,7 @@ module.exports = function(
 		return new Ticket(ticketData).save().then(
 			function(ticket) {
 				$scope.tickets.push(ticket);
+				return ticket;
 			},
 			function(err) {
 				// TODO Handle it

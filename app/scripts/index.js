@@ -11,6 +11,7 @@ require('angular-animate');
 require('angular-truncate');
 require('angular-sanitize');
 require('angular-text');
+require('angular-adaptive-speech');
 
 // main module
 // TODO split into modules based on features
@@ -22,6 +23,7 @@ angular.module('tb', [
 		'ngSanitize',
 		'textAngular',
 		'pascalprecht.translate',
+		'adaptive.speech',
 		require('./modules/configuration').name,
 		require('./modules/authentication').name,
 		require('./modules/uservoice').name
