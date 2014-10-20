@@ -15,28 +15,28 @@ module.exports = function(
 	$speechRecognition
 	) {
 
-	var tasks = {
-		'createBoard': {
-			regex: /^create .+/gi,
-			lang: 'en-US',
-			call: function(e) {
-				$scope.createBoard({
-					'name': e.split(' ').slice(1).join(' ')
-				});
-			}
-		}
-	}
+	// var tasks = {
+	// 	'createBoard': {
+	// 		regex: /^create .+/gi,
+	// 		lang: 'en-US',
+	// 		call: function(e) {
+	// 			$scope.createBoard({
+	// 				'name': e.split(' ').slice(1).join(' ')
+	// 			});
+	// 		}
+	// 	}
+	// }
 
-	$speechRecognition.onerror(function(e) {
-		console.error('Voice controls disabled.', e);
-	});
+	// $speechRecognition.onerror(function(e) {
+	// 	console.error('Voice controls disabled.', e);
+	// });
 
-	$speechRecognition.onstart(function() {
-		console.debug('Voice controls enabled!');
-		$speechRecognition.listenUtterance(tasks['createBoard']);
-	});
+	// $speechRecognition.onstart(function() {
+	// 	console.debug('Voice controls enabled!');
+	// 	$speechRecognition.listenUtterance(tasks['createBoard']);
+	// });
 
-	$speechRecognition.listen();
+	// $speechRecognition.listen();
 
 	$scope.boards = boards;
 	$scope.selectedBoardIds = [];

@@ -18,49 +18,49 @@ module.exports = function(
 	) {
 
 
-	var lastVoicedTicket = null;
+	// var lastVoicedTicket = null;
 
-	var tasks = {
-		'createTicket': {
-			regex: /^create .+/gi,
-			lang: 'en-US',
-			call: function(e) {
-				$scope.createTicket({
-					'heading': e.split(' ').slice(1).join(' ')
-				}).then(function(ticket) {
-					lastVoicedTicket = ticket;
-				});
-			}
-		},
-		'updateTicket': {
-			regex: /^write .+/gi,
-			lang: 'en-US',
-			call: function(e) {
-				if(lastVoicedTicket) {
-					$scope.editTicket(lastVoicedTicket, {
-						'color':   lastVoicedTicket.color,
-						'heading': lastVoicedTicket.heading,
-						'content': e.split(' ').slice(1).join(' ')
-					});
-				}
-				else {
-					console.debug('no ticket was selected');
-				}
-			}
-		}
-	}
+	// var tasks = {
+	// 	'createTicket': {
+	// 		regex: /^create .+/gi,
+	// 		lang: 'en-US',
+	// 		call: function(e) {
+	// 			$scope.createTicket({
+	// 				'heading': e.split(' ').slice(1).join(' ')
+	// 			}).then(function(ticket) {
+	// 				lastVoicedTicket = ticket;
+	// 			});
+	// 		}
+	// 	},
+	// 	'updateTicket': {
+	// 		regex: /^write .+/gi,
+	// 		lang: 'en-US',
+	// 		call: function(e) {
+	// 			if(lastVoicedTicket) {
+	// 				$scope.editTicket(lastVoicedTicket, {
+	// 					'color':   lastVoicedTicket.color,
+	// 					'heading': lastVoicedTicket.heading,
+	// 					'content': e.split(' ').slice(1).join(' ')
+	// 				});
+	// 			}
+	// 			else {
+	// 				console.debug('no ticket was selected');
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	$speechRecognition.onerror(function(e) {
-		console.error('Voice controls disabled.', e);
-	});
+	// $speechRecognition.onerror(function(e) {
+	// 	console.error('Voice controls disabled.', e);
+	// });
 
-	$speechRecognition.onstart(function() {
-		console.debug('Voice controls enabled!');
-		$speechRecognition.listenUtterance(tasks['createTicket']);
-		$speechRecognition.listenUtterance(tasks['updateTicket']);
-	});
+	// $speechRecognition.onstart(function() {
+	// 	console.debug('Voice controls enabled!');
+	// 	$speechRecognition.listenUtterance(tasks['createTicket']);
+	// 	$speechRecognition.listenUtterance(tasks['updateTicket']);
+	// });
 
-	$speechRecognition.listen();
+	// $speechRecognition.listen();
 
 
 	// board resolved in the ui-router
