@@ -7,77 +7,40 @@ module.exports = function($http, Config, Ticket) {
 
 	var _obj = function(board) {
 		return {
-			name:       board.name,
-			info:       board.info,
-			isPublic:   board.isPublic,
-			size:       board.size,
-			background: board.background
+			name:        board.name,
+			description: board.description,
+			size:        board.size,
+			background:  board.background,
+			createdBy:   board.createdBy,
+			accessCode:  board.accessCode
 		}
 	}
 
 	var _init = function(response) {
 		this.id         = response.data.id;
-		this.owner      = response.data.owner;
-		this.screenshot = Config.api.url() + 'boards/' + this.id +
-			'/screenshot';
+		this.createdBy  = response.data.createdBy;
 
 		return response;
 	}
 
 	var _update = function(response) {
 		this.name       = response.data.name       || this.name;
-		this.info       = response.data.info       || this.info;
-		this.isPublic   = response.data.isPublic   || this.isPublic;
 		this.size       = response.data.size       || this.size;
 		this.background = response.data.background || this.background;
-
-		this.guests  = response.data.guests  || this.guests;
-		this.members = response.data.members || this.members;
-
-		if(response.data.tickets) {
-			this.tickets = _makeTickets(response.data.tickets, this.id);
-		}
+		this.createdBy  = response.data.createdBy  || this.createdBy;
+		this.accessCode = response.data.accessCode || this.accessCode;
 
 		return this;
 	}
 
-	var _makeTickets = function(raw, board) {
-		var tickets = [ ];
-
-		if(!raw) {
-			return tickets;
-		}
-
-		for(var i = 0; i < raw.length; i++) {
-			var ticketData       = raw[i];
-				ticketData.board = board;
-			tickets.push(new Ticket(ticketData));
-		}
-
-		return tickets;
-	}
-
 	var Board = function(data) {
 
-		this.id    = data.id;
-		this.owner = data.owner;
-
+		this.id         = data.id;
 		this.name       = data.name;
-		this.info       = data.info;
-		this.isPublic   = data.isPublic;
 		this.size       = data.size;
 		this.background = data.background;
-
-		this.screenshot = Config.api.url() + 'boards/' + this.id +
-			'/screenshot';
-
-		this.guests  = data.guests  || [ ];
-		this.members = data.members || [ ];
-		this.tickets = _makeTickets(data.tickets, this.id);
-	}
-
-	Board.remove = function(ids) {
-		return $http.delete(Config.api.url() + 'boards?boards=' + ids.join(','));
+		this.createdBy  = data.createdBy;
+		this.accessCode = data.accessCode;
 	}
 
 	Board.prototype.save = function() {
@@ -99,13 +62,13 @@ module.exports = function($http, Config, Ticket) {
 		return $http.delete(Config.api.url() + 'boards/' + this.id);
 	}
 
-	Board.prototype.addMember = function(uid) {
-		return $http.post(Config.api.url() + 'boards/' + this.id + '/users', { id: uid })
+	Board.prototype.grantGuestAccess = function() {
+		return $http.post(Config.api.url() + 'boards/' + this.id + '/access')
 			.then(_update.bind(this));
 	}
 
-	Board.prototype.removeMember = function(uid) {
-		return $http.delete(Config.api.url() + 'boards/' + this.id + '/users/' + uid)
+	Board.prototype.revokeGuestAccess = function() {
+		return $http.delete(Config.api.url() + 'boards/' + this.id + '/access')
 			.then(_update.bind(this));
 	}
 

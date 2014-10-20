@@ -15,7 +15,8 @@
     "underscore": "~1.6.0",
     "angular-sanitize": "~1.2.20",
     "iscroll": "~5.1.2",
-    "angular-translate": "~2.2.0"
+    "angular-translate": "~2.2.0",
+    "angular-adaptive-speech": "~0.3.0"
   },
   "overrides": {
     "gsap": {

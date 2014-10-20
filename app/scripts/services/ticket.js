@@ -18,7 +18,6 @@ module.exports = function($http, Config) {
 
 	var _init = function(response) {
 		this.id    = response.data.id;
-		this.owner = response.data.owner;
 
 		return response;
 	}
@@ -35,16 +34,10 @@ module.exports = function($http, Config) {
 	var Ticket = function(data) {
 		this.id       = data.id;
 		this.board    = data.board;
-		this.owner    = data.owner;
 		this.color    = data.color;
 		this.heading  = data.heading;
 		this.content  = data.content;
 		this.position = data.position;
-	}
-
-	Ticket.remove = function(board, ids) {
-		return $http.delete(Config.api.url() + 'boards/' + board +
-			'/tickets?tickets=' + ids.join(',') + '');
 	}
 
 	Ticket.prototype.save = function() {

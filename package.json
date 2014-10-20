@@ -80,6 +80,11 @@
         "angular"
       ]
     },
+    "angular-adaptive-speech": {
+      "depends": [
+        "angular"
+      ]
+    },
     "underscore": "_"
   },
   "browser": {
@@ -98,6 +103,7 @@
     "angular-truncate": "./bower_components/angular-truncate/src/truncate.js",
     "angular-text": "./bower_components/textAngular/dist/textAngular.min.js",
     "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
-    "angular-translate": "./bower_components/angular-translate/angular-translate.min.js"
+    "angular-translate": "./bower_components/angular-translate/angular-translate.min.js",
+    "angular-adaptive-speech": "./bower_components/angular-adaptive-speech/angular-adaptive-speech.js"
   }
 }

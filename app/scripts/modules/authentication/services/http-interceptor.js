@@ -1,6 +1,11 @@
 'use strict';
 
 
+/**
+ * Injects the 'access-token' from 'authService' into each HTTP request.
+ *   'Authorization': 'Bearer <token>'
+ * Redirects to 'login' state when response has status of 401.
+ */
 module.exports = function($q, $injector, Config) {
 
 	return {
@@ -18,7 +23,6 @@ module.exports = function($q, $injector, Config) {
 
 		responseError: function(res) {
 			if(res.status == 401) {
-				$injector.get('authService').clear();
 				$injector.get('$state').go(Config.states.login);
 			}
 

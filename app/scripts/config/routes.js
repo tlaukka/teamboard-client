@@ -1,32 +1,38 @@
 'use strict';
 
 
-module.exports = function(
-		$stateProvider, $urlRouterProvider, $locationProvider) {
+module.exports = function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 	$stateProvider
+		.state('guestlogin', {
+			url: '/board/:id/access/:code',
+			template: require('../../partials/guestlogin.html'),
+			controller: require('../controllers/guestlogin')
+		})
+
 		.state('main', {
 			url:      '/main',
 			abstract: true,
 			template: require('../../partials/main.html')
 		})
-		.state('main.workspace', {
 
+		.state('main.workspace', {
 			url: '/workspace',
 
 			resolve: {
-
 				currentUser: function(authService) {
-					return authService.getUser();
+					authService.getUser();
 				},
 
 				// transform boards from http request into Board models
 				// so they can have some more functionality
 				boards: function($http, Config, Board) {
 					var _ = require('underscore');
+
 					return $http.get(Config.api.url() + 'boards')
 						.then(function(response) {
 							var boards = response.data;
+
 							return _.map(boards, function(board) {
 								return new Board(board);
 							});
@@ -35,7 +41,6 @@ module.exports = function(
 			},
 
 			views: {
-
 				'sidebar': {
 					template:   require('../../partials/sidebar.html'),
 					controller: require('../controllers/sidebar')
@@ -52,8 +57,8 @@ module.exports = function(
 				}
 			}
 		})
-		.state('main.board', {
 
+		.state('main.board', {
 			url: '/board/:id',
 
 			resolve: {
@@ -100,38 +105,29 @@ module.exports = function(
 				},
 
 				'content': {
-
 					resolve: {
+
 						currentUser: function(authService) {
 							return authService.getUser();
 						},
-						connectedSocket: function(socketService) {
-							return socketService.connect().then(
-								function(socket) {
-									console.log('got socket:', socket);
-									return socket;
-								},
-								function(err) {
-									// TODO Handle it?
-									console.log('err', err);
-								});
-						},
-						joinRoom: function($q, $stateParams, connectedSocket) {
+
+						connectedSocket: function($q, $stateParams, Config, authService) {
+							var io = require('socket.io-client');
+
+							var socket = io(Config.io.url(), {
+								'query':     'access-token=' + authService.getToken() + '',
+								'multiplex': false
+							});
+
 							var deferred = $q.defer();
 
-							connectedSocket.emit('board:join', {
-									board: $stateParams.id
-								},
-								function(err, res) {
-
-									if(err) {
-										// TODO Handle this how?
-										console.log('err', err);
-										return deferred.reject(err);
-									}
-
-									return deferred.resolve(res);
+							socket.on('connect', function() {
+								socket.emit('board:join', { 'board': $stateParams.id }, function(err) {
+									return err ? deferred.reject(err) : deferred.resolve(socket);
 								});
+							});
+
+							socket.on('error', deferred.reject);
 
 							return deferred.promise;
 						}
@@ -142,13 +138,13 @@ module.exports = function(
 				}
 			}
 		})
-		.state('main.presentation', {
 
-			url: '/presentation/:boardId',
+		.state('main.presentation', {
+			url: '/presentation/:id',
 
 			resolve: {
 				resolvedBoard: function($http, $stateParams, Config, Board) {
-					return $http.get(Config.api.url() + 'boards/' + $stateParams.boardId + '')
+					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
 						.then(
 							function(response) {
 								return new Board(response.data);
@@ -160,7 +156,7 @@ module.exports = function(
 				},
 
 				tickets: function($http, $stateParams, Config, Ticket, resolvedBoard) {
-					return $http.get(Config.api.url() + 'boards/' + $stateParams.boardId + '/tickets')
+					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '/tickets')
 						.then(function(response) {
 							var tickets = [];
 							for(var i = 0; i < response.data.length; i++) {
@@ -180,42 +176,64 @@ module.exports = function(
 
 			views: {
 				'presentation': {
-
 					resolve: {
 						currentUser: function(authService) {
 							return authService.getUser();
 						},
-						connectedSocket: function(socketService) {
-							return socketService.connect().then(
-								function(socket) {
-									console.log('got socket:', socket);
-									return socket;
-								},
-								function(err) {
-									// TODO Handle it?
-									console.log('err', err);
-								});
-						},
-						joinRoom: function($q, $stateParams, connectedSocket) {
+
+						connectedSocket: function($q, $stateParams, Config, authService) {
+							var io = require('socket.io-client');
+
+							var socket = io(Config.io.url(), {
+								'query':     'access-token=' + authService.getToken() + '',
+								'multiplex': false
+							});
+
 							var deferred = $q.defer();
 
-							connectedSocket.emit('board:join', {
-									board: $stateParams.boardId
-								},
-								function(err, res) {
-
-									if(err) {
-
-										// TODO Handle this how?
-										console.log('err', err);
-										return deferred.reject(err);
-									}
-
-									return deferred.resolve(res);
+							socket.on('connect', function() {
+								socket.emit('board:join', { 'board': $stateParams.id }, function(err) {
+									return err ? deferred.reject(err) : deferred.resolve(socket);
 								});
+							});
+
+							socket.on('error', deferred.reject);
 
 							return deferred.promise;
 						}
+
+						// connectedSocket: function(socketService) {
+						// 	return socketService.connect().then(
+						// 		function(socket) {
+						// 			console.log('got socket:', socket);
+						// 			return socket;
+						// 		},
+						// 		function(err) {
+						// 			// TODO Handle it?
+						// 			console.log('err', err);
+						// 		});
+						// },
+
+						// joinRoom: function($q, $stateParams, connectedSocket) {
+						// 	var deferred = $q.defer();
+
+						// 	connectedSocket.emit('board:join', {
+						// 			board: $stateParams.boardId
+						// 		},
+						// 		function(err, res) {
+
+						// 			if(err) {
+
+						// 				// TODO Handle this how?
+						// 				console.log('err', err);
+						// 				return deferred.reject(err);
+						// 			}
+
+						// 			return deferred.resolve(res);
+						// 		});
+
+						// 	return deferred.promise;
+						// }
 					},
 
 					template:   require('../../partials/presentation-container.html'),
@@ -225,6 +243,5 @@ module.exports = function(
 		});
 
 	$urlRouterProvider.otherwise('/main/workspace');
-
 	$locationProvider.html5Mode(true);
 }

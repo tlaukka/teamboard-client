@@ -22,27 +22,18 @@
 						required>
 				</div>
 			</div>
-			<div class="form-group last">
-				<label for="visibilityInput" class="control-label col-md-2">{{ 'MODAL_LABEL_VISIBILITY' | translate }}</label>
-				<div class="col-xs-10">
-					<div id="visibilityInput" class="btn-group btn-group-justified btn-group-visibility" ng-init="newBoard.isPublic = false">
-						<label class="btn btn-md btn-visibility" ng-model="newBoard.isPublic" btn-radio="false">{{ 'LABEL_PRIVATE' | translate }}</label>
-						<label class="btn btn-md btn-visibility" ng-model="newBoard.isPublic" btn-radio="true">{{ 'LABEL_PUBLIC' | translate }}</label>
-					</div>
-				</div>
-			</div>
 		</form>
 	</div>
-	<div class="modal-content-divider"></div>
+	<!-- <div class="modal-content-divider"></div>
 	<div class="modal-heading-block"
 		ng-click="isMemberViewCollapsed = !isMemberViewCollapsed; userOptions.isOwnerDetailsVisible = false">
 		<div>{{ 'MODAL_HEADER_PEOPLEVIEW' | translate }}
 			<i ng-if="!isMemberViewCollapsed" class="fa fa-caret-down fa-fw modal-content-caret"></i>
 			<i ng-if="isMemberViewCollapsed" class="fa fa-caret-right fa-fw modal-content-caret"></i>
 		</div>
-	</div>
+	</div> -->
 	<!-- Member view -->
-	<div class="modal-content-block padding-md centered"
+	<!-- <div class="modal-content-block padding-md centered"
 		ng-show="!isMemberViewCollapsed && !userOptions.isOwnerDetailsVisible">
 		<div class="member-block" ng-click="userOptions.isOwnerDetailsVisible = true">
 			<i class="fa fa-star owner-mark"></i>
@@ -54,7 +45,7 @@
 			<div tb-gravatar size="80" email="userOptions.owner.email"></div>
 		</div>
 		<p class="selected-email">{{userOptions.owner.email}}</p>
-	</div>
+	</div> -->
 </div>
 <div class="modal-content-divider"></div>
 <div class="modal-footer">
