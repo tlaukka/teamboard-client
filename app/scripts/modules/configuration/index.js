@@ -31,9 +31,8 @@ var config = {
 
 		// restful api url and port
 		api: {
-			_url:     'http://' + (process.env.HOSTNAME || 'localhost'),
-			_port:    9002,
-			_version: 'api/v1'
+			_url: 'http://' + (process.env.HOSTNAME || 'localhost') +
+				':9002/api'
 		},
 
 		// static content provider url and port
@@ -49,9 +48,7 @@ var config = {
 			_port: process.env.IO_PORT
 		},
 		api: {
-			_url:     process.env.API_URL,
-			_port:    process.env.API_PORT,
-			_version: 'api/v1'
+			_url:     process.env.API_URL
 		},
 		static: {
 			_url:  process.env.STATIC_URL,
@@ -68,11 +65,7 @@ config.io.url = function() {
 }
 
 config.api.url = function() {
-	return this._url;
-}
-
-config.static.url = function() {
-	return this._url + ':' + this._port;
+	return this._url + '/';
 }
 
 module.exports = angular.module('tb.configuration', [ ])
