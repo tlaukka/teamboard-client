@@ -62,6 +62,28 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			url: '/board/:id',
 
 			resolve: {
+				resolveUser: function($http, $stateParams, Config, authService) {
+					var _ = require('underscore');
+
+					if (authService.getToken() == undefined) {
+						authService.setTokenKey('tb-access-token-guest-' + $stateParams.id);
+					}
+					else {
+						// Check user type (guest or user)
+						return $http.get(Config.api.url() + 'boards')
+							.then(function(response) {
+								var boards = response.data;
+								var result = _.find(boards, function(board) {
+									return board.id == $stateParams.id;
+								});
+
+								if (result == undefined) {
+									authService.setTokenKey('tb-access-token-guest-' + $stateParams.id);
+								}
+							});
+					}
+				},
+
 				resolvedBoard: function($http, $stateParams, Config, Board) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
 						.then(
@@ -201,39 +223,6 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 							return deferred.promise;
 						}
-
-						// connectedSocket: function(socketService) {
-						// 	return socketService.connect().then(
-						// 		function(socket) {
-						// 			console.log('got socket:', socket);
-						// 			return socket;
-						// 		},
-						// 		function(err) {
-						// 			// TODO Handle it?
-						// 			console.log('err', err);
-						// 		});
-						// },
-
-						// joinRoom: function($q, $stateParams, connectedSocket) {
-						// 	var deferred = $q.defer();
-
-						// 	connectedSocket.emit('board:join', {
-						// 			board: $stateParams.boardId
-						// 		},
-						// 		function(err, res) {
-
-						// 			if(err) {
-
-						// 				// TODO Handle this how?
-						// 				console.log('err', err);
-						// 				return deferred.reject(err);
-						// 			}
-
-						// 			return deferred.resolve(res);
-						// 		});
-
-						// 	return deferred.promise;
-						// }
 					},
 
 					template:   require('../../partials/presentation-container.html'),
