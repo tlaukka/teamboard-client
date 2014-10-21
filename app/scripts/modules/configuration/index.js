@@ -68,7 +68,7 @@ config.io.url = function() {
 }
 
 config.api.url = function() {
-	return this._url + ':' + this._port + '/';
+	return this._url;
 }
 
 config.static.url = function() {
