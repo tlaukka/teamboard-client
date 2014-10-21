@@ -25,14 +25,12 @@ var config = {
 
 		// socket.io server host and port
 		io: {
-			_url: 'http://' + (process.env.HOSTNAME || 'localhost'),
-			_port: 9001,
+			_url: 'http://' + (process.env.HOSTNAME || 'localhost') + ':9001',
 		},
 
 		// restful api url and port
 		api: {
-			_url: 'http://' + (process.env.HOSTNAME || 'localhost') +
-				':9002/api'
+			_url: 'http://' + (process.env.HOSTNAME || 'localhost') + ':9002/api'
 		},
 
 		// static content provider url and port
@@ -43,13 +41,15 @@ var config = {
 		}
 	},
 	production: {
+
 		io: {
-			_url:  process.env.IO_URL,
-			_port: process.env.IO_PORT
+			_url: process.env.IO_URL
 		},
+
 		api: {
-			_url:     process.env.API_URL
+			_url: process.env.API_URL
 		},
+
 		static: {
 			_url:  process.env.STATIC_URL,
 			_port: process.env.STATIC_PORT
@@ -61,7 +61,7 @@ config = _.extend(config.common,
 	config[process.env.NODE_ENV] || config.development);
 
 config.io.url = function() {
-	return this._url + ':' + this._port;
+	return this._url;
 }
 
 config.api.url = function() {
