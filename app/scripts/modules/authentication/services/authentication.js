@@ -14,7 +14,6 @@ module.exports = function($q, $http, Config) {
 				.then(function(response) {
 					var token = response.headers('x-access-token');
 					self.setUserToken(token);
-					// self.setTokenKey('tb-access-token-user');
 				});
 		},
 
@@ -25,34 +24,16 @@ module.exports = function($q, $http, Config) {
 				.then(function(response) {
 					var token = response.headers('x-access-token')
 					self.setGuestToken(boardId, token);
-					// self.setTokenKey('tb-access-token-guest-' + boardId);
-				});
-		},
-
-		login: function(user) {
-			return $http.post(_api + 'auth/login', user)
-				.then(function(response) {
-					localStorage.setItem('access-token',
-						response.headers('x-access-token'));
 				});
 		},
 
 		logout: function() {
+			var self = this;
+
 			return $http.post(_api + 'auth/logout')
 				.then(function() {
-					localStorage.removeItem('access-token');
+					self.removeToken();
 				});
-		},
-
-		logoutUser: function() {
-			return $http.post(_api + 'auth/logout')
-				.then(function() {
-					removeUserToken();
-				});
-		},
-
-		logoutGuest: function(boardId) {
-			removeGuestToken(boardId);
 		},
 
 		register: function(user) {
@@ -74,20 +55,7 @@ module.exports = function($q, $http, Config) {
 		},
 
 		getToken: function() {
-			// return localStorage.getItem('access-token');
 			return localStorage.getItem(_tokenKey);
-		},
-
-		getUserToken: function() {
-			return localStorage.getItem('tb-access-token-user');
-		},
-
-		getGuestToken: function(boardId) {
-			return localStorage.getItem('tb-access-token-guest-' + boardId);
-		},
-
-		setToken: function(token) {
-			localStorage.setItem('access-token', token);
 		},
 
 		setUserToken: function(token) {
@@ -98,16 +66,8 @@ module.exports = function($q, $http, Config) {
 			localStorage.setItem('tb-access-token-guest-' + boardId, token);
 		},
 
-		removeUserToken: function() {
-			localStorage.removeItem('tb-access-token-user');
-		},
-
-		removeGuestToken: function(boardId) {
-			localStorage.removeItem('tb-access-token-guest-' + boardId);
-		},
-
-		clear: function() {
-			localStorage.removeItem('access-token');
+		removeToken: function() {
+			localStorage.removeItem(_tokenKey);
 		}
 	}
 }
