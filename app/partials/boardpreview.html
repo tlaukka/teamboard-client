@@ -11,7 +11,6 @@
 			<i class="fa fa-check-circle"></i>
 		</div>
 		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked($event)">
-			<!-- <img ng-src="{{screenshotUrl}}" class="board center-block"> -->
 			<div class="board-map">
 				<tb-minimap board="board" tickets="tickets" width="204" indicator="false"></tb-minimap>
 			</div>
@@ -20,6 +19,4 @@
 	<div class="heading" ng-click="promptBoardEdit(board)">
 		{{ board.name | characters: 20: true }}
 	</div>
-	<div ng-if="!board.isPublic" class="label label-private">{{ 'LABEL_PRIVATE' | translate }}</div>
-	<div ng-if="board.isPublic" class="label label-public">{{ 'LABEL_PUBLIC' | translate }}</div>
 </div>
