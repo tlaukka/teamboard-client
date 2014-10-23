@@ -40,6 +40,7 @@
     "Draggable": "Draggable",
     "CSSPlugin": "CSSPlugin",
     "IScroll": "IScroll",
+    "zeroclipboard": "zeroclipboard",
     "angular-bootstrap": {
       "depends": [
         "angular"
@@ -85,6 +86,11 @@
         "angular"
       ]
     },
+    "angular-clip": {
+      "depends": [
+        "angular"
+      ]
+    },
     "underscore": "_"
   },
   "browser": {
@@ -93,6 +99,7 @@
     "Draggable": "./bower_components/gsap/src/uncompressed/utils/Draggable.js",
     "CSSPlugin": "./bower_components/gsap/src/uncompressed/plugins/CSSPlugin.js",
     "IScroll": "./bower_components/iscroll/build/iscroll.js",
+    "zeroclipboard": "./bower_components/zeroclipboard/dist/ZeroClipboard.js",
     "angular": "./bower_components/angular/angular.js",
     "angular-route": "./bower_components/angular-route/angular-route.js",
     "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.js",
@@ -104,6 +111,7 @@
     "angular-text": "./bower_components/textAngular/dist/textAngular.min.js",
     "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
     "angular-translate": "./bower_components/angular-translate/angular-translate.min.js",
-    "angular-adaptive-speech": "./bower_components/angular-adaptive-speech/angular-adaptive-speech.js"
+    "angular-adaptive-speech": "./bower_components/angular-adaptive-speech/angular-adaptive-speech.js",
+    "angular-clip": "./bower_components/ng-clip/dest/ng-clip.min.js"
   }
 }

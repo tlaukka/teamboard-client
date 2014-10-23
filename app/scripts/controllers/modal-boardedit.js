@@ -29,6 +29,10 @@ module.exports = function($scope, $modalInstance, $http, $location, Config, Boar
 		});
 	}
 
+	$scope.copyUrlFallback = function(copy) {
+		window.prompt('Press cmd+c to copy the text below.', copy);
+	}
+
 	// Apply action
 	$scope.apply = function(result) {
 		$modalInstance.close(result);

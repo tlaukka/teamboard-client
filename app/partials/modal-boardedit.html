@@ -26,14 +26,19 @@
 			<div class="form-group last">
 				<label for="headingInput" class="control-label col-xs-2">{{ 'MODAL_LABEL_SHARING' | translate }}</label>
 				<div class="col-xs-7">
-					<input type="text"
-						id="sharingInput"
-						name="sharingInput"
-						class="form-control text"
-						ng-model="url"
-						readonly
-						tb-auto-focus
-						required>
+					<div class="input-group">
+						<input type="text"
+							id="sharingInput"
+							name="sharingInput"
+							class="form-control text"
+							ng-model="url"
+							readonly>
+						<span class="input-group-btn">
+							<button class="btn btn-default" clip-copy="url" clip-click-fallback="copyUrlFallback(copy)">
+								{{ 'MODAL_LABEL_COPY' | translate }}
+							</button>
+						</span>
+					</div>
 				</div>
 				<div class="col-xs-3">
 					<button ng-if="!board.accessCode" class="btn btn-primary btn-fw" ng-click="generateUrl()">
@@ -74,7 +79,9 @@
 	<div class="modal-content-block padding-md">
 		<div class="row">
 			<div class="col-md-6">
-				<button type="button" class="btn btn-lg btn-default btn-fw" ng-click="cancel()">{{ 'MODAL_LABEL_CANCEL' | translate }}</button>
+				<button type="button" class="btn btn-lg btn-default btn-fw" ng-click="cancel()">
+					{{ 'MODAL_LABEL_CANCEL' | translate }}
+				</button>
 			</div>
 			<div class="col-md-6">
 				<button type="submit"

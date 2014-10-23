@@ -15,18 +15,6 @@ module.exports = function($scope, $state, $stateParams, $http, Config, authServi
 				function(err) {
 					$scope.errors.other = err.data.message;
 				});
-
-			// var url = Config.api.url() + 'boards/' + $stateParams.id + '/access/' + $stateParams.code;
-
-			// return $http.post(url, { username: $scope.username }).then(
-			// 	function(response) {
-			// 		var token = response.headers('x-access-token');
-			// 		authService.setToken(token);
-			// 		$state.go('main.board', { id: $stateParams.id });
-			// 	},
-			// 	function(err) {
-			// 		$scope.errors.other = err.data.message;
-			// 	});
 		}
 	}
 }

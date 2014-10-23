@@ -7,14 +7,15 @@ module.exports = function(
 	$scope,
 	$rootScope,
 	$q,
+	$speechRecognition,
+	$timeout,
 	Board,
 	Ticket,
 	modalService,
 	connectedSocket,
 	resolvedBoard,
 	tickets,
-	currentUser,
-	$speechRecognition
+	currentUser
 	) {
 
 
@@ -61,7 +62,6 @@ module.exports = function(
 	// });
 
 	// $speechRecognition.listen();
-
 
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
@@ -151,6 +151,13 @@ module.exports = function(
 	}
 
 	$scope.isMinimapVisible = (localStorage.getItem('tb-minimap-visible') === 'true');
+
+	if (currentUser.type == 'guest') {
+		$rootScope.$broadcast('ui:enable-background', false);
+	}
+	else {
+		$rootScope.$broadcast('ui:enable-background', true);
+	}
 
 	// triggered from TopBarController
 	$scope.$on('action:create', function(event, data) {

@@ -21,7 +21,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 			resolve: {
 				currentUser: function(authService) {
-					authService.getUser();
+					return authService.getUser();
 				},
 
 				// transform boards from http request into Board models

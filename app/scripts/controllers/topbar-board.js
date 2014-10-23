@@ -9,6 +9,7 @@ module.exports = function($scope, $rootScope, resolvedBoard) {
 	$scope.snapEnabled = false;
 	$scope.removeEnabled = false;
 	$scope.editEnabled = false;
+	$scope.backgroundEnabled = false;
 
 	$scope.onCreateClicked = function() {
 		$rootScope.$broadcast('action:create');
@@ -44,6 +45,10 @@ module.exports = function($scope, $rootScope, resolvedBoard) {
 
 	$scope.$on('ui:enable-edit', function(event, enabled) {
 		$scope.editEnabled = enabled;
+	});
+
+	$scope.$on('ui:enable-background', function(event, enabled) {
+		$scope.backgroundEnabled = enabled;
 	});
 
 	$scope.$on('action:sidebar-collapse', function(event, isCollapsed) {

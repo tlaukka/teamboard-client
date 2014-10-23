@@ -28,6 +28,14 @@ gulp.task('copy-font', function() {
 		.pipe(gulp.dest('./dist/styles'));
 });
 
+// This file is needed for clipboard copying
+gulp.task('copy-clip', function() {
+	return gulp.src([
+			'./bower_components/zeroclipboard/dist/*.swf'
+		])
+		.pipe(gulp.dest('./dist/zeroclipboard'));
+});
+
 // copy the various html assets to the distribution folder
 gulp.task('copy-html', function() {
 	var replace = require('gulp-replace');
@@ -42,7 +50,7 @@ gulp.task('copy-html', function() {
 });
 
 // shorthand to run all static copy tasks in one go
-gulp.task('copy', ['copy-img', 'copy-font', 'copy-html']);
+gulp.task('copy', ['copy-img', 'copy-font', 'copy-clip', 'copy-html']);
 
 // compile sass and concatenate to a single file in the distribution folder
 gulp.task('sass', function() {

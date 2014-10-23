@@ -8,11 +8,12 @@ module.exports = function(
 	$rootScope,
 	$http,
 	$q,
+	$speechRecognition,
 	modalService,
 	Config,
 	Board,
 	boards,
-	$speechRecognition
+	currentUser
 	) {
 
 	// var tasks = {

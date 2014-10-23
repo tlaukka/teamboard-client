@@ -12,6 +12,8 @@ require('angular-truncate');
 require('angular-sanitize');
 require('angular-text');
 require('angular-adaptive-speech');
+require('angular-clip');
+require('zeroclipboard');
 
 // main module
 // TODO split into modules based on features
@@ -21,6 +23,7 @@ angular.module('tb', [
 		'ngAnimate',
 		'truncate',
 		'ngSanitize',
+		'ngClipboard',
 		'textAngular',
 		'pascalprecht.translate',
 		'adaptive.speech',
@@ -40,9 +43,14 @@ angular.module('tb', [
 	.config(require('./config/routes'))
 	.config(require('./config/decorators'))
 	.config(require('./config/translations'))
+
 	.config(function(buttonConfig) {
 		// Fix radio button toggle event in mobile devices
 		buttonConfig.toggleEvent = 'touchstart click';
+	})
+
+	.config(function(ngClipProvider) {
+		ngClipProvider.setPath("../zeroclipboard/ZeroClipboard.swf");
 	})
 
 	.directive('tbBoard',        require('./directives/board'))

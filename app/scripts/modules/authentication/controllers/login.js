@@ -10,7 +10,6 @@ module.exports = function($scope, $state, Config, authService) {
 		$scope.submitted = true;
 
 		if(form.$valid) {
-			// authService.login($scope.user).then(
 			authService.loginUser($scope.user).then(
 				function() {
 					$state.go(Config.states.main);

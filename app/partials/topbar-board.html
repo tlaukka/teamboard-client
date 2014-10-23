@@ -3,14 +3,12 @@
 		ng-class="isSidebarCollapsed ? 'sidebar-margin-collapsed' : 'sidebar-margin'">
 		<div class="row">
 			<div class="hidden-xs col-sm-5 content-block cursor-pointer" ng-click="onHeadingClicked()">
-				<h2 class="workspace-heading">{{ board.name | characters: 20: true }}
-					<span ng-if="!board.isPublic" class="label label-private">{{ 'LABEL_PRIVATE' | translate }}</span>
-					<span ng-if="board.isPublic" class="label label-public">{{ 'LABEL_PUBLIC' | translate }}</span>
-				</h2>
+				<h2 class="workspace-heading">{{ board.name | characters: 24: true }}</h2>
 			</div>
 			<div class="col-xs-9 col-sm-4 content-block">
 				<div class="btn-group iconbar pull-right">
 					<div class="btn btn-icon"
+						ng-show="backgroundEnabled"
 						ng-click="onAddBackgroundClicked()">
 						<i class="fa fa-picture-o fa-fw"></i>
 					</div>
@@ -21,14 +19,12 @@
 						<i class="fa fa-magnet fa-fw"></i>
 					</div>
 					<div class="btn btn-icon"
-						ng-class="{ enabled: removeEnabled, disabled: !removeEnabled }"
-						ng-disabled="!removeEnabled"
+						ng-show="removeEnabled"
 						ng-click="onRemoveClicked()">
 						<i class="fa fa-trash-o fa-fw"></i>
 					</div>
 					<div class="btn btn-icon"
-						ng-class="{ enabled: editEnabled, disabled: !editEnabled }"
-						ng-disabled="!editEnabled"
+						ng-show="editEnabled"
 						ng-click="onEditClicked()">
 						<i class="fa fa-edit fa-fw"></i>
 					</div>
@@ -36,7 +32,8 @@
 			</div>
 			<div class="col-xs-3 col-sm-3 content-block">
 				<button class="btn btn-add center-block" ng-click="onCreateClicked()">
-					<i class="fa fa-plus"></i> <span class="hidden-xs">{{ 'TOPBAR_LABEL_CREATETICKET' | translate }}</span>
+					<i class="fa fa-plus"></i>
+					<span class="hidden-xs">{{ 'TOPBAR_LABEL_CREATETICKET' | translate }}</span>
 				</button>
 			</div>
 		</div>

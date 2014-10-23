@@ -16,7 +16,9 @@
     "angular-sanitize": "~1.2.20",
     "iscroll": "~5.1.2",
     "angular-translate": "~2.2.0",
-    "angular-adaptive-speech": "~0.3.0"
+    "angular-adaptive-speech": "~0.3.0",
+    "zeroclipboard": "~2.1.6",
+    "ng-clip": "~0.2.4"
   },
   "overrides": {
     "gsap": {
