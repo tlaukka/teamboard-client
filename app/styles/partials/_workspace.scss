@@ -23,6 +23,14 @@
 	}
 }
 
+.boardsearch {
+	position: fixed;
+	z-index: 11001;
+	right: 56px;
+	top: $topbar-height + 8px;
+	width: 256px;
+}
+
 .board-preview-container {
 	width: 3 * ($boardpreview-width + $boardpreview-margin-left);
 }

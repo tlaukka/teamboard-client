@@ -51,6 +51,16 @@
 		right: 8px;
 		bottom: 8px;
 	}
+
+	&.btn-boardsearch {
+		right: 8px;
+		top: $topbar-height + 8px;
+	}
+
+	&.btn-ticketsearch {
+		right: 8px;
+		top: 208px;
+	}
 }
 
 .btn.radioselect {

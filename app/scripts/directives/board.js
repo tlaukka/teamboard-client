@@ -83,6 +83,10 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 				element.css('background-image', 'url(../' + bg + ')');
 			}
 
+			// scope.applySearch = function(searchStr) {
+			// 	console.log(searchStr);
+			// }
+
 			// triggered from TopBarController
 			scope.$on('action:add-background', function(event, data) {
 				scope.promptBackgroundAdd();

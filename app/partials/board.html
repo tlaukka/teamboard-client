@@ -15,6 +15,12 @@
 <div class="btn btn-board-icon btn-minimap" ng-click="toggleMinimap()">
 	<i class="fa fa-arrows-alt fa-fw"></i>
 </div>
+<!-- <div class="btn btn-board-icon btn-ticketsearch" ng-click="isSearchVisible = !isSearchVisible">
+	<i class="fa fa-search fa-fw"></i>
+</div>
+<div ng-show="isSearchVisible">
+	<input type="text" class="form-control text ticketsearch" ng-model="searchStr" ng-change="applySearch(searchStr)">
+</div> -->
 <div class="minimap-container" ng-class="{'minimap-visible': isMinimapVisible, 'minimap-hidden': !isMinimapVisible}">
 	<tb-minimap board="board" tickets="tickets" width="225" indicator="true"></tb-minimap>
 </div>

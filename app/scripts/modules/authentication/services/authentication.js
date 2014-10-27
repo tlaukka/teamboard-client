@@ -67,6 +67,7 @@ module.exports = function($q, $http, Config) {
 		},
 
 		removeToken: function() {
+			console.log(_tokenKey);
 			localStorage.removeItem(_tokenKey);
 		}
 	}

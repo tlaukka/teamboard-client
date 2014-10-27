@@ -36,6 +36,14 @@
 	}
 }
 
+.ticketsearch {
+	position: fixed;
+	z-index: 11001;
+	right: 56px;
+	top: 208px;
+	width: 256px;
+}
+
 .presentation-background {
 	position: fixed;
 	left: 0;
