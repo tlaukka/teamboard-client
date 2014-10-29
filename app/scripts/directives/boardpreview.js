@@ -10,13 +10,7 @@ module.exports = function($http, Config, Ticket, scrollArea, authService) {
 		restrict: 'E',
 		template: require('../../partials/boardpreview.html'),
 		replace: true,
-
-		scope: {
-			board: '=boardData',
-			workspaceState: '=workspaceState',
-			promptBoardEdit: '&boardEdit',
-			toggleBoardSelection: '&boardToggle'
-		},
+		scope: true,
 
 		link: function(scope, element) {
 
@@ -29,14 +23,7 @@ module.exports = function($http, Config, Ticket, scrollArea, authService) {
 					console.log('err', err);
 				});
 
-			scope.isLoading = false;
 			scope.isSelected = false;
-
-			scope.screenshotUrl = scope.board.screenshot + '?' +
-				'access_token=' + authService.getToken() + '&' +
-				// it just works
-				'refresh=' + new Date().getTime() + '';
-
 
 			scope.$on('action:select-boards', function(event, select) {
 				if (select) {
@@ -56,11 +43,10 @@ module.exports = function($http, Config, Ticket, scrollArea, authService) {
 			scope.onBoardClicked = function($event) {
 				$event.stopPropagation();
 
-				scope.isLoading = true;
-				scope.workspaceState.isLoadingBoard = true;
-
 				var thumbnailContainer = angular.element(element.children()[0]);
 				thumbnailContainer.css('z-index', 1000);
+
+				scope.state.isLoadingBoard = true;
 
 				// scrollArea.scrollTo(0, 0);
 
@@ -100,7 +86,7 @@ module.exports = function($http, Config, Ticket, scrollArea, authService) {
 					element.addClass('selected');
 				}
 
-				scope.toggleBoardSelection({ id: scope.board.id });
+				scope.toggleBoardSelection(scope.board.id);
 			}
 		}
 	};

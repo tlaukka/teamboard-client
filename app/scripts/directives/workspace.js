@@ -23,7 +23,8 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				mouseWheel: true,
 				scrollbars: true,
 				interactiveScrollbars: true,
-				disableMouse: false
+				disableMouse: false,
+				keyBindings: true
 			}));
 
 			scope.updateWorkspace = function() {
