@@ -6,7 +6,7 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 	var IScroll = require('IScroll');
 
 	return {
-		restrict: 'AE',
+		restrict: 'E',
 
 		scope: {
 			boards: '=',

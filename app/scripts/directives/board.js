@@ -42,7 +42,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 				scope.setBackground(scope.board.background);
 			}, 0);
 
-			scrollArea.refresh(0);
+			// scrollArea.refresh(0);
 			scope.isPresentationVisible = true;
 
 			scope.promptBackgroundAdd = function() {

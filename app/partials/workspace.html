@@ -1,5 +1,4 @@
-<div id="loading-overlay"></div>
-<div tb-workspace boards="boards" id="workspace" state="state" ng-click="removeBoardSelections($event)">
+<tb-workspace boards="boards" id="workspace" state="state" ng-click="removeBoardSelections($event)">
 	<div class="container-fluid">
 		<div class="row">
 			<tb-board-preview
@@ -10,11 +9,12 @@
 				board-toggle="toggleBoardSelection(id)">
 			</tb-board-preview>
 		</div>
-		<div class="btn btn-board-icon btn-boardsearch" ng-click="isSearchVisible = !isSearchVisible">
-			<i class="fa fa-search fa-fw"></i>
-		</div>
-		<div ng-show="isSearchVisible">
-			<input type="text" class="form-control text boardsearch" ng-model="searchStr">
-		</div>
 	</div>
+</tb-workspace>
+<div class="btn btn-board-icon btn-boardsearch" ng-click="isSearchVisible = !isSearchVisible">
+	<i class="fa fa-search fa-fw"></i>
 </div>
+<div ng-show="isSearchVisible">
+	<input type="text" class="form-control text boardsearch" ng-model="searchStr">
+</div>
+<div id="loading-overlay"></div>

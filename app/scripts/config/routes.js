@@ -69,6 +69,8 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 						authService.setTokenKey('tb-access-token-guest-' + $stateParams.id);
 					}
 					else {
+						authService.setTokenKey('tb-access-token-user');
+
 						// Check user type (guest or user)
 						return $http.get(Config.api.url() + 'boards')
 							.then(function(response) {
