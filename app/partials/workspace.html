@@ -1,4 +1,4 @@
-<tb-workspace boards="boards" id="workspace" state="state" ng-click="onWorkspaceClicked($event)">
+<div tb-workspace id="workspace" ng-click="onWorkspaceClicked($event)">
 	<div class="container-fluid">
 		<div class="row"
 			ng-select="selectedBoardIds"
@@ -11,7 +11,7 @@
 			</tb-board-preview>
 		</div>
 	</div>
-</tb-workspace>
+</div>
 <div class="btn btn-board-icon btn-boardsearch" ng-click="isSearchVisible = !isSearchVisible">
 	<i class="fa fa-search fa-fw"></i>
 </div>

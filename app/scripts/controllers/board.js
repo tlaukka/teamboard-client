@@ -178,7 +178,8 @@ module.exports = function(
 	$scope.$on('action:remove', function(event, data) {
 		$scope.promptTicketRemove($scope.selectedTicketIds, function() {
 			// Clear ticket selections if tickets were deleted
-			$scope.selectedTicketIds.length = 0;
+			// $scope.selectedTicketIds.length = 0;
+			$scope.removeTicketSelections();
 		});
 	});
 
@@ -210,12 +211,18 @@ module.exports = function(
 		}
 	});
 
+	$scope.onBoardClicked = function($event) {
+		$event.stopPropagation();
+		$scope.removeTicketSelections();
+	}
+
 	$scope.toggleMinimap = function() {
 		$scope.isMinimapVisible = !$scope.isMinimapVisible;
 		localStorage.setItem('tb-minimap-visible', $scope.isMinimapVisible);
 	}
 
 	$scope.toggleTicketSelection = function(id) {
+		console.log(id);
 		var selectedIndex = $scope.selectedTicketIds.indexOf(id);
 
 		if (selectedIndex == -1) {
@@ -226,10 +233,9 @@ module.exports = function(
 		}
 	}
 
-	$scope.removeTicketSelections = function($event) {
-		$event.stopPropagation();
-		$rootScope.$broadcast('action:select-tickets', false);
-		$scope.selectedTicketIds.length = 0;
+	$scope.removeTicketSelections = function() {
+		// $rootScope.$broadcast('action:select-tickets', false);
+		$scope.selectedTicketIds = [];
 	}
 
 	$scope.createTicket = function(ticketData) {
