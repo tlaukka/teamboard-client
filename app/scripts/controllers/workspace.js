@@ -53,7 +53,7 @@ module.exports = function(
 	$scope.$on('action:remove', function() {
 		$scope.promptBoardRemove($scope.selectedBoardIds, function() {
 			// Clear board selections if boards were deleted
-			$scope.selectedBoardIds.length = 0;
+			$scope.removeBoardSelections();
 		});
 	});
 
@@ -84,6 +84,15 @@ module.exports = function(
 		}
 	});
 
+	$scope.onWorkspaceClicked = function($event) {
+		$event.stopPropagation();
+		$scope.removeBoardSelections();
+	}
+
+	$scope.onBoardPreviewClicked = function($event) {
+		$event.stopPropagation();
+	}
+
 	$scope.toggleBoardSelection = function(id) {
 		var selectedIndex = $scope.selectedBoardIds.indexOf(id);
 
@@ -95,10 +104,8 @@ module.exports = function(
 		}
 	}
 
-	$scope.removeBoardSelections = function($event) {
-		$event.stopPropagation();
-		$rootScope.$broadcast('action:select-boards', false);
-		$scope.selectedBoardIds.length = 0;
+	$scope.removeBoardSelections = function() {
+		$scope.selectedBoardIds = [];
 	}
 
 	$scope.createBoard = function(data) {

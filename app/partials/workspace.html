@@ -1,14 +1,14 @@
-<tb-workspace boards="boards" id="workspace" state="state" ng-click="removeBoardSelections($event)">
+<tb-workspace boards="boards" id="workspace" state="state" ng-click="onWorkspaceClicked($event)">
 	<div class="container-fluid">
-		<div class="row">
-			<tb-board-preview ng-repeat="board in boards | filter:{ name: searchStr } | reverse"></tb-board-preview>
-			<!-- <tb-board-preview
-				ng-repeat="board in boards | filter:{ name: searchStr } | reverse"
-				workspace-state="state"
-				board-data="board"
-				board-edit="promptBoardEdit(board)"
-				board-toggle="toggleBoardSelection(id)">
-			</tb-board-preview> -->
+		<div class="row"
+			ng-select="selectedBoardIds"
+			select-class="{ 'selected': $optSelected }"
+			select-multiple>
+
+			<tb-board-preview ng-repeat="board in boards | filter:{ name: searchStr } | reverse track by board.id"
+				ng-select-option="{{board.id}}"
+				ng-click="onBoardPreviewClicked($event)">
+			</tb-board-preview>
 		</div>
 	</div>
 </tb-workspace>

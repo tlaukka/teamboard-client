@@ -91,6 +91,11 @@
         "angular"
       ]
     },
+    "angular-select": {
+      "depends": [
+        "angular"
+      ]
+    },
     "underscore": "_"
   },
   "browser": {
@@ -112,6 +117,7 @@
     "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
     "angular-translate": "./bower_components/angular-translate/angular-translate.min.js",
     "angular-adaptive-speech": "./bower_components/angular-adaptive-speech/angular-adaptive-speech.js",
-    "angular-clip": "./bower_components/ng-clip/dest/ng-clip.min.js"
+    "angular-clip": "./bower_components/ng-clip/dest/ng-clip.min.js",
+    "angular-select": "./bower_components/ngSelect/ngSelect.min.js"
   }
 }

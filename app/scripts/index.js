@@ -13,6 +13,7 @@ require('angular-sanitize');
 require('angular-text');
 require('angular-adaptive-speech');
 require('angular-clip');
+require('angular-select');
 require('zeroclipboard');
 
 // main module
@@ -24,6 +25,7 @@ angular.module('tb', [
 		'truncate',
 		'ngSanitize',
 		'ngClipboard',
+		'ngSelect',
 		'textAngular',
 		'pascalprecht.translate',
 		'adaptive.speech',
