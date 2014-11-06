@@ -23,6 +23,21 @@ module.exports = function($http, Config, Ticket, scrollArea, authService) {
 					console.log('err', err);
 				});
 
+			scope.$on('action:select-boards', function(event, select) {
+				if (select) {
+					if (!scope.isSelected) {
+						scope.isSelected = true;
+						scope.toggleSelection();
+					}
+				}
+				else {
+					if (scope.isSelected) {
+						scope.isSelected = false;
+						scope.toggleSelection();
+					}
+				}
+			});
+
 			scope.onBoardClicked = function($event) {
 				$event.stopPropagation();
 
@@ -58,6 +73,17 @@ module.exports = function($http, Config, Ticket, scrollArea, authService) {
 
 			scope.onSelectClicked = function($event) {
 				$event.stopPropagation();
+				scope.toggleSelection();
+			}
+
+			scope.toggleSelection = function() {
+				// if (element.hasClass('selected')) {
+				// 	element.removeClass('selected');
+				// }
+				// else {
+				// 	element.addClass('selected');
+				// }
+
 				scope.toggleBoardSelection(scope.board.id);
 			}
 		}

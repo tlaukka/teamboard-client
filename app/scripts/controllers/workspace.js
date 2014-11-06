@@ -89,10 +89,6 @@ module.exports = function(
 		$scope.removeBoardSelections();
 	}
 
-	$scope.onBoardPreviewClicked = function($event) {
-		$event.stopPropagation();
-	}
-
 	$scope.toggleBoardSelection = function(id) {
 		var selectedIndex = $scope.selectedBoardIds.indexOf(id);
 
@@ -105,6 +101,7 @@ module.exports = function(
 	}
 
 	$scope.removeBoardSelections = function() {
+		$rootScope.$broadcast('action:select-boards', false);
 		$scope.selectedBoardIds = [];
 	}
 

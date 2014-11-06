@@ -13,7 +13,6 @@ require('angular-sanitize');
 require('angular-text');
 require('angular-adaptive-speech');
 require('angular-clip');
-require('angular-select');
 require('zeroclipboard');
 
 // main module
@@ -25,7 +24,6 @@ angular.module('tb', [
 		'truncate',
 		'ngSanitize',
 		'ngClipboard',
-		'ngSelect',
 		'textAngular',
 		'pascalprecht.translate',
 		'adaptive.speech',
@@ -55,9 +53,9 @@ angular.module('tb', [
 		ngClipProvider.setPath("../zeroclipboard/ZeroClipboard.swf");
 	})
 
+	.directive('ngClick',        require('./directives/click'))
 	.directive('tbBoard',        require('./directives/board'))
 	.directive('tbTicket',       require('./directives/ticket'))
-	.directive('ngClick',        require('./directives/click'))
 	.directive('tbGravatar',     require('./directives/gravatar'))
 	.directive('tbAutoFocus',    require('./directives/autofocus'))
 	.directive('tbTicketProxy',  require('./directives/ticketproxy'))

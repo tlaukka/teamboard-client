@@ -1,13 +1,7 @@
 <div tb-workspace id="workspace" ng-click="onWorkspaceClicked($event)">
 	<div class="container-fluid">
-		<div class="row"
-			ng-select="selectedBoardIds"
-			select-class="{ 'selected': $optSelected }"
-			select-multiple>
-
-			<tb-board-preview ng-repeat="board in boards | filter:{ name: searchStr } | reverse track by board.id"
-				ng-select-option="{{board.id}}"
-				ng-click="onBoardPreviewClicked($event)">
+		<div class="row">
+			<tb-board-preview ng-repeat="board in boards | filter:{ name: searchStr } | reverse track by board.id">
 			</tb-board-preview>
 		</div>
 	</div>

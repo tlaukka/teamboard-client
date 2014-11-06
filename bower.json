@@ -18,8 +18,7 @@
     "angular-translate": "~2.2.0",
     "angular-adaptive-speech": "~0.3.0",
     "zeroclipboard": "~2.1.6",
-    "ng-clip": "~0.2.4",
-    "ngSelect": "~0.1.1"
+    "ng-clip": "~0.2.4"
   },
   "overrides": {
     "gsap": {

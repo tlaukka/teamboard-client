@@ -108,7 +108,7 @@ module.exports = function(ticketProxy, scrollArea) {
 			scope.onSelectClicked = function($event) {
 				$event.stopPropagation();
 				// scope.toggleSelection();
-				scope.toggleTicketSelection(scope.ticket.id);
+				scope.toggleTicketSelection({ id: scope.ticket.id });
 			}
 
 			// scope.toggleSelection = function() {
