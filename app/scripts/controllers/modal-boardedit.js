@@ -3,9 +3,9 @@
 
 var _ = require('underscore');
 
-module.exports = function($scope, $modalInstance, $http, $location, Config, Board, boardCollection) {
+module.exports = function($scope, $modalInstance, $location, boardCollection) {
 
-	$scope.board = boardCollection.selectedBoard;
+	$scope.board = boardCollection.getSelectedBoard();
 	$scope.url = '';
 
 	if ($scope.board.accessCode != undefined) {

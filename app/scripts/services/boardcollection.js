@@ -3,7 +3,7 @@
 
 var _ = require('underscore');
 
-module.exports = function(Board) {
+module.exports = function($q, Board) {
 	var boardCollection = {};
 
 	var _selectedBoard = null;
@@ -23,7 +23,7 @@ module.exports = function(Board) {
 	}
 
 	boardCollection.getSelectedBoardsCount = function() {
-		return _selectedBoard.length;
+		return _selectedBoardIds.length;
 	}
 
 	boardCollection.getBoards = function() {
@@ -57,12 +57,8 @@ module.exports = function(Board) {
 		}
 
 		if (_selectedBoardIds.length == 1) {
-			_selectedBoard = _.find(_boards, function(board) {
-				return board.id == _selectedBoardIds[0];
-			});
+			_selectedBoard = boardCollection.findBoard(_selectedBoardIds[0]);
 		}
-
-		return _selectedBoardIds.length;
 	}
 
 	boardCollection.addBoard = function(data) {
@@ -75,6 +71,12 @@ module.exports = function(Board) {
 				// Wat do
 				console.log(err);
 			});
+	}
+
+	boardCollection.updateBoard = function(id, attrs) {
+		var board = boardCollection.findBoard(id);
+		board.name = attrs.name;
+		return board.save();
 	}
 
 	var _removeBoard = function(id) {
@@ -90,25 +92,22 @@ module.exports = function(Board) {
 	boardCollection.removeSelectedBoards = function() {
 		var promises = [];
 
-		for (var i = 0; i < ids.length; i++) {
-			 promises.push(_removeBoard(ids[i]));
+		for (var i = 0; i < boardCollection.getSelectedBoardsCount(); i++) {
+			 promises.push(_removeBoard(_selectedBoardIds[i]));
 		}
 
-		$q.all(promises).then(
+		return $q.all(promises).then(
 			function() {
-				_.boards = _.reject(_.boards,
-					function(board) {
-						return _.contains(ids, board.id);
-					});
+				_boards = _.reject(_boards, function(board) {
+					return _.contains(_selectedBoardIds, board.id);
+				});
 
-				callback();
+				boardCollection.clearSelectedBoardIds();
 			},
 			function(err) {
 				// wat do
 				console.log(err);
 			});
-
-		boardCollection.clearSelectedBoardIds();
 	}
 
 	return boardCollection;
