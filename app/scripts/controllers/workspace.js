@@ -13,6 +13,7 @@ module.exports = function(
 	Config,
 	Board,
 	boards,
+	boardCollection,
 	currentUser
 	) {
 
@@ -39,8 +40,10 @@ module.exports = function(
 
 	// $speechRecognition.listen();
 
-	$scope.boards = boards;
-	$scope.selectedBoardIds = [];
+	// $scope.boards = boards;
+	$scope.boards = boardCollection.getBoards();
+	// $scope.selectedBoardIds = [];
+	// boardCollection.setBoards(boards);
 
 	$scope.state = {
 		isLoadingBoard: false
@@ -51,27 +54,70 @@ module.exports = function(
 	});
 
 	$scope.$on('action:remove', function() {
-		$scope.promptBoardRemove($scope.selectedBoardIds, function() {
+		// $scope.promptBoardRemove($scope.selectedBoardIds, function() {
+		// $scope.promptBoardRemove(boardCollection.getSelectedBoardIds(), function() {
+		$scope.promptBoardRemove();//function() {
 			// Clear board selections if boards were deleted
-			$scope.removeBoardSelections();
-		});
+			// $scope.removeBoardSelections();
+		// });
+
+		// $scope.promptBoardRemove(boardCollection.getSelectedBoardIds(), function() {
+		// 	// Clear board selections if boards were deleted
+		// 	$scope.removeBoardSelections();
+		// });
 	});
 
 	$scope.$on('action:edit', function() {
-		var board = _.find($scope.boards, function(board) {
-			return board.id == $scope.selectedBoardIds[0];
-		});
+		// var board = _.find($scope.boards, function(board) {
+		// 	return board.id == $scope.selectedBoardIds[0];
+		// });
 
-		$scope.promptBoardEdit(board);
+		// $scope.promptBoardEdit(board);
+		$scope.promptBoardEdit(boardCollection.selectedBoard);
 	});
 
-	// Enable/disable necessary toolbar buttons.
-	$scope.$watch('selectedBoardIds.length', function() {
-		if ($scope.selectedBoardIds.length != 0) {
+	// // Enable/disable necessary toolbar buttons.
+	// $scope.$watch('selectedBoardIds.length', function() {
+	// 	if ($scope.selectedBoardIds.length != 0) {
+	// 		$rootScope.$broadcast('ui:enable-remove', true);
+
+	// 		// Enable edit only if a single board is selected.
+	// 		if ($scope.selectedBoardIds.length == 1) {
+	// 			$rootScope.$broadcast('ui:enable-edit', true);
+	// 		}
+	// 		else {
+	// 			$rootScope.$broadcast('ui:enable-edit', false);
+	// 		}
+	// 	}
+	// 	else {
+	// 		$rootScope.$broadcast('ui:enable-remove', false);
+	// 		$rootScope.$broadcast('ui:enable-edit', false);
+	// 	}
+	// });
+
+	$scope.onWorkspaceClicked = function($event) {
+		$event.stopPropagation();
+		$scope.removeBoardSelections();
+	}
+
+	$scope.toggleBoardSelection = function(id) {
+		// var selectedIndex = $scope.selectedBoardIds.indexOf(id);
+
+		// if (selectedIndex == -1) {
+		// 	$scope.selectedBoardIds.push(id);
+		// }
+		// else {
+		// 	$scope.selectedBoardIds.splice(selectedIndex, 1);
+		// }
+
+		var result = boardCollection.toggleBoardSelection(id);
+
+		// Enable/disable necessary toolbar buttons.
+		if (result != 0) {
 			$rootScope.$broadcast('ui:enable-remove', true);
 
 			// Enable edit only if a single board is selected.
-			if ($scope.selectedBoardIds.length == 1) {
+			if (result == 1) {
 				$rootScope.$broadcast('ui:enable-edit', true);
 			}
 			else {
@@ -82,69 +128,61 @@ module.exports = function(
 			$rootScope.$broadcast('ui:enable-remove', false);
 			$rootScope.$broadcast('ui:enable-edit', false);
 		}
-	});
-
-	$scope.onWorkspaceClicked = function($event) {
-		$event.stopPropagation();
-		$scope.removeBoardSelections();
-	}
-
-	$scope.toggleBoardSelection = function(id) {
-		var selectedIndex = $scope.selectedBoardIds.indexOf(id);
-
-		if (selectedIndex == -1) {
-			$scope.selectedBoardIds.push(id);
-		}
-		else {
-			$scope.selectedBoardIds.splice(selectedIndex, 1);
-		}
 	}
 
 	$scope.removeBoardSelections = function() {
 		$rootScope.$broadcast('action:select-boards', false);
-		$scope.selectedBoardIds = [];
+		// $scope.selectedBoardIds = [];
+		boardCollection.clearSelectedBoardIds();
+	}
+
+	$scope.validateToolset = function() {
+		
 	}
 
 	$scope.createBoard = function(data) {
-		new Board(data).save().then(
-			function(board) {
-				$scope.boards.push(board);
-			},
-			function(err) {
-				// Wat do
-				console.log(err);
-			});
+		boardCollection.addBoard(data);
+		// new Board(data).save().then(
+		// 	function(board) {
+		// 		$scope.boards.push(board);
+		// 	},
+		// 	function(err) {
+		// 		// Wat do
+		// 		console.log(err);
+		// 	});
 	}
 
-	$scope.removeBoard = function(id) {
-		var filter = function(board) { return board.id === id }
-		var board  = _.find($scope.boards, filter);
+	// $scope.removeBoard = function(id) {
+	// 	var filter = function(board) { return board.id === id }
+	// 	var board  = _.find($scope.boards, filter);
 
-		if(board) {
-			return board.remove();
-		}
-	}
+	// 	if(board) {
+	// 		return board.remove();
+	// 	}
+	// }
 
-	$scope.removeBoards = function(ids, callback) {
-		var promises = [];
+	// $scope.removeSelectedBoards = function(callback) {
+	$scope.removeSelectedBoards = function() {
+		boardCollection.removeSelectedBoards();
+		// var promises = [];
 
-		for (var i = 0; i < ids.length; i++) {
-			 promises.push($scope.removeBoard(ids[i]));
-		}
+		// for (var i = 0; i < ids.length; i++) {
+		// 	 promises.push($scope.removeBoard(ids[i]));
+		// }
 
-		$q.all(promises).then(
-			function() {
-				$scope.boards = _.reject($scope.boards,
-					function(board) {
-						return _.contains(ids, board.id);
-					});
+		// $q.all(promises).then(
+		// 	function() {
+		// 		$scope.boards = _.reject($scope.boards,
+		// 			function(board) {
+		// 				return _.contains(ids, board.id);
+		// 			});
 
-				callback();
-			},
-			function(err) {
-				// wat do
-				console.log(err);
-			});
+		// 		callback();
+		// 	},
+		// 	function(err) {
+		// 		// wat do
+		// 		console.log(err);
+		// 	});
 	}
 
 	$scope.editBoard = function(board, attrs) {
@@ -174,7 +212,8 @@ module.exports = function(
 	}
 
 	$scope.promptBoardEdit = function(board) {
-		Board.selectedBoard = board;
+		// Board.selectedBoard = board;
+		boardCollection.setSelectedBoard(board);
 
 		var modalOptions = {
 			template: require('../../partials/modal-boardedit.html'),
@@ -189,7 +228,7 @@ module.exports = function(
 		});
 	}
 
-	$scope.promptBoardRemove = function(ids, callback) {
+	$scope.promptBoardRemove = function(callback) {
 		var modalOptions = {
 			template: require('../../partials/modal-boardremove.html'),
 			windowClass: 'modal-size-sm'
@@ -197,18 +236,24 @@ module.exports = function(
 
 		var userOptions = {};
 
-		if (ids.length == 1) {
-			var board = _.find($scope.boards, function(board) {
-				return board.id == ids[0];
-			});
+		if (boardCollection.getSelectedBoardsCount() == 1) {
 
-			userOptions.boardName = board.name;
+			// var board = _.find($scope.boards, function(board) {
+			// 	return board.id == ids[0];
+			// });
+
+			// userOptions.boardName = board.name;
+			// var boardId = boardCollection.getSelectedBoardIds()[0];
+			// userOptions.boardName = boardCollection.findBoard(boardId);
+			userOptions.boardName = boardCollection.getSelectedBoard().name;
 		}
 
-		userOptions.boardCount = ids.length;
-
+		// userOptions.boardCount = ids.length;
+		userOptions.boardCount = boardCollection.getSelectedBoardsCount();
+console.log(userOptions.boardName + ', ' + userOptions.boardCount);
 		modalService.show(modalOptions, userOptions).then(function() {
-			$scope.removeBoards(ids, callback);
+			// $scope.removeSelectedBoards(ids, callback);
+			$scope.removeSelectedBoards();
 		});
 	}
 }

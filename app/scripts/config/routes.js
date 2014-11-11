@@ -26,16 +26,18 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 				// transform boards from http request into Board models
 				// so they can have some more functionality
-				boards: function($http, Config, Board) {
+				boards: function($http, Config, boardCollection) {
 					var _ = require('underscore');
 
 					return $http.get(Config.api.url() + 'boards')
 						.then(function(response) {
-							var boards = response.data;
+							boardCollection.setBoards(response.data);
+							return boardCollection.getBoards();
+							// var boards = response.data;
 
-							return _.map(boards, function(board) {
-								return new Board(board);
-							});
+							// return _.map(boards, function(board) {
+							// 	return new Board(board);
+							// });
 						});
 				}
 			},
