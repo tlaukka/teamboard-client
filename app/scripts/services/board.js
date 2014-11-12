@@ -1,9 +1,7 @@
 'use strict';
 
 
-module.exports = function($http, Config, Ticket) {
-
-	var selectedBoard = null;
+module.exports = function($http, Config) {
 
 	var _obj = function(board) {
 		return {

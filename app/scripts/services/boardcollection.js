@@ -19,7 +19,7 @@ module.exports = function($q, Board) {
 	}
 
 	boardCollection.getSelectedBoardIds = function() {
-		return _selectedBoard;
+		return _selectedBoardIds;
 	}
 
 	boardCollection.getSelectedBoardsCount = function() {
@@ -80,9 +80,7 @@ module.exports = function($q, Board) {
 	}
 
 	var _removeBoard = function(id) {
-		var board  = _.find(_boards, function(board) {
-			return board.id === id;
-		});
+		var board = boardCollection.findBoard(id);
 
 		if(board) {
 			return board.remove();

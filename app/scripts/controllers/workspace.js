@@ -52,24 +52,10 @@ module.exports = function(
 		$scope.promptBoardEdit(boardCollection.getSelectedBoard());
 	});
 
-	$scope.onWorkspaceClicked = function($event) {
-		$event.stopPropagation();
-		$scope.removeBoardSelections();
-	}
-
-	$scope.toggleBoardSelection = function(id) {
-		boardCollection.toggleBoardSelection(id);
-		$scope.validateToolset();
-	}
-
-	$scope.removeBoardSelections = function() {
-		$rootScope.$broadcast('action:select-boards', false);
-		boardCollection.clearSelectedBoardIds();
-		$scope.validateToolset();
-	}
-
 	$scope.validateToolset = function() {
 		var selectionCount = boardCollection.getSelectedBoardsCount();
+
+		// Enable/disable necessary toolbar buttons.
 		if (selectionCount != 0) {
 			$rootScope.$broadcast('ui:enable-remove', true);
 
@@ -85,6 +71,22 @@ module.exports = function(
 			$rootScope.$broadcast('ui:enable-remove', false);
 			$rootScope.$broadcast('ui:enable-edit', false);
 		}
+	}
+
+	$scope.onWorkspaceClicked = function($event) {
+		$event.stopPropagation();
+		$scope.removeBoardSelections();
+	}
+
+	$scope.toggleBoardSelection = function(id) {
+		boardCollection.toggleBoardSelection(id);
+		$scope.validateToolset();
+	}
+
+	$scope.removeBoardSelections = function() {
+		$rootScope.$broadcast('action:select-boards', false);
+		boardCollection.clearSelectedBoardIds();
+		$scope.validateToolset();
 	}
 
 	$scope.createBoard = function(data) {

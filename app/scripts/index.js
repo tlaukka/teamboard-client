@@ -66,13 +66,14 @@ angular.module('tb', [
 	.directive('tbMinimap',      require('./directives/minimap'))
 	.directive('tbPresentation', require('./directives/presentation'))
 
-	.factory('Board',           require('./services/board'))
-	.factory('Ticket',          require('./services/ticket'))
-	.service('modalService',    require('./services/modal'))
-	.factory('socketService',   require('./services/socket'))
-	.factory('ticketProxy',     require('./services/ticketproxy'))
-	.factory('scrollArea',      require('./services/scrollarea'))
-	.factory('boardCollection',	require('./services/boardcollection'))
+	.factory('Board',               require('./services/board'))
+	.factory('Ticket',              require('./services/ticket'))
+	.service('modalService',        require('./services/modal'))
+	.factory('socketService',       require('./services/socket'))
+	.factory('ticketProxy',         require('./services/ticketproxy'))
+	.factory('scrollArea',          require('./services/scrollarea'))
+	.factory('boardCollection',     require('./services/boardcollection'))
+	.factory('ticketCollection',	require('./services/ticketcollection'))
 
 	.filter('reverse', require('./filters/reverse'));
 

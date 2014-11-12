@@ -1,9 +1,9 @@
-<div id="{{ticket.id}}" class="ticket" hm-tap="editTicket($event)">
+<div id="{{ticket.id}}" class="ticket" ng-click="editTicket($event)">
 	<div ng-if="isSelected" class="selection-overlay"></div>
 	<div btn-checkbox
 		class="btn btn-select btn-checkbox"
 		ng-model="isSelected"
-		hm-tap="onSelectClicked($event)">
+		ng-click="onSelectClicked($event)">
 		<i class="fa fa-check-circle"></i>
 	</div>
 	<div class="color" ng-style="{ 'background-color': ticket.color }"></div>

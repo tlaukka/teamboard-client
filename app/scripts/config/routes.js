@@ -33,11 +33,6 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 						.then(function(response) {
 							boardCollection.setBoards(response.data);
 							return boardCollection.getBoards();
-							// var boards = response.data;
-
-							// return _.map(boards, function(board) {
-							// 	return new Board(board);
-							// });
 						});
 				}
 			},
@@ -100,17 +95,11 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 							});
 				},
 
-				tickets: function($http, $stateParams, Config, Ticket, resolvedBoard) {
+				tickets: function($http, $stateParams, Config, ticketCollection) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '/tickets')
 						.then(function(response) {
-							var tickets = [];
-							for(var i = 0; i < response.data.length; i++) {
-								var ticketData = response.data[i];
-								ticketData.board = resolvedBoard.id;
-								tickets.push(new Ticket(ticketData));
-							}
-
-							return tickets;
+							ticketCollection.setTickets(response.data);
+							return ticketCollection.getTickets();
 						},
 						function(err) {
 							// TODO Handle it?

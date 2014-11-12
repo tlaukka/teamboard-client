@@ -1,14 +1,7 @@
 <div id="board-background">
-	<div tb-board
-		id="board"
-		hm-tap="onBoardClicked($event)"
-		ng-select="selectedTicketIds"
-		select-class="{ 'selected': $optSelected }"
-		select-multiple>
-
+	<div tb-board id="board" ng-click="onBoardClicked($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
 		<tb-ticket ng-repeat="ticket in tickets track by ticket.id"
-			ng-select-option="{{ticket.id}}"
 			snap-options="snapOptions"
 			ticket-data="ticket"
 			ticket-edit="promptTicketEdit(ticket)"
@@ -31,4 +24,3 @@
 <div class="minimap-container" ng-class="{ 'minimap-visible': isMinimapVisible, 'minimap-hidden': !isMinimapVisible }">
 	<tb-minimap board="board" tickets="tickets" width="225" indicator="true"></tb-minimap>
 </div>
-<div class="debugstr">{{selectedTicketIds}}</div>

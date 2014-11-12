@@ -90,37 +90,29 @@ module.exports = function(ticketProxy, scrollArea) {
 					{ x: ticket.position.x, y: ticket.position.y });
 			});
 
-			// scope.$on('action:select-tickets', function(event, select) {
-			// 	if (select) {
-			// 		if (!scope.isSelected) {
-			// 			scope.isSelected = true;
-			// 			scope.toggleSelection();
-			// 		}
-			// 	}
-			// 	else {
-			// 		if (scope.isSelected) {
-			// 			scope.isSelected = false;
-			// 			scope.toggleSelection();
-			// 		}
-			// 	}
-			// });
+			scope.$on('action:select-tickets', function(event, select) {
+				if (select) {
+					if (!scope.isSelected) {
+						scope.isSelected = true;
+						scope.toggleSelection();
+					}
+				}
+				else {
+					if (scope.isSelected) {
+						scope.isSelected = false;
+						scope.toggleSelection();
+					}
+				}
+			});
 
 			scope.onSelectClicked = function($event) {
 				$event.stopPropagation();
-				// scope.toggleSelection();
-				scope.toggleTicketSelection({ id: scope.ticket.id });
+				scope.toggleSelection();
 			}
 
-			// scope.toggleSelection = function() {
-			// 	if (element.hasClass('selected')) {
-			// 		element.removeClass('selected');
-			// 	}
-			// 	else {
-			// 		element.addClass('selected');
-			// 	}
-
-			// 	scope.toggleTicketSelection({ id: scope.ticket.id });
-			// }
+			scope.toggleSelection = function() {
+				scope.toggleTicketSelection({ id: scope.ticket.id });
+			}
 
 			scope.editTicket = function($event) {
 				$event.stopPropagation();
