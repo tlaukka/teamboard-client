@@ -6,16 +6,12 @@ var _ = require('underscore');
 module.exports = function(
 	$scope,
 	$rootScope,
-	$q,
 	$speechRecognition,
-	$timeout,
-	Board,
-	Ticket,
 	modalService,
 	connectedSocket,
 	resolvedBoard,
-	tickets,
-	currentUser
+	currentUser,
+	ticketCollection
 	) {
 
 
@@ -65,14 +61,7 @@ module.exports = function(
 
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
-	$scope.tickets = tickets;
-
-	// shorthand for finding a ticket from the scopes ticket collection
-	var _getTicket = function(id) {
-		return _.find($scope.tickets, function(ticket) {
-			return ticket.id === id;
-		});
-	}
+	$scope.tickets = ticketCollection.getTickets();
 
 	// create a new ticket in our clients collection if necessary
 	connectedSocket.on('ticket:create', function(ev) {
@@ -84,13 +73,12 @@ module.exports = function(
 			return console.log('ticket:create made by this client');
 		}
 
-		var ticketDoesExist = (_getTicket(ev.ticket.id) != undefined)
+		var ticketDoesExist = (ticketCollection.findTicket(ev.ticket.id) != undefined)
 
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if (!ticketDoesExist) {
-			ev.ticket.board = $scope.board.id;
-			$scope.tickets.push(new Ticket(ev.ticket));
+			ticketCollection.addTicketLocal(ev.ticket);
 			return $scope.$apply();
 		}
 	});
@@ -109,12 +97,12 @@ module.exports = function(
 			return console.log('ticket:update made by this client');
 		}
 
-		var existingTicket = _getTicket(ev.ticket.id);
+		var existingTicket = ticketCollection.findTicket(ev.ticket.id);
 
 		// for some reason the ticket does not yet exist in our client
 		// so we need to add it to our clients collection
 		if (!existingTicket) {
-			return $scope.tickets.push(new Ticket(ev.ticket));
+			return ticketCollection.addTicketLocal(ev.ticket);
 		}
 
 		// the ticket already exists in our clients collection, so
@@ -133,10 +121,8 @@ module.exports = function(
 			return;
 		}
 
-		$scope.tickets = _.reject($scope.tickets,
-			function(ticket) {
-				return ev.ticket.id == ticket.id;
-			});
+		ticketCollection.removeTicketLocal(ev.ticket.id);
+		$scope.tickets = ticketCollection.getTickets();
 
 		return $scope.$apply();
 	});
@@ -170,34 +156,29 @@ module.exports = function(
 	});
 
 	// triggered from TopBarController
-	$scope.$on('action:edit-board', function(event, data) {
-		$scope.promptBoardEdit($scope.board);
-	});
+	// $scope.$on('action:edit-board', function(event, data) {
+	// 	$scope.promptBoardEdit($scope.board);
+	// });
 
 	// triggered from TopBarController
 	$scope.$on('action:remove', function(event, data) {
-		$scope.promptTicketRemove($scope.selectedTicketIds, function() {
-			// Clear ticket selections if tickets were deleted
-			$scope.selectedTicketIds.length = 0;
-		});
+		$scope.promptTicketRemove();
 	});
 
 	// triggered from TopBarController
 	$scope.$on('action:edit', function(event, data) {
-		var ticket = _.find($scope.tickets, function(ticket) {
-			return ticket.id == $scope.selectedTicketIds[0];
-		});
-
-		$scope.promptTicketEdit(ticket);
+		$scope.promptTicketEdit(ticketCollection.getSelectedTicket());
 	});
 
-	// Enable/disable necessary toolbar buttons.
-	$scope.$watch('selectedTicketIds.length', function() {
-		if ($scope.selectedTicketIds.length != 0) {
+	$scope.validateToolset = function() {
+		var selectionCount = ticketCollection.getSelectedTicketsCount();
+
+		// Enable/disable necessary toolbar buttons.
+		if (selectionCount != 0) {
 			$rootScope.$broadcast('ui:enable-remove', true);
 
 			// Enable edit only if a single ticket is selected.
-			if ($scope.selectedTicketIds.length == 1) {
+			if (selectionCount == 1) {
 				$rootScope.$broadcast('ui:enable-edit', true);
 			}
 			else {
@@ -208,7 +189,12 @@ module.exports = function(
 			$rootScope.$broadcast('ui:enable-remove', false);
 			$rootScope.$broadcast('ui:enable-edit', false);
 		}
-	});
+	}
+
+	$scope.onBoardClicked = function($event) {
+		$event.stopPropagation();
+		$scope.removeTicketSelections();
+	}
 
 	$scope.toggleMinimap = function() {
 		$scope.isMinimapVisible = !$scope.isMinimapVisible;
@@ -216,82 +202,27 @@ module.exports = function(
 	}
 
 	$scope.toggleTicketSelection = function(id) {
-		var selectedIndex = $scope.selectedTicketIds.indexOf(id);
-
-		if (selectedIndex == -1) {
-			$scope.selectedTicketIds.push(id);
-		}
-		else {
-			$scope.selectedTicketIds.splice(selectedIndex, 1);
-		}
+		ticketCollection.toggleTicketSelection(id);
+		$scope.validateToolset();
 	}
 
-	$scope.removeTicketSelections = function($event) {
-		$event.stopPropagation();
+	$scope.removeTicketSelections = function() {
 		$rootScope.$broadcast('action:select-tickets', false);
-		$scope.selectedTicketIds.length = 0;
+		ticketCollection.clearSelectedTicketIds();
+		$scope.validateToolset();
 	}
 
-	$scope.createTicket = function(ticketData) {
-		// TODO Allow a predefined position
-		ticketData.board    = $scope.board.id;
-		ticketData.position = { x: 0, y: 0, z: 1000 }
-
-		return new Ticket(ticketData).save().then(
-			function(ticket) {
-				$scope.tickets.push(ticket);
-				return ticket;
-			},
-			function(err) {
-				// TODO Handle it
-				console.log(err);
-			});
+	$scope.createTicket = function(data) {
+		data.board = $scope.board.id;
+		data.position = { x: 0, y: 0, z: 1000 };
+		ticketCollection.addTicket(data);
 	}
 
-	$scope.removeTicket = function(id) {
-		var filter = function(ticket) { return ticket.id === id }
-		var ticket = _.find($scope.tickets, filter);
-
-		if (ticket) {
-			return ticket.remove();
-		}
-	}
-
-	$scope.removeTickets = function(ids, callback) {
-		var promises = [];
-
-		for (var i = 0; i < ids.length; i++) {
-			 promises.push($scope.removeTicket(ids[i]));
-		}
-
-		$q.all(promises).then(
-			function() {
-				$scope.tickets = _.reject($scope.tickets,
-					function(ticket) {
-						return _.contains(ids, ticket.id);
-					});
-
-				callback();
-			},
-			function(err) {
-				// Wat do
-				console.log(err);
-			});
-	}
-
-	$scope.editTicket = function(ticket, attrs) {
-		ticket.color   = attrs.color;
-		ticket.heading = attrs.heading;
-		ticket.content = attrs.content;
-
-		return ticket.save().then(
-			function(ticket) {
-				console.log('updated', ticket);
-			},
-			function(err) {
-				// TODO Handle it
-				console.log(err);
-			});
+	$scope.removeSelectedTickets = function() {
+		ticketCollection.removeSelectedTickets().then(function() {
+			$scope.tickets = ticketCollection.getTickets();
+			$scope.removeTicketSelections();
+		});
 	}
 
 	$scope.promptTicketCreate = function() {
@@ -318,7 +249,7 @@ module.exports = function(
 		}
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
-			$scope.editTicket(ticket, result);
+			ticketCollection.updateTicket(ticket.id, result);
 		});
 	}
 
@@ -330,48 +261,44 @@ module.exports = function(
 
 		var userOptions = {};
 
-		if (ids.length == 1) {
-			var ticket = _.find($scope.tickets, function(ticket) {
-				return ticket.id == ids[0];
-			});
-
-			userOptions.ticketName = ticket.heading;
+		if (ticketCollection.getSelectedTicketsCount() == 1) {
+			userOptions.ticketName = ticketCollection.getSelectedTicket().heading;
 		}
 
-		userOptions.ticketCount = ids.length;
+		userOptions.ticketCount = ticketCollection.getSelectedTicketsCount();
 
 		modalService.show(modalOptions, userOptions).then(function() {
-			$scope.removeTickets(ids, callback);
+			$scope.removeSelectedTickets();
 		});
 	}
 
-	$scope.editBoard = function(board, attrs) {
-		board.name     = attrs.name;
-		board.isPublic = attrs.isPublic;
+	// $scope.editBoard = function(board, attrs) {
+	// 	board.name     = attrs.name;
+	// 	board.isPublic = attrs.isPublic;
 
-		return board.save().then(
-			function(board) {
-				console.log('edited', board);
-			},
-			function(err) {
-				// wat do
-				console.log(err);
-			});
-	}
+	// 	return board.save().then(
+	// 		function(board) {
+	// 			console.log('edited', board);
+	// 		},
+	// 		function(err) {
+	// 			// wat do
+	// 			console.log(err);
+	// 		});
+	// }
 
-	$scope.promptBoardEdit = function(board) {
-		Board.selectedBoard = board;
+	// $scope.promptBoardEdit = function(board) {
+	// 	Board.selectedBoard = board;
 
-		var modalOptions = {
-			template: require('../../partials/modal-boardedit.html'),
-			windowClass: 'modal-size-md',
-			controller: require('./modal-boardedit')
-		}
+	// 	var modalOptions = {
+	// 		template: require('../../partials/modal-boardedit.html'),
+	// 		windowClass: 'modal-size-md',
+	// 		controller: require('./modal-boardedit')
+	// 	}
 
-		var userOptions = {};
+	// 	var userOptions = {};
 
-		modalService.show(modalOptions, userOptions).then(function(result) {
-			$scope.editBoard(board, result);
-		});
-	}
+	// 	modalService.show(modalOptions, userOptions).then(function(result) {
+	// 		$scope.editBoard(board, result);
+	// 	});
+	// }
 }

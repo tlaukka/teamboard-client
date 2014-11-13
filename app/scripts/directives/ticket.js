@@ -111,13 +111,6 @@ module.exports = function(ticketProxy, scrollArea) {
 			}
 
 			scope.toggleSelection = function() {
-				if (element.hasClass('selected')) {
-					element.removeClass('selected');
-				}
-				else {
-					element.addClass('selected');
-				}
-
 				scope.toggleTicketSelection({ id: scope.ticket.id });
 			}
 

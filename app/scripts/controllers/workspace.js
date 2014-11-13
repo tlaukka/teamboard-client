@@ -6,14 +6,9 @@ var _ = require('underscore');
 module.exports = function(
 	$scope,
 	$rootScope,
-	$http,
-	$q,
 	$speechRecognition,
 	modalService,
-	Config,
-	Board,
-	boards,
-	currentUser
+	boardCollection
 	) {
 
 	// var tasks = {
@@ -39,8 +34,7 @@ module.exports = function(
 
 	// $speechRecognition.listen();
 
-	$scope.boards = boards;
-	$scope.selectedBoardIds = [];
+	$scope.boards = boardCollection.getBoards();
 
 	$scope.state = {
 		isLoadingBoard: false
@@ -51,27 +45,22 @@ module.exports = function(
 	});
 
 	$scope.$on('action:remove', function() {
-		$scope.promptBoardRemove($scope.selectedBoardIds, function() {
-			// Clear board selections if boards were deleted
-			$scope.selectedBoardIds.length = 0;
-		});
+		$scope.promptBoardRemove();
 	});
 
 	$scope.$on('action:edit', function() {
-		var board = _.find($scope.boards, function(board) {
-			return board.id == $scope.selectedBoardIds[0];
-		});
-
-		$scope.promptBoardEdit(board);
+		$scope.promptBoardEdit(boardCollection.getSelectedBoard());
 	});
 
-	// Enable/disable necessary toolbar buttons.
-	$scope.$watch('selectedBoardIds.length', function() {
-		if ($scope.selectedBoardIds.length != 0) {
+	$scope.validateToolset = function() {
+		var selectionCount = boardCollection.getSelectedBoardsCount();
+
+		// Enable/disable necessary toolbar buttons.
+		if (selectionCount != 0) {
 			$rootScope.$broadcast('ui:enable-remove', true);
 
 			// Enable edit only if a single board is selected.
-			if ($scope.selectedBoardIds.length == 1) {
+			if (selectionCount == 1) {
 				$rootScope.$broadcast('ui:enable-edit', true);
 			}
 			else {
@@ -82,78 +71,33 @@ module.exports = function(
 			$rootScope.$broadcast('ui:enable-remove', false);
 			$rootScope.$broadcast('ui:enable-edit', false);
 		}
-	});
-
-	$scope.toggleBoardSelection = function(id) {
-		var selectedIndex = $scope.selectedBoardIds.indexOf(id);
-
-		if (selectedIndex == -1) {
-			$scope.selectedBoardIds.push(id);
-		}
-		else {
-			$scope.selectedBoardIds.splice(selectedIndex, 1);
-		}
 	}
 
-	$scope.removeBoardSelections = function($event) {
+	$scope.onWorkspaceClicked = function($event) {
 		$event.stopPropagation();
+		$scope.removeBoardSelections();
+	}
+
+	$scope.toggleBoardSelection = function(id) {
+		boardCollection.toggleBoardSelection(id);
+		$scope.validateToolset();
+	}
+
+	$scope.removeBoardSelections = function() {
 		$rootScope.$broadcast('action:select-boards', false);
-		$scope.selectedBoardIds.length = 0;
+		boardCollection.clearSelectedBoardIds();
+		$scope.validateToolset();
 	}
 
 	$scope.createBoard = function(data) {
-		new Board(data).save().then(
-			function(board) {
-				$scope.boards.push(board);
-			},
-			function(err) {
-				// Wat do
-				console.log(err);
-			});
+		boardCollection.addBoard(data);
 	}
 
-	$scope.removeBoard = function(id) {
-		var filter = function(board) { return board.id === id }
-		var board  = _.find($scope.boards, filter);
-
-		if(board) {
-			return board.remove();
-		}
-	}
-
-	$scope.removeBoards = function(ids, callback) {
-		var promises = [];
-
-		for (var i = 0; i < ids.length; i++) {
-			 promises.push($scope.removeBoard(ids[i]));
-		}
-
-		$q.all(promises).then(
-			function() {
-				$scope.boards = _.reject($scope.boards,
-					function(board) {
-						return _.contains(ids, board.id);
-					});
-
-				callback();
-			},
-			function(err) {
-				// wat do
-				console.log(err);
-			});
-	}
-
-	$scope.editBoard = function(board, attrs) {
-		board.name = attrs.name;
-
-		return board.save().then(
-			function(board) {
-				console.log('edited', board);
-			},
-			function(err) {
-				// wat do
-				console.log(err);
-			});
+	$scope.removeSelectedBoards = function() {
+		boardCollection.removeSelectedBoards().then(function() {
+			$scope.boards = boardCollection.getBoards();
+			$scope.removeBoardSelections();
+		});
 	}
 
 	$scope.promptBoardCreate = function() {
@@ -170,8 +114,6 @@ module.exports = function(
 	}
 
 	$scope.promptBoardEdit = function(board) {
-		Board.selectedBoard = board;
-
 		var modalOptions = {
 			template: require('../../partials/modal-boardedit.html'),
 			windowClass: 'modal-size-md',
@@ -181,11 +123,11 @@ module.exports = function(
 		var userOptions = {};
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
-			$scope.editBoard(board, result);
+			boardCollection.updateBoard(board.id, result);
 		});
 	}
 
-	$scope.promptBoardRemove = function(ids, callback) {
+	$scope.promptBoardRemove = function(callback) {
 		var modalOptions = {
 			template: require('../../partials/modal-boardremove.html'),
 			windowClass: 'modal-size-sm'
@@ -193,18 +135,14 @@ module.exports = function(
 
 		var userOptions = {};
 
-		if (ids.length == 1) {
-			var board = _.find($scope.boards, function(board) {
-				return board.id == ids[0];
-			});
-
-			userOptions.boardName = board.name;
+		if (boardCollection.getSelectedBoardsCount() == 1) {
+			userOptions.boardName = boardCollection.getSelectedBoard().name;
 		}
 
-		userOptions.boardCount = ids.length;
+		userOptions.boardCount = boardCollection.getSelectedBoardsCount();
 
 		modalService.show(modalOptions, userOptions).then(function() {
-			$scope.removeBoards(ids, callback);
+			$scope.removeSelectedBoards();
 		});
 	}
 }

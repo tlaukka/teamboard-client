@@ -32,9 +32,19 @@ module.exports = function($window, $timeout) {
 				'background-size': '100%'
 			});
 
-			$timeout(function() {
-				scope.updateIndicator();
-			}, 0);
+			if (scope.indicator == 'true') {
+				$timeout(function() {
+					scope.updateIndicator();
+				}, 0);
+
+				scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
+					scope.updateIndicator(isCollapsed);
+				});
+
+				angular.element($window).bind('resize', function() {
+					scope.updateIndicator();
+				});
+			}
 
 			scope.setTicket = function(ticket) {
 				return {
@@ -46,8 +56,7 @@ module.exports = function($window, $timeout) {
 				}
 			}
 
-			scope.updateIndicator = function() {
-				var isSidebarCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
+			scope.updateIndicator = function(isSidebarCollapsed) {
 				if ($window.innerWidth < 768) {
 					isSidebarCollapsed = true;
 				}
@@ -66,14 +75,6 @@ module.exports = function($window, $timeout) {
 			scope.setBackground = function(bg) {
 				element.css('background-image', 'url(../' + bg + ')');
 			}
-
-			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
-				scope.updateIndicator();
-			});
-
-			angular.element($window).bind('resize', function() {
-				scope.updateIndicator();
-			});
 
 			scope.$watch('board.background', function() {
 				scope.setBackground(scope.board.background);

@@ -6,7 +6,7 @@
 		ng-click="onSelectClicked($event)">
 		<i class="fa fa-check-circle"></i>
 	</div>
-	<div ng-style="{ 'background-color': ticket.color }" class="color"></div>
+	<div class="color" ng-style="{ 'background-color': ticket.color }"></div>
 	<div class="heading">
 		{{ ticket.heading | characters: 80: true }}
 	</div>

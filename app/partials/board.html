@@ -1,7 +1,7 @@
 <div id="board-background">
-	<div tb-board id="board" board="board" ng-click="removeTicketSelections($event)">
+	<div tb-board id="board" ng-click="onBoardClicked($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
-		<tb-ticket ng-repeat="ticket in tickets"
+		<tb-ticket ng-repeat="ticket in tickets track by ticket.id"
 			snap-options="snapOptions"
 			ticket-data="ticket"
 			ticket-edit="promptTicketEdit(ticket)"
@@ -21,6 +21,6 @@
 <div ng-show="isSearchVisible">
 	<input type="text" class="form-control text ticketsearch" ng-model="searchStr" ng-change="applySearch(searchStr)">
 </div> -->
-<div class="minimap-container" ng-class="{'minimap-visible': isMinimapVisible, 'minimap-hidden': !isMinimapVisible}">
+<div class="minimap-container" ng-class="{ 'minimap-visible': isMinimapVisible, 'minimap-hidden': !isMinimapVisible }">
 	<tb-minimap board="board" tickets="tickets" width="225" indicator="true"></tb-minimap>
 </div>

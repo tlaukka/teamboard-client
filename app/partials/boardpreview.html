@@ -1,4 +1,4 @@
-<div id="{{board.id}}" class="board-preview">
+<div id="{{board.id}}" class="board-preview" ng-class="{ 'selected': isSelected }">
 	<div class="thumbnail-container">
 		<div class="spinner" ng-show="isLoading">
 			<i class="fa fa-circle-o-notch fa-spin"></i>
@@ -8,6 +8,7 @@
 			class="btn btn-select btn-checkbox"
 			ng-model="$parent.isSelected"
 			ng-click="onSelectClicked($event)">
+
 			<i class="fa fa-check-circle"></i>
 		</div>
 		<a ui-sref="main.board({ id: board.id })" ng-click="onBoardClicked($event)">
@@ -16,7 +17,7 @@
 			</div>
 		</a>
 	</div>
-	<div class="heading" ng-click="promptBoardEdit(board)">
+	<div class="heading">
 		{{ board.name | characters: 20: true }}
 	</div>
 </div>

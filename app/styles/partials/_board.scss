@@ -82,7 +82,12 @@
 		transition: all 0.4s ease;
 	}
 }
-
+.debugstr {
+	position: fixed;
+	z-index: 1000000;
+	left: 400px;
+	top: 8px;
+}
 .ticket {
 	position: absolute;
 	box-sizing: border-box;

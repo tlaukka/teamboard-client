@@ -6,12 +6,8 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 	var IScroll = require('IScroll');
 
 	return {
-		restrict: 'AE',
-
-		scope: {
-			boards: '=',
-			state: '='
-		},
+		restrict: 'A',
+		scope: true,
 
 		link: function(scope, element) {
 
@@ -23,7 +19,8 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				mouseWheel: true,
 				scrollbars: true,
 				interactiveScrollbars: true,
-				disableMouse: false
+				disableMouse: false,
+				keyBindings: true
 			}));
 
 			scope.updateWorkspace = function() {

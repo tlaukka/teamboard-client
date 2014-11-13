@@ -26,16 +26,13 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 				// transform boards from http request into Board models
 				// so they can have some more functionality
-				boards: function($http, Config, Board) {
+				boards: function($http, Config, boardCollection) {
 					var _ = require('underscore');
 
 					return $http.get(Config.api.url() + 'boards')
 						.then(function(response) {
-							var boards = response.data;
-
-							return _.map(boards, function(board) {
-								return new Board(board);
-							});
+							boardCollection.setBoards(response.data);
+							return boardCollection.getBoards();
 						});
 				}
 			},
@@ -69,6 +66,8 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 						authService.setTokenKey('tb-access-token-guest-' + $stateParams.id);
 					}
 					else {
+						authService.setTokenKey('tb-access-token-user');
+
 						// Check user type (guest or user)
 						return $http.get(Config.api.url() + 'boards')
 							.then(function(response) {
@@ -96,17 +95,11 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 							});
 				},
 
-				tickets: function($http, $stateParams, Config, Ticket, resolvedBoard) {
+				tickets: function($http, $stateParams, Config, ticketCollection) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '/tickets')
 						.then(function(response) {
-							var tickets = [];
-							for(var i = 0; i < response.data.length; i++) {
-								var ticketData = response.data[i];
-								ticketData.board = resolvedBoard.id;
-								tickets.push(new Ticket(ticketData));
-							}
-
-							return tickets;
+							ticketCollection.setTickets(response.data);
+							return ticketCollection.getTickets();
 						},
 						function(err) {
 							// TODO Handle it?

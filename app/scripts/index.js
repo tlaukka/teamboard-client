@@ -53,9 +53,9 @@ angular.module('tb', [
 		ngClipProvider.setPath("../zeroclipboard/ZeroClipboard.swf");
 	})
 
+	.directive('ngClick',        require('./directives/click'))
 	.directive('tbBoard',        require('./directives/board'))
 	.directive('tbTicket',       require('./directives/ticket'))
-	.directive('ngClick',        require('./directives/click'))
 	.directive('tbGravatar',     require('./directives/gravatar'))
 	.directive('tbAutoFocus',    require('./directives/autofocus'))
 	.directive('tbTicketProxy',  require('./directives/ticketproxy'))
@@ -66,12 +66,14 @@ angular.module('tb', [
 	.directive('tbMinimap',      require('./directives/minimap'))
 	.directive('tbPresentation', require('./directives/presentation'))
 
-	.factory('Board',         require('./services/board'))
-	.factory('Ticket',        require('./services/ticket'))
-	.service('modalService',  require('./services/modal'))
-	.factory('socketService', require('./services/socket'))
-	.factory('ticketProxy',   require('./services/ticketproxy'))
-	.factory('scrollArea',    require('./services/scrollarea'))
+	.factory('Board',               require('./services/board'))
+	.factory('Ticket',              require('./services/ticket'))
+	.service('modalService',        require('./services/modal'))
+	.factory('socketService',       require('./services/socket'))
+	.factory('ticketProxy',         require('./services/ticketproxy'))
+	.factory('scrollArea',          require('./services/scrollarea'))
+	.factory('boardCollection',     require('./services/boardcollection'))
+	.factory('ticketCollection',	require('./services/ticketcollection'))
 
 	.filter('reverse', require('./filters/reverse'));
 

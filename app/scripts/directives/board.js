@@ -5,16 +5,17 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
+	var Draggable = require('Draggable');
 	var IScroll = require('IScroll');
 
 	return {
 		// replace: true,
-		restrict: 'AE',
-
-		scope: {
-			board: '='
-			// zoom: '=zoomOptions'
-		},
+		restrict: 'A',
+		scope: true,
+		// scope: {
+		// 	board: '='
+		// 	// zoom: '=zoomOptions'
+		// },
 
 		link: function(scope, element) {
 
@@ -42,7 +43,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 				scope.setBackground(scope.board.background);
 			}, 0);
 
-			scrollArea.refresh(0);
+			// scrollArea.refresh(0);
 			scope.isPresentationVisible = true;
 
 			scope.promptBackgroundAdd = function() {
