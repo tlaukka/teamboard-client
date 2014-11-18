@@ -1,7 +1,7 @@
 'use strict';
 
-
-var _ = require('underscore');
+var _    = require('underscore');
+var utf8 = require('utf8');
 
 module.exports = function(
 	$scope,
@@ -78,6 +78,10 @@ module.exports = function(
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if (!ticketDoesExist) {
+			ev.ticket.color   = utf8.decode(ev.ticket.color);
+			ev.ticket.heading = utf8.decode(ev.ticket.heading);
+			ev.ticket.content = utf8.decode(ev.ticket.content);
+
 			ticketCollection.addTicketLocal(ev.ticket);
 			return $scope.$apply();
 		}
@@ -102,14 +106,17 @@ module.exports = function(
 		// for some reason the ticket does not yet exist in our client
 		// so we need to add it to our clients collection
 		if (!existingTicket) {
+			ev.ticket.color   = utf8.decode(ev.ticket.color);
+			ev.ticket.heading = utf8.decode(ev.ticket.heading);
+			ev.ticket.content = utf8.decode(ev.ticket.content);
 			return ticketCollection.addTicketLocal(ev.ticket);
 		}
 
 		// the ticket already exists in our clients collection, so
 		// we can just update the attributes of it
-		existingTicket.color    = ev.ticket.color;
-		existingTicket.heading  = ev.ticket.heading;
-		existingTicket.content  = ev.ticket.content;
+		existingTicket.color    = utf8.decode(ev.ticket.color);
+		existingTicket.heading  = utf8.decode(ev.ticket.heading);
+		existingTicket.content  = utf8.decode(ev.ticket.content);
 		existingTicket.position = ev.ticket.position;
 
 		return $scope.$apply();
