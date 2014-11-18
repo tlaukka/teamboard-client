@@ -109,15 +109,15 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			},
 
 			views: {
-				'sidebar': {
-					template:   require('../../partials/sidebar.html'),
-					controller: require('../controllers/sidebar')
-				},
+				// 'sidebar': {
+				// 	template:   require('../../partials/sidebar.html'),
+				// 	controller: require('../controllers/sidebar')
+				// },
 
-				'topbar': {
-					template:   require('../../partials/topbar-board.html'),
-					controller: require('../controllers/topbar-board')
-				},
+				// 'topbar': {
+				// 	template:   require('../../partials/topbar-board.html'),
+				// 	controller: require('../controllers/topbar-board')
+				// },
 
 				'content': {
 					resolve: {

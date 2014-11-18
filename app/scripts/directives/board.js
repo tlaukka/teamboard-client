@@ -41,6 +41,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 			$timeout(function() {
 				// Set current background image
 				scope.setBackground(scope.board.background);
+				scrollArea.refresh(0);
 			}, 0);
 
 			// scrollArea.refresh(0);
