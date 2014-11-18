@@ -1,4 +1,8 @@
 <div tb-workspace id="workspace" ng-click="onWorkspaceClicked($event)">
+	<tb-toolbar>
+		<div class="btn btn-tool"><i class="fa fa-trash-o fa-fw"></i></div>
+		<div class="btn btn-tool"><i class="fa fa-edit fa-fw"></i></div>
+	</tb-toolbar>
 	<div class="container-fluid">
 		<div class="row">
 			<tb-board-preview ng-repeat="board in boards | filter:{ name: searchStr } | reverse track by board.id">

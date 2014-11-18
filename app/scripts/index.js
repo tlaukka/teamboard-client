@@ -65,6 +65,7 @@ angular.module('tb', [
 	.directive('tbBgPreview',    require('./directives/bgpreview'))
 	.directive('tbMinimap',      require('./directives/minimap'))
 	.directive('tbPresentation', require('./directives/presentation'))
+	.directive('tbToolbar',      require('./directives/toolbar'))
 
 	.factory('Board',               require('./services/board'))
 	.factory('Ticket',              require('./services/ticket'))

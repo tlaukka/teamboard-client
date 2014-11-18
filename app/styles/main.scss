@@ -60,7 +60,12 @@ $sidebar-width-collapsed: 74px;
 $sidebar-margin-left: 24px;
 $board-width: 1920px;
 $board-height: 1080px;
-$board-margin: 8px;
+// $board-margin: 8px;
+$board-margin-top: 100px;
+$board-margin-right: 80px;
+$board-margin-bottom: 80px;
+$board-margin-left: 80px;
+
 $boardpreview-width: 230px;
 $boardpreview-height: 200px;
 $boardpreview-margin-left: 24px;
@@ -88,6 +93,20 @@ $sidebar-collapse-duration: 0.2s;
 @import "partials/workspace";
 @import "partials/board";
 @import "partials/minimap";
+
+.toolbar {
+	position: absolute;
+	z-index: 10000;
+	right: 8px;
+	top: 70px;
+	padding: 4px;
+	border-radius: 5px;
+	background-color: rgba(200, 200, 200, 0.8);
+
+	.btn-tool {
+		font-size: 24px;
+	}
+}
 
 html {
 	position: fixed;
@@ -140,14 +159,14 @@ body {
 #content-scrollarea {
 	position: relative;
 	background-color: $white;
-	left: $sidebar-width;
-	top: $topbar-height;
-	// left: 0px;
-	// top: 0px;
-	width: calc(100% - #{$sidebar-width} + 1px);
-	height: calc(100% - #{$topbar-height});
-	// width: 100%;
-	// height: 100%;
+	// left: $sidebar-width;
+	// top: $topbar-height;
+	left: 0px;
+	top: 0px;
+	// width: calc(100% - #{$sidebar-width} + 1px);
+	// height: calc(100% - #{$topbar-height});
+	width: calc(100% + 1px);
+	height: calc(100%);
 
 	&.scrollarea-expanded {
 		left: $sidebar-width-collapsed;

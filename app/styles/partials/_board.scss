@@ -1,13 +1,14 @@
 #board-background {
 	position: absolute;
-	width: $board-width + 2 * $board-margin;
-	height: $board-height + 2 * $board-margin;
+	width: $board-width + $board-margin-right + $board-margin-left;
+	// height: $board-height + 2 * $board-margin;
+	height: $board-height + $board-margin-top + $board-margin-bottom;
 }
 
 #board {
 	position: absolute;
-	left: $board-margin;
-	top: $board-margin;
+	left: $board-margin-left;
+	top: $board-margin-top;
 	width: $board-width;
 	height: $board-height;
 	background-color: $board-bg;
