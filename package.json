@@ -1,6 +1,6 @@
 {
   "name": "teamboard",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "browserify": "~3.32.1",
     "browserify-shim": "^3.4.1",
