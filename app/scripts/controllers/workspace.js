@@ -1,12 +1,11 @@
 'use strict';
 
 
-var _ = require('underscore');
+var _ = require('lodash');
 
 module.exports = function(
 	$scope,
 	$rootScope,
-	$speechRecognition,
 	modalService,
 	boardCollection
 	) {

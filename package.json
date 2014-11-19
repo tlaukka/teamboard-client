@@ -2,118 +2,33 @@
   "name": "teamboard",
   "version": "0.2.1",
   "dependencies": {
-    "browserify": "~3.32.1",
-    "browserify-shim": "^3.4.1",
-    "envify": "^2.0.0",
-    "gulp": "~3.6.0",
-    "gulp-concat": "^2.2.0",
-    "gulp-jshint": "^1.7.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-replace": "^0.4.0",
-    "gulp-ruby-sass": "^0.6.0",
-    "gulp-uglify": "^0.3.1",
-    "gulp-webserver": "^0.3.4",
-    "jshint-stylish": "^0.3.0",
-    "lodash": "^2.4.1",
-    "partialify": "^3.1.1",
-    "socket.io-client": "^1.0.6",
-    "utf8": "^2.0.0",
-    "vinyl-source-stream": "~0.1.1"
+    "angular": "1.3.3",
+    "angular-animate": "1.3.3",
+    "angular-bootstrap": "0.11.0",
+    "angular-translate": "2.4.2",
+    "angular-ui-router": "0.2.11",
+    "gsap": "1.14.2",
+    "iscroll": "5.1.3",
+    "lodash": "2.4.1",
+    "ng-clip": "0.2.4",
+    "socket.io-client": "1.2.0",
+    "utf8": "2.0.0",
+    "zeroclipboard": "2.1.6"
   },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "angular": "angular",
-    "angular-route": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-resource": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "TweenLite": "TweenLite",
-    "Draggable": "Draggable",
-    "CSSPlugin": "CSSPlugin",
-    "IScroll": "IScroll",
-    "zeroclipboard": "zeroclipboard",
-    "angular-bootstrap": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-animate": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-touch": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-truncate": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-text": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-sanitize": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-ui-router": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-translate": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-adaptive-speech": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "angular-clip": {
-      "depends": [
-        "angular"
-      ]
-    },
-    "underscore": "_"
-  },
-  "browser": {
-    "underscore": "./bower_components/underscore/underscore.js",
-    "TweenLite": "./bower_components/gsap/src/uncompressed/TweenLite.js",
-    "Draggable": "./bower_components/gsap/src/uncompressed/utils/Draggable.js",
-    "CSSPlugin": "./bower_components/gsap/src/uncompressed/plugins/CSSPlugin.js",
-    "IScroll": "./bower_components/iscroll/build/iscroll.js",
-    "zeroclipboard": "./bower_components/zeroclipboard/dist/ZeroClipboard.js",
-    "hammerjs": "./bower_components/hammer.js/hammer.min.js",
-    "angular": "./bower_components/angular/angular.js",
-    "angular-route": "./bower_components/angular-route/angular-route.js",
-    "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.js",
-    "angular-resource": "./bower_components/angular-resource/angular-resource.js",
-    "angular-bootstrap": "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
-    "angular-animate": "./bower_components/angular-animate/angular-animate.js",
-    "angular-touch": "./bower_components/angular-touch/angular-touch.js",
-    "angular-truncate": "./bower_components/angular-truncate/src/truncate.js",
-    "angular-text": "./bower_components/textAngular/dist/textAngular.min.js",
-    "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.js",
-    "angular-translate": "./bower_components/angular-translate/angular-translate.min.js",
-    "angular-adaptive-speech": "./bower_components/angular-adaptive-speech/angular-adaptive-speech.js",
-    "angular-clip": "./bower_components/ng-clip/dest/ng-clip.min.js"
+  "devDependencies": {
+    "browserify": "6.3.2",
+    "envify": "3.2.0",
+    "exposify": "^0.2.0",
+    "gulp": "3.8.10",
+    "gulp-concat": "2.4.2",
+    "gulp-jshint": "1.9.0",
+    "gulp-rename": "1.2.0",
+    "gulp-replace": "0.5.0",
+    "gulp-ruby-sass": "0.7.1",
+    "gulp-uglify": "1.0.1",
+    "gulp-webserver": "0.8.7",
+    "jshint-stylish": "1.0.0",
+    "partialify": "3.1.1",
+    "vinyl-source-stream": "1.0.0"
   }
 }

@@ -1,12 +1,11 @@
 'use strict';
 
-var _    = require('underscore');
+var _    = require('lodash');
 var utf8 = require('utf8');
 
 module.exports = function(
 	$scope,
 	$rootScope,
-	$speechRecognition,
 	modalService,
 	connectedSocket,
 	resolvedBoard,

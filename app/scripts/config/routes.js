@@ -27,7 +27,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 				// transform boards from http request into Board models
 				// so they can have some more functionality
 				boards: function($http, Config, boardCollection) {
-					var _ = require('underscore');
+					var _ = require('lodash');
 
 					return $http.get(Config.api.url() + 'boards')
 						.then(function(response) {
@@ -60,7 +60,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 			resolve: {
 				resolveUser: function($http, $stateParams, Config, authService) {
-					var _ = require('underscore');
+					var _ = require('lodash');
 
 					if (authService.getToken() == undefined) {
 						authService.setTokenKey('tb-access-token-guest-' + $stateParams.id);

@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+
+	<base href="/">
 	<title>Teamboard</title>
+
+	<meta charset="UTF-8">
 	<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link rel="shortcut icon" href="/images/favicon.ico" />
 	<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="/styles/main.css">
-	<link rel="shortcut icon" href="/images/favicon.ico" />
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<base href="/">
+
 </head>
 <body ng-app="tb">
 	<div id="app" ui-view></div>
+
 	<script src="//widget.uservoice.com/eXKxE4WzstJy0DTpmrepAA.js" async></script>
+
+	<script src="/scripts/lib/angular.js"></script>
+	<script src="/scripts/lib/TweenLite.js"></script>
+	<script src="/scripts/lib/Draggable.js"></script>
+	<script src="/scripts/lib/CSSPlugin.js"></script>
+	<script src="/scripts/lib/ZeroClipboard.js"></script>
+
 	<script src="/scripts/app.js"></script>
 </body>
 </html>
