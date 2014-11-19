@@ -9,6 +9,7 @@ require('angular-translate');
 require('angular-ui-router');
 require('angular-bootstrap');
 
+
 angular.module('tb', [
 
 		'ui.router',
@@ -19,6 +20,7 @@ angular.module('tb', [
 
 		'pascalprecht.translate',
 
+		require('./modules/modal').name,
 		require('./modules/uservoice').name,
 		require('./modules/configuration').name,
 		require('./modules/authentication').name,
@@ -36,6 +38,11 @@ angular.module('tb', [
 	.filter('reverse', require('./filters/reverse'))
 
 	.service('modalService', require('./services/modal'))
+
+	/**
+	 * Modals!
+	 */
+	.factory('EditBoardModal', require('./modals/edit-board'))
 
 	.factory('Board',            require('./services/board'))
 	.factory('Ticket',           require('./services/ticket'))
