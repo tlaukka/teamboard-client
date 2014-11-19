@@ -47,39 +47,39 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 			// scrollArea.refresh(0);
 			scope.isPresentationVisible = true;
 
-			scope.promptBackgroundAdd = function() {
-				var modalOptions = {
-					template: require('../../partials/modal-backgroundadd.html'),
-					windowClass: 'modal-size-lg'
-				}
+			// scope.promptBackgroundAdd = function() {
+			// 	var modalOptions = {
+			// 		template: require('../../partials/modal-backgroundadd.html'),
+			// 		windowClass: 'modal-size-lg'
+			// 	}
 
-				var backgrounds = [];
-				backgrounds.push({ name: 'Blank', url: 'none' });
-				backgrounds.push({ name: 'Kanban', url: 'images/backgrounds/kanban.png' });
-				backgrounds.push({ name: 'Scrum', url: 'images/backgrounds/scrum.png' });
-				backgrounds.push({ name: 'Business model', url: 'images/backgrounds/business_model_canvas.png' });
-				backgrounds.push({ name: 'SWOT', url: 'images/backgrounds/swot.png' });
-				backgrounds.push({ name: 'Customer journey', url: 'images/backgrounds/customer_journey_map.png' });
-				backgrounds.push({ name: 'Keep drop try', url: 'images/backgrounds/keep_drop_try.png' });
-				backgrounds.push({ name: 'Play', url: 'images/backgrounds/play.png' });
+			// 	var backgrounds = [];
+			// 	backgrounds.push({ name: 'Blank', url: 'none' });
+			// 	backgrounds.push({ name: 'Kanban', url: 'images/backgrounds/kanban.png' });
+			// 	backgrounds.push({ name: 'Scrum', url: 'images/backgrounds/scrum.png' });
+			// 	backgrounds.push({ name: 'Business model', url: 'images/backgrounds/business_model_canvas.png' });
+			// 	backgrounds.push({ name: 'SWOT', url: 'images/backgrounds/swot.png' });
+			// 	backgrounds.push({ name: 'Customer journey', url: 'images/backgrounds/customer_journey_map.png' });
+			// 	backgrounds.push({ name: 'Keep drop try', url: 'images/backgrounds/keep_drop_try.png' });
+			// 	backgrounds.push({ name: 'Play', url: 'images/backgrounds/play.png' });
 
-				var userOptions = {
-					backgrounds: backgrounds,
-					currentBg: scope.board.background
-				};
+			// 	var userOptions = {
+			// 		backgrounds: backgrounds,
+			// 		currentBg: scope.board.background
+			// 	};
 
-				modalService.show(modalOptions, userOptions).then(function(result) {
-					scope.updateBackground(result.selectedBg);
-				});
-			}
+			// 	modalService.show(modalOptions, userOptions).then(function(result) {
+			// 		scope.updateBackground(result.selectedBg);
+			// 	});
+			// }
 
-			scope.updateBackground = function(bg) {
-				scope.board.background = bg;
-				scope.board.update()
-					.then(function() {
-						scope.setBackground(bg);
-					});
-			}
+			// scope.updateBackground = function(bg) {
+			// 	scope.board.background = bg;
+			// 	scope.board.update()
+			// 		.then(function() {
+			// 			scope.setBackground(bg);
+			// 		});
+			// }
 
 			scope.setBackground = function(bg) {
 				element.css('background-image', 'url(../' + bg + ')');
@@ -91,7 +91,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 
 			// triggered from TopBarController
 			scope.$on('action:add-background', function(event, data) {
-				scope.promptBackgroundAdd();
+				scope.setBackground(data);
 			});
 
 			// var zoom = scope.zoom;

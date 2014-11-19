@@ -1,5 +1,6 @@
 .minimap {
 	background-color: $white;
+	background-repeat: no-repeat;
 
 	.minimap-indicator {
 		position: absolute;
@@ -10,7 +11,7 @@
 	}
 
 	.minimap-ticket {
-		position: absolute;
+		position: relative;
 		z-index: 2;
 
 		-webkit-transition: all 0.4s ease;

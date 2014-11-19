@@ -15,6 +15,14 @@
 	overflow: hidden;
 }
 
+.board-heading {
+	position: relative;
+	top: 52px;
+	left: 80px;
+	font-size: 32px;
+	color: $lightgray-dark;
+}
+
 .minimap-container {
 	position: fixed;
 	z-index: 11000;

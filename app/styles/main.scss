@@ -94,17 +94,24 @@ $sidebar-collapse-duration: 0.2s;
 @import "partials/board";
 @import "partials/minimap";
 
+.toolbar-container {
+	position: fixed;
+	top: 8px;
+	right: 280px;
+}
+
 .toolbar {
-	position: absolute;
-	z-index: 10000;
-	right: 8px;
-	top: 70px;
 	padding: 4px;
-	border-radius: 5px;
-	background-color: rgba(200, 200, 200, 0.8);
+	border-radius: 3px;
+	background-color: rgba(20, 20, 20, 0.95);
 
 	.btn-tool {
 		font-size: 24px;
+		color: $lightgray-dark;
+
+		&.active {
+			color: $turquoise;
+		}
 	}
 }
 
