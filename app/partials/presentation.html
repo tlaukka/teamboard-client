@@ -5,7 +5,7 @@
 	<div ng-repeat="ticket in tickets" class="ticket smooth-transition" ng-style="setTicket(ticket)">
 		<div ng-style="{ 'background-color': ticket.color }" class="color"></div>
 		<div class="heading">
-			{{ ticket.heading }}
+			{{ ticket.heading | limitTo:80 }}
 		</div>
 	</div>
 </div>
