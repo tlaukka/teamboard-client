@@ -1,4 +1,55 @@
-<div class="angular-modal">
-	<h1>Tärkeää asiaa</h1>
-	<div ng-click="close()">Close</div>
+<div class="tb-modal-backdrop" ng-click="close(false)"></div>
+<div class="tb-modal">
+
+	<div class="tb-modal-head">
+
+		<span class="tb-modal-close" ng-click="close(false)">
+			<i class="fa fa-times"></i>
+		</span>
+
+		<div class="tb-modal-heading">
+			{{ 'MODAL_HEADER_BOARDEDIT' | translate }}
+		</div>
+
+	</div>
+	<div class="tb-modal-body">
+
+		<div class="tb-modal-section">
+			<label for="board-name">
+				{{ 'MODAL_LABEL_NAME' | translate }}
+			</label>
+			<input name="board-name" type="text" required
+					 ng-model="result.name" tb-auto-focus />
+		</div>
+
+		<div class="tb-modal-section">
+			<label for="board-url">
+				{{ 'MODAL_LABEL_SHARING' | translate }}
+			</label>
+			<div class="input-group">
+				<input name="board-url" type="text" readonly
+						ng-model="result.url" />
+		 		<!-- TODO ZeroClip / ng-clip stuff -->
+				<button clip-copy="result.url"
+						clip-click-fallback="window.prompt(copy)">
+					{{ 'MODAL_LABEL_COPY' | translate }}
+				</button>
+			</div>
+		</div>
+
+		<div class="two-button-row tb-modal-section">
+			<button ng-if="!result.url" ng-click="generate()">
+				{{ 'MODAL_LABEL_GENERATE' | translate }}
+			</button>
+			<button ng-if="result.url" ng-click="clear()">
+				{{ 'MODAL_LABEL_CLEAR' | translate }}
+			</button>
+		</div>
+
+		<div class="tb-modal-submit">
+			<button ng-click="close(true)">
+				{{ 'MODAL_LABEL_SAVECHANGES' | translate }}
+			</button>
+		</div>
+	</div>
 </div>

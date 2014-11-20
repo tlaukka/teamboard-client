@@ -1,5 +1,6 @@
 'use strict';
 
+var _       = require('lodash');
 var angular = require('angular');
 
 /**
@@ -10,58 +11,73 @@ module.exports = angular.module('tb.modal', [])
 	/**
 	 *
 	 */
-	.factory('Modal', function($animate, $compile, $rootScope, $controller) {
-		return function ModalFactory(opts) {
+	.factory('Modal', function($q, $animate, $compile, $rootScope, $controller) {
 
-			var template   = opts.template;
-			var controller = opts.controller;
+		var _scope   = null;
+		var _element = null;
+		var _promise = null;
 
-			var scope   = null;
-			var element = null;
+		/**
+		 * Creates a new scope and attaches the modal the DOM.
+		 */
+		var _attach = function attach(template, controller, props) {
+			_scope        = $rootScope.$new();
+			_scope.close  = _close;
+			_scope.result = _.clone(props);
 
-			/**
-			 * Attaches the modal the DOM.
-			 */
-			var _attach = function _attach(props) {
-				scope   = $rootScope.$new();
-				element = angular.element(template);
+			_element = angular.element(template);
+			$animate.enter(_element, document.body);
 
-				$animate.enter(element, document.body);
+			$controller(controller, { '$scope': _scope });
+			$compile(_element)(_scope);
+		}
 
-				// Copy any given properties to the controller's 'scope'.
-				if(props) {
-					for(var name in props) {
-						scope[name] = props[name];
-					}
-				}
+		/**
+		 *
+		 */
+		var _open = function open(template, controller, props) {
+			var deferred = $q.defer();
 
-				$controller(controller, { '$scope': scope });
-				$compile(element)(scope);
+			if(!_element) {
+				_promise = deferred;
+				_attach(template, controller, props);
+			}
+			else {
+				deferred.reject(new Error('A modal is already open'));
 			}
 
-			return {
-				/**
-				 *
-				 */
-				open: function(props) {
-					if(!element) {
-						return _attach(template, props);
-					}
-				},
+			return deferred.promise;
+		}
 
-				/**
-				 *
-				 */
-				close: function() {
-					if(element) {
-						$animate.leave(element).then(function() {
-							scope.$destroy();
+		/**
+		 *
+		 */
+		var _close = function close(submit) {
+			if(!_element) return;
 
-							scope   = null;
-							element = null;
-						});
-					}
+			$animate.leave(_element).then(function() {
+				if(_promise && submit) {
+					_promise.resolve(_.clone(_scope.result))
 				}
+
+				_scope.$destroy();
+
+				_scope   = null;
+				_element = null;
+				_promise = null;
+			});
+		}
+
+		/**
+		 *
+		 */
+		return function ModalFactory(opts) {
+			var template   = opts.template;
+			var controller = opts.controller || angular.noop;
+
+			return {
+				'open':  _open.bind(null, template, controller),
+				'close': _close,
 			}
 		}
 	});

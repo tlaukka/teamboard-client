@@ -175,22 +175,121 @@ body {
 /**
  * Shame Modals
  */
-
-.angular-modal {
+.tb-modal-backdrop {
 	position: fixed;
 
-	top:   50%;
-	left:  50%;
-	width: 50%;
+	top:  0;
+	left: 0;
 
-	max-width: 550px;
-	min-width: 330px;
+	width:  calc(100%);
+	height: calc(100%);
 
-	height:  auto;
-	z-index: 2000;
+	opacity:          0.85;
+	background-color: black;
+
+	z-index: 900000;
+}
+
+.tb-modal {
+	position: fixed;
+
+	top:  50%;
+	left: 50%;
 
 	-webkit-transform: translateX(-50%) translateY(-50%);
 	-moz-transform:    translateX(-50%) translateY(-50%);
 	-ms-transform:     translateX(-50%) translateY(-50%);
 	transform:         translateX(-50%) translateY(-50%);
+
+	width: 50%;
+	@media (max-width: 720px) {
+		width: 90%
+	}
+
+	height:  auto;
+	z-index: 900001;
+
+	.tb-modal-head {
+		/**
+		 * DEBUG
+		 */
+		color:            white;
+		background-color: red;
+
+		/**
+		 * Padding for the head (vertical, horizontal).
+		 */
+		padding: 4px 8px;
+
+		.tb-modal-close {
+			float:  right;
+			cursor: pointer;
+		}
+	}
+
+	.tb-modal-body {
+		/**
+		 * DEBUG
+		 */
+		color:            white;
+		background-color: blue;
+
+		/**
+		 * Padding for the body (vertical, horizontal).
+		 */
+		padding: 4px 8px;
+
+		/**
+		 * A section is basically a row here.
+		 */
+		.tb-modal-section {
+			width: 100%;
+
+			margin-top:    4px;
+			margin-bottom: 4px;
+		}
+
+		/**
+		 * The submit section is a special place.
+		 */
+		.tb-modal-submit {
+			width: 100%;
+		}
+
+		/**
+		 * Basic text input
+		 */
+		input[type="text"] {
+			color: black;
+			width: 100%;
+		}
+
+		// DEBUG STUFF, I CANNOT INTO DESIGN
+
+		.input-group {
+			width: 100%;
+			clear: both;
+
+			input[type="text"] {
+				width:   80%;
+				display: inline-block;
+			}
+
+			button {
+				width:   20%;
+				display: inline-block;
+			}
+		}
+
+		.two-button-row {
+			width: 100%;
+			vertical-align: center;
+
+			button {
+				width:   49%;
+				display: inline-block;
+			}
+		}
+
+	}
 }
