@@ -1,7 +1,6 @@
 #board-background {
 	position: absolute;
 	width: $board-width + $board-margin-right + $board-margin-left;
-	// height: $board-height + 2 * $board-margin;
 	height: $board-height + $board-margin-top + $board-margin-bottom;
 }
 
@@ -17,9 +16,8 @@
 
 .board-heading {
 	position: relative;
-	top: 52px;
-	left: 80px;
 	font-size: 32px;
+	top: -30px;
 	color: $lightgray-dark;
 }
 
@@ -27,10 +25,6 @@
 	position: fixed;
 	z-index: 11000;
 	padding: 4px;
-	// width: 231px;//227px;
-	// height: //128px;
-	// border: 1px solid $lightgray-dark;
-	// background-color: rgba(24, 24, 24, 0.6);
 	background-color: rgb(24, 24, 24);
 	-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 	-moz-box-shadow: 1px 1px 1px 1px $black-transparent-20;
