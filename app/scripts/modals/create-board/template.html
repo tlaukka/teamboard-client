@@ -1,0 +1,31 @@
+<div class="tb-modal-backdrop" ng-click="close(false)"></div>
+<div class="tb-modal">
+	<div class="tb-modal-head">
+
+		<span class="tb-modal-close" ng-click="close(false)">
+			<i class="fa fa-times"></i>
+		</span>
+
+		<div class="tb-modal-heading">
+			{{ 'MODAL_HEADER_NEWBOARD' | translate }}
+		</div>
+
+	</div>
+	<div class="tb-modal-body">
+
+		<div class="tb-modal-section">
+			<label for="board-name">
+				{{ 'MODAL_LABEL_NAME' | translate }}
+			</label>
+			<input name="board-name" type="text" required
+			       ng-model="result.name" tb-auto-focus />
+		</div>
+
+		<div class="tb-modal-submit">
+			<button ng-click="close(true)">
+				{{ 'MODAL_LABEL_CREATE' | translate }}
+			</button>
+		</div>
+
+	</div>
+</div>
