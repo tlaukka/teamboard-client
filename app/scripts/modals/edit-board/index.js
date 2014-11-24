@@ -42,7 +42,7 @@ module.exports = function EditBoardModal(Modal) {
 			 *
 			 */
 			$scope.clear = function() {
-				$http.delete(endpoint).then(function(res) {
+				$http.delete(endpoint).then(function() {
 					$scope.result.url        = null;
 					$scope.result.accessCode = null;
 				});

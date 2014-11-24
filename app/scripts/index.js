@@ -39,11 +39,6 @@ angular.module('tb', [
 
 	.service('modalService', require('./services/modal'))
 
-	/**
-	 * Modals!
-	 */
-	.factory('EditBoardModal', require('./modals/edit-board'))
-
 	.factory('Board',            require('./services/board'))
 	.factory('Ticket',           require('./services/ticket'))
 	.factory('scrollArea',       require('./services/scrollarea'))

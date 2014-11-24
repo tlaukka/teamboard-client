@@ -1,15 +1,11 @@
 'use strict';
 
-module.exports = function CreateBoardModal(Modal) {
-	return Modal({
-		template: require('./template.html'),
-
-		/**
-		 *
-		 */
-		controller: function($scope) {
-			$scope.result      = $scope.result || { }
-			$scope.result.name = $scope.result.name || '';
+module.exports = function Modal($modal, $rootScope) {
+	return {
+		open: function(props, opts) {
+			var scope       = $rootScope.$new()
+			    scope.props = _.clone(props);
+			return $modal.open(_.merge({ scope: scope }, opts));
 		}
-	});
+	}
 }
