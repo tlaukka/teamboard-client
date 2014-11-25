@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($window, $timeout, modalService, scrollArea) {
+module.exports = function($window, $timeout, Modal, scrollArea) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
@@ -47,28 +47,29 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 			scope.isPresentationVisible = true;
 
 			scope.promptBackgroundAdd = function() {
-				var modalOptions = {
-					template: require('../../partials/modal-backgroundadd.html'),
-					windowClass: 'modal-size-lg'
+				var backgrounds = [
+					{ name: 'Blank',            url: 'none'                                         },
+					{ name: 'Kanban',           url: 'images/backgrounds/kanban.png'                },
+					{ name: 'Scrum',            url: 'images/backgrounds/scrum.png'                 },
+					{ name: 'Business model',   url: 'images/backgrounds/business_model_canvas.png' },
+					{ name: 'SWOT',             url: 'images/backgrounds/swot.png'                  },
+					{ name: 'Customer journey', url: 'images/backgrounds/customer_journey_map.png'  },
+					{ name: 'Keep drop try',    url: 'images/backgrounds/keep_drop_try.png'         },
+					{ name: 'Play',             url: 'images/backgrounds/play.png'                  },
+				];
+
+				var props = {
+					'current':     scope.board.background,
+					'backgrounds': backgrounds,
 				}
 
-				var backgrounds = [];
-				backgrounds.push({ name: 'Blank', url: 'none' });
-				backgrounds.push({ name: 'Kanban', url: 'images/backgrounds/kanban.png' });
-				backgrounds.push({ name: 'Scrum', url: 'images/backgrounds/scrum.png' });
-				backgrounds.push({ name: 'Business model', url: 'images/backgrounds/business_model_canvas.png' });
-				backgrounds.push({ name: 'SWOT', url: 'images/backgrounds/swot.png' });
-				backgrounds.push({ name: 'Customer journey', url: 'images/backgrounds/customer_journey_map.png' });
-				backgrounds.push({ name: 'Keep drop try', url: 'images/backgrounds/keep_drop_try.png' });
-				backgrounds.push({ name: 'Play', url: 'images/backgrounds/play.png' });
+				var options = {
+					'size':     'lg',
+					'template': require('../../partials/modals/edit-background.html'),
+				}
 
-				var userOptions = {
-					backgrounds: backgrounds,
-					currentBg: scope.board.background
-				};
-
-				modalService.show(modalOptions, userOptions).then(function(result) {
-					scope.updateBackground(result.selectedBg);
+				Modal.open(props, options).result.then(function(result) {
+					return scope.updateBackground(result.current);
 				});
 			}
 
