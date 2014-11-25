@@ -10,6 +10,7 @@ module.exports = function(
 	connectedSocket,
 	resolvedBoard,
 	currentUser,
+	Modal,
 	ticketCollection
 	) {
 
@@ -232,79 +233,42 @@ module.exports = function(
 	}
 
 	$scope.promptTicketCreate = function() {
-		var modalOptions = {
-			template: require('../../partials/modal-ticketcreate.html'),
-			windowClass: 'modal-size-md'
+		var options = {
+			'template': require('../../partials/modals/create-ticket.html'),
 		}
 
-		return modalService.show(modalOptions, null).then(function(result) {
+		Modal.open(null, options).result.then(function(result) {
 			return $scope.createTicket(result);
 		});
 	}
 
 	$scope.promptTicketEdit = function(ticket) {
-		var modalOptions = {
-			template: require('../../partials/modal-ticketedit.html')
+		var props = {
+			'color':   ticket.color,
+			'heading': ticket.heading,
 		}
 
-		var userOptions = {
-			color:   ticket.color,
-			heading: ticket.heading,
-			content: ticket.content,
-			owner:   ticket.owner
+		var options = {
+			'template': require('../../partials/modals/edit-ticket.html'),
 		}
 
-		modalService.show(modalOptions, userOptions).then(function(result) {
-			ticketCollection.updateTicket(ticket.id, result);
+		Modal.open(props, options).result.then(function(result) {
+			return ticketCollection.updateTicket(ticket.id, result);
 		});
 	}
 
-	$scope.promptTicketRemove = function(ids, callback) {
-		var modalOptions = {
-			template: require('../../partials/modal-ticketremove.html'),
-			windowClass: 'modal-size-sm'
+	$scope.promptTicketRemove = function() {
+		var props = {
+			'name':  ticketCollection.getSelectedTicket().heading,
+			'count': ticketCollection.getSelectedTicketsCount(),
 		}
 
-		var userOptions = {};
-
-		if (ticketCollection.getSelectedTicketsCount() == 1) {
-			userOptions.ticketName = ticketCollection.getSelectedTicket().heading;
+		var options = {
+			'template': require('../../partials/modals/remove-ticket.html'),
 		}
 
-		userOptions.ticketCount = ticketCollection.getSelectedTicketsCount();
-
-		modalService.show(modalOptions, userOptions).then(function() {
-			$scope.removeSelectedTickets();
+		Modal.open(props, options).result.then(function() {
+			return $scope.removeSelectedTickets();
 		});
 	}
-
-	// $scope.editBoard = function(board, attrs) {
-	// 	board.name     = attrs.name;
-	// 	board.isPublic = attrs.isPublic;
-
-	// 	return board.save().then(
-	// 		function(board) {
-	// 			console.log('edited', board);
-	// 		},
-	// 		function(err) {
-	// 			// wat do
-	// 			console.log(err);
-	// 		});
-	// }
-
-	// $scope.promptBoardEdit = function(board) {
-	// 	Board.selectedBoard = board;
-
-	// 	var modalOptions = {
-	// 		template: require('../../partials/modal-boardedit.html'),
-	// 		windowClass: 'modal-size-md',
-	// 		controller: require('./modal-boardedit')
-	// 	}
-
-	// 	var userOptions = {};
-
-	// 	modalService.show(modalOptions, userOptions).then(function(result) {
-	// 		$scope.editBoard(board, result);
-	// 	});
-	// }
 }

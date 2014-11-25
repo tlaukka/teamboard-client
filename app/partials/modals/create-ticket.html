@@ -1,0 +1,47 @@
+<div class="modal-header color-select"
+     ng-style="{ 'background-color': props.color }">
+	<div class="btn-group btn-group-justified radiogroup"
+	     ng-init="props.color = '#4f819a'">
+		<label class="btn radioselect blue"
+		       ng-model="props.color" btn-radio="'#4f819a'">
+			&nbsp;
+		</label>
+		<label class="btn radioselect purple"
+		       ng-model="props.color" btn-radio="'#724a7f'">
+			&nbsp;
+		</label>
+		<label class="btn radioselect yellow"
+		       ng-model="props.color" btn-radio="'#dcc75b'">
+			&nbsp;
+		</label>
+		<label class="btn radioselect red"
+		       ng-model="props.color" btn-radio="'#eb584a'">
+			&nbsp;
+		</label>
+	</div>
+</div>
+<div class="modal-body">
+	<div class="modal-content-block padding-md">
+		<input type="text" class="form-control input-lg ticket-heading"
+		       ng-model="props.heading"
+		       placeholder="{{ 'MODAL_LABEL_HEADINGADD' | translate }}">
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="modal-content-block padding-md">
+		<div class="row">
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-fw btn-default"
+				        ng-click="$dismiss()">
+					{{ 'MODAL_LABEL_CANCEL' | translate }}
+				</button>
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-fw btn-primary"
+				        ng-click="$close(props)">
+					{{ 'MODAL_LABEL_CREATE' | translate }}
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
