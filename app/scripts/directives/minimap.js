@@ -64,7 +64,7 @@ module.exports = function($window, $timeout) {
 				}
 			}
 
-			scope.updateIndicator = function(isSidebarCollapsed) {
+			scope.updateIndicator = function() {
 				var indicatorWidth = $window.innerWidth * scale;
 				var indicatorHeight = $window.innerHeight * scale;
 

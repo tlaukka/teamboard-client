@@ -10,6 +10,23 @@
 		</tb-ticket>
 	</div>
 </div>
+<div class="info-container">
+	<tb-toolbar>
+		<div class="logo" ui-sref="main.workspace">
+			<img src="/images/teamboard_logo.svg">
+		</div>
+		<div class="btn btn-tool"
+			ng-click="logout()">
+			<i class="fa fa-sign-out fa-fw"></i>
+		</div>
+		<div class="btn btn-tool"
+			ng-if="currentUser.type != 'guest'"
+			ui-sref="main.workspace">
+			<i class="fa fa-th fa-fw"></i>
+		</div>
+	</tb-toolbar>
+</div>
+{{searchStr}}
 <div class="toolbar-container">
 	<tb-toolbar>
 		<div class="btn btn-tool"
@@ -41,19 +58,15 @@
 <div class="btn btn-board-icon btn-presentation" ui-sref="main.presentation({ id: board.id })">
 	<i class="fa fa-expand fa-fw"></i>
 </div>
-<div class="btn btn-board-icon btn-minimap" ng-click="toggleMinimap()">
-	<i class="fa fa-arrows-alt fa-fw"></i>
-</div>
-<!-- <div class="btn btn-board-icon btn-ticketsearch" ng-click="isSearchVisible = !isSearchVisible">
-	<i class="fa fa-search fa-fw"></i>
-</div>
-<div ng-show="isSearchVisible">
-	<input type="text" class="form-control text ticketsearch" ng-model="searchStr" ng-change="applySearch(searchStr)">
-</div> -->
-<div class="minimap-container" ng-class="{ 'minimap-visible': isMinimapVisible, 'minimap-hidden': !isMinimapVisible }">
-	<tb-minimap board="board" tickets="tickets" width="226" indicator="true"></tb-minimap>
-	<div class="search-box ticket-search">
-		<span class="search-icon"><i class="fa fa-search"></i></span>
-		<input type="search" class="search-input" ng-model="searchStr" placeholder="Search tickets...">
-	</div>
+<div class="search-container">
+	<tb-toolbar>
+		<div class="ticket-search">
+			<input type="text" class="form-control search-input" ng-model="searchStr" placeholder="Search tickets...">
+		</div>
+		<div class="btn btn-tool"
+			ng-click="toggleMinimap()">
+			<i class="fa fa-arrows-alt fa-fw"></i>
+		</div>
+		<tb-minimap ng-show="isMinimapVisible" board="board" tickets="tickets" width="226" indicator="true"></tb-minimap>
+	</tb-toolbar>
 </div>

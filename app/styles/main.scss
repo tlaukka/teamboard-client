@@ -94,6 +94,23 @@ $sidebar-collapse-duration: 0.2s;
 @import "partials/board";
 @import "partials/minimap";
 
+.info-container {
+	position: fixed;
+	top: 8px;
+	left: 8px;
+
+	img {
+		margin: 8px;
+		height: 32px;
+	}
+}
+
+.search-container {
+	position: fixed;
+	top: 8px;
+	right: 8px;
+}
+
 .toolbar-container {
 	position: fixed;
 	top: 8px;
@@ -101,6 +118,7 @@ $sidebar-collapse-duration: 0.2s;
 }
 
 .toolbar {
+	float: left;
 	padding: 4px;
 	border-radius: 3px;
 	background-color: rgba(20, 20, 20, 0.95);
@@ -112,6 +130,20 @@ $sidebar-collapse-duration: 0.2s;
 		&.active {
 			color: $turquoise;
 		}
+	}
+}
+
+.logo {
+	font-family: $font-lobster;
+	box-sizing: border-box;
+	cursor: pointer;
+	font-size: 30px;
+	float: left;
+
+	.logo-text {
+		margin-right: 8px;
+		margin-left: 8px;
+		color: $white;
 	}
 }
 
@@ -195,5 +227,6 @@ body {
 
 .iScrollIndicator {
 	border: none !important;
-	border-radius: 0 !important;
+	border-radius: 3 !important;
+	background-color: rgba(20, 20, 20, 0.80) !important;
 }

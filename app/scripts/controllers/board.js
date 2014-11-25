@@ -11,7 +11,8 @@ module.exports = function(
 	connectedSocket,
 	resolvedBoard,
 	currentUser,
-	ticketCollection
+	ticketCollection,
+	authService
 	) {
 
 
@@ -209,6 +210,7 @@ module.exports = function(
 	$scope.toggleMinimap = function() {
 		$scope.isMinimapVisible = !$scope.isMinimapVisible;
 		localStorage.setItem('tb-minimap-visible', $scope.isMinimapVisible);
+		$rootScope.$broadcast('action:toggle-minimap', $scope.isMinimapVisible);
 	}
 
 	$scope.toggleTicketSelection = function(id) {
@@ -259,7 +261,8 @@ module.exports = function(
 			template: require('../../partials/modal-ticketedit.html')
 		}
 
-		var ticket = ticketCollection.getSelectedTicket();
+		ticket = ticket || ticketCollection.getSelectedTicket();
+
 		var userOptions = {
 			color:   ticket.color,
 			heading: ticket.heading,
@@ -314,6 +317,13 @@ module.exports = function(
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
 			$scope.addBackground(result.selectedBg);
+		});
+	}
+
+	$scope.logout = function() {
+		authService.logout().then(function() {
+			socketService.disconnect();
+			$state.go('login');
 		});
 	}
 
