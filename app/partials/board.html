@@ -1,9 +1,14 @@
 <div id="board-background">
-	<!-- <span class="board-heading">{{board.name}}</span> -->
+	<span class="board-heading">{{ticketSearch.str}}</span>
 	<div tb-board id="board" ng-click="onBoardClicked($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
-		<tb-ticket ng-repeat="ticket in tickets | filter:searchStr track by ticket.id"
+		<!-- <div ng-repeat="t in ticketSearchResult"
+			class="ticket-hilight"
+			ng-style="setHilightStyle(t)">
+		</div> -->
+		<tb-ticket ng-repeat="ticket in tickets | filter:ticketSearch.str track by ticket.id"
 			snap-options="snapOptions"
+			ticket-search="ticketSearch"
 			ticket-data="ticket"
 			ticket-edit="promptTicketEdit(ticket)"
 			ticket-toggle="toggleTicketSelection(id)">
@@ -26,7 +31,6 @@
 		</div>
 	</tb-toolbar>
 </div>
-{{searchStr}}
 <div class="toolbar-container">
 	<tb-toolbar>
 		<div class="btn btn-tool"
@@ -61,12 +65,21 @@
 <div class="search-container">
 	<tb-toolbar>
 		<div class="ticket-search">
-			<input type="text" class="form-control search-input" ng-model="searchStr" placeholder="Search tickets...">
+			<input type="text"
+				class="form-control search-input"
+				ng-model="ticketSearch.str"
+				ng-change="applySearch()"
+				placeholder="Search tickets...">
 		</div>
 		<div class="btn btn-tool"
 			ng-click="toggleMinimap()">
 			<i class="fa fa-arrows-alt fa-fw"></i>
 		</div>
-		<tb-minimap ng-show="isMinimapVisible" board="board" tickets="tickets" width="226" indicator="true"></tb-minimap>
+		<tb-minimap ng-show="isMinimapVisible"
+			board="board"
+			tickets="tickets"
+			width="226"
+			indicator="true">
+		</tb-minimap>
 	</tb-toolbar>
 </div>

@@ -64,6 +64,15 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 			// scrollArea.refresh(0);
 			scope.isPresentationVisible = true;
 
+			scope.setHilightStyle= function(ticket) {
+				return {
+					'top': ticket.position.y + 'px',
+					'left': ticket.position.x + 'px',
+					'-webkit-box-shadow': '0 0 4px 3px ' + ticket.color,
+					'box-shadow': '0 0 4px 3px ' + ticket.color
+				};
+			}
+
 			scope.setBackground = function(bg) {
 				element.css('background-image', 'url(../' + bg + ')');
 			}

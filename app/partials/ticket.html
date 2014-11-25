@@ -1,5 +1,7 @@
 <div id="{{ticket.id}}" class="ticket" ng-click="editTicket($event)">
-	<div ng-if="isSelected" class="selection-overlay"></div>
+	<div ng-if="isSelected || isHilighted"
+		ng-class="{ 'selection-overlay': isSelected, 'ticket-hilight': isHilighted }">
+	</div>
 	<div btn-checkbox
 		class="btn btn-select btn-checkbox"
 		ng-model="isSelected"

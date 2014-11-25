@@ -14,6 +14,7 @@ module.exports = function(ticketProxy, scrollArea) {
 
 		scope: {
 			snap: '=snapOptions',
+			search: '=ticketSearch',
 			ticket: '=ticketData',
 			promptTicketEdit: '&ticketEdit',
 			toggleTicketSelection: '&ticketToggle'
@@ -24,6 +25,7 @@ module.exports = function(ticketProxy, scrollArea) {
 			var snap = scope.snap;
 
 			scope.isSelected = false;
+			scope.isHilighted = false;
 
 			// TODO: Need to handle zIndex
 			TweenLite.set(element, {
@@ -88,6 +90,15 @@ module.exports = function(ticketProxy, scrollArea) {
 			scope.$watch('ticket.position', function() {
 				TweenLite.to(element, 1,
 					{ x: ticket.position.x, y: ticket.position.y });
+			});
+
+			scope.$watch('search.str', function(str) {
+				if (str !== '' && ticket.heading.indexOf(str) > -1 && !scope.isSelected) {
+					scope.isHilighted = true;
+				}
+				else {
+					scope.isHilighted = false;
+				}
 			});
 
 			scope.$on('action:select-tickets', function(event, select) {

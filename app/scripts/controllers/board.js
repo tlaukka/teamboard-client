@@ -63,6 +63,7 @@ module.exports = function(
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
 	$scope.tickets = ticketCollection.getTickets();
+	$scope.ticketSearchResult = [];
 
 	// create a new ticket in our clients collection if necessary
 	connectedSocket.on('ticket:create', function(ev) {
@@ -144,6 +145,10 @@ module.exports = function(
 
 	$scope.isMinimapVisible = (localStorage.getItem('tb-minimap-visible') === 'true');
 
+	$scope.ticketSearch = {
+		str: ''
+	};
+
 	// if (currentUser.type == 'guest') {
 	// 	$rootScope.$broadcast('ui:enable-background', false);
 	// }
@@ -175,6 +180,10 @@ module.exports = function(
 	$scope.$on('action:edit', function(event, data) {
 		$scope.promptTicketEdit();
 	});
+
+	$scope.applySearch = function() {
+		$scope.ticketSearchResult = ticketCollection.getSearchResult($scope.ticketSearch.str);
+	}
 
 	$scope.validateToolset = function() {
 		var selectionCount = ticketCollection.getSelectedTicketsCount();

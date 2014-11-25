@@ -61,7 +61,7 @@ module.exports = function($window, $timeout) {
 					'left': ((ticket.position.x + marginLeft) * scale) + 'px',
 					'width': (226 * scale) + 'px',
 					'height': (128 * scale) + 'px'
-				}
+				};
 			}
 
 			scope.updateIndicator = function() {
