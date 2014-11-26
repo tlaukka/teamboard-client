@@ -42,35 +42,52 @@
 	}
 }
 
-.ticket-search {
+.search-box {
+	position: relative;
 	display: inline-block;
 	width: 160px;
 	margin-left: 6px;
 	outline: none;
 
-	&:after {
-		content: "\f002";
-		font-family: FontAwesome;
+	.search-icon {
 		position: absolute;
-		top: 18px;
-		left: 18px;
+		top: 8px;
+		left: 8px;
 		color: #4f5b66;
 	}
-}
 
-.search-input {
-	background: rgb(60, 60, 60);
-	border: none;
-	font-size: 10pt;
-	color: #63717f;
-	padding-left: 28px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	border: none !important;
-	-webkit-box-shadow: none !important;
-	-moz-box-shadow: none !important;
-	box-shadow: none !important;
+	// &:after {
+	// 	content: "\f002";
+	// 	font-family: FontAwesome;
+	// 	position: absolute;
+	// 	top: 18px;
+	// 	left: 18px;
+	// 	color: #4f5b66;
+	// }
+
+	// &:after {
+	// 	content: "\f00d";
+	// 	font-family: FontAwesome;
+	// 	position: absolute;
+	// 	top: 0px;
+	// 	left: 0px;
+	// 	color: #4f5b66;
+	// }
+
+	.search-input {
+		background: rgb(60, 60, 60);
+		border: none;
+		font-size: 10pt;
+		color: #63717f;
+		padding-left: 28px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		border: none !important;
+		-webkit-box-shadow: none !important;
+		-moz-box-shadow: none !important;
+		box-shadow: none !important;
+	}
 }
 
 // .search-box {
@@ -144,12 +161,18 @@
 .ticket {
 	position: absolute;
 	box-sizing: border-box;
+	z-index: 100;
 	width: $ticket-width; // Margin 16
 	height: $ticket-height; // Margin 8
 	max-width: $ticket-width;
 	max-height: $ticket-height;
 	background-color: $white;
 	border: 1px solid $lightgray-dark;
+
+	&.unfocused {
+		opacity: 0.5;
+		z-index: 0 !important;
+	}
 
 	.selection-overlay {
 		position: absolute;

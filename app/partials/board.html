@@ -1,12 +1,8 @@
 <div id="board-background">
-	<span class="board-heading">{{ticketSearch.str}}</span>
+	<span class="board-heading">{{board.name}}</span>
 	<div tb-board id="board" ng-click="onBoardClicked($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
-		<!-- <div ng-repeat="t in ticketSearchResult"
-			class="ticket-hilight"
-			ng-style="setHilightStyle(t)">
-		</div> -->
-		<tb-ticket ng-repeat="ticket in tickets | filter:ticketSearch.str track by ticket.id"
+		<tb-ticket ng-repeat="ticket in tickets track by ticket.id"
 			snap-options="snapOptions"
 			ticket-search="ticketSearch"
 			ticket-data="ticket"
@@ -64,12 +60,17 @@
 </div>
 <div class="search-container">
 	<tb-toolbar>
-		<div class="ticket-search">
+		<div class="search-box">
 			<input type="text"
 				class="form-control search-input"
 				ng-model="ticketSearch.str"
-				ng-change="applySearch()"
 				placeholder="Search tickets...">
+			<span class="search-icon" ng-show="ticketSearch.str.lenght == 0">
+				<i class="fa fa-search"></i>
+			</span>
+			<span class="search-icon" ng-show="ticketSearch.str.lenght != 0" ng-click="ticketSearch.str = ''">
+				<i class="fa fa-times"></i>
+			</span>
 		</div>
 		<div class="btn btn-tool"
 			ng-click="toggleMinimap()">

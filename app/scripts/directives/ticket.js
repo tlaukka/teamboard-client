@@ -93,10 +93,19 @@ module.exports = function(ticketProxy, scrollArea) {
 			});
 
 			scope.$watch('search.str', function(str) {
-				if (str !== '' && ticket.heading.indexOf(str) > -1 && !scope.isSelected) {
+				if (str !== '' && ticket.heading.indexOf(str) > -1) {
 					scope.isHilighted = true;
+					element.removeClass('unfocused');
+				}
+				else if (str !== '') {
+					scope.isHilighted = false;
+					element.addClass('unfocused');
 				}
 				else {
+					if (element.hasClass('unfocused')) {
+						element.removeClass('unfocused');
+					}
+
 					scope.isHilighted = false;
 				}
 			});
