@@ -3,7 +3,7 @@
 
 module.exports = function(scrollArea, $timeout, $window, $document) {
 
-	var IScroll = require('IScroll');
+	var IScroll = require('iscroll');
 
 	return {
 		restrict: 'A',

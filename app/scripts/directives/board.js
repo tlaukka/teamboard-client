@@ -6,7 +6,7 @@ module.exports = function($window, $timeout, Modal, scrollArea) {
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
 	var Draggable = require('Draggable');
-	var IScroll = require('IScroll');
+	var IScroll = require('iscroll');
 
 	return {
 		// replace: true,
