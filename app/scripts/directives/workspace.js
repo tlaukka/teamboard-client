@@ -12,16 +12,19 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 		link: function(scope, element) {
 
 			scrollArea.destroy();
-			scrollArea.set(new IScroll('#content-scrollarea', {
-				scrollX: true,
-				scrollY: true,
-				freeScroll: true,
-				mouseWheel: true,
-				scrollbars: true,
-				interactiveScrollbars: true,
-				disableMouse: false,
-				keyBindings: true
-			}));
+
+			$timeout(function() {
+				scrollArea.set(new IScroll('#content-scrollarea', {
+					scrollX: true,
+					scrollY: true,
+					freeScroll: true,
+					mouseWheel: true,
+					scrollbars: true,
+					interactiveScrollbars: true,
+					disableMouse: false,
+					keyBindings: true
+				}));
+			}, 0);
 
 			scope.updateWorkspace = function() {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
@@ -46,9 +49,9 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				loadingOverlay.addClass('visible');
 			}
 
-			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
-				scope.updateWorkspace();
-			});
+			// scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
+			// 	scope.updateWorkspace();
+			// });
 
 			scope.$watch('boards.length', function() {
 				scope.updateWorkspace();

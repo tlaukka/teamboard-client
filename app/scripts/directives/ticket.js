@@ -25,7 +25,6 @@ module.exports = function(ticketProxy, scrollArea) {
 			var snap = scope.snap;
 
 			scope.isSelected = false;
-			scope.isHilighted = false;
 
 			// TODO: Need to handle zIndex
 			TweenLite.set(element, {
@@ -93,20 +92,16 @@ module.exports = function(ticketProxy, scrollArea) {
 			});
 
 			scope.$watch('search.str', function(str) {
-				if (str !== '' && ticket.heading.indexOf(str) > -1) {
-					scope.isHilighted = true;
+				if (str.length != 0 && ticket.heading.indexOf(str) > -1) {
 					element.removeClass('unfocused');
 				}
-				else if (str !== '') {
-					scope.isHilighted = false;
+				else if (str.length != 0) {
 					element.addClass('unfocused');
 				}
 				else {
 					if (element.hasClass('unfocused')) {
 						element.removeClass('unfocused');
 					}
-
-					scope.isHilighted = false;
 				}
 			});
 

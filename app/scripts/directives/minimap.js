@@ -65,8 +65,8 @@ module.exports = function($window, $timeout) {
 			}
 
 			scope.updateIndicator = function() {
-				var indicatorWidth = $window.innerWidth * scale;
-				var indicatorHeight = $window.innerHeight * scale;
+				var indicatorWidth = $window.innerWidth * scale + 2;
+				var indicatorHeight = $window.innerHeight * scale + 2;
 
 				var indicator = angular.element(element.children()[0]);
 				indicator.css({

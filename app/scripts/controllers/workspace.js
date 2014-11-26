@@ -36,8 +36,15 @@ module.exports = function(
 
 	$scope.boards = boardCollection.getBoards();
 
+	$scope.removeEnabled = false;
+	$scope.editEnabled = false;
+
 	$scope.state = {
 		isLoadingBoard: false
+	};
+
+	$scope.boardSearch = {
+		str: ''
 	};
 
 	$scope.$on('action:create', function() {
@@ -49,7 +56,7 @@ module.exports = function(
 	});
 
 	$scope.$on('action:edit', function() {
-		$scope.promptBoardEdit(boardCollection.getSelectedBoard());
+		$scope.promptBoardEdit();
 	});
 
 	$scope.validateToolset = function() {
@@ -57,19 +64,19 @@ module.exports = function(
 
 		// Enable/disable necessary toolbar buttons.
 		if (selectionCount != 0) {
-			$rootScope.$broadcast('ui:enable-remove', true);
+			$scope.removeEnabled = true;
 
 			// Enable edit only if a single board is selected.
 			if (selectionCount == 1) {
-				$rootScope.$broadcast('ui:enable-edit', true);
+				$scope.editEnabled = true;
 			}
 			else {
-				$rootScope.$broadcast('ui:enable-edit', false);
+				$scope.editEnabled = false;
 			}
 		}
 		else {
-			$rootScope.$broadcast('ui:enable-remove', false);
-			$rootScope.$broadcast('ui:enable-edit', false);
+			$scope.removeEnabled = false;
+			$scope.editEnabled = false;
 		}
 	}
 
@@ -120,6 +127,8 @@ module.exports = function(
 			controller: require('./modal-boardedit')
 		};
 
+		board = board || boardCollection.getSelectedBoard();
+
 		var userOptions = {};
 
 		modalService.show(modalOptions, userOptions).then(function(result) {
@@ -127,7 +136,7 @@ module.exports = function(
 		});
 	}
 
-	$scope.promptBoardRemove = function(callback) {
+	$scope.promptBoardRemove = function() {
 		var modalOptions = {
 			template: require('../../partials/modal-boardremove.html'),
 			windowClass: 'modal-size-sm'

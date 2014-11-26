@@ -1,5 +1,5 @@
 <div id="board-background">
-	<span class="board-heading">{{board.name}}</span>
+	<span class="view-heading">{{board.name}}</span>
 	<div tb-board id="board" ng-click="onBoardClicked($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
 		<tb-ticket ng-repeat="ticket in tickets track by ticket.id"
@@ -13,7 +13,7 @@
 </div>
 <div class="info-container">
 	<tb-toolbar>
-		<div class="logo" ui-sref="main.workspace">
+		<div class="logo">
 			<img src="/images/teamboard_logo.svg">
 		</div>
 		<div class="btn btn-tool"
@@ -29,6 +29,10 @@
 </div>
 <div class="toolbar-container">
 	<tb-toolbar>
+		<div class="btn btn-tool"
+			ui-sref="main.presentation({ id: board.id })">
+			<i class="fa fa-expand fa-fw"></i>
+		</div>
 		<div class="btn btn-tool"
 			ng-show="backgroundEnabled"
 			ng-click="promptBackgroundAdd()">
@@ -55,9 +59,6 @@
 		</div>
 	</tb-toolbar>
 </div>
-<div class="btn btn-board-icon btn-presentation" ui-sref="main.presentation({ id: board.id })">
-	<i class="fa fa-expand fa-fw"></i>
-</div>
 <div class="search-container">
 	<tb-toolbar>
 		<div class="search-box">
@@ -65,10 +66,10 @@
 				class="form-control search-input"
 				ng-model="ticketSearch.str"
 				placeholder="Search tickets...">
-			<span class="search-icon" ng-show="ticketSearch.str.lenght == 0">
+			<span class="search-icon" ng-show="ticketSearch.str.length == 0">
 				<i class="fa fa-search"></i>
 			</span>
-			<span class="search-icon" ng-show="ticketSearch.str.lenght != 0" ng-click="ticketSearch.str = ''">
+			<span class="search-icon" ng-show="ticketSearch.str.length != 0" ng-click="ticketSearch.str = ''">
 				<i class="fa fa-times"></i>
 			</span>
 		</div>

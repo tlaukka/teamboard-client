@@ -186,23 +186,18 @@ module.exports = function(
 		// Enable/disable necessary toolbar buttons.
 		if (selectionCount != 0) {
 			$scope.removeEnabled = true;
-			// $rootScope.$broadcast('ui:enable-remove', true);
 
 			// Enable edit only if a single ticket is selected.
 			if (selectionCount == 1) {
 				$scope.editEnabled = true;
-				// $rootScope.$broadcast('ui:enable-edit', true);
 			}
 			else {
 				$scope.editEnabled = false;
-				// $rootScope.$broadcast('ui:enable-edit', false);
 			}
 		}
 		else {
 			$scope.removeEnabled = false;
 			$scope.editEnabled = false;
-			// $rootScope.$broadcast('ui:enable-remove', false);
-			// $rootScope.$broadcast('ui:enable-edit', false);
 		}
 	}
 
@@ -279,7 +274,7 @@ module.exports = function(
 		});
 	}
 
-	$scope.promptTicketRemove = function(ids, callback) {
+	$scope.promptTicketRemove = function() {
 		var modalOptions = {
 			template: require('../../partials/modal-ticketremove.html'),
 			windowClass: 'modal-size-sm'

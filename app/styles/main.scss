@@ -67,7 +67,7 @@ $board-margin-bottom: 80px;
 $board-margin-left: 80px;
 
 $boardpreview-width: 230px;
-$boardpreview-height: 200px;
+$boardpreview-height: 188px;
 $boardpreview-margin-left: 24px;
 $boardpreview-margin-top: 24px;
 $boardpreview-padding: 12px;
@@ -83,16 +83,35 @@ $boardpreview-fade-duration: 0.6s;
 $loadingoverlay-fade-duration: 0.4s;
 $sidebar-collapse-duration: 0.2s;
 
-@import "partials/animations";
-@import "partials/buttons";
-@import "partials/texteditor";
-@import "partials/auth";
-@import "partials/modal";
-@import "partials/sidebar";
-@import "partials/topbar";
-@import "partials/workspace";
-@import "partials/board";
-@import "partials/minimap";
+.search-box {
+	position: relative;
+	display: inline-block;
+	width: 160px;
+	margin-left: 6px;
+	outline: none;
+
+	.search-icon {
+		position: absolute;
+		top: 7px;
+		left: 8px;
+		color: #4f5b66;
+	}
+
+	.search-input {
+		background: rgb(60, 60, 60);
+		border: none;
+		font-size: 10pt;
+		color: #63717f;
+		padding-left: 28px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		border: none !important;
+		-webkit-box-shadow: none !important;
+		-moz-box-shadow: none !important;
+		box-shadow: none !important;
+	}
+}
 
 .info-container {
 	position: fixed;
@@ -133,6 +152,14 @@ $sidebar-collapse-duration: 0.2s;
 	}
 }
 
+.view-heading {
+	position: relative;
+	font-size: 32px;
+	top: 80px;
+	left: 80px;
+	color: $lightgray-dark;
+}
+
 .logo {
 	font-family: $font-lobster;
 	box-sizing: border-box;
@@ -146,6 +173,17 @@ $sidebar-collapse-duration: 0.2s;
 		color: $white;
 	}
 }
+
+@import "partials/animations";
+@import "partials/buttons";
+@import "partials/texteditor";
+@import "partials/auth";
+@import "partials/modal";
+@import "partials/sidebar";
+@import "partials/topbar";
+@import "partials/workspace";
+@import "partials/board";
+@import "partials/minimap";
 
 html {
 	position: fixed;

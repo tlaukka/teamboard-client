@@ -1,7 +1,18 @@
+#workspace-background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: gray;
+}
+
 #workspace {
 	position: absolute;
+	top: $board-margin-top;
+	right: $board-margin-right;
+	bottom: $board-margin-bottom;
+	left: $board-margin-left;
 	background-color: $workspace-bg;
-	width: 100%;
+	// width: calc(100% - 160px);
 }
 
 #loading-overlay {
@@ -21,14 +32,6 @@
 		-ms-animation: $loadingoverlay-fade-duration fadeIn;
 		animation: $loadingoverlay-fade-duration fadeIn;
 	}
-}
-
-.boardsearch {
-	position: fixed;
-	z-index: 11001;
-	right: 56px;
-	top: $topbar-height + 8px;
-	width: 256px;
 }
 
 .board-preview-container {
@@ -61,8 +64,8 @@
 		position: relative;
 		box-sizing: border-box;
 		margin: 0;
-		width: 206px;
-		height: 116px;
+		// width: 206px;
+		// height: 116px;
 		background-color: $white;
 		border: 1px solid $lightgray-dark;
 		-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
@@ -72,8 +75,8 @@
 
 	.board-map {
 		box-sizing: border-box;
-		width: 200px;
-		height: 113px;
+		// width: 200px;
+		// height: 113px;
 		background-color: $white;
 	}
 
