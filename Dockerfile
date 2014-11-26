@@ -52,17 +52,11 @@ WORKDIR /data
 RUN ["useradd", "-m", "teamboard"]
 
 ADD . /home/teamboard/teamboard-client
+RUN ["chown", "-R", "teamboard:teamboard", "/home/teamboard/teamboard-client"]
 
 RUN apt-get update && \
 	apt-get install -y ruby && \
 	gem install sass
-
-RUN npm install -g bower
-
-RUN cd /home/teamboard/teamboard-client && \
-	npm install && \
-	chown -R teamboard:teamboard . && \
-	sudo -i -u teamboard /bin/bash -c "cd /home/teamboard/teamboard-client && bower install"
 
 RUN echo "\
 server {\n\
@@ -78,6 +72,16 @@ server {\n\
         }\n\
 }" > /etc/nginx/sites-enabled/default
 
+RUN npm install -g bower
+
+USER teamboard
+WORKDIR /home/teamboard/teamboard-client
+ENV HOME /home/teamboard/
+
+RUN npm install
+RUN bower install
+
+USER root
 CMD cd /home/teamboard/teamboard-client && \
 	sudo -u teamboard -E ./node_modules/.bin/gulp build && \
 	nginx
