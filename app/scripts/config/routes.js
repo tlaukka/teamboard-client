@@ -20,15 +20,15 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			url: '/workspace',
 
 			resolve: {
-				currentUser: function(authService) {
+				token: function(authService) {
+					return authService.setTokenKey('tb-access-token-user');
+				},
+
+				currentUser: function(token, authService) {
 					return authService.getUser();
 				},
 
-				// transform boards from http request into Board models
-				// so they can have some more functionality
-				boards: function($http, Config, boardCollection) {
-					var _ = require('lodash');
-
+				boards: function(token, $http, Config, boardCollection) {
 					return $http.get(Config.api.url() + 'boards')
 						.then(function(response) {
 							boardCollection.setBoards(response.data);
@@ -59,51 +59,28 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			url: '/board/:id',
 
 			resolve: {
-				resolveUser: function($http, $stateParams, Config, authService) {
-					var _ = require('lodash');
-
-					if (authService.getToken() == undefined) {
-						authService.setTokenKey('tb-access-token-guest-' + $stateParams.id);
-					}
-					else {
-						authService.setTokenKey('tb-access-token-user');
-
-						// Check user type (guest or user)
-						return $http.get(Config.api.url() + 'boards')
-							.then(function(response) {
-								var boards = response.data;
-								var result = _.find(boards, function(board) {
-									return board.id == $stateParams.id;
-								});
-
-								if (result == undefined) {
-									authService.setTokenKey('tb-access-token-guest-' + $stateParams.id);
-								}
-							});
-					}
+				token: function($http, $stateParams, Config, authService) {
+					return authService.setTokenKey('tb-access-token-user');
 				},
 
-				resolvedBoard: function($http, $stateParams, Config, Board) {
+				resolvedBoard: function(token, $http, $stateParams, Config, Board) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
-						.then(
-							function(response) {
+						.then(function(response) {
 								return new Board(response.data);
 							},
 							function(err) {
-								// TODO Handle it?
-								console.log('err', err);
+								return console.log(err);
 							});
 				},
 
-				tickets: function($http, $stateParams, Config, ticketCollection) {
+				tickets: function(token, $http, $stateParams, Config, ticketCollection) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '/tickets')
 						.then(function(response) {
 							ticketCollection.setTickets(response.data);
 							return ticketCollection.getTickets();
 						},
 						function(err) {
-							// TODO Handle it?
-							console.log('err', err);
+							return console.log(err);
 						});
 				}
 			},
@@ -121,20 +98,18 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 
 				'content': {
 					resolve: {
-
-						currentUser: function(authService) {
+						currentUser: function(token, authService) {
 							return authService.getUser();
 						},
 
-						connectedSocket: function($q, $stateParams, Config, authService) {
-							var io = require('socket.io-client');
+						connectedSocket: function(token, $q, $stateParams, Config, authService) {
+							var io       = require('socket.io-client');
+							var deferred = $q.defer();
 
 							var socket = io(Config.io.url(), {
 								'query':     'access-token=' + authService.getToken() + '',
 								'multiplex': false
 							});
-
-							var deferred = $q.defer();
 
 							socket.on('connect', function() {
 								socket.emit('board:join', { 'board': $stateParams.id }, function(err) {
@@ -154,19 +129,27 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			}
 		})
 
+		.state('main.board.guest', {
+			url: '/guest',
+
+			resolve: {
+				token: function($stateParams, authService) {
+					return authService.setTokenKey('tb-access-token-guest-' + $stateParams.id + '');
+				},
+			}
+		})
+
 		.state('main.presentation', {
 			url: '/presentation/:id',
 
 			resolve: {
 				resolvedBoard: function($http, $stateParams, Config, Board) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '')
-						.then(
-							function(response) {
+						.then(function(response) {
 								return new Board(response.data);
 							},
 							function(err) {
-								// TODO Handle it?
-								console.log('err', err);
+								return console.log(err);
 							});
 				},
 
@@ -183,8 +166,7 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 							return tickets;
 						},
 						function(err) {
-							// TODO Handle it?
-							console.log('err', err);
+							return console.log(err);
 						});
 				}
 			},
