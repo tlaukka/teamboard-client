@@ -245,10 +245,10 @@ body {
 	width: calc(100% + 1px);
 	height: calc(100%);
 
-	&.scrollarea-expanded {
-		left: $sidebar-width-collapsed;
-		width: calc(100% - #{$sidebar-width-collapsed} + 1px);
-	}
+	// &.scrollarea-expanded {
+	// 	left: $sidebar-width-collapsed;
+	// 	width: calc(100% - #{$sidebar-width-collapsed} + 1px);
+	// }
 }
 
 #presentation-container {

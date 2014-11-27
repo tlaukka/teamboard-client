@@ -8,10 +8,11 @@
 #workspace {
 	position: absolute;
 	top: $board-margin-top;
-	right: $board-margin-right;
-	bottom: $board-margin-bottom;
-	left: $board-margin-left;
+	// right: $board-margin-right;
+	// bottom: $board-margin-bottom;
+	// left: $board-margin-left;
 	background-color: $workspace-bg;
+	width: 100%;
 	// width: calc(100% - 160px);
 }
 
@@ -34,9 +35,17 @@
 	}
 }
 
-.board-preview-container {
-	width: 3 * ($boardpreview-width + $boardpreview-margin-left);
+.workspace-heading {
+	position: absolute;
+	font-size: 32px;
+	top: 80px;
+	left: 48px;
+	color: $lightgray-dark;
 }
+
+// .board-preview-container {
+// 	width: 3 * ($boardpreview-width + $boardpreview-margin-left);
+// }
 
 .board-preview {
 	background-color: $boardpreview-bg;
