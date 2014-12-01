@@ -86,15 +86,15 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 			},
 
 			views: {
-				'sidebar': {
-					template:   require('../../partials/sidebar.html'),
-					controller: require('../controllers/sidebar')
-				},
+				// 'sidebar': {
+				// 	template:   require('../../partials/sidebar.html'),
+				// 	controller: require('../controllers/sidebar')
+				// },
 
-				'topbar': {
-					template:   require('../../partials/topbar-board.html'),
-					controller: require('../controllers/topbar-board')
-				},
+				// 'topbar': {
+				// 	template:   require('../../partials/topbar-board.html'),
+				// 	controller: require('../controllers/topbar-board')
+				// },
 
 				'content': {
 					resolve: {
@@ -153,21 +153,30 @@ module.exports = function($stateProvider, $urlRouterProvider, $locationProvider)
 							});
 				},
 
-				tickets: function($http, $stateParams, Config, Ticket, resolvedBoard) {
+				tickets: function($http, $stateParams, Config, ticketCollection) {
 					return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '/tickets')
 						.then(function(response) {
-							var tickets = [];
-							for(var i = 0; i < response.data.length; i++) {
-								var ticketData = response.data[i];
-								ticketData.board = resolvedBoard.id;
-								tickets.push(new Ticket(ticketData));
-							}
-
-							return tickets;
+							ticketCollection.setTickets(response.data);
+							return ticketCollection.getTickets();
 						},
 						function(err) {
 							return console.log(err);
 						});
+
+					// return $http.get(Config.api.url() + 'boards/' + $stateParams.id + '/tickets')
+					// 	.then(function(response) {
+					// 		var tickets = [];
+					// 		for(var i = 0; i < response.data.length; i++) {
+					// 			var ticketData = response.data[i];
+					// 			ticketData.board = resolvedBoard.id;
+					// 			tickets.push(new Ticket(ticketData));
+					// 		}
+
+					// 		return tickets;
+						// },
+						// function(err) {
+						// 	return console.log(err);
+						// });
 				}
 			},
 

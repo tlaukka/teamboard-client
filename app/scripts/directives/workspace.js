@@ -12,22 +12,24 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 		link: function(scope, element) {
 
 			scrollArea.destroy();
-			scrollArea.set(new IScroll('#content-scrollarea', {
-				scrollX: true,
-				scrollY: true,
-				freeScroll: true,
-				mouseWheel: true,
-				scrollbars: true,
-				interactiveScrollbars: true,
-				disableMouse: false,
-				keyBindings: true
-			}));
+
+			$timeout(function() {
+				scrollArea.set(new IScroll('#content-scrollarea', {
+					scrollX: true,
+					scrollY: true,
+					freeScroll: true,
+					mouseWheel: true,
+					scrollbars: true,
+					interactiveScrollbars: true,
+					disableMouse: false
+				}));
+			}, 0);
 
 			scope.updateWorkspace = function() {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
 
 				// workspaceWidth / (boardPreviewWidth + margin)
-				var boardsPerRow = Math.floor(scroller[0].clientWidth / 254);
+				var boardsPerRow = Math.floor((scroller[0].clientWidth - 24) / 254);
 				boardsPerRow = Math.min(Math.max(boardsPerRow, 1), 8);
 
 				var boardRowCount = Math.floor(scope.boards.length / boardsPerRow); // Full rows
@@ -37,7 +39,7 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				}
 
 				// (boardRowCount * boardPreviewHeight + margin) + 2 * margin
-				var height = (boardRowCount * 224 + 48) + 'px';
+				var height = (boardRowCount * 212 + 48 + 140) + 'px';
 				element.css('height', height);
 			}
 
@@ -46,9 +48,9 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				loadingOverlay.addClass('visible');
 			}
 
-			scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
-				scope.updateWorkspace();
-			});
+			// scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
+			// 	scope.updateWorkspace();
+			// });
 
 			scope.$watch('boards.length', function() {
 				scope.updateWorkspace();

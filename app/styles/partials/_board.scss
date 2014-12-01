@@ -1,47 +1,37 @@
 #board-background {
 	position: absolute;
-	width: $board-width + 2 * $board-margin;
-	height: $board-height + 2 * $board-margin;
+	width: $board-width + $board-margin-right + $board-margin-left;
+	height: $board-height + $board-margin-top + $board-margin-bottom;
 }
 
 #board {
 	position: absolute;
-	left: $board-margin;
-	top: $board-margin;
+	// box-sizing: border-box;
+	left: $board-margin-left;
+	top: $board-margin-top;
 	width: $board-width;
 	height: $board-height;
 	background-color: $board-bg;
+	// border: 1px solid $lightgray;
 	overflow: hidden;
+}
+
+.board-heading {
+	position: relative;
+	font-size: 32px;
+	top: 80px;
+	left: 80px;
+	color: $lightgray-dark;
 }
 
 .minimap-container {
 	position: fixed;
 	z-index: 11000;
-	width: 227px;
-	height: 128px;
-	border: 1px solid $lightgray-dark;
-	background-color: $white;
+	padding: 4px;
+	background-color: rgb(24, 24, 24);
 	-webkit-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 	-moz-box-shadow: 1px 1px 1px 1px $black-transparent-20;
 	box-shadow: 1px 1px 1px 1px $black-transparent-20;
-
-	&.minimap-visible {
-		right: 8px;
-		top: $topbar-height + 8px;
-	}
-
-	&.minimap-hidden {
-		right: -500px;
-		top: 0;
-	}
-}
-
-.ticketsearch {
-	position: fixed;
-	z-index: 11001;
-	right: 56px;
-	top: 208px;
-	width: 256px;
 }
 
 .presentation-background {
@@ -82,15 +72,11 @@
 		transition: all 0.4s ease;
 	}
 }
-.debugstr {
-	position: fixed;
-	z-index: 1000000;
-	left: 400px;
-	top: 8px;
-}
+
 .ticket {
 	position: absolute;
 	box-sizing: border-box;
+	z-index: 100;
 	width: $ticket-width; // Margin 16
 	height: $ticket-height; // Margin 8
 	max-width: $ticket-width;
@@ -98,13 +84,28 @@
 	background-color: $white;
 	border: 1px solid $lightgray-dark;
 
+	&.unfocused {
+		opacity: 0.5;
+		z-index: 0 !important;
+	}
+
 	.selection-overlay {
 		position: absolute;
-		left: -1px;
-		top: -1px;
-		width: $ticket-width;
-		height: $ticket-height;
+		left: -2px;
+		top: -2px;
+		width: $ticket-width + 2px;
+		height: $ticket-height + 2px;
 		border: 3px solid $turquoise;
+		background-color: $transparent;
+	}
+
+	.ticket-hilight {
+		position: absolute;
+		left: -2px;
+		top: -2px;
+		width: $ticket-width + 2px;
+		height: $ticket-height + 2px;
+		border: 3px dashed $turquoise;
 		background-color: $transparent;
 	}
 

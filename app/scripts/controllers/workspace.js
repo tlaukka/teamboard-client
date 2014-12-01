@@ -8,7 +8,8 @@ module.exports = function(
 	$rootScope,
 	modalService,
 	Modal,
-	boardCollection
+	boardCollection,
+	currentUser
 	) {
 
 	// var tasks = {
@@ -33,11 +34,18 @@ module.exports = function(
 	// });
 
 	// $speechRecognition.listen();
-
+	$scope.user = currentUser;
 	$scope.boards = boardCollection.getBoards();
+
+	$scope.removeEnabled = false;
+	$scope.editEnabled = false;
 
 	$scope.state = {
 		isLoadingBoard: false
+	};
+
+	$scope.boardSearch = {
+		str: ''
 	};
 
 	$scope.$on('action:create', function() {
@@ -49,7 +57,7 @@ module.exports = function(
 	});
 
 	$scope.$on('action:edit', function() {
-		$scope.promptBoardEdit(boardCollection.getSelectedBoard());
+		$scope.promptBoardEdit();
 	});
 
 	$scope.validateToolset = function() {
@@ -57,19 +65,19 @@ module.exports = function(
 
 		// Enable/disable necessary toolbar buttons.
 		if (selectionCount != 0) {
-			$rootScope.$broadcast('ui:enable-remove', true);
+			$scope.removeEnabled = true;
 
 			// Enable edit only if a single board is selected.
 			if (selectionCount == 1) {
-				$rootScope.$broadcast('ui:enable-edit', true);
+				$scope.editEnabled = true;
 			}
 			else {
-				$rootScope.$broadcast('ui:enable-edit', false);
+				$scope.editEnabled = false;
 			}
 		}
 		else {
-			$rootScope.$broadcast('ui:enable-remove', false);
-			$rootScope.$broadcast('ui:enable-edit', false);
+			$scope.removeEnabled = false;
+			$scope.editEnabled = false;
 		}
 	}
 
@@ -111,6 +119,8 @@ module.exports = function(
 	}
 
 	$scope.promptBoardEdit = function(board) {
+		board = board || boardCollection.getSelectedBoard();
+
 		var props = {
 			'id':         board.id,
 			'name':       board.name,

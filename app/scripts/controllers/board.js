@@ -11,7 +11,8 @@ module.exports = function(
 	resolvedBoard,
 	currentUser,
 	Modal,
-	ticketCollection
+	ticketCollection,
+	authService
 	) {
 
 
@@ -62,6 +63,12 @@ module.exports = function(
 	// board resolved in the ui-router
 	$scope.board = resolvedBoard;
 	$scope.tickets = ticketCollection.getTickets();
+
+	$scope.$on('$stateChangeStart', function() {
+		connectedSocket.off('ticket:create');
+		connectedSocket.off('ticket:update');
+		connectedSocket.off('ticket:remove');
+	});
 
 	// create a new ticket in our clients collection if necessary
 	connectedSocket.on('ticket:create', function(ev) {
@@ -136,6 +143,11 @@ module.exports = function(
 
 	$scope.selectedTicketIds = [];
 
+	$scope.removeEnabled = false;
+	$scope.editEnabled = false;
+
+	$scope.backgroundEnabled = (currentUser.type == 'guest') ? false : true;
+
 	// TODO Move these to app configuration?
 	$scope.snapOptions = {
 		enabled:    false,
@@ -145,12 +157,16 @@ module.exports = function(
 
 	$scope.isMinimapVisible = (localStorage.getItem('tb-minimap-visible') === 'true');
 
-	if (currentUser.type == 'guest') {
-		$rootScope.$broadcast('ui:enable-background', false);
-	}
-	else {
-		$rootScope.$broadcast('ui:enable-background', true);
-	}
+	$scope.ticketSearch = {
+		str: ''
+	};
+
+	// if (currentUser.type == 'guest') {
+	// 	$rootScope.$broadcast('ui:enable-background', false);
+	// }
+	// else {
+	// 	$rootScope.$broadcast('ui:enable-background', true);
+	// }
 
 	// triggered from TopBarController
 	$scope.$on('action:create', function(event, data) {
@@ -174,7 +190,7 @@ module.exports = function(
 
 	// triggered from TopBarController
 	$scope.$on('action:edit', function(event, data) {
-		$scope.promptTicketEdit(ticketCollection.getSelectedTicket());
+		$scope.promptTicketEdit();
 	});
 
 	$scope.validateToolset = function() {
@@ -182,19 +198,19 @@ module.exports = function(
 
 		// Enable/disable necessary toolbar buttons.
 		if (selectionCount != 0) {
-			$rootScope.$broadcast('ui:enable-remove', true);
+			$scope.removeEnabled = true;
 
 			// Enable edit only if a single ticket is selected.
 			if (selectionCount == 1) {
-				$rootScope.$broadcast('ui:enable-edit', true);
+				$scope.editEnabled = true;
 			}
 			else {
-				$rootScope.$broadcast('ui:enable-edit', false);
+				$scope.editEnabled = false;
 			}
 		}
 		else {
-			$rootScope.$broadcast('ui:enable-remove', false);
-			$rootScope.$broadcast('ui:enable-edit', false);
+			$scope.removeEnabled = false;
+			$scope.editEnabled = false;
 		}
 	}
 
@@ -206,6 +222,7 @@ module.exports = function(
 	$scope.toggleMinimap = function() {
 		$scope.isMinimapVisible = !$scope.isMinimapVisible;
 		localStorage.setItem('tb-minimap-visible', $scope.isMinimapVisible);
+		$rootScope.$broadcast('action:toggle-minimap', $scope.isMinimapVisible);
 	}
 
 	$scope.toggleTicketSelection = function(id) {
@@ -223,6 +240,14 @@ module.exports = function(
 		data.board = $scope.board.id;
 		data.position = { x: 0, y: 0, z: 1000 };
 		ticketCollection.addTicket(data);
+	}
+
+	$scope.addBackground = function(bg) {
+		$scope.board.background = bg;
+		$scope.board.update()
+			.then(function() {
+				$scope.$broadcast('action:add-background', bg);
+			});
 	}
 
 	$scope.removeSelectedTickets = function() {
@@ -243,6 +268,8 @@ module.exports = function(
 	}
 
 	$scope.promptTicketEdit = function(ticket) {
+		ticket = ticket || ticketCollection.getSelectedTicket();
+
 		var props = {
 			'color':   ticket.color,
 			'heading': ticket.heading,
@@ -269,6 +296,39 @@ module.exports = function(
 
 		Modal.open(props, options).result.then(function() {
 			return $scope.removeSelectedTickets();
+		});
+	}
+
+	$scope.promptBackgroundAdd = function() {
+		var modalOptions = {
+			template: require('../../partials/modal-backgroundadd.html'),
+			windowClass: 'modal-size-lg'
+		}
+
+		var backgrounds = [];
+		backgrounds.push({ name: 'Blank', url: 'none' });
+		backgrounds.push({ name: 'Kanban', url: 'images/backgrounds/kanban.png' });
+		backgrounds.push({ name: 'Scrum', url: 'images/backgrounds/scrum.png' });
+		backgrounds.push({ name: 'Business model', url: 'images/backgrounds/business_model_canvas.png' });
+		backgrounds.push({ name: 'SWOT', url: 'images/backgrounds/swot.png' });
+		backgrounds.push({ name: 'Customer journey', url: 'images/backgrounds/customer_journey_map.png' });
+		backgrounds.push({ name: 'Keep drop try', url: 'images/backgrounds/keep_drop_try.png' });
+		backgrounds.push({ name: 'Play', url: 'images/backgrounds/play.png' });
+
+		var userOptions = {
+			backgrounds: backgrounds,
+			currentBg: $scope.board.background
+		};
+
+		modalService.show(modalOptions, userOptions).then(function(result) {
+			$scope.addBackground(result.selectedBg);
+		});
+	}
+
+	$scope.logout = function() {
+		authService.logout().then(function() {
+			socketService.disconnect();
+			$state.go('login');
 		});
 	}
 }

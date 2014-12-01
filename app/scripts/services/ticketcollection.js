@@ -61,6 +61,16 @@ module.exports = function($q, Ticket) {
 		}
 	}
 
+	ticketCollection.getSearchResult = function(searchStr) {
+		if (searchStr === null || searchStr === '') {
+			return [];
+		}
+
+		return _.filter(_tickets, function(ticket) {
+			return (ticket.heading.indexOf(searchStr) > -1) ? true : false;
+		});
+	}
+
 	ticketCollection.addTicket = function(data) {
 		var ticket = new Ticket(data);
 		return ticket.save().then(
