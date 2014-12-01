@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function($scope, $rootScope, $state, $timeout, $translate, $window, authService, socketService) {
+module.exports = function($scope, $rootScope, $state, $timeout, $translate, $window, authService) {
 
 	// Set the initial state
 	if ($window.innerWidth < 768) {
@@ -32,7 +32,6 @@ module.exports = function($scope, $rootScope, $state, $timeout, $translate, $win
 
 	$scope.logout = function() {
 		authService.logout().then(function() {
-			socketService.disconnect();
 			$state.go('login');
 		});
 	}

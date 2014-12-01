@@ -1,12 +1,12 @@
 'use strict';
 
 
-module.exports = function($window, $timeout, modalService, scrollArea) {
+module.exports = function($window, $timeout, Modal, scrollArea) {
 
 	var TweenLite = require('TweenLite');
 	var CSSPlugin = require('CSSPlugin');
 	var Draggable = require('Draggable');
-	var IScroll = require('IScroll');
+	var IScroll = require('iscroll');
 
 	return {
 		restrict: 'A',
@@ -19,23 +19,6 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 		link: function(scope, element) {
 
 			scrollArea.destroy();
-			// scrollArea.set(new IScroll('#content-scrollarea', {
-			// 	scrollX: true,
-			// 	scrollY: true,
-			// 	freeScroll: true,
-			// 	mouseWheel: true,
-			// 	scrollbars: true,
-			// 	interactiveScrollbars: true,
-			// 	disableMouse: false,
-			// 	keyBindings: true,
-
-			// 	indicators: {
-			// 		el: '.minimap',
-			// 		interactive: true,
-			// 		resize: false,
-			// 		shrink: false
-			// 	}
-			// }));
 
 			$timeout(function() {
 				scrollArea.set(new IScroll('#content-scrollarea', {
@@ -46,7 +29,6 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 					scrollbars: true,
 					interactiveScrollbars: true,
 					disableMouse: false,
-					keyBindings: true,
 
 					indicators: {
 						el: '.minimap',
@@ -64,7 +46,7 @@ module.exports = function($window, $timeout, modalService, scrollArea) {
 			// scrollArea.refresh(0);
 			scope.isPresentationVisible = true;
 
-			scope.setHilightStyle= function(ticket) {
+			scope.setHilightStyle = function(ticket) {
 				return {
 					'top': ticket.position.y + 'px',
 					'left': ticket.position.x + 'px',

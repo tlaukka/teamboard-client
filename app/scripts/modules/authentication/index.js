@@ -2,7 +2,9 @@
 
 
 var angular = require('angular');
-              require('angular-ui-router');
+
+require('angular-ui-router');
+require('angular-translate');
 
 /**
  * Adds authentication capabilities to 'tb' application.

@@ -1,16 +1,16 @@
 'use strict';
 
-
-var _ = require('underscore');
+var _    = require('lodash');
+var utf8 = require('utf8');
 
 module.exports = function(
 	$scope,
 	$rootScope,
-	$speechRecognition,
 	modalService,
 	connectedSocket,
 	resolvedBoard,
 	currentUser,
+	Modal,
 	ticketCollection,
 	authService
 	) {
@@ -64,6 +64,12 @@ module.exports = function(
 	$scope.board = resolvedBoard;
 	$scope.tickets = ticketCollection.getTickets();
 
+	$scope.$on('$stateChangeStart', function() {
+		connectedSocket.off('ticket:create');
+		connectedSocket.off('ticket:update');
+		connectedSocket.off('ticket:remove');
+	});
+
 	// create a new ticket in our clients collection if necessary
 	connectedSocket.on('ticket:create', function(ev) {
 		if (ev.board !== $scope.board.id) {
@@ -79,6 +85,10 @@ module.exports = function(
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if (!ticketDoesExist) {
+			ev.ticket.color   = utf8.decode(ev.ticket.color);
+			ev.ticket.heading = utf8.decode(ev.ticket.heading);
+			ev.ticket.content = utf8.decode(ev.ticket.content);
+
 			ticketCollection.addTicketLocal(ev.ticket);
 			return $scope.$apply();
 		}
@@ -103,14 +113,17 @@ module.exports = function(
 		// for some reason the ticket does not yet exist in our client
 		// so we need to add it to our clients collection
 		if (!existingTicket) {
+			ev.ticket.color   = utf8.decode(ev.ticket.color);
+			ev.ticket.heading = utf8.decode(ev.ticket.heading);
+			ev.ticket.content = utf8.decode(ev.ticket.content);
 			return ticketCollection.addTicketLocal(ev.ticket);
 		}
 
 		// the ticket already exists in our clients collection, so
 		// we can just update the attributes of it
-		existingTicket.color    = ev.ticket.color;
-		existingTicket.heading  = ev.ticket.heading;
-		existingTicket.content  = ev.ticket.content;
+		existingTicket.color    = utf8.decode(ev.ticket.color);
+		existingTicket.heading  = utf8.decode(ev.ticket.heading);
+		existingTicket.content  = utf8.decode(ev.ticket.content);
 		existingTicket.position = ev.ticket.position;
 
 		return $scope.$apply();
@@ -245,51 +258,44 @@ module.exports = function(
 	}
 
 	$scope.promptTicketCreate = function() {
-		var modalOptions = {
-			template: require('../../partials/modal-ticketcreate.html'),
-			windowClass: 'modal-size-md'
+		var options = {
+			'template': require('../../partials/modals/create-ticket.html'),
 		}
 
-		return modalService.show(modalOptions, null).then(function(result) {
+		Modal.open(null, options).result.then(function(result) {
 			return $scope.createTicket(result);
 		});
 	}
 
 	$scope.promptTicketEdit = function(ticket) {
-		var modalOptions = {
-			template: require('../../partials/modal-ticketedit.html')
-		}
-
 		ticket = ticket || ticketCollection.getSelectedTicket();
 
-		var userOptions = {
-			color:   ticket.color,
-			heading: ticket.heading,
-			content: ticket.content,
-			owner:   ticket.owner
+		var props = {
+			'color':   ticket.color,
+			'heading': ticket.heading,
 		}
 
-		modalService.show(modalOptions, userOptions).then(function(result) {
-			ticketCollection.updateTicket(ticket.id, result);
+		var options = {
+			'template': require('../../partials/modals/edit-ticket.html'),
+		}
+
+		Modal.open(props, options).result.then(function(result) {
+			return ticketCollection.updateTicket(ticket.id, result);
 		});
 	}
 
 	$scope.promptTicketRemove = function() {
-		var modalOptions = {
-			template: require('../../partials/modal-ticketremove.html'),
-			windowClass: 'modal-size-sm'
+		var props = {
+			'name':  ticketCollection.getSelectedTicket().heading,
+			'count': ticketCollection.getSelectedTicketsCount(),
 		}
 
-		var userOptions = {};
-
-		if (ticketCollection.getSelectedTicketsCount() == 1) {
-			userOptions.ticketName = ticketCollection.getSelectedTicket().heading;
+		var options = {
+			'template': require('../../partials/modals/remove-ticket.html'),
 		}
 
-		userOptions.ticketCount = ticketCollection.getSelectedTicketsCount();
-
-		modalService.show(modalOptions, userOptions).then(function() {
-			$scope.removeSelectedTickets();
+		Modal.open(props, options).result.then(function() {
+			return $scope.removeSelectedTickets();
 		});
 	}
 
@@ -325,34 +331,4 @@ module.exports = function(
 			$state.go('login');
 		});
 	}
-
-	// $scope.editBoard = function(board, attrs) {
-	// 	board.name     = attrs.name;
-	// 	board.isPublic = attrs.isPublic;
-
-	// 	return board.save().then(
-	// 		function(board) {
-	// 			console.log('edited', board);
-	// 		},
-	// 		function(err) {
-	// 			// wat do
-	// 			console.log(err);
-	// 		});
-	// }
-
-	// $scope.promptBoardEdit = function(board) {
-	// 	Board.selectedBoard = board;
-
-	// 	var modalOptions = {
-	// 		template: require('../../partials/modal-boardedit.html'),
-	// 		windowClass: 'modal-size-md',
-	// 		controller: require('./modal-boardedit')
-	// 	}
-
-	// 	var userOptions = {};
-
-	// 	modalService.show(modalOptions, userOptions).then(function(result) {
-	// 		$scope.editBoard(board, result);
-	// 	});
-	// }
 }

@@ -10,7 +10,8 @@ module.exports = function($scope, $state, $stateParams, $http, Config, authServi
 		if (form.$valid) {
 			authService.loginGuest($stateParams.id, $stateParams.code, $scope.username).then(
 				function() {
-					$state.go('main.board', { id: $stateParams.id });
+					console.log('för helvete');
+					$state.go('main.board.guest', { id: $stateParams.id });
 				},
 				function(err) {
 					$scope.errors.other = err.data.message;

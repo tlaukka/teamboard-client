@@ -1,13 +1,13 @@
 'use strict';
 
 
-var _ = require('underscore');
+var _ = require('lodash');
 
 module.exports = function(
 	$scope,
 	$rootScope,
-	$speechRecognition,
 	modalService,
+	Modal,
 	boardCollection,
 	currentUser
 	) {
@@ -109,50 +109,49 @@ module.exports = function(
 	}
 
 	$scope.promptBoardCreate = function() {
-		var modalOptions = {
-			template: require('../../partials/modal-boardcreate.html'),
-			windowClass: 'modal-size-md'
-		};
+		var options = {
+			'template': require('../../partials/modals/create-board.html'),
+		}
 
-		var userOptions = {};
-
-		modalService.show(modalOptions, userOptions).then(function(result) {
-			$scope.createBoard(result);
+		Modal.open(null, options).result.then(function(result) {
+			return $scope.createBoard(result);
 		});
 	}
 
 	$scope.promptBoardEdit = function(board) {
-		var modalOptions = {
-			template: require('../../partials/modal-boardedit.html'),
-			windowClass: 'modal-size-md',
-			controller: require('./modal-boardedit')
-		};
-
 		board = board || boardCollection.getSelectedBoard();
 
-		var userOptions = {};
+		var props = {
+			'id':         board.id,
+			'name':       board.name,
+			'accessCode': board.accessCode,
+		}
 
-		modalService.show(modalOptions, userOptions).then(function(result) {
-			boardCollection.updateBoard(board.id, result);
+		var options = {
+			'template':   require('../../partials/modals/edit-board.html'),
+			'controller': require('./modals/edit-board'),
+		}
+
+		Modal.open(props, options).result.then(function(result) {
+			return boardCollection.updateBoard(props.id, result);
 		});
 	}
 
 	$scope.promptBoardRemove = function() {
-		var modalOptions = {
-			template: require('../../partials/modal-boardremove.html'),
-			windowClass: 'modal-size-sm'
-		};
+		var selBoard    = boardCollection.getSelectedBoard();
+		var lenSelected = boardCollection.getSelectedBoardsCount();
 
-		var userOptions = {};
-
-		if (boardCollection.getSelectedBoardsCount() == 1) {
-			userOptions.boardName = boardCollection.getSelectedBoard().name;
+		var props = {
+			'name':  lenSelected > 1 ? '' : selBoard.name,
+			'count': lenSelected,
 		}
 
-		userOptions.boardCount = boardCollection.getSelectedBoardsCount();
+		var options = {
+			'template': require('../../partials/modals/remove-board.html'),
+		}
 
-		modalService.show(modalOptions, userOptions).then(function() {
-			$scope.removeSelectedBoards();
+		Modal.open(props, options).result.then(function() {
+			return $scope.removeSelectedBoards();
 		});
 	}
 }

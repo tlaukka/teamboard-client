@@ -3,7 +3,7 @@
 		ng-class="isSidebarCollapsed ? 'sidebar-margin-collapsed' : 'sidebar-margin'">
 		<div class="row">
 			<div class="hidden-xs col-sm-5 content-block cursor-pointer" ng-click="onHeadingClicked()">
-				<h2 class="workspace-heading">{{ board.name | characters: 24: true }}</h2>
+				<h2 class="workspace-heading">{{ board.name | limitTo:24 }}</h2>
 			</div>
 			<div class="col-xs-9 col-sm-4 content-block">
 				<div class="btn-group iconbar pull-right">

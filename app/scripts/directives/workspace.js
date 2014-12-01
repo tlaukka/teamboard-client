@@ -3,7 +3,7 @@
 
 module.exports = function(scrollArea, $timeout, $window, $document) {
 
-	var IScroll = require('IScroll');
+	var IScroll = require('iscroll');
 
 	return {
 		restrict: 'A',
@@ -21,8 +21,7 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 					mouseWheel: true,
 					scrollbars: true,
 					interactiveScrollbars: true,
-					disableMouse: false,
-					keyBindings: true
+					disableMouse: false
 				}));
 			}, 0);
 

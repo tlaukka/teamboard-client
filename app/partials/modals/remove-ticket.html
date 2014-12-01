@@ -1,0 +1,50 @@
+<div class="modal-header">
+	<span class="btn btn-modal-close" ng-click="$dismiss()">
+		<i class="fa fa-times"></i>
+	</span>
+	<div class="modal-heading-block">
+		<span ng-if="props.count >= 2">
+			{{ 'MODAL_HEADER_REMOVETICKETS' | translate }}
+		</span>
+		<span ng-if="props.count == 1">
+			{{ 'MODAL_HEADER_REMOVETICKET' | translate }}
+		</span>
+	</div>
+</div>
+
+<div class="modal-content-divider"></div>
+
+<div class="modal-body">
+
+	<div ng-if="props.count >= 2"
+	     class="modal-content-block padding-md">
+		<p class="text-center">
+			{{ 'MODAL_MESSAGE_TICKETSREMOVE' | translate }}
+			<span class="highlight">
+				{{props.count}}
+			</span>
+			{{ 'MODAL_MESSAGE_TICKETS' | translate }}
+		</p>
+	</div>
+
+	<div ng-if="props.count == 1"
+	     class="modal-content-block padding-md">
+		<p class="text-center">
+			{{ 'MODAL_MESSAGE_TICKETREMOVE' | translate }}
+		</p>
+		<p class="text-center highlight">
+			{{props.name}}
+		</p>
+	</div>
+</div>
+
+<div class="modal-content-divider"></div>
+
+<div class="modal-footer">
+	<div class="modal-content-block padding-md">
+		<button class="btn btn-lg btn-fw btn-primary"
+		        ng-click="$close(props)">
+			{{ 'MODAL_LABEL_DELETE' | translate }}
+		</button>
+	</div>
+</div>

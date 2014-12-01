@@ -1,0 +1,210 @@
+Changelog
+=========
+
+v0.2.5 (2014-11-27)
+-------------------
+
+-  Changelog. [jenkins]
+
+v0.2.4 (2014-11-27)
+-------------------
+
+- Fix iscroll imports. [Teemu Laukka]
+
+v0.2.3 (2014-11-25)
+-------------------
+
+- Add EditBackgroundModal. [tanelih]
+
+- Add RemoveBoardModal. [tanelih]
+
+- Replace workspace modals with refactored ones. [tanelih]
+
+- Add Create and Remove modals for boards. [tanelih]
+
+- Add a 'EditBoardModal' service, based on 'Modal' service. Very basic
+  styles for 'Modal'. [tanelih]
+
+- Add a 'modal' service. [tanelih]
+
+- Use 'limitTo' filter, instead of separate 'truncate'. [tanelih]
+
+v0.2.2 (2014-11-19)
+-------------------
+
+- Refactor most 'bower_components' into 'node_modules'. [tanelih]
+
+  Remove 'text-angular', 'angular-truncate', 'ng-sanitize'. Remove
+  'adaptive-speech' because it is a joke. Replace 'underscore' with
+  'lodash'.
+
+v0.2.1 (2014-11-18)
+-------------------
+
+- Add UTF8 decoding to received 'ticket:create', 'ticket:update' events.
+  Closes #224. [tanelih]
+
+- Change product name to Contriboard. [Teemu Laukka]
+
+- Add board search. [Teemu Laukka]
+
+- Fix board loading everlay layout issues. [Teemu Laukka]
+
+- Add board url copy. [Teemu Laukka]
+
+- Fix logout. [Teemu Laukka]
+
+- Broke configuration. [Taneli Hartikainen]
+
+- Use process.env.API_URL for the whole api url, including any versions
+  and ports. [Taneli Hartikainen]
+
+- Disable speech recog... For now. [Taneli Hartikainen]
+
+- Modify uservoice autoprompt. [Teemu Laukka]
+
+- Add mobile layout css rules. [Teemu Laukka]
+
+- Fix socket disconnect problem on logout. [Teemu Laukka]
+
+- Fix issues with undefined board id in tickets issues. [Teemu Laukka]
+
+- Fix apply with enter key in modals. [Teemu Laukka]
+
+- Remove debug logging from presentation. [Teemu Laukka]
+
+- Add debug logging. [Teemu Laukka]
+
+- Fix presentation events. [Teemu Laukka]
+
+- Add socket event listening to board presentation. [Teemu Laukka]
+
+- Add board presentation. [Teemu Laukka]
+
+- Fix missing scss import. [Teemu Laukka]
+
+- Fix board presentation layout. [Teemu Laukka]
+
+- Update boardpreview to use minimap, add Swedish translation. [Teemu
+  Laukka]
+
+- Update minimap directive. [Teemu Laukka]
+
+- Fix ticket update socket events. [Teemu Laukka]
+
+- Fix loading overlay size. [Teemu Laukka]
+
+- Add new backgrounds. [Teemu Laukka]
+
+- Add folder for background images, add password confirmation to
+  register form. [Teemu Laukka]
+
+- Update minimap styles. [Teemu Laukka]
+
+- Update background handling. [Teemu Laukka]
+
+- Update scrollArea service. [Teemu Laukka]
+
+- Add minimap to board view. [Teemu Laukka]
+
+- Add minimap template. [Teemu Laukka]
+
+- Add translations to board background adding dialog. [Teemu Laukka]
+
+- Add translations and language select. [Teemu Laukka]
+
+- Add localization to auth and workspace. [Teemu Laukka]
+
+- Fix scrollarea height. [Teemu Laukka]
+
+- Fix background selection. [Teemu Laukka]
+
+- Add background image path to local storage. [Teemu Laukka]
+
+- Add highlighting to background selection. [Teemu Laukka]
+
+- Add background images, add modal for background selection. [Teemu
+  Laukka]
+
+- Fix member add/remove. [Teemu Laukka]
+
+- Add removeMember function to board service. [Teemu Laukka]
+
+- Add details view to board edit. [Teemu Laukka]
+
+- Update all modal layouts. [Teemu Laukka]
+
+- Add member list to board craete/edit. [Teemu Laukka]
+
+- Add new layout to create board modal. [Teemu Laukka]
+
+- Remove unnecessary partials. [Teemu Laukka]
+
+- Add new auth page styles. [Teemu Laukka]
+
+- Fix whole window from scrolling on iPad. [Teemu Laukka]
+
+- Fix Lobster font. [Taneli Hartikainen]
+
+- Add addMember method to Board. [Taneli Hartikainen]
+
+- Remove funny placeholder pic. Fix screenshots not loading on board
+  create. [Taneli Hartikainen]
+
+- Add placeholder for screenshots. [Taneli Hartikainen]
+
+- Add modal dialog for board/ticket deletion. [Teemu Laukka]
+
+- Add new ticket color selection. [Teemu Laukka]
+
+- Modify ticket create dialog. [Teemu Laukka]
+
+- Add remove function to board service, fix workspace layout. [Teemu
+  Laukka]
+
+- Add proper modal dialog sizing. [Teemu Laukka]
+
+- Add new styles to create board modal. [Teemu Laukka]
+
+- Fix scrolling on tablet. [Teemu Laukka]
+
+- Change ticket:remove logging. [Taneli Hartikainen]
+
+- Fix issues with socket:update and :create. [Taneli Hartikainen]
+
+- Add id-attributes to boardpreview and ticket. [Taneli Hartikainen]
+
+- Fix bug with socket-disconnects. Change events to have array instead
+  of single object. [Taneli Hartikainen]
+
+- Add new styles to board view. [Teemu Laukka]
+
+- Add new topbar styles. [Teemu Laukka]
+
+- Modify board loading spinner. [Teemu Laukka]
+
+- Clean the code. [Teemu Laukka]
+
+- Add multi board remove. [Teemu Laukka]
+
+- Add loading overlay to workspace. [Teemu Laukka]
+
+- Add spinner to board loading. [Teemu Laukka]
+
+- Add boardpreview directive and board multi selection. [Teemu Laukka]
+
+- Add icon bar to topbar. [Teemu Laukka]
+
+- Add new topbar styles. [Teemu Laukka]
+
+- Add new board preview styles. [Teemu Laukka]
+
+- Remove boardlist directive. [Teemu Laukka]
+
+- Fix workspace scrolling. [Teemu Laukka]
+
+- Create LICENSE. [Taneli Hartikainen]
+
+- Initial commit. [Taneli Hartikainen]
+
+
