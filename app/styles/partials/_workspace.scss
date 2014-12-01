@@ -11,7 +11,7 @@
 	// right: $board-margin-right;
 	// bottom: $board-margin-bottom;
 	// left: $board-margin-left;
-	background-color: $workspace-bg;
+	// background-color: $workspace-bg;
 	width: 100%;
 	// width: calc(100% - 160px);
 }
@@ -33,6 +33,25 @@
 		-ms-animation: $loadingoverlay-fade-duration fadeIn;
 		animation: $loadingoverlay-fade-duration fadeIn;
 	}
+}
+
+.info-box {
+	font-size: 12px;
+	color: darken($lightgray-dark, 20%);
+
+	.info-entry {
+		margin: 8px;
+	}
+
+	.info-username {
+		font-weight: bold;
+		color: $lightgray-dark;
+	}
+}
+
+.board-container {
+	margin-right: 24px;
+	padding: 0;
 }
 
 .workspace-heading {

@@ -6,11 +6,13 @@
 
 #board {
 	position: absolute;
+	box-sizing: border-box;
 	left: $board-margin-left;
 	top: $board-margin-top;
 	width: $board-width;
 	height: $board-height;
 	background-color: $board-bg;
+	border: 1px solid $lightgray;
 	overflow: hidden;
 }
 

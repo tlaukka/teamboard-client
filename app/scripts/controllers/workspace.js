@@ -8,7 +8,8 @@ module.exports = function(
 	$rootScope,
 	$speechRecognition,
 	modalService,
-	boardCollection
+	boardCollection,
+	currentUser
 	) {
 
 	// var tasks = {
@@ -33,7 +34,7 @@ module.exports = function(
 	// });
 
 	// $speechRecognition.listen();
-
+	$scope.user = currentUser;
 	$scope.boards = boardCollection.getBoards();
 
 	$scope.removeEnabled = false;

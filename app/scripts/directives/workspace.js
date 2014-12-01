@@ -30,8 +30,7 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				var scroller = angular.element(document.getElementById('content-scrollarea'));
 
 				// workspaceWidth / (boardPreviewWidth + margin)
-				console.log('scroller w: ' + scroller[0].clientWidth);
-				var boardsPerRow = Math.floor(scroller[0].clientWidth / 254);
+				var boardsPerRow = Math.floor((scroller[0].clientWidth - 24) / 254);
 				boardsPerRow = Math.min(Math.max(boardsPerRow, 1), 8);
 
 				var boardRowCount = Math.floor(scope.boards.length / boardsPerRow); // Full rows
@@ -39,10 +38,9 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 					// Partial row
 					boardRowCount++;
 				}
-				console.log('br: ' + boardRowCount);
+
 				// (boardRowCount * boardPreviewHeight + margin) + 2 * margin
 				var height = (boardRowCount * 212 + 48 + 140) + 'px';
-				console.log('h: ' + height);
 				element.css('height', height);
 			}
 
