@@ -1,67 +1,15 @@
-<!-- <div id="workspace-background"> -->
-	<div tb-workspace id="workspace" ng-click="onWorkspaceClicked($event)">
-		<!-- <div class="container-fluid"> -->
-		<div class="board-container">
-			<!-- <div class="row"> -->
-				<tb-board-preview ng-repeat="board in boards | filter:{ name: boardSearch.str } | reverse track by board.id">
-				</tb-board-preview>
-			<!-- </div> -->
+<div tb-workspace id="workspace" ng-click="onWorkspaceClicked($event)">
+	<div class="container-fluid">
+		<div class="row">
+			<tb-board-preview ng-repeat="board in boards | filter:{ name: searchStr } | reverse track by board.id">
+			</tb-board-preview>
 		</div>
 	</div>
-	<!-- <span class="workspace-heading">Boards</span> -->
-<!-- </div> -->
-<div class="info-container">
-	<tb-toolbar>
-		<div class="logo">
-			<img src="/images/teamboard_logo.svg">
-		</div>
-		<div class="btn btn-tool"
-			ng-click="logout()">
-			<i class="fa fa-sign-out fa-fw"></i>
-		</div>
-	</tb-toolbar>
 </div>
-<div class="toolbar-container">
-	<tb-toolbar>
-		<div class="btn btn-tool"
-			ng-show="removeEnabled"
-			ng-click="promptBoardRemove()">
-			<i class="fa fa-trash-o fa-fw"></i>
-		</div>
-		<div class="btn btn-tool"
-			ng-show="editEnabled"
-			ng-click="promptBoardEdit()">
-			<i class="fa fa-edit fa-fw"></i>
-		</div>
-		<div class="btn btn-tool"
-			ng-click="promptBoardCreate()">
-			<i class="fa fa-plus fa-fw"></i>
-		</div>
-	</tb-toolbar>
+<div class="btn btn-board-icon btn-boardsearch" ng-click="isSearchVisible = !isSearchVisible">
+	<i class="fa fa-search fa-fw"></i>
 </div>
-<div class="search-container">
-	<tb-toolbar>
-		<div class="search-box">
-			<input type="text"
-				class="form-control search-input"
-				ng-model="boardSearch.str"
-				placeholder="Search boards...">
-			<span class="search-icon" ng-show="boardSearch.str.length == 0">
-				<i class="fa fa-search"></i>
-			</span>
-			<span class="search-icon" ng-show="boardSearch.str.length != 0" ng-click="boardSearch.str = ''">
-				<i class="fa fa-times"></i>
-			</span>
-		</div>
-		<div class="btn btn-tool"
-			ng-click="isInfoVisible = !isInfoVisible">
-			<i class="fa fa-info fa-fw"></i>
-		</div>
-		<div class="info-box" ng-show="isInfoVisible">
-			<div class="info-entry">Logged in as:
-				<span class="info-username"> {{user.username}}</span> ({{user.type}})
-			</div>
-		</div>
-	</tb-toolbar>
+<div ng-show="isSearchVisible">
+	<input type="text" class="form-control text boardsearch" ng-model="searchStr">
 </div>
 <div id="loading-overlay"></div>

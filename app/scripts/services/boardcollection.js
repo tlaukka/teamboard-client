@@ -59,9 +59,6 @@ module.exports = function($q, Board) {
 		if (_selectedBoardIds.length == 1) {
 			_selectedBoard = boardCollection.findBoard(_selectedBoardIds[0]);
 		}
-		else {
-			_selectedBoard = null;
-		}
 	}
 
 	boardCollection.addBoard = function(data) {

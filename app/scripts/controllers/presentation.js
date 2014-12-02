@@ -1,25 +1,16 @@
 'use strict';
 
-var _ = require('lodash');
-var utf8 = require('utf8');
 
-module.exports = function(
-	$scope,
-	$state,
-	connectedSocket,
-	currentUser,
-	resolvedBoard,
-	ticketCollection
-	) {
+module.exports = function($scope, $state, authService, connectedSocket, currentUser, resolvedBoard, tickets) {
 
 	$scope.board = resolvedBoard;
-	$scope.tickets = ticketCollection.getTickets();
+	$scope.tickets = tickets;
 
-	$scope.$on('$stateChangeStart', function() {
-		connectedSocket.off('ticket:create');
-		connectedSocket.off('ticket:update');
-		connectedSocket.off('ticket:remove');
-	});
+	var _getTicket = function(id) {
+		return _.find($scope.tickets, function(ticket) {
+			return ticket.id === id;
+		});
+	}
 
 	// create a new ticket in our clients collection if necessary
 	connectedSocket.on('ticket:create', function(ev) {
@@ -31,16 +22,12 @@ module.exports = function(
 			return console.log('ticket:create made by this client');
 		}
 
-		var ticketDoesExist = (ticketCollection.findTicket(ev.ticket.id) != undefined)
+		var ticketDoesExist = (_getTicket(ev.ticket.id) != undefined)
 
 		// if the ticket does not already exist in our client (maybe we
 		// added it ourselves) we add it to our clients collection
 		if (!ticketDoesExist) {
-			ev.ticket.color   = utf8.decode(ev.ticket.color);
-			ev.ticket.heading = utf8.decode(ev.ticket.heading);
-			ev.ticket.content = utf8.decode(ev.ticket.content);
-
-			ticketCollection.addTicketLocal(ev.ticket);
+			$scope.tickets.push(new Ticket(ev.ticket));
 			return $scope.$apply();
 		}
 	});
@@ -59,22 +46,19 @@ module.exports = function(
 			return console.log('ticket:update made by this client');
 		}
 
-		var existingTicket = ticketCollection.findTicket(ev.ticket.id);
+		var existingTicket = _getTicket(ev.ticket.id);
 
 		// for some reason the ticket does not yet exist in our client
 		// so we need to add it to our clients collection
 		if (!existingTicket) {
-			ev.ticket.color   = utf8.decode(ev.ticket.color);
-			ev.ticket.heading = utf8.decode(ev.ticket.heading);
-			ev.ticket.content = utf8.decode(ev.ticket.content);
-			return ticketCollection.addTicketLocal(ev.ticket);
+			return $scope.tickets.push(new Ticket(ev.ticket));
 		}
 
 		// the ticket already exists in our clients collection, so
 		// we can just update the attributes of it
-		existingTicket.color    = utf8.decode(ev.ticket.color);
-		existingTicket.heading  = utf8.decode(ev.ticket.heading);
-		existingTicket.content  = utf8.decode(ev.ticket.content);
+		existingTicket.color    = ev.ticket.color;
+		existingTicket.heading  = ev.ticket.heading;
+		existingTicket.content  = ev.ticket.content;
 		existingTicket.position = ev.ticket.position;
 
 		return $scope.$apply();
@@ -86,8 +70,10 @@ module.exports = function(
 			return;
 		}
 
-		ticketCollection.removeTicketLocal(ev.ticket.id);
-		$scope.tickets = ticketCollection.getTickets();
+		$scope.tickets = _.reject($scope.tickets,
+			function(ticket) {
+				return _.contains(_.pluck(ev.tickets, 'id'), ticket.id);
+			});
 
 		return $scope.$apply();
 	});

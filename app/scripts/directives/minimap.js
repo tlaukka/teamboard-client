@@ -22,32 +22,24 @@ module.exports = function($window, $timeout) {
 			// Set minimap size according to scale.
 			// One horizontal unit: 240px
 			// One vertical unit: 135px
-			var unitW = 240;
-			var unitH = 135;
-			var marginTop = 140;
-			var marginRight = 80;
-			var marginBottom = 80;
-			var marginLeft = 80;
-
-			var scale = scope.width / (scope.board.size.width * unitW + marginLeft + marginRight);
-			var width = ((scope.board.size.width * unitW + marginLeft + marginRight) * scale) + 'px';
-			var height = ((scope.board.size.height * unitH + marginTop + marginBottom) * scale) + 'px';
-			var bgPos = (marginLeft * scale) + 'px ' + (marginTop * scale) + 'px';
-			var bgWidth = (scope.board.size.width * unitW * scale + 2) + 'px';
-			var bgHeight = (scope.board.size.height * unitH * scale + 1) + 'px';
-			var bgSize = bgWidth + ' ' + bgHeight;
+			var scale = scope.width / (scope.board.size.width * 240);
+			var width = Math.floor(scope.board.size.width * 240 * scale) + 'px';
+			var height = Math.floor(scope.board.size.height * 135 * scale) + 'px';
 
 			element.css({
 				'width': width,
 				'height': height,
-				'background-position': bgPos,
-				'background-size': bgSize
+				'background-size': '100%'
 			});
 
 			if (scope.indicator == 'true') {
 				$timeout(function() {
 					scope.updateIndicator();
 				}, 0);
+
+				scope.$on('action:sidebar-collapse', function(event, isCollapsed) {
+					scope.updateIndicator(isCollapsed);
+				});
 
 				angular.element($window).bind('resize', function() {
 					scope.updateIndicator();
@@ -57,16 +49,21 @@ module.exports = function($window, $timeout) {
 			scope.setTicket = function(ticket) {
 				return {
 					'background-color': ticket.color,
-					'top': ((ticket.position.y + marginTop) * scale) + 'px',
-					'left': ((ticket.position.x + marginLeft) * scale) + 'px',
+					'left': (ticket.position.x * scale) + 'px',
+					'top': (ticket.position.y * scale) + 'px',
 					'width': (226 * scale) + 'px',
 					'height': (128 * scale) + 'px'
-				};
+				}
 			}
 
-			scope.updateIndicator = function() {
-				var indicatorWidth = $window.innerWidth * scale + 2;
-				var indicatorHeight = $window.innerHeight * scale + 2;
+			scope.updateIndicator = function(isSidebarCollapsed) {
+				if ($window.innerWidth < 768) {
+					isSidebarCollapsed = true;
+				}
+
+				var indicatorWidth = isSidebarCollapsed ? ($window.innerWidth - 74) : ($window.innerWidth - 232);
+				indicatorWidth *= scale;
+				var indicatorHeight = ($window.innerHeight - 64) * scale;
 
 				var indicator = angular.element(element.children()[0]);
 				indicator.css({
