@@ -49,7 +49,6 @@ angular.module('tb', [
 	.directive('tbBoard',        require('./directives/board'))
 	.directive('tbTicket',       require('./directives/ticket'))
 	.directive('tbMinimap',      require('./directives/minimap'))
-	.directive('tbToolbar',      require('./directives/toolbar'))
 	.directive('tbGravatar',     require('./directives/gravatar'))
 	.directive('tbBgPreview',    require('./directives/bgpreview'))
 	.directive('tbAutoFocus',    require('./directives/autofocus'))

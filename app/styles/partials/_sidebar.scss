@@ -6,38 +6,38 @@
 	background-color: $gray-medium;
 	color: $white;
 
-	// .logo {
-	// 	font-family: $font-lobster;
-	// 	position: relative;
-	// 	box-sizing: border-box;
-	// 	cursor: pointer;
-	// 	font-size: 30px;
-	// 	padding-left: $sidebar-margin-left;
-	// 	padding-top: 12px;
-	// 	padding-bottom: 12px;
+	.logo {
+		font-family: $font-lobster;
+		position: relative;
+		box-sizing: border-box;
+		cursor: pointer;
+		font-size: 30px;
+		padding-left: $sidebar-margin-left;
+		padding-top: 12px;
+		padding-bottom: 12px;
 
-	// 	.logo-text {
-	// 		margin-left: 12px;
-	// 		top: 45px;
-	// 	}
+		.logo-text {
+			margin-left: 12px;
+			top: 45px;
+		}
 
-	// 	// Full width 74px (collapsed sidebar)
-	// 	.underline {
-	// 		&:after {
-	// 			content: "";
-	// 			position: absolute;
-	// 			left: 12px;
-	// 			top: $topbar-height;
-	// 			width: 50px;
-	// 			border-bottom: 1px solid $lightgray-dark;
-	// 		}
-	// 	}
+		// Full width 74px (collapsed sidebar)
+		.underline {
+			&:after {
+				content: "";
+				position: absolute;
+				left: 12px;
+				top: $topbar-height;
+				width: 50px;
+				border-bottom: 1px solid $lightgray-dark;
+			}
+		}
 
-	// 	img {
-	// 		width: 28px;
-	// 		margin-bottom: 12px;
-	// 	}
-	// }
+		img {
+			width: 28px;
+			margin-bottom: 12px;
+		}
+	}
 
 	.btn-collapse-space {
 		height: 73px;

@@ -1,87 +1,26 @@
 <div id="board-background">
-	<span class="view-heading">{{board.name}}</span>
 	<div tb-board id="board" ng-click="onBoardClicked($event)">
 		<div tb-ticket-proxy class="ticket-proxy"></div>
 		<tb-ticket ng-repeat="ticket in tickets track by ticket.id"
 			snap-options="snapOptions"
-			ticket-search="ticketSearch"
 			ticket-data="ticket"
 			ticket-edit="promptTicketEdit(ticket)"
 			ticket-toggle="toggleTicketSelection(id)">
 		</tb-ticket>
 	</div>
 </div>
-<div class="info-container">
-	<tb-toolbar>
-		<div class="logo">
-			<img src="/images/teamboard_logo.svg">
-		</div>
-		<div class="btn btn-tool"
-			ng-click="logout()">
-			<i class="fa fa-sign-out fa-fw"></i>
-		</div>
-		<div class="btn btn-tool"
-			ng-if="currentUser.type != 'guest'"
-			ui-sref="main.workspace">
-			<i class="fa fa-th fa-fw"></i>
-		</div>
-	</tb-toolbar>
+<div class="btn btn-board-icon btn-presentation" ui-sref="main.presentation({ id: board.id })">
+	<i class="fa fa-expand fa-fw"></i>
 </div>
-<div class="toolbar-container">
-	<tb-toolbar>
-		<div class="btn btn-tool"
-			ui-sref="main.presentation({ id: board.id })">
-			<i class="fa fa-expand fa-fw"></i>
-		</div>
-		<div class="btn btn-tool"
-			ng-show="backgroundEnabled"
-			ng-click="promptBackgroundAdd()">
-			<i class="fa fa-picture-o fa-fw"></i>
-		</div>
-		<div btn-checkbox
-			class="btn btn-tool btn-checkbox enabled"
-			ng-model="snapOptions.enabled">
-			<i class="fa fa-magnet fa-fw"></i>
-		</div>
-		<div class="btn btn-tool"
-			ng-show="removeEnabled"
-			ng-click="promptTicketRemove()">
-			<i class="fa fa-trash-o fa-fw"></i>
-		</div>
-		<div class="btn btn-tool"
-			ng-show="editEnabled"
-			ng-click="promptTicketEdit()">
-			<i class="fa fa-edit fa-fw"></i>
-		</div>
-		<div class="btn btn-tool"
-			ng-click="promptTicketCreate()">
-			<i class="fa fa-plus fa-fw"></i>
-		</div>
-	</tb-toolbar>
+<div class="btn btn-board-icon btn-minimap" ng-click="toggleMinimap()">
+	<i class="fa fa-arrows-alt fa-fw"></i>
 </div>
-<div class="search-container">
-	<tb-toolbar>
-		<div class="search-box">
-			<input type="text"
-				class="form-control search-input"
-				ng-model="ticketSearch.str"
-				placeholder="Search tickets...">
-			<span class="search-icon" ng-show="ticketSearch.str.length == 0">
-				<i class="fa fa-search"></i>
-			</span>
-			<span class="search-icon" ng-show="ticketSearch.str.length != 0" ng-click="ticketSearch.str = ''">
-				<i class="fa fa-times"></i>
-			</span>
-		</div>
-		<div class="btn btn-tool"
-			ng-click="toggleMinimap()">
-			<i class="fa fa-arrows-alt fa-fw"></i>
-		</div>
-		<tb-minimap ng-show="isMinimapVisible"
-			board="board"
-			tickets="tickets"
-			width="226"
-			indicator="true">
-		</tb-minimap>
-	</tb-toolbar>
+<!-- <div class="btn btn-board-icon btn-ticketsearch" ng-click="isSearchVisible = !isSearchVisible">
+	<i class="fa fa-search fa-fw"></i>
+</div>
+<div ng-show="isSearchVisible">
+	<input type="text" class="form-control text ticketsearch" ng-model="searchStr" ng-change="applySearch(searchStr)">
+</div> -->
+<div class="minimap-container" ng-class="{ 'minimap-visible': isMinimapVisible, 'minimap-hidden': !isMinimapVisible }">
+	<tb-minimap board="board" tickets="tickets" width="225" indicator="true"></tb-minimap>
 </div>
