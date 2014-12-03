@@ -132,10 +132,10 @@ gulp.task('browserify', function() {
 gulp.task('serve', ['sass', 'uglify', 'copy'], function() {
 	var server = require('gulp-webserver');
 
-	var serverOpts = { livereload: true, fallback: 'index.html' }
-
-	if(process.env.HOSTNAME) {
-		serverOpts.host = process.env.HOSTNAME;
+	var serverOpts = {
+		'host':       '0.0.0.0',
+		'fallback':   'index.html',
+		'livereload': true,
 	}
 
 	return gulp.src('./dist').pipe(server(serverOpts));
