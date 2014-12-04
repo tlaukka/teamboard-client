@@ -1,13 +1,14 @@
 'use strict';
 
 
-module.exports = function($window) {
+module.exports = function($window, $state) {
 	return {
 		template: require('../../partials/presentation.html'),
 		replace: true,
 		restrict: 'E',
 
 		scope: {
+			user: '=',
 			board: '=',
 			tickets: '='
 		},
@@ -56,6 +57,15 @@ module.exports = function($window) {
 				return {
 					'left': ticket.position.x + 'px',
 					'top': ticket.position.y + 'px'
+				}
+			}
+
+			scope.onCloseClicked = function() {
+				if (scope.user.type == 'guest') {
+					$state.go('main.board.guest', { id: scope.board.id });
+				}
+				else {
+					$state.go('main.board', { id: scope.board.id });
 				}
 			}
 

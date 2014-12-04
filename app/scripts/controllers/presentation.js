@@ -3,6 +3,7 @@
 
 module.exports = function($scope, $state, authService, connectedSocket, currentUser, resolvedBoard, tickets) {
 
+	$scope.user = currentUser;
 	$scope.board = resolvedBoard;
 	$scope.tickets = tickets;
 
