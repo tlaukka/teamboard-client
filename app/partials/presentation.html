@@ -1,5 +1,5 @@
 <div class="board-presentation">
-	<span class="btn btn-presentation-close pull-right" ui-sref="main.board({ id: board.id })">
+	<span class="btn btn-presentation-close pull-right" ng-click="onCloseClicked()">
 		<i class="fa fa-times"></i>
 	</span>
 	<div ng-repeat="ticket in tickets" class="ticket smooth-transition" ng-style="setTicket(ticket)">
