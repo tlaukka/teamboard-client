@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function(scrollArea, $timeout, $window, $document) {
+module.exports = function($rootScope, $timeout, $window, $document, scrollArea) {
 
 	var IScroll = require('iscroll');
 
@@ -14,7 +14,7 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 			scrollArea.destroy();
 
 			$timeout(function() {
-				scrollArea.set(new IScroll('#content-scrollarea', {
+				scrollArea.set(new IScroll('#content-scrollarea-workspace', {
 					scrollX: true,
 					scrollY: true,
 					freeScroll: true,
@@ -25,8 +25,20 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				}));
 			}, 0);
 
+			// Set the initial state
+			if ($window.innerWidth < 768) {
+				scope.state.isSidebarCollapsed = true;
+			}
+			else {
+				scope.state.isSidebarCollapsed = (localStorage.getItem('tb-sidebar-collapsed') === 'true');
+			}
+
+			$timeout(function() {
+				$rootScope.$broadcast('action:sidebar-collapse', scope.state.isSidebarCollapsed);
+			}, 0);
+
 			scope.updateWorkspace = function() {
-				var scroller = angular.element(document.getElementById('content-scrollarea'));
+				var scroller = angular.element(document.getElementById('content-scrollarea-workspace'));
 
 				// workspaceWidth / (boardPreviewWidth + margin)
 				var boardsPerRow = Math.floor((scroller[0].clientWidth - 24) / 254);
@@ -39,7 +51,7 @@ module.exports = function(scrollArea, $timeout, $window, $document) {
 				}
 
 				// (boardRowCount * boardPreviewHeight + margin) + 2 * margin
-				var height = (boardRowCount * 212 + 48 + 140) + 'px';
+				var height = (boardRowCount * 212 + 48) + 'px';
 				element.css('height', height);
 			}
 

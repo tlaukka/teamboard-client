@@ -41,7 +41,8 @@ module.exports = function(
 	$scope.editEnabled = false;
 
 	$scope.state = {
-		isLoadingBoard: false
+		isLoadingBoard: false,
+		isSidebarCollapsed: localStorage.getItem('tb-sidebar-collapsed') === 'true'
 	};
 
 	$scope.boardSearch = {
@@ -59,6 +60,12 @@ module.exports = function(
 	$scope.$on('action:edit', function() {
 		$scope.promptBoardEdit();
 	});
+
+	$scope.toggleSidebarCollapse = function() {
+		$scope.state.isSidebarCollapsed = !$scope.state.isSidebarCollapsed;
+		localStorage.setItem('tb-sidebar-collapsed', $scope.state.isSidebarCollapsed.toString());
+		$rootScope.$broadcast('action:sidebar-collapse', $scope.state.isSidebarCollapsed);
+	}
 
 	$scope.validateToolset = function() {
 		var selectionCount = boardCollection.getSelectedBoardsCount();
